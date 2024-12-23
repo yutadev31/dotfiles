@@ -1,6 +1,6 @@
 require("config.lazy")
 
-require('onedark').load()
+require("onedark").load()
 
 vim.opt.shiftwidth = 2
 vim.opt.number = true
@@ -21,16 +21,14 @@ local autocmd = vim.api.nvim_create_autocmd
 set("n", "<C-n>", ":Neotree <CR>")
 set("n", "<C-h>", ":bprev<CR>")
 set("n", "<C-l>", ":bnext<CR>")
-set('n', '<C-g>', function() vim.lsp.buf.format { async = true } end)
-set("i", "<C-j>", "<Plug>(skkeleton-enable)")
-
-vim.cmd("call skkeleton#initialize()")
-vim.cmd("call skkeleton#config({ 'globalDictionaries': [['~/.skk/SKK-JISYO.L', 'euc-jp']] })")
+set("n", "<C-g>", function()
+	vim.lsp.buf.format({ async = true })
+end)
 
 autocmd("TermOpen", {
 	callback = function()
 		vim.opt_local.number = false
 		vim.opt_local.relativenumber = false
-		vim.cmd('startinsert')
-	end
+		vim.cmd("startinsert")
+	end,
 })
