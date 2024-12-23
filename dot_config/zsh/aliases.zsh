@@ -25,4 +25,14 @@ alias vim="nvim"
 
 # git
 alias lg="lazygit"
+alias ga="git add"
+alias gaa="git add ."
+alias gc="git commit"
+alias gp="git push"
 
+alias reboot="sudo reboot"
+alias shutdown="sudo shutdown -h now"
+
+alias py="python3"
+
+alias ssh1="ssh yuta@192.168.11.50"
