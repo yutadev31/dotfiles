@@ -17,8 +17,9 @@ alias cl="clear"
 alias ll="ls -l"
 alias la="ls -la"
 
-# pacman
+# package manager
 alias pacman="sudo pacman"
+alias apt="sudo apt"
 
 # vim
 alias vim="nvim"
