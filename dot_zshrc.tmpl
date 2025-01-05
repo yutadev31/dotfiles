@@ -2,15 +2,24 @@
 
 chezmoi git pull > /dev/null
 
+{{ if eq .chezmoi.osRelease.id "arch" }}
+
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+{{ end }}
 
 source "$HOME/.config/zsh/aliases.zsh"
 source "$HOME/.config/zsh/prompt.zsh"
 
 # Vars
 
+{{ if eq .chezmoi.osRelease.id "arch" }}
+
 export $(dbus-launch)
+
+{{ end }}
+
 export LANG=ja_JP.UTF-8
 export EDITOR=nvim
 
