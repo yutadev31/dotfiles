@@ -19,9 +19,11 @@ alias cl="clear"
 alias ll="ls -l"
 alias la="ls -la"
 
-# package manager
+# sudo
 alias pacman="sudo pacman"
 alias apt="sudo apt"
+alias reboot="sudo reboot"
+alias shutdown="sudo shutdown -h now"
 
 # git
 alias lg="lazygit"
@@ -31,9 +33,6 @@ alias gc="git commit"
 alias gcinit="git commit -m \"Initial commit\""
 alias gp="git push"
 
-alias reboot="sudo reboot"
-alias shutdown="sudo shutdown -h now"
-
+# python
 alias py="python3"
 
-alias ssh1="ssh yuta@192.168.11.50"

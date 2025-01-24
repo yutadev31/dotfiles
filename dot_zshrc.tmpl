@@ -11,8 +11,9 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 {{ end }}
 
-source "$HOME/.config/zsh/aliases.zsh"
-source "$HOME/.config/zsh/prompt.zsh"
+for script in $HOME/.config/zsh/*.zsh; do
+  [ -r "$script" ] && source "$script"
+done
 
 # Vars
 
