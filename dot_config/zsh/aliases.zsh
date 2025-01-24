@@ -21,14 +21,12 @@ alias la="ls -la"
 alias pacman="sudo pacman"
 alias apt="sudo apt"
 
-# vim
-alias vim="nvim"
-
 # git
 alias lg="lazygit"
 alias ga="git add"
 alias gaa="git add ."
 alias gc="git commit"
+alias gcinit="git commit -m \"Initial commit\""
 alias gp="git push"
 
 alias reboot="sudo reboot"
