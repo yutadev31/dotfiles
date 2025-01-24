@@ -27,7 +27,11 @@ export EDITOR=nvim
 
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-PATH="$PATH:/home/yuta/.cargo/bin:/home/yuta/.bin"
+PATH="$PATH:/home/yuta/.cargo/bin:/home/yuta/.bin:/snap/bin"
+
+{{ if eq .chezmoi.osRelease.id "ubuntu" }}
+. "$HOME/.cargo/env"
+{{ end }}
 
 # pnpm
 export PNPM_HOME="/home/yuta/.local/share/pnpm"
