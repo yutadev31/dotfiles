@@ -32,7 +32,16 @@ alias gaa="git add ."
 alias gc="git commit"
 alias gcinit="git commit -m \"Initial commit\""
 alias gp="git push"
+alias gpull="git pull"
+
+EDITOR="nvim"
+
+# editor
+alias edit=$EDITOR
+alias neovim=$EDITOR
+alias vim=$EDITOR
+alias vi=$EDITOR
+alias emacs=$EDITOR
 
 # python
 alias py="python3"
-
