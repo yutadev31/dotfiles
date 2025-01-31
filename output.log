@@ -1,0 +1,8 @@
+[2025-02-01 07:15:16] [TRACE] [arboard::platform::linux::x11] Started serve requests thread.
+[2025-02-01 07:15:16] [TRACE] [mio::poll] registering event source with poller: token=Token(0), interests=READABLE
+[2025-02-01 07:15:16] [TRACE] [mio::poll] registering event source with poller: token=Token(1), interests=READABLE
+[2025-02-01 07:15:20] [TRACE] [arboard::platform::linux::x11] Clipboard server window is being destroyed x_x
+[2025-02-01 07:15:32] [TRACE] [arboard::platform::linux::x11] Started serve requests thread.
+[2025-02-01 07:15:32] [TRACE] [mio::poll] registering event source with poller: token=Token(0), interests=READABLE
+[2025-02-01 07:15:32] [TRACE] [mio::poll] registering event source with poller: token=Token(1), interests=READABLE
+[2025-02-01 07:15:41] [TRACE] [arboard::platform::linux::x11] Clipboard server window is being destroyed x_x
