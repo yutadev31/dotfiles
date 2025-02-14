@@ -1,1 +1,3 @@
-return {'petertriho/nvim-scrollbar'}
+return {
+	"eetertriho/nvim-scrollbar",
+}

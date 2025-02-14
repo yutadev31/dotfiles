@@ -4,12 +4,29 @@ return {
 		"neovim/nvim-lspconfig",
 		"williamboman/mason.nvim",
 		"hrsh7th/cmp-nvim-lsp",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	lazy = false,
 	config = function()
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+		local ensure_installed = {
+			-- rust --
+			"rust-analyzer",
+
+			-- lua --
+			"lua-language-server",
+			"stylua",
+
+			-- web --
+			"html-lsp",
+			"css-lsp",
+			"json-lsp",
+			"typescript-language-server",
+			"astro-language-server",
+		}
 
 		require("mason").setup()
+		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 		require("mason-lspconfig").setup({})
 
 		require("mason-lspconfig").setup_handlers({

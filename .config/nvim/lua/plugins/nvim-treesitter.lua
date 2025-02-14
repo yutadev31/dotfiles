@@ -1,10 +1,10 @@
 return {
-	'nvim-treesitter/nvim-treesitter',
+	"nvim-treesitter/nvim-treesitter",
 	config = function()
-		require('nvim-treesitter.configs').setup {
+		require("nvim-treesitter.configs").setup({
 			highlight = {
 				enable = true,
 			},
-		}
-	end
+		})
+	end,
 }

@@ -1,4 +1,5 @@
 require("config.lazy")
+require("config.keys")
 
 require("onedark").load()
 
@@ -14,19 +15,3 @@ vim.o.timeout = true
 vim.o.timeoutlen = 400
 vim.opt.laststatus = 3
 vim.opt.clipboard = "unnamedplus"
-
-local set = vim.keymap.set
-
-set("n", "<leader>ee", "<CMD>Oil<CR>")
-set("n", "<leader>tt", "<CMD>ToggleTerm<CR>")
-
-set("n", "<leader>ff", function()
-	vim.lsp.buf.format({ async = true })
-end)
-
-set(
-	'n',
-	'<leader>tg',
-	[[<CMD>lua require('close_buffers').delete({type = 'all'})<CR>]],
-	{ noremap = true, silent = true }
-)
