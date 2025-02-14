@@ -1,52 +1,61 @@
 return {
-	"williamboman/mason-lspconfig.nvim",
-	dependencies = {
-		"neovim/nvim-lspconfig",
-		"williamboman/mason.nvim",
-		"hrsh7th/cmp-nvim-lsp",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-	},
-	lazy = false,
-	config = function()
-		local capabilities = require("cmp_nvim_lsp").default_capabilities()
-		local ensure_installed = {
-			-- rust --
-			"rust-analyzer",
+  "williamboman/mason-lspconfig.nvim",
+  dependencies = {
+    "neovim/nvim-lspconfig",
+    "williamboman/mason.nvim",
+    "hrsh7th/cmp-nvim-lsp",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+  },
+  lazy = false,
+  config = function()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    local ensure_installed = {
+      -- c/c++ --
+      "clangd",
+      "clang-format",
 
-			-- lua --
-			"lua-language-server",
-			"stylua",
+      -- rust --
+      "rust-analyzer",
 
-			-- web --
-			"html-lsp",
-			"css-lsp",
-			"json-lsp",
-			"typescript-language-server",
-			"astro-language-server",
-		}
+      -- lua --
+      "lua-language-server",
+      "stylua",
 
-		require("mason").setup()
-		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-		require("mason-lspconfig").setup({})
+      -- python --
+      "pyright",
+      "black",
 
-		require("mason-lspconfig").setup_handlers({
-			function(server_name)
-				require("lspconfig")[server_name].setup({
-					capabilities = capabilities,
-				})
-			end,
-			["rust_analyzer"] = function()
-				require("lspconfig").rust_analyzer.setup({
-					capabilities = capabilities,
-					settings = {
-						["rust-analyzer"] = {
-							diagnostic = {
-								refreshSupport = false,
-							},
-						},
-					},
-				})
-			end,
-		})
-	end,
+      -- web --
+      "html-lsp",
+      "css-lsp",
+      "json-lsp",
+      "typescript-language-server",
+      "astro-language-server",
+      "prettierd",
+    }
+
+    require("mason").setup()
+    require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+    require("mason-lspconfig").setup({})
+
+    require("mason-lspconfig").setup_handlers({
+      function(server_name)
+        require("lspconfig")[server_name].setup({
+          capabilities = capabilities,
+        })
+      end,
+      ["rust_analyzer"] = function()
+        require("lspconfig").rust_analyzer.setup({
+          capabilities = capabilities,
+          settings = {
+            ["rust-analyzer"] = {
+              diagnostic = {
+                refreshSupport = false,
+              },
+            },
+          },
+        })
+      end,
+    })
+  end,
 }
