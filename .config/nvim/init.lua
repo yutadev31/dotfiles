@@ -1,5 +1,6 @@
 require("config.lazy")
 require("config.keys")
+require("theme.colors")
 
 require("onedark").load()
 

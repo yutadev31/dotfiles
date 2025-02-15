@@ -1,2 +1,3 @@
 #!/bin/zsh
-PROMPT='%F{green}%n %F{cyan}%~%f %f%# '
+
+eval "$(starship init zsh)"
