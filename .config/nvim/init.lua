@@ -1,8 +1,7 @@
 require("config.lazy")
 require("config.keys")
-require("theme.colors")
 
-require("onedark").load()
+vim.cmd("colorscheme dracula")
 
 -- 行番号を表示
 vim.opt.number = true
@@ -35,6 +34,10 @@ vim.g.mapleader = " "
 vim.o.timeout = true
 vim.o.timeoutlen = 400
 vim.opt.laststatus = 3
+
+vim.opt.termguicolors = true
+vim.opt.winblend = 0
+vim.opt.pumblend = 0
 
 vim.opt.list = true
 vim.opt.listchars = { tab = ">>", trail = "-", nbsp = "+" }
