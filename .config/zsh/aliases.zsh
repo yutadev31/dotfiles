@@ -17,7 +17,7 @@ alias cl="clear"
 
 # ls
 alias l="ls"
-alias sl="sl"
+alias sl="ls"
 alias ll="ls -l"
 alias la="ls -la"
 
