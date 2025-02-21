@@ -11,6 +11,7 @@
 !/.config/zsh/*.zsh
 
 !/.commit_template
+!/.tmux.conf
 !/.zshrc
 
 !/README.md
