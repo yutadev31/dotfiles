@@ -14,6 +14,7 @@ alias rmrf="rm -rf"
 alias cp="cp -i"
 
 alias cl="clear"
+alias rmdir="rm -r"
 
 # ls
 alias l="ls"

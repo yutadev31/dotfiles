@@ -3,6 +3,7 @@ set -ue
 
 dotdir=$(pwd)
 
+ln -snf $dotdir/.bin $HOME
 ln -snf $dotdir/.config $HOME
 
 ln -snf $dotdir/.commit_template $HOME
