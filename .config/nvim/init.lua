@@ -2,6 +2,8 @@ require("config.lazy")
 require("config.keys")
 
 vim.cmd("colorscheme dracula")
+-- vim.cmd("colorscheme catppuccin")
+-- vim.cmd("colorscheme nord")
 
 -- 行番号を表示
 vim.opt.number = true
