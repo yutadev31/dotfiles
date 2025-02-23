@@ -40,4 +40,4 @@ vim.opt.winblend = 0
 vim.opt.pumblend = 0
 
 vim.opt.list = true
-vim.opt.listchars = { tab = ">>", trail = "-", nbsp = "+" }
+vim.opt.listchars = { tab = "> ", trail = "-", nbsp = "+" }
