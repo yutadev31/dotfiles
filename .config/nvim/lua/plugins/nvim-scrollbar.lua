@@ -1,3 +1,3 @@
 return {
-	"eetertriho/nvim-scrollbar",
+  "eetertriho/nvim-scrollbar",
 }

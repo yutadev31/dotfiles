@@ -1,6 +1,6 @@
 return {
-	"akinsho/toggleterm.nvim",
-	opts = {
+  "akinsho/toggleterm.nvim",
+  opts = {
     direction = "tab",
   },
 }
