@@ -2,18 +2,24 @@ local set = vim.keymap.set
 
 set("n", "<leader>ee", "<CMD>Oil<CR>")
 set("n", "<leader>tt", "<CMD>ToggleTerm<CR>")
+set("n", "<leader>tb", function()
+  vim.cmd("belowright split | terminal")
+  vim.cmd("resize 10")
+end)
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.wo.number = false
+    vim.cmd("startinsert")
+  end,
+})
+
 set("n", "<leader>mm", "<CMD>Mason<CR>")
 
 set("n", "<leader>fo", function()
   vim.lsp.buf.format({ async = true })
 end)
-
-set(
-  "n",
-  "<leader>tg",
-  [[<CMD>lua require('close_buffers').delete({type = 'all'})<CR>]],
-  { noremap = true, silent = true }
-)
 
 set("t", "<ESC>", "<C-\\><C-n>")
 
