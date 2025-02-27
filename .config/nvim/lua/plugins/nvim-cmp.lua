@@ -9,6 +9,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "L3MON4D3/LuaSnip",
   },
+  priority = 1000,
   config = function()
     local cmp = require("cmp")
     local types = require("cmp.types")
