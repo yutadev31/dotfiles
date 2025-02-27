@@ -48,12 +48,11 @@ vim.opt.undodir = vim.fn.stdpath("cache") .. "/undo"
 vim.opt.shortmess:append("c")
 vim.opt.updatetime = 300
 
--- ▼ スワップファイル無効化（不要なら）
+-- ▼ スワップファイル無効化
 vim.opt.swapfile = false
 
 -- ▼ 外部変更の自動検出
 vim.opt.autoread = true
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, { command = "checktime" })
 
 -- ▼ ウィンドウの挙動を改善
 vim.opt.splitright = true -- 縦分割を右側に

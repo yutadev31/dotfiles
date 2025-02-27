@@ -44,6 +44,23 @@ return {
           capabilities = capabilities,
         })
       end,
+      ["lua_ls"] = function()
+        require("lspconfig").lua_ls.setup({
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { "vim" }, 
+              },
+              workspace = {
+                library = {
+                  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                  [vim.fn.stdpath("config") .. "/lua"] = true,
+                },
+              },
+            },
+          },
+        })
+      end,
       ["rust_analyzer"] = function()
         require("lspconfig").rust_analyzer.setup({
           capabilities = capabilities,
