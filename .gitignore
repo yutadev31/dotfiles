@@ -1,6 +1,9 @@
 /*
 /.**
 
+!/script/
+!/script/*
+
 !/.config/
 !/.config/starship.toml
 !/.config/nvim/
