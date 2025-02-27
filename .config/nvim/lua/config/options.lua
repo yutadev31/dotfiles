@@ -58,3 +58,6 @@ vim.opt.autoread = true
 vim.opt.splitright = true -- 縦分割を右側に
 vim.opt.splitbelow = true -- 横分割を下側に
 vim.opt.showmode = false  -- ステータスラインを使うなら非表示
+
+-- ▼ カラースキーム
+vim.cmd("colorscheme onenord")

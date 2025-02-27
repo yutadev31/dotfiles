@@ -1,22 +1,26 @@
 local set = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
-set("n", "<leader>ee", "<CMD>Oil<CR>")
-set("n", "<leader>tt", "<CMD>ToggleTerm<CR>")
+-- ▼ ファイラー・ターミナル
+set("n", "<leader>ee", "<CMD>Oil<CR>", { desc = "ファイラーを開く" })
+set("n", "<leader>tt", "<CMD>ToggleTerm<CR>", { desc = "ターミナルをトグル" })
 set("n", "<leader>tb", function()
   vim.cmd("split | terminal")
   vim.cmd("resize 10")
-end)
+end, { desc = "下部にターミナルを開く" })
 
-set("n", "<leader>mm", "<CMD>Mason<CR>")
+-- ▼ Mason（LSP・ツール管理）
+set("n", "<leader>mm", "<CMD>Mason<CR>", { desc = "Mason を開く" })
 
+-- ▼ LSPフォーマット
 set("n", "<leader>fo", function()
   vim.lsp.buf.format({ async = true })
-end)
+end, { desc = "コードフォーマット" })
 
--- Terminal mode to normal mode
-set("t", "<ESC>", "<C-\\><C-n>")
+-- ▼ ターミナルモードのESCキーでノーマルモードへ
+set("t", "<ESC>", "<C-\\><C-n>", { desc = "ターミナルモード終了" })
 
--- telescope
+-- ▼ Telescope (ファイル・検索系)
 local builtin = require("telescope.builtin")
 
 set("n", "<leader>ff", builtin.find_files, { desc = "ファイル検索" })
@@ -24,19 +28,17 @@ set("n", "<leader>fg", builtin.live_grep, { desc = "単語検索" })
 set("n", "<leader>fb", builtin.buffers, { desc = "開いているバッファ一覧" })
 set("n", "<leader>fh", builtin.help_tags, { desc = "ヘルプ検索" })
 
--- LSP関連
+-- ▼ LSP関連
 set("n", "<leader>fr", builtin.lsp_references, { desc = "シンボルの参照一覧" })
 set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "ファイル内のシンボル検索" })
 set("n", "<leader>fw", builtin.lsp_workspace_symbols, { desc = "ワークスペース全体のシンボル検索" })
 
--- Git関連 (Gitプラグインが必要)
+-- ▼ Git関連（Git プラグインが必要）
 set("n", "<leader>gc", builtin.git_commits, { desc = "Gitコミット履歴" })
 set("n", "<leader>gb", builtin.git_branches, { desc = "Gitブランチ一覧" })
 set("n", "<leader>gs", builtin.git_status, { desc = "Gitの変更ファイル" })
 
-local opts = { noremap = true, silent = true }
-
--- LSP基本操作
+-- ▼ LSP基本操作
 set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)          -- 定義へジャンプ
 set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)         -- 宣言へジャンプ
 set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)          -- 参照を検索
