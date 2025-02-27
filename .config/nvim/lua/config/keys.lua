@@ -3,7 +3,7 @@ local set = vim.keymap.set
 set("n", "<leader>ee", "<CMD>Oil<CR>")
 set("n", "<leader>tt", "<CMD>ToggleTerm<CR>")
 set("n", "<leader>tb", function()
-  vim.cmd("belowright split | terminal")
+  vim.cmd("split | terminal")
   vim.cmd("resize 10")
 end)
 
