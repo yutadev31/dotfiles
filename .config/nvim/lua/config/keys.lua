@@ -14,3 +14,11 @@ set(
   [[<CMD>lua require('close_buffers').delete({type = 'all'})<CR>]],
   { noremap = true, silent = true }
 )
+
+set("t", "<ESC>", "<C-\\><C-n>")
+
+local builtin = require("telescope.builtin")
+set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
+set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })

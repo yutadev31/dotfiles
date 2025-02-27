@@ -1,3 +1,0 @@
-return {
-  "eetertriho/nvim-scrollbar",
-}

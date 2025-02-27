@@ -1,9 +1,8 @@
 require("config.lazy")
 require("config.keys")
 
-vim.cmd("colorscheme dracula")
--- vim.cmd("colorscheme catppuccin")
--- vim.cmd("colorscheme nord")
+-- vim.cmd("colorscheme onedark")
+vim.cmd("colorscheme onenord")
 
 -- 行番号を表示
 vim.opt.number = true
@@ -42,4 +41,4 @@ vim.opt.winblend = 0
 vim.opt.pumblend = 0
 
 vim.opt.list = true
-vim.opt.listchars = { tab = "> ", trail = "-", nbsp = "+" }
+vim.opt.listchars = { tab = "> ", trail = " ", nbsp = "+" }
