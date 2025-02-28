@@ -40,10 +40,6 @@ vim.opt.listchars = { tab = "> ", trail = " ", nbsp = "+" }
 -- ▼ バックスペースの挙動改善
 vim.opt.backspace = "indent,eol,start"
 
--- ▼ Undo（やり直し）の拡張
-vim.opt.undofile = true
-vim.opt.undodir = vim.fn.stdpath("cache") .. "/undo"
-
 -- ▼ 補完時の挙動をスムーズに
 vim.opt.shortmess:append("c")
 vim.opt.updatetime = 300
