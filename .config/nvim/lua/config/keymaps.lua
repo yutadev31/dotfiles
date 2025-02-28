@@ -3,7 +3,6 @@ local opts = { noremap = true, silent = true }
 
 -- ▼ ファイラー・ターミナル
 set("n", "<leader>ee", "<CMD>Oil<CR>", { desc = "ファイラーを開く" })
-set("n", "<leader>nn", "<CMD>Neotree<CR>", { desc = "Neotreeを開く" })
 set("n", "<leader>tt", "<CMD>ToggleTerm<CR>", { desc = "ターミナルをトグル" })
 set("n", "<leader>tb", function()
   vim.cmd("split | terminal")
