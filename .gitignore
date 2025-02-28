@@ -1,8 +1,8 @@
 /*
 /.**
 
-!/script/
-!/script/*
+!/scripts/
+!/scripts/*.sh
 
 !/.config/
 !/.config/starship.toml
