@@ -1,48 +1,63 @@
-local set = vim.keymap.set
-local opts = { noremap = true, silent = true }
+-- ▼ 基本設定
+vim.g.mapleader = " " -- リーダーキー設定
+vim.opt.encoding = "utf-8"
+vim.opt.title = true
+vim.opt.termguicolors = true                  -- 24bitカラー対応
+vim.opt.completeopt = "menu,menuone,noselect" -- 補完の挙動
+vim.opt.timeout = true
+vim.opt.timeoutlen = 400
 
--- ▼ ファイラー・ターミナル
-set("n", "<leader>ee", "<CMD>Oil<CR>", { desc = "ファイラーを開く" })
-set("n", "<leader>tt", "<CMD>ToggleTerm<CR>", { desc = "ターミナルをトグル" })
-set("n", "<leader>tb", function()
-  vim.cmd("split | terminal")
-  vim.cmd("resize 10")
-end, { desc = "下部にターミナルを開く" })
+-- ▼ 表示設定
+vim.opt.number = true               -- 行番号表示
+vim.opt.cursorline = true           -- カーソル行をハイライト
+vim.opt.scrolloff = 5               -- スクロール時の余白
+vim.opt.laststatus = 3              -- ステータスラインを全ウィンドウで統一
+vim.opt.winblend = 0                -- ウィンドウの透明度
+vim.opt.pumblend = 0                -- ポップアップメニューの透明度
+vim.opt.wrap = true                 -- 行の折り返しを有効化
+vim.opt.linebreak = true            -- 単語の途中で折り返さない
+vim.opt.whichwrap:append("<,>,h,l") -- 折り返しをまたいで移動
 
--- ▼ Mason（LSP・ツール管理）
-set("n", "<leader>mm", "<CMD>Mason<CR>", { desc = "Mason を開く" })
+-- ▼ インデント設定
+vim.opt.expandtab = true   -- タブをスペースに変換
+vim.opt.shiftwidth = 2     -- インデント幅
+vim.opt.tabstop = 2        -- タブの幅
+vim.opt.autoindent = true  -- 自動インデント
+vim.opt.smartindent = true -- スマートインデント
 
--- ▼ LSPフォーマット
-set("n", "<leader>fo", function()
-  vim.lsp.buf.format({ async = true })
-end, { desc = "コードフォーマット" })
+-- ▼ 検索設定
+vim.opt.ignorecase = true -- 大文字小文字を区別しない
+vim.opt.smartcase = true  -- ただし大文字が含まれている場合は区別
+vim.opt.hlsearch = true   -- 検索結果をハイライト
 
--- ▼ ターミナルモードのESCキーでノーマルモードへ
-set("t", "<ESC>", "<C-\\><C-n>", { desc = "ターミナルモード終了" })
+-- ▼ クリップボード共有
+vim.opt.clipboard = "unnamedplus" -- システムクリップボードと連携
 
--- ▼ Telescope (ファイル・検索系)
-local builtin = require("telescope.builtin")
+-- ▼ 不可視文字の表示設定
+vim.opt.list = true
+vim.opt.listchars = { tab = "> ", trail = " ", nbsp = "+" }
 
-set("n", "<leader>ff", builtin.find_files, { desc = "ファイル検索" })
-set("n", "<leader>fg", builtin.live_grep, { desc = "単語検索" })
-set("n", "<leader>fb", builtin.buffers, { desc = "開いているバッファ一覧" })
-set("n", "<leader>fh", builtin.help_tags, { desc = "ヘルプ検索" })
+-- ▼ バックスペースの挙動改善
+vim.opt.backspace = "indent,eol,start"
 
--- ▼ LSP関連
-set("n", "<leader>fr", builtin.lsp_references, { desc = "シンボルの参照一覧" })
-set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "ファイル内のシンボル検索" })
-set("n", "<leader>fw", builtin.lsp_workspace_symbols, { desc = "ワークスペース全体のシンボル検索" })
+-- ▼ Undo（やり直し）の拡張
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath("cache") .. "/undo"
 
--- ▼ Git関連（Git プラグインが必要）
-set("n", "<leader>gc", builtin.git_commits, { desc = "Gitコミット履歴" })
-set("n", "<leader>gb", builtin.git_branches, { desc = "Gitブランチ一覧" })
-set("n", "<leader>gs", builtin.git_status, { desc = "Gitの変更ファイル" })
+-- ▼ 補完時の挙動をスムーズに
+vim.opt.shortmess:append("c")
+vim.opt.updatetime = 300
 
--- ▼ LSP基本操作
-set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)          -- 定義へジャンプ
-set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)         -- 宣言へジャンプ
-set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)          -- 参照を検索
-set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)      -- 実装へジャンプ
-set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)                -- ドキュメント表示
-set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)      -- 変数リネーム
-set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts) -- コードアクション
+-- ▼ スワップファイル無効化
+vim.opt.swapfile = false
+
+-- ▼ 外部変更の自動検出
+vim.opt.autoread = true
+
+-- ▼ ウィンドウの挙動を改善
+vim.opt.splitright = true -- 縦分割を右側に
+vim.opt.splitbelow = true -- 横分割を下側に
+vim.opt.showmode = false  -- ステータスラインを使うなら非表示
+
+-- ▼ カラースキーム
+vim.cmd("colorscheme onenord")
