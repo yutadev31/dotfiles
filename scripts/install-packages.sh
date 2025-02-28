@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -Syu \
+sudo pacman -Syu --needed \
   base base-devel \
   zip unzip \
   curl wget \
