@@ -1,6 +1,9 @@
 /*
 /.**
 
+!/docs/
+!/docs/*.md
+
 !/scripts/
 !/scripts/*.sh
 
@@ -19,5 +22,5 @@
 
 !/README.md
 !/LICENSE
-!.gitignore
-!install
+!/.gitignore
+!/install
