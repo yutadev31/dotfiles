@@ -31,6 +31,8 @@ alias shutdown="sudo shutdown -h now"
 
 # git
 alias lg="lazygit"
+alias g="git"
+alias gi="git init"
 alias ga="git add"
 alias gaa="git add ."
 alias gc="git commit"
