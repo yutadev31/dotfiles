@@ -5,8 +5,8 @@ sudo pacman -Syu --needed \
   zip unzip \
   curl wget \
   git github-cli \
-  zsh tmux \
-  vim neovim \
+  zsh tmux starship \
+  vim neovim helix \
   fastfetch \
   man-db man-pages \
   nodejs npm yarn pnpm \
