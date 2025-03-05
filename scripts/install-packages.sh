@@ -7,7 +7,7 @@ sudo pacman -Syu --needed \
   git github-cli \
   zsh tmux \
   vim neovim \
-  festfetch \
+  fastfetch \
   man-db man-pages \
   nodejs npm yarn pnpm \
   cmake nasm rustup \
