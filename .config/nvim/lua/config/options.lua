@@ -1,5 +1,6 @@
 -- ▼ 基本設定
-vim.g.mapleader = " " -- リーダーキー設定
+vim.g.mapleader = " "       -- リーダーキー設定
+vim.g.maplocalleader = "\\" -- ローカルリーダーキー設定
 vim.opt.encoding = "utf-8"
 vim.opt.title = true
 vim.opt.termguicolors = true                  -- 24bitカラー対応
@@ -22,6 +23,7 @@ vim.opt.whichwrap:append("<,>,h,l") -- 折り返しをまたいで移動
 vim.opt.expandtab = true   -- タブをスペースに変換
 vim.opt.shiftwidth = 2     -- インデント幅
 vim.opt.tabstop = 2        -- タブの幅
+vim.opt.softtabstop = 2    -- バックスペースでの削除幅
 vim.opt.autoindent = true  -- 自動インデント
 vim.opt.smartindent = true -- スマートインデント
 
