@@ -14,6 +14,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 
+vim.g.mapleader = " "       -- リーダーキー設定
+vim.g.maplocalleader = "\\" -- ローカルリーダーキー設定
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
