@@ -16,6 +16,8 @@
 !/.config/nvim/*.lua
 !/.config/nvim/lua/
 !/.config/nvim/lua/**
+!/.config/tmux/
+!/.config/tmux/tmux.conf
 !/.config/zsh/
 !/.config/zsh/*.zsh
 
