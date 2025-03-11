@@ -11,5 +11,3 @@ ln -snf $dotdir/.zshrc $HOME
 
 git config --global commit.template ~/.commit_template
 git config --global init.defaultBranch main
-
-# curl -sS https://starship.rs/install.sh | sh
