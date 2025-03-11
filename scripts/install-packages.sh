@@ -11,4 +11,4 @@ sudo pacman -Syu --needed \
   man-db man-pages \
   nodejs npm yarn pnpm \
   cmake nasm rustup \
-  openssh translate-shell tree zip unzip 
+  openssh translate-shell tree zip unzip

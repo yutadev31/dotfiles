@@ -13,6 +13,7 @@
 !/.config/
 !/.config/starship.toml
 !/.config/alacritty.toml
+!/.config/commit_template.txt
 !/.config/nvim/
 !/.config/nvim/*.lua
 !/.config/nvim/lua/
@@ -22,8 +23,6 @@
 !/.config/zsh/
 !/.config/zsh/*.zsh
 
-!/.commit_template
-!/.tmux.conf
 !/.zshrc
 
 !/README.md

@@ -6,8 +6,7 @@ dotdir=$(pwd)
 ln -snf $dotdir/.bin $HOME
 ln -snf $dotdir/.config $HOME
 
-ln -snf $dotdir/.commit_template $HOME
 ln -snf $dotdir/.zshrc $HOME
 
-git config --global commit.template ~/.commit_template
+git config --global commit.template ~/.config/commit_template.txt
 git config --global init.defaultBranch main
