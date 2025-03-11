@@ -8,7 +8,6 @@ ln -snf $dotdir/.config $HOME
 
 ln -snf $dotdir/.commit_template $HOME
 ln -snf $dotdir/.zshrc $HOME
-ln -snf $dotdir/.tmux.conf $HOME
 
 git config --global commit.template ~/.commit_template
 git config --global init.defaultBranch main
