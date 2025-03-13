@@ -4,6 +4,9 @@
 !/docs/
 !/docs/*.md
 
+!/packages/
+!/packages/*.txt
+
 !/scripts/
 !/scripts/*.sh
 
