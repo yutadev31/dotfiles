@@ -74,8 +74,8 @@ useradd -m -g wheel -s /bin/bash -m $USER_NAME
 echo $USER_PASSWORD | passwd --stdin $USER_NAME
 
 # Install Grub
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --boot-directory=/boot/efi/EFI --recheck
-grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --boot-directory=/boot/EFI --recheck
+grub-mkconfig -o /boot/EFI/grub/grub.cfg
 
 # Network
 systemctl enable networkmanager
