@@ -52,9 +52,10 @@ output eDP-1 pos 0 1080
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-    input * {
-      xkb_layout "jp"
-    }
+input * {
+    xkb_options "ctrl:swapcaps"
+    xkb_layout "jp"
+}
 
 ### Key bindings
 #
