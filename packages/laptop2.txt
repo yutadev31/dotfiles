@@ -21,7 +21,6 @@ git
 github-cli
 google-chrome
 grub
-hyprland
 inetutils
 kwindowsystem
 lightdm
@@ -51,12 +50,15 @@ pnpm
 prismlauncher
 pulseaudio
 pulseaudio-alsa
+ranger
 reflector
 ristretto
 rsync
 spotify
 starship
 sudo
+swaybg
+swayfx
 thunar
 thunar-archive-plugin
 thunar-media-tags-plugin
@@ -72,6 +74,7 @@ virtualbox
 visual-studio-code-bin
 waybar
 wget
+wofi
 xfburn
 xfce4-appfinder
 xfce4-artwork
