@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Config
 DISK="/dev/sda"
