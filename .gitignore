@@ -25,6 +25,10 @@
 !/.config/tmux/tmux.conf
 !/.config/zsh/
 !/.config/zsh/*.zsh
+!/.config/sway/
+!/.config/sway/*
+!/.config/waybar/
+!/.config/waybar/*
 
 !/.zshrc
 
