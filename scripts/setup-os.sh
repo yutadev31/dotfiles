@@ -34,7 +34,7 @@ mount --mkdir $ROOT_PART /mnt
 mount --mkdir $BOOT_PART /mnt/boot
 
 # Install base system
-pacstrap /mnt $BASE_PACKAGES
+pacstrap /mnt $BASE_PACKAGES --noconfirm
 
 # Create fstab
 genfstab -U /mnt >> /mnt/etc/fstab
