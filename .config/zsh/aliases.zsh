@@ -6,6 +6,7 @@ alias '$'=
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
+
 # -i
 alias mv="mv -i"
 alias rm="rm -i"
