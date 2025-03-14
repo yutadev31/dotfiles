@@ -10,9 +10,6 @@
 !/scripts/
 !/scripts/*.sh
 
-!/.bin/
-!/.bin/*
-
 !/.config/
 !/.config/starship.toml
 !/.config/alacritty.toml
