@@ -1,9 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 set -ue
 
 dotdir=$(pwd)
 
-ln -snf $dotdir/.bin $HOME
 ln -snf $dotdir/.config $HOME
 
 ln -snf $dotdir/.zshrc $HOME
