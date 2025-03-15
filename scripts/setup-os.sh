@@ -9,14 +9,17 @@ HOSTNAME="vm-arch"
 TIMEZONE="Asia/Tokyo"
 LANG="ja_JP.UTF-8"
 KEYMAP="jp106"
+USER_NAME="yuta"
+PASSWORD=
 
-BASE_PACKAGES=$(cat packages/base.txt)
+BASE_PACKAGES="base dhcpcd efibootmgr grub linux networkmanager reflector"
+MOUNT_POINT="/mnt"
 
 read -p "Do you want to install? (y/N): " answer
 
 if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
-  echo "Installation canceled"
-  exit 1
+	echo "Installation canceled"
+	exit 1
 fi
 
 # Create partition
@@ -30,17 +33,17 @@ mkfs.fat -F32 $BOOT_PART
 mkfs.ext4 $ROOT_PART
 
 # Mount
-mount --mkdir $ROOT_PART /mnt
-mount --mkdir $BOOT_PART /mnt/boot
+mount --mkdir $ROOT_PART $MOUNT_POINT
+mount --mkdir $BOOT_PART $MOUNT_POINT/boot
 
 # Install base system
-pacstrap /mnt $BASE_PACKAGES --noconfirm
+pacstrap $MOUNT_POINT $BASE_PACKAGES --noconfirm
 
 # Create fstab
-genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -U $MOUNT_POINT >>$MOUNT_POINT/etc/fstab
 
 # chroot
-arch-chroot /mnt <<EOF
+arch-chroot $MOUNT_POINT <<EOF
 # Init package signing key
 pacman-key --init
 pacman-key --populate archlinux
@@ -67,16 +70,16 @@ echo "$HOSTNAME" > /etc/hostname
 echo "KEYMAP=$KEYMAP" > /etc/vconsole.conf
 
 # Set root password
-echo $ROOT_PASSWORD | passwd --stdin
+echo $PASSWORD | passwd --stdin
 
 # Create user
 useradd -m -g wheel -s /bin/bash -m $USER_NAME
-echo $USER_PASSWORD | passwd --stdin $USER_NAME
+echo $PASSWORD | passwd --stdin $USER_NAME
 
 # Install Grub
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --boot-directory=/boot/EFI --recheck
 grub-mkconfig -o /boot/EFI/grub/grub.cfg
 
 # Network
-systemctl enable networkmanager
+systemctl enable NetworkManager
 EOF
