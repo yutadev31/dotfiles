@@ -5,7 +5,7 @@ offset = { x = 1, y = 1 }
 
 [window]
 padding = { x = 8, y = 8 }
-opacity = 0.8
+opacity = 0.95
 
 [colors]
 # Default colors
