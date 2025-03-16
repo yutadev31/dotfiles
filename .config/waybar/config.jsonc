@@ -2,12 +2,16 @@
   "height": 30,
   "spacing": 0,
   "modules-left": [
-    "sway/workspaces"
+    "sway/workspaces",
+    "custom/media"
   ],
   "modules-center": [
     "clock"
   ],
-  "modules-right": [],
+  "modules-right": [
+    "pulseaudio",
+    "tray"
+  ],
   "sway/workspaces": {
     "persistent-workspaces": {
       "1": [],
@@ -19,8 +23,8 @@
       "7": [],
       "8": [],
       "9": [],
-      "10": []
+      "10": [],
     },
-    "active-only": false
-  }
+    "active-only": false,
+  },
 }

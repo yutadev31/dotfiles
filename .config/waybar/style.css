@@ -18,10 +18,29 @@ window#waybar.hidden {
 
 #workspaces button {
   padding: 0 10px;
-  font-weight: bold;
-  border-bottom: #fff solid 2px;
 }
 
 #workspaces button.focused {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #d55;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd {
+  padding: 0 10px;
+  color: #ffffff;
 }
