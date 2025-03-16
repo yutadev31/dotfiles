@@ -1,11 +1,14 @@
 #!/bin/sh
 set -ue
 
-dotdir=$(pwd)
+function install_files() {
+  dotdir=$(pwd)
 
-ln -snf $dotdir/.config $HOME
+  ln -snf $dotdir/.config $HOME
+  ln -snf $dotdir/.zshrc $HOME
+}
 
-ln -snf $dotdir/.zshrc $HOME
+install_files
 
 git config --global commit.template ~/.config/commit_template.txt
 git config --global init.defaultBranch main
