@@ -10,7 +10,6 @@ TIMEZONE="Asia/Tokyo"
 LANG="ja_JP.UTF-8"
 KEYMAP="jp106"
 USER_NAME="yuta"
-PASSWORD=
 
 BASE_PACKAGES="base dhcpcd efibootmgr grub linux networkmanager reflector"
 MOUNT_POINT="/mnt"
