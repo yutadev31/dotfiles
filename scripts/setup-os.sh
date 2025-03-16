@@ -21,27 +21,33 @@ if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
 	exit 1
 fi
 
-# Create partition
+# Create partitions
+echo "Create partition"
 parted -s "$DISK" mklabel gpt
 parted -s "$DISK" mkpart ESP fat32 1MiB 512MiB
 parted -s "$DISK" set 1 boot on
 parted -s "$DISK" mkpart primary ext4 512MiB 100%
 
-# Format
+# Format partitions
+echo "Format partitions"
 mkfs.fat -F32 $BOOT_PART
 mkfs.ext4 $ROOT_PART
 
 # Mount
+echo "Mount partitions"
 mount --mkdir $ROOT_PART $MOUNT_POINT
 mount --mkdir $BOOT_PART $MOUNT_POINT/boot
 
 # Install base system
+echo "Install base system"
 pacstrap $MOUNT_POINT $BASE_PACKAGES --noconfirm
 
 # Create fstab
+echo "Create fstab"
 genfstab -U $MOUNT_POINT >>$MOUNT_POINT/etc/fstab
 
 # chroot
+echo "Start chroot"
 arch-chroot $MOUNT_POINT <<EOF
 # Init package signing key
 pacman-key --init
