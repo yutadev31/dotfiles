@@ -224,4 +224,7 @@ bar {
     swaybar_command waybar
 }
 
+for_window [app_id="pavucontrol"] floating enable, resize set 800 600
+
+
 exec fcitx5 -d

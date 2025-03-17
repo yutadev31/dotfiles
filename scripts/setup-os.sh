@@ -7,7 +7,7 @@ BOOT_PART="/dev/sda1"
 ROOT_PART="/dev/sda2"
 HOSTNAME="vm-arch"
 TIMEZONE="Asia/Tokyo"
-LANG="ja_JP.UTF-8"
+LANG="en_US.UTF-8"
 KEYMAP="jp106"
 USER_NAME="yuta"
 
