@@ -6,7 +6,7 @@
 }
 
 window#waybar {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
   color: #ffffff;
   transition-property: background-color;
   transition-duration: 0.5s;
@@ -17,7 +17,7 @@ window#waybar.hidden {
 }
 
 #workspaces button {
-  padding: 0 10px;
+  padding: 0 5px;
   transition-property: background-color;
   transition-duration: 0.2s;
 }
