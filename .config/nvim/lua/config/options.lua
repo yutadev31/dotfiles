@@ -2,7 +2,7 @@
 vim.g.mapleader = " "       -- リーダーキー設定
 vim.g.maplocalleader = "\\" -- ローカルリーダーキー設定
 vim.opt.encoding = "utf-8"
-vim.opt.title = true
+vim.opt.title = false
 vim.opt.termguicolors = true                  -- 24bitカラー対応
 vim.opt.completeopt = "menu,menuone,noselect" -- 補完の挙動
 vim.opt.timeout = true
