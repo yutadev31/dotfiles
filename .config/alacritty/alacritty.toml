@@ -11,7 +11,6 @@ bold_italic = { family = "Hack Nerd Font", style="Bold Italic" }
 
 [window]
 padding = { x = 4, y = 4 }
-opacity = 0.95
 
 [colors]
 # Default colors
