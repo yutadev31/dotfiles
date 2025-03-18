@@ -6,11 +6,13 @@
     "custom/media"
   ],
   "modules-center": [
-    "clock"
+    "sway/window"
   ],
   "modules-right": [
+    "tray",
     "pulseaudio",
-    "tray"
+    "battery",
+    "clock"
   ],
   "sway/workspaces": {
     "persistent-workspaces": {
@@ -49,5 +51,24 @@
       ],
     },
     "on-click": "pavucontrol",
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
   },
 }
