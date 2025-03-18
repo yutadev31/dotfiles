@@ -204,9 +204,9 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
-set $bg             #bf616a88
+set $bg             #bf616a
 set $bg-inactive    #00000000
-set $fg             #ffffffff
+set $fg             #ffffff
 
 default_border pixel 4
 gaps outer 4

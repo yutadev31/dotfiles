@@ -1,11 +1,10 @@
 window {
   margin: 0;
-  background-color: transparent;
 }
 
 #input {
-  margin: 5px;
-  background-color: #333333;
+  margin: 5px 5px 0 5px;
+  background-color: #222222;
   border: none;
   border-radius: 0;
 }
@@ -17,12 +16,11 @@ window {
 }
 
 #outer-box {
-  border-radius: 4px;
   background-color: #111111;
 }
 
 #scroll {
-  background-color: #333333;
+  background-color: #222222;
   margin: 5px;
   border: none;
   border-radius: 0;
@@ -33,9 +31,10 @@ window {
 }
 
 #entry {
-  background-color: #333333;
+  background-color: #222222;
 }
 
 #entry:selected {
-  background-color: #dd4444;
+  background-color: #bf616a;
+  outline: none;
 }
