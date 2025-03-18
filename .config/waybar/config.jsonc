@@ -2,8 +2,7 @@
   "height": 30,
   "spacing": 0,
   "modules-left": [
-    "sway/workspaces",
-    "custom/media"
+    "sway/workspaces"
   ],
   "modules-center": [
     "sway/window"

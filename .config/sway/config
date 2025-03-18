@@ -7,9 +7,9 @@ set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+
 set $term alacritty
-# Your preferred application launcher
+set $browser firefox
 set $menu wofi --show=drun
 
 ### Output configuration
