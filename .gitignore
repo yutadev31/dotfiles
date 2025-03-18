@@ -12,8 +12,9 @@
 
 !/.config/
 !/.config/starship.toml
-!/.config/alacritty.toml
 !/.config/commit_template.txt
+!/.config/alacritty/
+!/.config/alacritty/alacritty.toml
 !/.config/nvim/
 !/.config/nvim/*.lua
 !/.config/nvim/lua/
