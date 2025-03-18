@@ -23,8 +23,8 @@ output * bg /home/yuta/wallpaper.png fill
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-output HDMI-A-1 pos 0 0
-output eDP-1 pos 0 1080
+output HDMI-A-1 pos 0 0 scale 0.75
+output eDP-1 pos 0 1440
 
 ### Idle configuration
 #
@@ -207,7 +207,7 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
-set $bg             #bf616a00
+set $bg             #bf616a88
 set $bg-inactive    #00000000
 set $fg             #ffffffff
 
