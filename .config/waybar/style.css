@@ -23,7 +23,7 @@ window#waybar.hidden {
 }
 
 #workspaces button.focused {
-  background-color: #d55;
+  background-color: #bf616a;
 }
 
 #tray * {

@@ -207,7 +207,7 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
-set $bg             #ff5555aa
+set $bg             #bf616a00
 set $bg-inactive    #00000000
 set $fg             #ffffffff
 
@@ -232,6 +232,5 @@ bar {
 }
 
 for_window [app_id="pavucontrol"] floating enable, resize set 800 600
-
 
 exec fcitx5 -d
