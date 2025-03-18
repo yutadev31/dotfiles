@@ -24,7 +24,8 @@ output * bg /home/yuta/wallpaper.png fill
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 output HDMI-A-1 pos 0 0
-output eDP-1 pos 0 1080
+output eDP-1 disable
+# pos 0 1080
 
 ### Idle configuration
 #
