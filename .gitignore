@@ -23,7 +23,7 @@
 !/.config/zsh/
 !/.config/zsh/*.zsh
 !/.config/sway/
-!/.config/sway/*
+!/.config/sway/config
 !/.config/waybar/
 !/.config/waybar/*
 !/.config/wofi/
