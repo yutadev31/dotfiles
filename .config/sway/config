@@ -207,14 +207,21 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
-default_border none
-gaps outer 3
-gaps inner 5
+set $bg             #ff5555aa
+set $bg-inactive    #00000000
+set $fg             #ffffffff
 
-corner_radius 10
-shadows enable
-shadow_blur_radius 10
-shadow_color #00000088
+default_border pixel 4
+gaps outer 4
+gaps inner 4
+
+# class                 border        bground       text        indicator     child_border
+client.focused          $bg           $bg           $fg         $bg           $bg
+client.focused_inactive $bg-inactive  $bg-inactive  $fg         $bg-inactive  $bg-inactive
+client.unfocused        $bg-inactive  $bg-inactive  $fg         $bg-inactive  $bg-inactive
+client.urgent           $bg-inactive  $bg-inactive  $fg         $bg-inactive  $bg-inactive
+client.placeholder      $bg-inactive  $bg-inactive  $fg         $bg-inactive  $bg-inactive
+
 
 #
 # Status Bar:
