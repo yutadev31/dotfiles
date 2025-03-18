@@ -26,6 +26,8 @@
 !/.config/sway/*
 !/.config/waybar/
 !/.config/waybar/*
+!/.config/wofi/
+!/.config/wofi/*
 
 !/.zshrc
 
