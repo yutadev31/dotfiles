@@ -20,7 +20,7 @@ window {
 }
 
 #scroll {
-  background-color: #222222;
+  background-color: #111111;
   margin: 5px;
   border: none;
   border-radius: 0;
@@ -31,7 +31,7 @@ window {
 }
 
 #entry {
-  background-color: #222222;
+  background-color: #111111;
 }
 
 #entry:selected {
