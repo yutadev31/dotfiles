@@ -47,10 +47,11 @@ npm
 obs-studio
 openssh
 pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
 pnpm
 prismlauncher
-pulseaudio
-pulseaudio-alsa
 reflector
 rsync
 rustup
