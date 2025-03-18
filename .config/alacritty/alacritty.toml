@@ -1,9 +1,6 @@
 [env]
 TERM = "alacritty"
 
-[terminal]
-shell = { program = "/usr/bin/tmux" }
-
 [font]
 size = 12
 offset = { x = 1, y = 1 }
