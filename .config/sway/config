@@ -230,6 +230,7 @@ bar {
 
 for_window [app_id="pavucontrol"] floating enable, resize set 800 600
 for_window [title="Picture in Picture"] floating enable, sticky enable
+for_window [title="Picture-in-Picture"] floating enable, sticky enable
 for_window [title="ピクチャー イン ピクチャー"] floating enable, sticky enable
 
 exec fcitx5 -d
