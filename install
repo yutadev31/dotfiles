@@ -6,6 +6,7 @@ function install_files() {
 
   ln -snf $dotdir/.config $HOME
   ln -snf $dotdir/.zshrc $HOME
+  ln -snf $dotdir/wallpaper.png $HOME
 }
 
 install_files

@@ -31,6 +31,7 @@
 !/.config/wofi/*
 
 !/.zshrc
+!/wallpaper.png
 
 !/README.md
 !/LICENSE
