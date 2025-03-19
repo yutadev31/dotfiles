@@ -6,8 +6,8 @@
 }
 
 window#waybar {
-  background-color: #111;
-  color: #ffffff;
+  background-color: #111111;
+  color: #eeeeee;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -19,8 +19,8 @@ window#waybar.hidden {
 #workspaces button {
   padding: 0 5px;
   color: #eeeeee;
-  transition-property: background-color;
-  transition-duration: 0.2s;
+  transition-property: color;
+  transition-duration: 0.1s;
 }
 
 #workspaces button.focused {
