@@ -10,6 +10,9 @@
 !/scripts/
 !/scripts/*.sh
 
+!/imgs/
+!/imgs/wallpaper.png
+
 !/.config/
 !/.config/starship.toml
 !/.config/commit_template.txt
@@ -31,7 +34,6 @@
 !/.config/wofi/*
 
 !/.zshrc
-!/wallpaper.png
 
 !/README.md
 !/LICENSE
