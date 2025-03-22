@@ -11,6 +11,9 @@ function install_files() {
 
 install_files
 
+# git config
+git config --global user.name Yuta
+git config --global user.email jp.yuta0131@gmail.com
 git config --global commit.template ~/.config/commit_template.txt
 git config --global init.defaultBranch main
 
