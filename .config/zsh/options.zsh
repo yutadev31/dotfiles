@@ -6,3 +6,6 @@ setopt hist_ignore_dups
 export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=100000
+
+# Delete Key
+bindkey "^[[3~" delete-char
