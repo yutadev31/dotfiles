@@ -51,6 +51,7 @@ output * bg /home/yuta/wallpaper.png fill
 # Read `man 5 sway-input` for more information about this section.
 input * {
     xkb_layout "jp"
+    xkb_options "ctrl:nocaps"
 }
 
 ### Key bindings
