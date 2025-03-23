@@ -32,6 +32,8 @@
 !/.config/waybar/*
 !/.config/wofi/
 !/.config/wofi/*
+!/.config/mako/
+!/.config/mako/*
 
 !/.zshrc
 
