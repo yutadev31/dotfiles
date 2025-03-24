@@ -9,6 +9,18 @@ function install_files() {
   ln -snf $dotdir/imgs/wallpaper.png $HOME
 }
 
+function clone_themes() {
+  wget -P ".config/sway/theme" https://raw.githubusercontent.com/catppuccin/i3/refs/heads/main/themes/catppuccin-mocha
+  wget -P ".config/waybar/theme.css" https://raw.githubusercontent.com/catppuccin/waybar/refs/heads/main/themes/mocha.css
+  wget -P ".config/alacritty/theme.toml" https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
+  wget -P ".config/zsh/theme.zsh" https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/refs/heads/main/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
+
+  mkdir -p ~/.config/tmux/plugins/catppuccin
+  git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+
+  # git clone https://github.com/catppuccin/mako.git
+}
+
 install_files
 
 # git config
@@ -16,5 +28,7 @@ git config --global user.name Yuta
 git config --global user.email jp.yuta0131@gmail.com
 git config --global commit.template ~/.config/commit_template.txt
 git config --global init.defaultBranch main
+
+clone_themes
 
 sudo pacman -S --needed --noconfirm $(cat ./packages/dev.txt)

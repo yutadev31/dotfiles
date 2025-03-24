@@ -26,14 +26,16 @@
 !/.config/tmux/tmux.conf
 !/.config/zsh/
 !/.config/zsh/*.zsh
+/.config/zsh/theme.zsh
 !/.config/sway/
 !/.config/sway/config
 !/.config/waybar/
-!/.config/waybar/*
+!/.config/waybar/config.jsonc
+!/.config/waybar/style.css
 !/.config/wofi/
-!/.config/wofi/*
+!/.config/wofi/style.css
 !/.config/mako/
-!/.config/mako/*
+!/.config/mako/config
 
 !/.zshrc
 
