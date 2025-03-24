@@ -240,3 +240,4 @@ exec wayvnc
 exec mako
 
 include /home/yuta/.config/sway/config.local
+include /home/yuta/.config/sway/theme
