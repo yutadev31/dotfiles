@@ -58,6 +58,6 @@ vim.opt.splitbelow = true -- 横分割を下側に
 vim.opt.showmode = false  -- ステータスラインを使うなら非表示
 
 -- ▼ カラースキーム
--- vim.cmd("colorscheme onenord")
-vim.cmd("colorscheme nord")
+vim.cmd("colorscheme onenord")
+-- vim.cmd("colorscheme nord")
 -- vim.cmd("colorscheme catppuccin")
