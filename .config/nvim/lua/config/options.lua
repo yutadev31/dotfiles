@@ -59,4 +59,5 @@ vim.opt.showmode = false  -- ステータスラインを使うなら非表示
 
 -- ▼ カラースキーム
 -- vim.cmd("colorscheme onenord")
-vim.cmd("colorscheme catppuccin")
+vim.cmd("colorscheme nord")
+-- vim.cmd("colorscheme catppuccin")

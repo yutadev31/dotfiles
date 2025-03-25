@@ -12,14 +12,15 @@ function install_files() {
 function clean_themes() {
   rm -f ".config/sway/theme"
   rm -f ".config/waybar/theme.css"
-  rm -f ".config/alacritty/theme.toml"
+  # rm -f ".config/alacritty/theme.toml"
   rm -f ".config/zsh/theme.zsh"
 }
 
 function install_themes() {
   wget -O ".config/sway/theme" https://raw.githubusercontent.com/catppuccin/i3/refs/heads/main/themes/catppuccin-mocha
   wget -O ".config/waybar/theme.css" https://raw.githubusercontent.com/catppuccin/waybar/refs/heads/main/themes/mocha.css
-  wget -O ".config/alacritty/theme.toml" https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
+  # wget -O ".config/alacritty/theme.toml" https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
+  # wget -O ".config/alacritty/theme.yaml" https://raw.githubusercontent.com/nordtheme/alacritty/refs/heads/main/src/nord.yaml
   wget -O ".config/zsh/theme.zsh" https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/refs/heads/main/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
   mkdir -p ~/.config/tmux/plugins/catppuccin
