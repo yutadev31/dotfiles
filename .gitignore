@@ -32,6 +32,8 @@
 /.config/zsh/theme.zsh
 !/.config/sway/
 !/.config/sway/config
+!/.config/hypr/
+!/.config/hypr/hyprland.conf
 !/.config/waybar/
 !/.config/waybar/config.jsonc
 !/.config/waybar/style.css

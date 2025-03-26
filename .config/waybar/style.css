@@ -27,6 +27,10 @@ window#waybar.hidden {
   color: #bf616a;
 }
 
+#workspaces button.active {
+  color: #bf616a;
+}
+
 #tray * {
   padding: 0 5px;
 }

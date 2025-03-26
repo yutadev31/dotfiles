@@ -1,4 +1,8 @@
 return {
   "rmehri01/onenord.nvim",
-  opts = {},
+  opts = {
+    disable = {
+      background = true,
+    },
+  },
 }
