@@ -13,6 +13,9 @@
 !/imgs/
 !/imgs/wallpaper.png
 
+!/.github/
+!/.github/**
+
 !/.config/
 !/.config/starship.toml
 !/.config/commit_template.txt
