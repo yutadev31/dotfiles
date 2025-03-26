@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-PATH="$PATH:/home/yuta/.bin"
+PATH="$PATH:$HOME/.bin:$HOME/dev/flutter-sdk/flutter/bin/"

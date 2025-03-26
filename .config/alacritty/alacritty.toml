@@ -9,8 +9,8 @@ bold = { family = "Hack Nerd Font", style="Bold" }
 italic = { family = "Hack Nerd Font", style="Italic" }
 bold_italic = { family = "Hack Nerd Font", style="Bold Italic" }
 
-# [window]
-# padding = { x = 4, y = 4 }
+[window]
+padding = { x = 4, y = 4 }
 
 [colors]
 # Default colors
