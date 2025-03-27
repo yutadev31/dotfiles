@@ -6,10 +6,12 @@ audacity
 base
 base-devel
 bat
+blender
 blockbench-bin
 brightnessctl
 bun-bin
 cava
+chezmoi
 clang
 cloc
 cmake
@@ -48,11 +50,13 @@ gtk3-demos
 gtk4-demos
 helix
 htop
+hyprland
 hyprpicker
 iftop
 inetutils
 inkscape
 jdk17-openjdk
+jq
 kwindowsystem
 less
 libappindicator-gtk3
@@ -88,9 +92,7 @@ nautilus
 neovim
 net-tools
 networkmanager
-nginx
 ninja
-nix
 nm-connection-editor
 noto-fonts
 noto-fonts-cjk
