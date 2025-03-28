@@ -21,8 +21,8 @@ alias ll="ls -l"
 alias la="ls -la"
 
 # editor
-alias vi="nvim"
-alias vim="nvim"
+alias vi="NVIM_APPNAME=nvim-lite nvim"
+alias vim="NVIM_APPNAME=nvim-lite nvim"
 alias emacs="nvim"
 alias nano="nvim"
 

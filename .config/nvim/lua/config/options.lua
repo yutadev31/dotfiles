@@ -10,6 +10,7 @@ vim.opt.timeoutlen = 500
 
 -- ▼ 表示設定
 vim.opt.number = true               -- 行番号表示
+vim.opt.relativenumber = true       -- 相対行番号表示
 vim.opt.cursorline = true           -- カーソル行をハイライト
 vim.opt.scrolloff = 5               -- スクロール時の余白
 vim.opt.laststatus = 3              -- ステータスラインを全ウィンドウで統一
@@ -59,5 +60,3 @@ vim.opt.showmode = false  -- ステータスラインを使うなら非表示
 
 -- ▼ カラースキーム
 vim.cmd("colorscheme onenord")
--- vim.cmd("colorscheme nord")
--- vim.cmd("colorscheme catppuccin")
