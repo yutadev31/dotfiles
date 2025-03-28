@@ -2,18 +2,25 @@
 # Initial commit
 
 # ==== Prefix ====
-# fix:      バグ修正
-# hotfix:   緊急のバグ修正
-# add:      ファイルの追加
-# feat:     機能の追加
-# update:   バグではない修正
-# change:   仕様変更
-# remove:   ファイル、機能の削除
-# move:     ファイルの移動、名前の変更
-# revert:   修正の取り消し
-# style:    フォーマットの修正など
-# refactor: リファクタリング
-# perf:     性能向上目的の修正 (prefはパフォーマンスの略)
-# docs:     ドキュメントの修正
-# test:     テストコードの修正
-# upgrade:  バージョンアップ
+# fix:      Bug fixes
+# add:      Adding new files
+# feat:     Adding new features
+# change:   Modifying existing specifications
+# remove:   Deleting files or features
+# move:     Moving or renaming files
+# revert:   Reverting changes
+# style:    Code style fixes
+# refactor: Code refactoring
+# perf:     Performance improvements
+# docs:     Documentation updates
+# test:     Modifying or adding test code
+# ci:       CI/CD configuration changes
+# chore:    Development environment changes
+# upgrade:  Version upgrades
+# build:    Build-related modifications
+# security: Security fixes and improvements
+# deps:     Adding or removing dependencies
+# i18n:     Internationalization and localization updates
+# ux:       UI/UX improvements
+# lint:     Linter rule updates or fixes
+# config:   Configuration file changes (.env, settings.json, etc.)
