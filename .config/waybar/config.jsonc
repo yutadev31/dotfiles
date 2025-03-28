@@ -3,10 +3,12 @@
   "spacing": 0,
   "modules-left": [
     "sway/workspaces",
-    "hyprland/workspaces"
+    "hyprland/workspaces",
+    "custom/media"
   ],
   "modules-center": [
-    "sway/window"
+    "sway/window",
+    "hyprland/window"
   ],
   "modules-right": [
     "tray",
@@ -98,5 +100,16 @@
       "",
       ""
     ],
+  },
+  "custom/media": {
+    "format": "{icon}  {text}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "default": "🎜",
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
   },
 }
