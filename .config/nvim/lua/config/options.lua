@@ -6,7 +6,7 @@ vim.opt.title = false
 vim.opt.termguicolors = true                  -- 24bitカラー対応
 vim.opt.completeopt = "menu,menuone,noselect" -- 補完の挙動
 vim.opt.timeout = true
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 1000
 
 -- ▼ 表示設定
 vim.opt.number = true               -- 行番号表示
@@ -38,7 +38,7 @@ vim.opt.clipboard = "unnamedplus" -- システムクリップボードと連携
 
 -- ▼ 不可視文字の表示設定
 vim.opt.list = true
-vim.opt.listchars = { tab = "> ", trail = " ", nbsp = "+" }
+vim.opt.listchars = { tab = "> ", trail = "-", nbsp = "+" }
 
 -- ▼ バックスペースの挙動改善
 vim.opt.backspace = "indent,eol,start"
