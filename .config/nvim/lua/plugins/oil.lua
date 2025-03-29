@@ -1,8 +1,7 @@
 return {
   "stevearc/oil.nvim",
   dependencies = {
-    -- { "echasnovski/mini.icons", opts = {} },
-    "nvim-tree/nvim-web-devicons",
+    "echasnovski/mini.nvim",
   },
   lazy = false,
   opts = {

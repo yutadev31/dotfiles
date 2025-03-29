@@ -3,7 +3,7 @@ local opts = { noremap = true, silent = true }
 
 -- ▼ ファイラー・ターミナル
 h.nmap("<leader>ee", "<CMD>Oil<CR>", { desc = "ファイラーを開く" })
-h.nmap("<leader>nn", "<CMD>Neotree<CR>")
+h.nmap("<leader>gg", "<CMD>Neogit<CR>")
 h.nmap("<leader>tt", "<CMD>ToggleTerm<CR>", { desc = "ターミナルをトグル" })
 
 -- ▼ Mason（LSP・ツール管理）
