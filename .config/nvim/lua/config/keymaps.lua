@@ -10,7 +10,7 @@ h.nmap("<leader>tt", "<CMD>ToggleTerm<CR>", { desc = "ターミナルをトグ�
 h.nmap("<leader>mm", "<CMD>Mason<CR>", { desc = "Mason を開く" })
 
 -- ▼ ターミナルモードのESCキーでノーマルモードへ
-set("t", "<ESC>", "<C-\\><C-n>", { desc = "ターミナルモード終了" })
+h.tmap("<ESC>", "<C-\\><C-n>", { desc = "ターミナルモード終了" })
 
 -- ▼ Telescope (ファイル・検索系)
 local builtin = require("telescope.builtin")
