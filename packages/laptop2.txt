@@ -55,9 +55,11 @@ hyprpicker
 iftop
 inetutils
 inkscape
+intellij-idea-community-edition
 jdk17-openjdk
 jq
 kwindowsystem
+lazygit
 less
 libappindicator-gtk3
 lightdm
@@ -87,6 +89,7 @@ man-db
 man-pages
 mercurial
 meson
+nano
 nasm
 nautilus
 neovim
