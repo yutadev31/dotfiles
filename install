@@ -37,3 +37,5 @@ install_files
 install_packages
 setup_git_config
 
+# curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+# fisher install jethrokuan/z
