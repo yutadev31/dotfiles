@@ -7,6 +7,7 @@ vim.opt.termguicolors = true                  -- 24bitカラー対応
 vim.opt.completeopt = "menu,menuone,noselect" -- 補完の挙動
 vim.opt.timeout = true
 vim.opt.timeoutlen = 1000
+vim.opt.shell = "/usr/bin/fish"
 
 -- ▼ 表示設定
 vim.opt.number = true               -- 行番号表示

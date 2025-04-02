@@ -1,6 +1,9 @@
 [env]
 TERM = "alacritty"
 
+[terminal]
+shell = "/usr/bin/fish"
+
 [font]
 size = 12
 offset = { x = 1, y = 1 }

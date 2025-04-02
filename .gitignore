@@ -30,6 +30,10 @@
 !/.config/zsh/
 !/.config/zsh/*.zsh
 /.config/zsh/theme.zsh
+!/.config/fish/
+!/.config/fish/config.fish
+!/.config/fish/conf.d/
+!/.config/fish/conf.d/*.fish
 !/.config/sway/
 !/.config/sway/config
 !/.config/hypr/
