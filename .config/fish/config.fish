@@ -1,6 +1,8 @@
 if status is-interactive
 end
 
+fish_vi_key_bindings
+
 # Env
 export EDITOR=nvim
 export SHELL=/usr/bin/fish
@@ -14,6 +16,7 @@ alias mv="mv -i"
 alias rm="rm -i"
 alias cp="cp -i"
 alias cl="clear"
+alias ls="eza --icons"
 alias l="ls"
 alias sl="ls"
 alias ll="ls -l"
@@ -47,3 +50,10 @@ alias grh="git reset --hard HEAD"
 alias gstash="git stash"
 alias gpop="git stash pop"
 alias glg="git log --oneline --graph --all --decorate"
+
+# mise
+if status is-interactive
+  mise activate fish | source
+else
+  mise activate fish --shims | source
+end
