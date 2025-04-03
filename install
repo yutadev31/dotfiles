@@ -8,6 +8,7 @@ function install_files() {
   ln -snf $dotdir/.zshrc $HOME
   ln -snf $dotdir/imgs/wallpaper.png $HOME
 
+  pacman -Sy --needed --noconfirm wget
   wget -O .config/waybar/mediaplayer.py https://raw.githubusercontent.com/Alexays/Waybar/refs/heads/master/resources/custom_modules/mediaplayer.py
 }
 
