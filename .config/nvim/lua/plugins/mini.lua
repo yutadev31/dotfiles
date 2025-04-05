@@ -26,7 +26,7 @@ return {
     -- setup("deps", {})
     -- setup("diff", {})
     setup("extra", {})
-    setup("files", {})
+    -- setup("files", {})
     setup("git", {})
     setup("jump", {})
     setup("jump2d", {})
