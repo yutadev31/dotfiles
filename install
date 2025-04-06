@@ -3,12 +3,19 @@ set -ue
 
 function install_files() {
   dotdir=$(pwd)
+  home=$HOME
+  mkdir -p $home
 
-  ln -snf $dotdir/.config $HOME
-  ln -snf $dotdir/.zshrc $HOME
-  ln -snf $dotdir/imgs/wallpaper.png $HOME
+  files=$(find .config -type f)
+  for file in $files; do
+    dir=$(dirname $file)
+    mkdir -pv $home/$dir
+    ln -svnf $dotdir/$file $home/$file
+  done
 
-  pacman -Sy --needed --noconfirm wget
+  ln -svnf $dotdir/.zshrc $home
+  ln -svnf $dotdir/imgs/wallpaper.png $home
+
   wget -O .config/waybar/mediaplayer.py https://raw.githubusercontent.com/Alexays/Waybar/refs/heads/master/resources/custom_modules/mediaplayer.py
 }
 
@@ -34,8 +41,8 @@ function setup_git_config() {
   fi
 }
 
-install_files
 install_packages
+install_files
 setup_git_config
 
 # curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
