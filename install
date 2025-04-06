@@ -16,7 +16,7 @@ function install_files() {
   ln -svnf $dotdir/.zshrc $home
   ln -svnf $dotdir/imgs/wallpaper.png $home
 
-  wget -O .config/waybar/mediaplayer.py https://raw.githubusercontent.com/Alexays/Waybar/refs/heads/master/resources/custom_modules/mediaplayer.py
+  wget -O $home/.config/waybar/mediaplayer.py https://raw.githubusercontent.com/Alexays/Waybar/refs/heads/master/resources/custom_modules/mediaplayer.py
 }
 
 function install_packages() {
