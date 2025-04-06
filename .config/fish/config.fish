@@ -9,7 +9,6 @@ export SHELL=/usr/bin/fish
 export LANG=en_US.UTF-8
 
 # Alias
-alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias mv="mv -i"
