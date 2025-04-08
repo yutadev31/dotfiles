@@ -6,11 +6,8 @@ function install_files() {
   home=$HOME
   mkdir -p $home
 
-  files=$(find .config -type f)
-  for file in $files; do
-    dir=$(dirname $file)
-    mkdir -pv $home/$dir
-    ln -svnf $dotdir/$file $home/$file
+  for dir in .config/*; do
+    ln -svnf $dotdir/$dir $home/$dir
   done
 
   ln -svnf $dotdir/.zshrc $home
