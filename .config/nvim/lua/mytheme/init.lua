@@ -5,6 +5,8 @@ function M.load()
 
   local theme = {
     Normal = { fg = colors.fg, bg = colors.bg },
+    CursorLine = { bg = colors.currentline },
+    CursorLineNr = { fg = colors.white },
 
     ["@comment"] = { fg = colors.white },
     ["@keyword"] = { fg = colors.red },

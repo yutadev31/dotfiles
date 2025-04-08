@@ -1,5 +1,6 @@
 return {
-  bg = "#1b1b1b",
+  bg = "#111317",
+  currentline = "#1B1D23",
   fg = "#eeeeee",
   red = "#e69494",
   green = "#7fc08c",
