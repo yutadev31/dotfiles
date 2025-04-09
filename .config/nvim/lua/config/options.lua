@@ -61,4 +61,5 @@ vim.opt.showmode = false  -- ステータスラインを使うなら非表示
 vim.opt.cmdheight = 0
 
 -- ▼ カラースキーム
-vim.cmd("colorscheme onenord")
+-- vim.cmd("colorscheme onenord")
+vim.cmd("colorscheme mytheme")

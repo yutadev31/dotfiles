@@ -1,12 +1,13 @@
 * {
-  /* `otf-font-awesome` is required to be installed for icons */
-  font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Hack Nerd Font", FontAwesome, sans-serif;
   font-size: 13px;
+  margin: 0;
+  padding: 0;
   border-radius: 0;
 }
 
 window#waybar {
-  background-color: #111111;
+  background-color: rgba(15, 18, 26, 0.95);
   color: #eeeeee;
   transition-property: background-color;
   transition-duration: 0.5s;
@@ -16,6 +17,12 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
+label.module,
+box.module {
+  padding: 0 8px;
+  color: #eeeeee;
+}
+
 #workspaces button {
   padding: 0 5px;
   color: #eeeeee;
@@ -23,35 +30,11 @@ window#waybar.hidden {
   transition-duration: 0.1s;
 }
 
-#workspaces button.focused {
-  color: #bf616a;
-}
-
+#workspaces button.focused,
 #workspaces button.active {
-  color: #bf616a;
+  color: #d27979;
 }
 
 #tray * {
   padding: 0 5px;
-}
-
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#wireplumber,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#scratchpad,
-#power-profiles-daemon,
-#mpd {
-  padding: 0 8px;
-  color: #ffffff;
 }

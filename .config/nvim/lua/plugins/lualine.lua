@@ -2,14 +2,14 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "rmehri01/onenord.nvim",
+    -- "rmehri01/onenord.nvim",
     "lewis6991/gitsigns.nvim",
     "SmiteshP/nvim-navic",
   },
   opts = {
     options = {
       icons_enabled = true,
-      theme = "auto",
+      theme = "mytheme",
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
       disabled_filetypes = {
