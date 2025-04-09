@@ -1,6 +1,7 @@
 return {
   bg = "#0f121a",
   currentline = "#252937",
+  black = "#000000",
   white = "#eeeeee",
   gray = "#808080",
   red = "#d27979",
