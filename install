@@ -4,7 +4,7 @@ set -ue
 function install_files() {
   dotdir=$(pwd)
   home=$HOME
-  mkdir -p $home
+  mkdir -p $home/.config
 
   for dir in .config/*; do
     ln -svnf $dotdir/$dir $home/$dir

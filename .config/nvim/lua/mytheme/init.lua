@@ -55,7 +55,7 @@ function M.load()
     WinSeparator = styles.WinSeparator,
     LineNr = colors.Hidden,
     CursorLineNr = { fg = colors.white },
-    TabLine = { bg = colors.currentline },
+    TabLine = { bg = colors.statusline },
     TabLineSel = { fg = colors.black, bg = colors.white },
     Whitespace = colors.Hidden,
     Visual = { bg = colors.currentline },
