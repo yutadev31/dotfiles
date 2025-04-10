@@ -1,35 +1,16 @@
 local h = require("utils.helper")
 local opts = { noremap = true, silent = true }
 
--- ▼ ファイラー・ターミナル
-h.nmap("<leader>ee", "<CMD>Oil<CR>", { desc = "ファイラーを開く" })
-h.nmap("<leader>gg", "<CMD>Neogit<CR>")
-h.nmap("<leader>tt", "<CMD>ToggleTerm<CR>", { desc = "ターミナルをトグル" })
-
--- ▼ Mason（LSP・ツール管理）
-h.nmap("<leader>mm", "<CMD>Mason<CR>", { desc = "Mason を開く" })
-
 -- ▼ ターミナルモードのESCキーでノーマルモードへ
-h.tmap("<ESC>", "<C-\\><C-n>", { desc = "ターミナルモード終了" })
+h.tmap("<ESC>", "<C-\\><C-n>")
 
--- ▼ Telescope (ファイル・検索系)
-local builtin = require("telescope.builtin")
+h.imap("<c-space>", function()
+  vim.lsp.completion.get()
+end)
 
-h.nmap("<leader>ff", builtin.find_files, { desc = "ファイル検索" })
-h.nmap("<leader>fg", builtin.live_grep, { desc = "単語検索" })
-h.nmap("<leader>fb", builtin.buffers, { desc = "開いているバッファ一覧" })
-h.nmap("<leader>fh", builtin.help_tags, { desc = "ヘルプ検索" })
-
--- ▼ LSP関連
-h.nmap("<leader>fd", builtin.diagnostics, { desc = "エラー一覧" })
-h.nmap("<leader>fr", builtin.lsp_references, { desc = "シンボルの参照一覧" })
-h.nmap("<leader>fs", builtin.lsp_document_symbols, { desc = "ファイル内のシンボル検索" })
-h.nmap("<leader>fw", builtin.lsp_workspace_symbols, { desc = "ワークスペース全体のシンボル検索" })
-
--- ▼ Git関連
-h.nmap("<leader>gc", builtin.git_commits, { desc = "Gitコミット履歴" })
-h.nmap("<leader>gb", builtin.git_branches, { desc = "Gitブランチ一覧" })
-h.nmap("<leader>gs", builtin.git_status, { desc = "Gitの変更ファイル" })
+h.nmap("<leader>ee", "<CMD>Oil<CR>")
+h.nmap("<leader>tt", "<CMD>ToggleTerm<CR>")
+h.nmap("<leader>mm", "<CMD>Mason<CR>")
 
 -- ▼ LSP基本操作
 h.nmap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)          -- 定義へジャンプ
