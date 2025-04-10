@@ -134,6 +134,7 @@ function M.load()
     ["@type"] = styles.Type,
     ["@property"] = styles.Property,
     ["@function"] = styles.Function,
+    ["@function.builtin"] = styles.Function,
     ["@keyword"] = styles.Keyword,
     ["@punctuation.delimiter"] = styles.Delimiter,
     ["@punctuation.bracket"] = styles.Bracket,
