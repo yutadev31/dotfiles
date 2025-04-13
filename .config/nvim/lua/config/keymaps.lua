@@ -4,7 +4,7 @@ local h = require("utils.helper")
 h.tmap("<ESC>", "<C-\\><C-n>")
 
 h.imap("<c-space>", function()
-  vim.lsp.completion.get()
+	vim.lsp.completion.get()
 end)
 
 h.nmap("<leader>ee", "<CMD>Oil<CR>")

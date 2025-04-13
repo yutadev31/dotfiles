@@ -14,32 +14,31 @@ bold_italic = { family = "Hack Nerd Font", style="Bold Italic" }
 
 [window]
 padding = { x = 4, y = 4 }
-opacity = 0.95
 
 [colors.primary]
-background = "#0f121a"
-foreground = "#eeeeee"
+background = "#1f222d"
+foreground = "#f2f2f2"
 
 [colors.normal]
-black = "#afb0b6"
-red = "#d48686"
-green = "#86d486"
-yellow = "#d4d486"
-blue = "#86add4"
-magenta = "#ad86d4"
-cyan = "#86d4d4"
-white = "#eeeeee"
+black = "#aeafb6"
+red = "#da6262"
+green = "#62da62"
+yellow = "#dada62"
+blue = "#629eda"
+magenta = "#9e62da"
+cyan = "#62dada"
+white = "#f2f2f2"
 
 [colors.bright]
-black = "#afb0b6"
-red = "#d48686"
-green = "#86d486"
-yellow = "#d4d486"
-blue = "#86add4"
-magenta = "#ad86d4"
-cyan = "#86d4d4"
-white = "#eeeeee"
+black = "#aeafb6"
+red = "#da6262"
+green = "#62da62"
+yellow = "#dada62"
+blue = "#629eda"
+magenta = "#9e62da"
+cyan = "#62dada"
+white = "#f2f2f2"
 
 [colors.selection]
 text = "CellForeground"
-background = "#3f4353"
+background = "#414657"
