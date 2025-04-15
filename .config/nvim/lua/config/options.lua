@@ -56,8 +56,8 @@ vim.opt.autoread = true
 -- ▼ ウィンドウの挙動を改善
 vim.opt.splitright = true -- 縦分割を右側に
 vim.opt.splitbelow = true -- 横分割を下側に
-vim.opt.showmode = true   -- ステータスラインを使うなら非表示
-vim.opt.cmdheight = 1
+vim.opt.showmode = false  -- ステータスラインを使うなら非表示
+vim.opt.cmdheight = 0
 
 -- ▼ カラースキーム
 vim.cmd("colorscheme shadow-hue")
