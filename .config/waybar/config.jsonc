@@ -1,20 +1,8 @@
 {
   "spacing": 4,
-  "modules-left": [
-    "sway/workspaces",
-    "hyprland/workspaces",
-    "custom/media"
-  ],
-  "modules-center": [
-    "sway/window",
-    "hyprland/window"
-  ],
-  "modules-right": [
-    "tray",
-    "pulseaudio",
-    "battery",
-    "clock"
-  ],
+  "modules-left": ["sway/workspaces", "hyprland/workspaces", "custom/media"],
+  "modules-center": ["sway/window", "hyprland/window"],
+  "modules-right": ["tray", "pulseaudio", "battery", "clock"],
   "sway/workspaces": {
     "persistent-workspaces": {
       "1": [],
@@ -73,11 +61,7 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": [
-        "",
-        "",
-        ""
-      ],
+      "default": ["", "", ""],
     },
     "on-click": "pavucontrol",
   },
@@ -92,13 +76,7 @@
     "format-charging": "{capacity}% ",
     "format-plugged": "{capacity}% ",
     "format-alt": "{time} {icon}",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
+    "format-icons": ["", "", "", "", ""],
   },
   "custom/media": {
     "format": "{icon}  {text}",
