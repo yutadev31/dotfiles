@@ -1,41 +1,38 @@
-[env]
-TERM = "alacritty"
-
 [terminal]
 shell = "/usr/bin/fish"
 
 [font]
 size = 12
-normal = { family = "Hack Nerd Font", style="Regular" }
-bold = { family = "Hack Nerd Font", style="Bold" }
-italic = { family = "Hack Nerd Font", style="Italic" }
-bold_italic = { family = "Hack Nerd Font", style="Bold Italic" }
+normal = { family = "Hack Nerd Font", style = "Regular" }
+bold = { family = "Hack Nerd Font", style = "Bold" }
+italic = { family = "Hack Nerd Font", style = "Italic" }
+bold_italic = { family = "Hack Nerd Font", style = "Bold Italic" }
 
 [window]
 padding = { x = 4, y = 4 }
 
 [colors.primary]
-background = "#1f222d"
+background = "#21232a"
 foreground = "#f2f2f2"
 
 [colors.normal]
 black = "#868891"
-red = "#da6262"
-green = "#62da62"
-yellow = "#dada62"
-blue = "#629eda"
-magenta = "#9e62da"
-cyan = "#62dada"
+red = "#c67575"
+green = "#75c675"
+yellow = "#c6c675"
+blue = "#7590c6"
+magenta = "#9075c6"
+cyan = "#75c6c6"
 white = "#f2f2f2"
 
 [colors.bright]
 black = "#868891"
-red = "#da6262"
-green = "#62da62"
-yellow = "#dada62"
-blue = "#629eda"
-magenta = "#9e62da"
-cyan = "#62dada"
+red = "#c67575"
+green = "#75c675"
+yellow = "#c6c675"
+blue = "#7590c6"
+magenta = "#9075c6"
+cyan = "#75c6c6"
 white = "#f2f2f2"
 
 [colors.selection]

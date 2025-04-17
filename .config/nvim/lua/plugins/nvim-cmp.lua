@@ -38,8 +38,8 @@ return {
           show_labelDetails = true,
           before = function(entry, vim_item)
             return vim_item
-          end
-        })
+          end,
+        }),
       },
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
@@ -49,7 +49,7 @@ return {
         { name = "cmdline" },
         { name = "vsnip" },
         { name = "luasnip" },
-      })
+      }),
     })
-  end
+  end,
 }
