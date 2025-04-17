@@ -50,6 +50,10 @@ alias gstash="git stash"
 alias gpop="git stash pop"
 alias glg="git log --oneline --graph --all --decorate"
 
+function cdp
+  cd (ghq root)/(ghq list | fzf)
+end
+
 # mise
 if status is-interactive
   mise activate fish | source
