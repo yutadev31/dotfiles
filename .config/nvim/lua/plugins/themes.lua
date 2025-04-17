@@ -1,4 +1,4 @@
 return {
-	"rmehri01/onenord.nvim",
-	"nordtheme/vim",
+  "rmehri01/onenord.nvim",
+  "nordtheme/vim",
 }

@@ -4,7 +4,6 @@ return {
     opts = {
       ensure_installed = {
         "lua-language-server",
-        "stylua",
       },
     },
   },
@@ -19,24 +18,12 @@ return {
         automatic_installation = true,
       })
 
-      local on_attach = function(client, bufnr)
-        vim.lsp.completion.enable(true, client.id, bufnr, {
-          autotrigger = true,
-          convert = function(item)
-            return { abbr = item.label:gsub("%b()", "") }
-          end,
-        })
-      end
-
       require("mason-lspconfig").setup_handlers({
         function(server_name)
-          require("lspconfig")[server_name].setup({
-            on_attach = on_attach,
-          })
+          require("lspconfig")[server_name].setup({})
         end,
         ["lua_ls"] = function()
           require("lspconfig").lua_ls.setup({
-            on_attach = on_attach,
             settings = {
               Lua = {
                 diagnostics = {
@@ -54,7 +41,6 @@ return {
         end,
         ["rust_analyzer"] = function()
           require("lspconfig").rust_analyzer.setup({
-            on_attach = on_attach,
             settings = {
               ["rust-analyzer"] = {
                 diagnostic = {
