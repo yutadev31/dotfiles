@@ -46,7 +46,7 @@ return {
     -- setup("indentscope", {})
     setup("map", {})
     -- setup("notify", {})
-    setup("starter", {})
+    -- setup("starter", {})
     -- setup("statusline", {})
     setup("tabline", {})
     setup("trailspace", {})

@@ -39,5 +39,6 @@ return {
         arrow = ">",
       },
     },
+    dashboard = {},
   },
 }
