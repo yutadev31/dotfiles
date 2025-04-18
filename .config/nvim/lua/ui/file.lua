@@ -5,6 +5,8 @@ local state = {
   expanded = {}, -- path => boolean
 }
 
+local WINDOW_NAME = "LazyFiles"
+
 local function scan_shallow(path)
   local uv = vim.loop
   local entries = {}
@@ -93,7 +95,7 @@ local function toggle_expand()
 end
 
 local function open_lazy_sidebar()
-  local res = require("ui.window").open_sidebar("LazyFiles", 30)
+  local res = require("ui.window").open_sidebar(WINDOW_NAME, 30)
   local buf = res.buf
 
   render(buf)
@@ -105,7 +107,7 @@ end
 local M = {}
 
 function M.setup()
-  vim.api.nvim_create_user_command("LazyFiles", open_lazy_sidebar, {})
+  vim.api.nvim_create_user_command(WINDOW_NAME, open_lazy_sidebar, {})
 end
 
 return M
