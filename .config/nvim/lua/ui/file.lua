@@ -78,7 +78,7 @@ local function render(buf)
     local line_length = #line
 
     -- アイコン部分のハイライト
-    local start_pos = string.find(line, icon) + indent
+    local start_pos = string.find(line, icon) + indent * 2
     local end_pos = start_pos + #icon - 1
     if start_pos and end_pos <= line_length then
       vim.api.nvim_buf_set_extmark(buf, ns_id, i - 1, start_pos - 1, {
