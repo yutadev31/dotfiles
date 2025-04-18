@@ -20,6 +20,8 @@ function M.open_sidebar(title, width)
   vim.bo[buf].bufhidden = "wipe"
   vim.bo[buf].swapfile = false
 
+  vim.wo[win].wrap = false
+  vim.wo[win].sidescrolloff = 2
   vim.wo[win].number = false
   vim.wo[win].relativenumber = false
 
