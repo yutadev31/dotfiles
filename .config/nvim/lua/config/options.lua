@@ -62,4 +62,4 @@ vim.opt.cmdheight = 0
 -- ▼ カラースキーム
 vim.cmd("colorscheme shadow-hue")
 
-require("ui")
+require("ui").setup()
