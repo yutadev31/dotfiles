@@ -6,8 +6,14 @@ local state = {
 }
 
 local WINDOW_NAME = "LazyFiles"
+local WINDOW_WIDTH = 35
 
 local function scan_shallow(path)
+  -- キャッシュを確認
+  if state.entries[path] then
+    return state.entries[path]
+  end
+
   local uv = vim.loop
   local entries = {}
   local fd = uv.fs_scandir(path)
@@ -30,13 +36,14 @@ local function scan_shallow(path)
     return a.name < b.name
   end)
 
+  -- キャッシュを保存
+  state.entries[path] = entries
   return entries
 end
 
 local function render(buf)
   vim.bo[buf].modifiable = true
   local lines = {}
-  state.path_map = {}
 
   local function render_dir(path, indent)
     local entries = scan_shallow(path)
@@ -53,8 +60,6 @@ local function render(buf)
   end
 
   local root = vim.fn.getcwd()
-  state.path_map[1] = nil
-  state.path_map[2] = nil
   render_dir(root, 0)
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
   vim.bo[buf].modifiable = false
@@ -86,7 +91,7 @@ local function open_or_expand()
 
       -- サイドバーを元のサイズに戻す
       vim.cmd("wincmd h")
-      vim.cmd("vertical resize 30")
+      vim.cmd("vertical resize " .. WINDOW_WIDTH)
       vim.cmd("wincmd l")
     end
 
@@ -95,7 +100,7 @@ local function open_or_expand()
 end
 
 local function open_lazy_files()
-  local res = require("ui.window").open_sidebar(WINDOW_NAME, 30)
+  local res = require("ui.window").open_sidebar(WINDOW_NAME, WINDOW_WIDTH)
   local buf = res.buf
 
   render(buf)
