@@ -5,6 +5,7 @@ local state = {
   entries = {},
   path_map = {}, -- 行番号 => path
   indent_map = {},
+  highlight_map = {},
   expanded = {}, -- path => boolean
   cache = {},
 }
@@ -47,18 +48,36 @@ local function render(buf)
 
   -- ディレクトリを再帰的に描画
   local function render_dir(path, indent)
+    local devicons = require("nvim-web-devicons")
+
     local entries = scan_shallow(path, state.cache)
     for _, entry in ipairs(entries) do
-      require("nvim-web-devicons")
-      local icon = entry.type == "directory" and "󰉋 " or "󰈔 "
+      local icon, hl_group
+
+      if entry.type == "directory" then
+        icon = "󰉋" -- ディレクトリ用の固定アイコン（必要ならカスタムできる）
+        hl_group = "Directory" -- Neovimのデフォルトのディレクトリハイライトグループ
+      else
+        -- ファイル名と拡張子からアイコン取得
+        icon, hl_group = devicons.get_icon(entry.name, nil, { default = true })
+        if not icon then
+          icon = "󰈔" -- デフォルトのファイルアイコン
+          hl_group = "Normal"
+        end
+      end
+
+      -- ハイライト付きの行を構築（ハイライトは後でNSで設定してもOK）
       local line = string.rep("  ", indent) .. icon .. " " .. entry.name
       table.insert(lines, line)
+
+      -- パスとインデント記録
       state.path_map[#lines] = entry.path
       state.indent_map[#lines] = indent
+      state.highlight_map[#lines] = hl_group -- アイコン用のハイライトを別に記録（後で使うなら）
 
-      -- ディレクトリの場合は再帰的に表示
+      -- 展開されていれば再帰
       if entry.type == "directory" and state.expanded[entry.path] then
-        render_dir(entry.path, indent + 1) -- 再帰的に呼び出してインデントを増加
+        render_dir(entry.path, indent + 1)
       end
     end
   end
@@ -72,9 +91,8 @@ local function render(buf)
   for i, line in ipairs(lines) do
     local entry_path = state.path_map[i]
     local indent = state.indent_map[i]
+    local highlight_group = state.highlight_map[i]
     local icon = line:sub(1, 2)
-    local highlight_group = entry_path and (vim.loop.fs_stat(entry_path).type == "directory" and "Directory" or "File")
-      or "Normal"
     local line_length = #line
 
     -- アイコン部分のハイライト
