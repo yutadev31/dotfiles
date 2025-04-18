@@ -60,7 +60,7 @@ local function render(buf)
   vim.bo[buf].modifiable = false
 end
 
-local function toggle_expand()
+local function open_or_expand()
   local buf = vim.api.nvim_get_current_buf()
   local line = vim.fn.line(".")
   local path = state.path_map[line]
@@ -94,20 +94,20 @@ local function toggle_expand()
   end
 end
 
-local function open_lazy_sidebar()
+local function open_lazy_files()
   local res = require("ui.window").open_sidebar(WINDOW_NAME, 30)
   local buf = res.buf
 
   render(buf)
 
   -- キーマップ: Enter で展開/折りたたみ
-  vim.keymap.set("n", "<CR>", toggle_expand, { buffer = buf, noremap = true, silent = true })
+  vim.keymap.set("n", "<CR>", open_or_expand, { buffer = buf, noremap = true, silent = true })
 end
 
 local M = {}
 
 function M.setup()
-  vim.api.nvim_create_user_command(WINDOW_NAME, open_lazy_sidebar, {})
+  vim.api.nvim_create_user_command(WINDOW_NAME, open_lazy_files, {})
 end
 
 return M
