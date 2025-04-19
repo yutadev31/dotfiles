@@ -8,7 +8,7 @@ return {
     "echasnovski/mini.pick",
   },
   config = function()
-    local h = require("utils.helper")
+    local h = require("yutadev31.utils.helper")
     h.nmap("<leader>gg", "<CMD>Neogit<CR>")
   end,
 }

@@ -1,5 +1,5 @@
 -- ui/file.lua
-local sidebar = require("ui.core.sidebar")
+local sidebar = require("yutadev31.ui.core.sidebar")
 
 local state = {
   entries = {},

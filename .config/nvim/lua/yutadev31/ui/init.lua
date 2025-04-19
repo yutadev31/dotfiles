@@ -1,5 +1,5 @@
 -- ui/init.lua
-local sidebar = require("ui.core.sidebar")
+local sidebar = require("yutadev31.ui.core.sidebar")
 
 local M = {}
 local views = {}
@@ -21,7 +21,7 @@ function M.open_view(name)
 end
 
 function M.setup()
-  M.register_view(require("ui.views.files"))
+  M.register_view(require("yutadev31.ui.views.files"))
 end
 
 return M

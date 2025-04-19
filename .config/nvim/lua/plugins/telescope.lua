@@ -3,7 +3,7 @@ return {
   tag = "0.1.8",
   dependencies = { "nvim-lua/plenary.nvim" },
   config = function()
-    local h = require("utils.helper")
+    local h = require("yutadev31.utils.helper")
     local builtin = require("telescope.builtin")
 
     h.nmap("<leader>ff", builtin.find_files)

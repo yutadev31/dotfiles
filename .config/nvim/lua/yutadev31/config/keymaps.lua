@@ -1,4 +1,4 @@
-local h = require("utils.helper")
+local h = require("yutadev31.utils.helper")
 
 -- ▼ ターミナルモードのESCキーでノーマルモードへ
 h.tmap("<ESC>", "<C-\\><C-n>")
