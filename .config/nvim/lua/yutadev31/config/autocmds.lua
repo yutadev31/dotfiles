@@ -6,6 +6,13 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+vim.api.nvim_create_autocmd("TermEnter", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("startinsert")
+  end,
+})
+
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function()
