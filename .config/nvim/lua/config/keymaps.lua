@@ -13,10 +13,15 @@ h.nmap("<leader>w", "<cmd>w<cr>")
 h.nmap("<leader>q", "<cmd>q<cr>")
 
 h.nmap("<leader>ee", "<cmd>Oil<cr>")
-h.nmap("<leader>tt", "<cmd>ToggleTerm<cr>")
-h.nmap("<leader>mm", "<cmd>Mason<cr>")
-h.nmap("<leader>ll", "<cmd>Lazy<cr>")
 
+-- Terminal
+h.nmap("<leader>tt", "<cmd>ToggleTerm<cr>")
+
+-- Package
+h.nmap("<leader>pm", "<cmd>Mason<cr>")
+h.nmap("<leader>pl", "<cmd>Lazy<cr>")
+
+-- LSP
 h.nmap("gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
 h.nmap("gd", "<cmd>lua vim.lsp.buf.declaration()<cr>")
 h.nmap("gr", "<cmd>lua vim.lsp.buf.references()<cr>")
