@@ -23,10 +23,7 @@ vim.opt.whichwrap:append("<,>,h,l") -- 折り返しをまたいで移動
 vim.opt.fillchars:append({ eob = "~" })
 
 -- ▼ インデント設定
-vim.opt.expandtab = true -- タブをスペースに変換
-vim.opt.shiftwidth = 2 -- インデント幅
-vim.opt.tabstop = 2 -- タブの幅
-vim.opt.softtabstop = 2 -- バックスペースでの削除幅
+h.tabsize(true, 2)
 vim.opt.autoindent = true -- 自動インデント
 vim.opt.smartindent = true -- スマートインデント
 
@@ -64,10 +61,16 @@ vim.opt.cmdheight = 0
 -- ▼ カラースキーム
 vim.cmd("colorscheme shadow-hue")
 
--- ▼ Rust
-h.filetype("rust", function()
-  vim.opt_local.expandtab = true
-  vim.opt_local.shiftwidth = 4
-  vim.opt_local.tabstop = 4
-  vim.opt_local.softtabstop = 4
+h.filetype({
+  "go",
+  "make",
+}, function()
+  h.tabsize(false, 4)
+end)
+
+h.filetype({
+  "rust",
+  "php",
+}, function()
+  h.tabsize(true, 4)
 end)

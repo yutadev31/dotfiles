@@ -17,4 +17,11 @@ M.filetype = function(pattern, callback)
   })
 end
 
+M.tabsize = function(expandtab, size)
+  vim.opt_local.expandtab = expandtab
+  vim.opt_local.shiftwidth = size
+  vim.opt_local.tabstop = size
+  vim.opt_local.softtabstop = size
+end
+
 return M
