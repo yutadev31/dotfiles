@@ -23,7 +23,10 @@ vim.opt.whichwrap:append("<,>,h,l") -- 折り返しをまたいで移動
 vim.opt.fillchars:append({ eob = "~" })
 
 -- ▼ インデント設定
-h.tabsize(true, 2)
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 vim.opt.autoindent = true -- 自動インデント
 vim.opt.smartindent = true -- スマートインデント
 
