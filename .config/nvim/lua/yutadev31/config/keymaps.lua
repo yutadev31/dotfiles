@@ -19,8 +19,7 @@ h.nmap("<leader>bd", "<cmd>bd<cr>", "Delete Buffer")
 h.nmap("<leader>bq", "<cmd>bufdo bd<cr>", "Close All Buffers")
 
 -- Views
--- h.nmap("<leader>ee", "<cmd>Oil<cr>", "Open Oil File Manager")
-h.nmap("<leader>ee", "<cmd>Files<cr>", "Open File Manager")
+h.nmap("<leader>ee", "<cmd>Oil<cr>", "Open Oil File Manager")
 h.nmap("<leader>gg", "<cmd>Neogit<CR>", "Open Neogit")
 
 -- Terminal
