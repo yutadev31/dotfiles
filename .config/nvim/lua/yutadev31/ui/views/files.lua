@@ -3,10 +3,10 @@ local sidebar = require("yutadev31.ui.core.sidebar")
 
 local state = {
   entries = {},
-  path_map = {}, -- 行番号 => path
+  path_map = {},
   indent_map = {},
   highlight_map = {},
-  expanded = {}, -- path => boolean
+  expanded = {},
   cache = {},
 }
 
@@ -55,7 +55,7 @@ local function render(buf)
       local icon, hl_group
 
       if entry.type == "directory" then
-        icon = "󰉋" -- ディレクトリ用の固定アイコン（必要ならカスタムできる）
+        icon = state.expanded[entry.path] and "" or "󰉋" -- ディレクトリ用の固定アイコン（必要ならカスタムできる）
         hl_group = "Directory" -- Neovimのデフォルトのディレクトリハイライトグループ
       else
         -- ファイル名と拡張子からアイコン取得
@@ -89,7 +89,6 @@ local function render(buf)
   -- ハイライト追加
   local ns_id = vim.api.nvim_create_namespace("lazy_explorer")
   for i, line in ipairs(lines) do
-    local entry_path = state.path_map[i]
     local indent = state.indent_map[i]
     local highlight_group = state.highlight_map[i]
     local icon = line:sub(1, 2)
