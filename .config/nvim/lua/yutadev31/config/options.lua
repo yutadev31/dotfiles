@@ -22,13 +22,6 @@ vim.opt.linebreak = true -- 単語の途中で折り返さない
 vim.opt.whichwrap:append("<,>,h,l") -- 折り返しをまたいで移動
 vim.opt.fillchars:append({ eob = "~" })
 
-h.filetype("rust", function()
-  vim.opt_local.expandtab = true
-  vim.opt_local.shiftwidth = 4
-  vim.opt_local.tabstop = 4
-  vim.opt_local.softtabstop = 4
-end)
-
 -- ▼ インデント設定
 vim.opt.expandtab = true -- タブをスペースに変換
 vim.opt.shiftwidth = 2 -- インデント幅
@@ -70,3 +63,11 @@ vim.opt.cmdheight = 0
 
 -- ▼ カラースキーム
 vim.cmd("colorscheme shadow-hue")
+
+-- ▼ Rust
+h.filetype("rust", function()
+  vim.opt_local.expandtab = true
+  vim.opt_local.shiftwidth = 4
+  vim.opt_local.tabstop = 4
+  vim.opt_local.softtabstop = 4
+end)
