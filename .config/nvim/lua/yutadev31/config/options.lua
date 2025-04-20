@@ -77,3 +77,5 @@ h.filetype({
 }, function()
   h.tabsize(true, 4)
 end)
+
+require("simple.statusline").setup()
