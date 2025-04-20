@@ -1,5 +1,5 @@
 local h = require("yutadev31.utils.helper")
-local builtin = require("telescope.builtin")
+local telescope = require("telescope.builtin")
 
 -- ▼ ターミナルモードのESCキーでノーマルモードへ
 h.tmap("<ESC>", "<C-\\><C-n>")
@@ -41,18 +41,18 @@ h.nmap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action")
 h.nmap("<leader>k", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help")
 
 -- Telescope
-h.nmap("<leader>ff", builtin.find_files, "Find Files")
-h.nmap("<leader>fg", builtin.live_grep, "Live Grep")
-h.nmap("<leader>fo", builtin.oldfiles, "Recent Files")
-h.nmap("<leader>fb", builtin.buffers, "Open Buffers")
-h.nmap("<leader>fc", builtin.commands, "Command Palette")
-h.nmap("<leader>fh", builtin.help_tags, "Help Tags")
-h.nmap("<leader>fd", builtin.diagnostics, "Diagnostics")
-h.nmap("<leader>fr", builtin.lsp_references, "LSP References")
-h.nmap("<leader>fs", builtin.lsp_document_symbols, "Document Symbols")
-h.nmap("<leader>fw", builtin.lsp_workspace_symbols, "Workspace Symbols")
+h.nmap("<leader>ff", telescope.find_files, "Find Files")
+h.nmap("<leader>fg", telescope.live_grep, "Live Grep")
+h.nmap("<leader>fo", telescope.oldfiles, "Recent Files")
+h.nmap("<leader>fb", telescope.buffers, "Open Buffers")
+h.nmap("<leader>fc", telescope.commands, "Command Palette")
+h.nmap("<leader>fh", telescope.help_tags, "Help Tags")
+h.nmap("<leader>fd", telescope.diagnostics, "Diagnostics")
+h.nmap("<leader>fr", telescope.lsp_references, "LSP References")
+h.nmap("<leader>fs", telescope.lsp_document_symbols, "Document Symbols")
+h.nmap("<leader>fw", telescope.lsp_workspace_symbols, "Workspace Symbols")
 
 -- Git
-h.nmap("<leader>gc", builtin.git_commits, "Git Commits")
-h.nmap("<leader>gb", builtin.git_branches, "Git Branches")
-h.nmap("<leader>gs", builtin.git_status, "Git Status")
+h.nmap("<leader>gc", telescope.git_commits, "Git Commits")
+h.nmap("<leader>gb", telescope.git_branches, "Git Branches")
+h.nmap("<leader>gs", telescope.git_status, "Git Status")
