@@ -6,6 +6,7 @@ return {
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
+  event = "VeryLazy",
   opts = {
     adapters = {},
   },

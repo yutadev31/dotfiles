@@ -1,3 +1,5 @@
+local h = require("yutadev31.utils.helper")
+
 -- ▼ 基本設定
 vim.opt.encoding = "utf-8"
 vim.opt.title = true
@@ -19,6 +21,13 @@ vim.opt.wrap = true -- 行の折り返しを有効化
 vim.opt.linebreak = true -- 単語の途中で折り返さない
 vim.opt.whichwrap:append("<,>,h,l") -- 折り返しをまたいで移動
 vim.opt.fillchars:append({ eob = "~" })
+
+h.filetype("rust", function()
+  vim.opt_local.expandtab = true
+  vim.opt_local.shiftwidth = 4
+  vim.opt_local.tabstop = 4
+  vim.opt_local.softtabstop = 4
+end)
 
 -- ▼ インデント設定
 vim.opt.expandtab = true -- タブをスペースに変換
@@ -61,5 +70,3 @@ vim.opt.cmdheight = 0
 
 -- ▼ カラースキーム
 vim.cmd("colorscheme shadow-hue")
-
-require("yutadev31.ui").setup()

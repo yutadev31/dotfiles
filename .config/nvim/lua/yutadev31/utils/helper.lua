@@ -10,4 +10,11 @@ for _, mode in pairs({ "n", "v", "i", "s", "o", "c", "t", "x" }) do
   end
 end
 
+M.filetype = function(pattern, callback)
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = pattern,
+    callback = callback,
+  })
+end
+
 return M

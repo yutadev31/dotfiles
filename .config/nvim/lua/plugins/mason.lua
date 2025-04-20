@@ -1,6 +1,7 @@
 return {
   {
     "williamboman/mason.nvim",
+    event = "VeryLazy",
     opts = {
       ensure_installed = {
         "lua-language-server",
@@ -13,6 +14,7 @@ return {
       "neovim/nvim-lspconfig",
       "williamboman/mason.nvim",
     },
+    event = "VeryLazy",
     config = function()
       require("mason-lspconfig").setup({
         automatic_installation = true,

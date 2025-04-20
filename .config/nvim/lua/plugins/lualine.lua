@@ -5,6 +5,7 @@ return {
     "lewis6991/gitsigns.nvim",
     "SmiteshP/nvim-navic",
   },
+  event = "VimEnter",
   opts = {
     options = {
       icons_enabled = true,
