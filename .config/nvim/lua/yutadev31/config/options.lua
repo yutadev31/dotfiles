@@ -79,3 +79,6 @@ h.filetype({
 end)
 
 require("simple.statusline").setup()
+require("simple.tabline").setup()
+require("simple.cursorword").setup()
+-- require("simple.indentscope").setup()

@@ -48,7 +48,7 @@ return {
     -- setup("notify", {})
     -- setup("starter", {})
     -- setup("statusline", {})
-    setup("tabline", {})
+    -- setup("tabline", {})
     -- setup("trailspace", {})
 
     -- Other --
