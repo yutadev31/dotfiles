@@ -64,6 +64,7 @@ vim.opt.cmdheight = 0
 -- ▼ カラースキーム
 vim.cmd("colorscheme shadow-hue")
 
+-- ▼ 言語別の設定
 h.filetype({
   "go",
   "make",
@@ -78,6 +79,7 @@ h.filetype({
   h.tabsize(true, 4)
 end)
 
+-- ▼ 自作プラグインの読み込み
 require("simple.statusline").setup()
 require("simple.tabline").setup()
 -- require("simple.cursorword").setup()
