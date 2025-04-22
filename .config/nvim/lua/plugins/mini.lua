@@ -13,7 +13,7 @@ return {
     -- setup("completion", {})
     -- setup("move", {})
     -- setup("operators", {})
-    setup("pairs", {})
+    -- setup("pairs", {})
     -- setup("snippets", {})
     -- setup("splitjoin", {})
     -- setup("surround", {})
