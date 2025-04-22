@@ -10,6 +10,7 @@ function install_files() {
     ln -svnf $dotdir/$dir $home/$dir
   done
 
+  ln -svnf $dotdir/.bin $home
   ln -svnf $dotdir/.zshrc $home
   ln -svnf $dotdir/imgs/wallpaper.png $home
 
