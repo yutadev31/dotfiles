@@ -2,4 +2,3 @@
 require("yutadev31.config.lazy")
 require("yutadev31.config.options")
 require("yutadev31.config.keymaps")
-require("yutadev31.config.autocmds")

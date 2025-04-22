@@ -78,3 +78,33 @@ end)
 h.filetype({ "rust", "php" }, function()
   h.tabsize(true, 4)
 end)
+
+-- Auto start insert mode & hide line numbers in terminal
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.number = false
+    vim.cmd("startinsert")
+  end,
+})
+
+-- Ensure insert mode when entering terminal buffer
+vim.api.nvim_create_autocmd("TermEnter", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("startinsert")
+  end,
+})
+
+-- Format on save (synchronously)
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
+
+-- Auto-reload files changed outside of Neovim
+vim.api.nvim_create_autocmd("FocusGained", {
+  command = "checktime",
+})
