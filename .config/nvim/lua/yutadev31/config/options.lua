@@ -67,6 +67,10 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldenable = true
 
+-- Spell Checking (useful for comments and documentation)
+vim.opt.spell = true
+vim.opt.spelllang = { "en_us" }
+
 -- Colorscheme
 vim.cmd("colorscheme shadow-hue")
 
