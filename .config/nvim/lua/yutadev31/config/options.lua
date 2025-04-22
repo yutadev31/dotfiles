@@ -71,12 +71,12 @@ vim.opt.foldenable = true
 vim.cmd("colorscheme shadow-hue")
 
 -- Filetype-specific Tab Settings
-h.filetype({ "go", "make" }, function()
-  h.tabsize(false, 4)
+h.filetype({ "rust", "php", "python" }, function()
+  h.tabsize(true, 4)
 end)
 
-h.filetype({ "rust", "php" }, function()
-  h.tabsize(true, 4)
+h.filetype({ "go", "make", "cpp", "java" }, function()
+  h.tabsize(false, 4)
 end)
 
 -- Auto start insert mode & hide line numbers in terminal
