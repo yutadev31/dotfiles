@@ -60,3 +60,6 @@ if status is-interactive
 else
   mise activate fish --shims | source
 end
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /home/yuta/.lmstudio/bin

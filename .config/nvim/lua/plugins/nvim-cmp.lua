@@ -25,7 +25,7 @@ return {
       }),
       formatting = {
         format = lspkind.cmp_format({
-          mode = "symbol",
+          mode = "symbol_text",
           maxwidth = {
             menu = 50,
             abbr = 50,
