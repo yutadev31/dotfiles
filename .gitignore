@@ -36,6 +36,8 @@
 !/.config/sway/config
 !/.config/hypr/
 !/.config/hypr/hyprland.conf
+!/.config/kitty/
+!/.config/kitty/*.conf
 !/.config/waybar/
 !/.config/waybar/config.jsonc
 !/.config/waybar/style.css
