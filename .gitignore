@@ -17,7 +17,6 @@
 !/.github/**
 
 !/.config/
-!/.config/starship.toml
 !/.config/commit_template.txt
 !/.config/alacritty/
 !/.config/alacritty/alacritty.toml
@@ -27,13 +26,8 @@
 !/.config/nvim/lua/**
 !/.config/tmux/
 !/.config/tmux/tmux.conf
-!/.config/zsh/
-!/.config/zsh/*.zsh
-/.config/zsh/theme.zsh
 !/.config/fish/
 !/.config/fish/config.fish
-!/.config/sway/
-!/.config/sway/config
 !/.config/hypr/
 !/.config/hypr/hyprland.conf
 !/.config/kitty/
