@@ -2,18 +2,6 @@
 /.**
 /home/.**
 
-!/docs/
-!/docs/*.md
-
-!/packages/
-!/packages/*.txt
-
-!/imgs/
-!/imgs/wallpaper.png
-
-!/.github/
-!/.github/**
-
 !/home/
 !/home/.zshrc
 !/home/.gitmessage
