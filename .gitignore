@@ -34,6 +34,10 @@
 !/home/.config/wofi/style.css
 !/home/.config/zsh/
 !/home/.config/zsh/*.zsh
+!/home/.config/gtk-2.0/
+!/home/.config/gtk-2.0/gtkrc-2.0
+!/home/.config/gtk-3.0/
+!/home/.config/gtk-3.0/settings.ini
 !/home/.bin/
 !/home/.bin/*
 
@@ -42,3 +46,4 @@
 !/.gitignore
 !/install
 !/stylua.toml
+!/scripts/

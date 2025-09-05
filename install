@@ -31,6 +31,8 @@ install_files() {
   install_file .config/mako
   install_file .config/waybar
   install_file .config/wofi
+  install_file .config/gtk-2.0
+  install_file .config/gtk-3.0
   install_file .bin
 }
 
