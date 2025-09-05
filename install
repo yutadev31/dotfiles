@@ -38,7 +38,6 @@ install() {
   echo "Installing dotfiles..."
 
   install_files
-  setup_git
 
   echo "Installed dotfiles successfully."
 }
