@@ -18,6 +18,7 @@ install_file() {
 
 install_files() {
   echo "Installing files..."
+  install_file wallpaper.png
   install_file .gitmessage
   install_file .zshrc
   install_file .config/zsh
