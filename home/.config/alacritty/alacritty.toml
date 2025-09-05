@@ -1,0 +1,41 @@
+[terminal]
+shell = "/bin/fish"
+
+[font]
+size = 12
+normal = { family = "Hack Nerd Font", style = "Regular" }
+bold = { family = "Hack Nerd Font", style = "Bold" }
+italic = { family = "Hack Nerd Font", style = "Italic" }
+bold_italic = { family = "Hack Nerd Font", style = "Bold Italic" }
+
+[window]
+padding = { x = 4, y = 4 }
+opacity = 0.95
+
+[colors.primary]
+background = "#1e1f2d"
+foreground = "#f9f9fa"
+
+[colors.cursor]
+text = "#1e1f2d"
+cursor = "#f9f9fa"
+
+[colors.normal]
+black = "#9c9eae"
+white = "#c1c2cc"
+red = "#ea7070"
+green = "#88ea70"
+yellow = "#ead070"
+blue = "#708eea"
+magenta = "#ea70bd"
+cyan = "#70e6ea"
+
+[colors.bright]
+black = "#9c9eae"
+white = "#c1c2cc"
+red = "#ea7070"
+green = "#88ea70"
+yellow = "#ead070"
+blue = "#708eea"
+magenta = "#ea70bd"
+cyan = "#70e6ea"

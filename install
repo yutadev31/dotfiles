@@ -1,0 +1,45 @@
+#!/bin/sh
+set -ue
+
+install_file() {
+  path=$1
+  dotdir=$(pwd)
+
+  if [ -L "$HOME/$path" ]; then return; fi
+
+  if [ -e "$HOME/$path" ]; then
+    mv $HOME/$path $HOME/$path.old
+    echo "Move ~/$path"
+  fi
+
+  mkdir -p $(dirname $HOME/$path)
+  ln -sf $dotdir/home/$path $HOME/$path
+}
+
+install_files() {
+  echo "Installing files..."
+  install_file .gitmessage
+  install_file .zshrc
+  install_file .config/zsh
+  install_file .config/fish
+  install_file .config/fastfetch
+  install_file .config/nvim
+  install_file .config/tmux
+  install_file .config/alacritty
+  install_file .config/hypr
+  install_file .config/mako
+  install_file .config/waybar
+  install_file .config/wofi
+  install_file .bin
+}
+
+install() {
+  echo "Installing dotfiles..."
+
+  install_files
+  setup_git
+
+  echo "Installed dotfiles successfully."
+}
+
+install

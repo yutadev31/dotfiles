@@ -1,0 +1,39 @@
+* {
+  font-family: "Hack Nerd Font", FontAwesome, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+window#waybar {
+  background-color: rgba(37, 39, 55, 0.8);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  color: #f9f9fa;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+label.module,
+box.module {
+  padding: 4px 4px;
+}
+
+#workspaces button {
+  padding: 0 4px;
+  margin: 0 2px;
+  border: none;
+  color: #b9bac6;
+  transition-property: color;
+  transition-duration: 0.1s;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+  color: #7ab2ff;
+}
+
+#tray {
+  padding: 0 5px;
+}
