@@ -32,6 +32,8 @@
 !/home/.config/waybar/style.css
 !/home/.config/wofi/
 !/home/.config/wofi/style.css
+!/home/.config/rofi/
+!/home/.config/rofi/config.rasi
 !/home/.config/zsh/
 !/home/.config/zsh/*.zsh
 !/home/.config/gtk-2.0/

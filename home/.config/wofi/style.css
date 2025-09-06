@@ -32,6 +32,7 @@ window {
 
 #entry {
   background-color: #252737;
+  border-radius: 0;
 }
 
 #entry:selected {

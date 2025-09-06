@@ -1,0 +1,6 @@
+configuration {
+  show-icons: true;
+}
+
+@import "~/.config/rofi/catppuccin-macchiato"
+@import "~/.config/rofi/catppuccin-default"
