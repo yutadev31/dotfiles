@@ -7,6 +7,5 @@ return {
   version = "*",
   config = function()
     setup("pairs", {})
-    setup("trailspace", {})
   end,
 }

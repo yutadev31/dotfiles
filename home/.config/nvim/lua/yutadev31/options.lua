@@ -1,6 +1,11 @@
+local function cwd_as_tilde()
+  return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+end
+
 -- Basic Settings
 vim.opt.encoding = "utf-8"
 vim.opt.title = true
+vim.opt.titlestring = "nvim " .. cwd_as_tilde()
 vim.opt.termguicolors = true
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.timeout = true
@@ -88,5 +93,11 @@ vim.api.nvim_create_autocmd("FocusGained", {
 vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
     os.execute("fcitx5-remote -c")
+  end,
+})
+
+vim.api.nvim_create_autocmd("DirChanged", {
+  callback = function()
+    vim.o.titlestring = "nvim " .. cwd_as_tilde()
   end,
 })
