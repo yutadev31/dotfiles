@@ -1,0 +1,7 @@
+#!/bin/bash
+
+tmux new-session -d -s dotfiles
+
+tmux send-keys -t dotfiles:1 "nvim ." Enter
+
+tmux attach-session -t dotfiles
