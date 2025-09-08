@@ -35,11 +35,9 @@ alias gstash="git stash"
 alias gpop="git stash pop"
 alias glg="git log --oneline --graph --all --decorate"
 
-export EDITOR=nvim
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export PATH="$HOME/dev/depot_tools:$PATH"
-export GTK_THEME="Catppuccin-Dark-Macchiato"
+function cd
+    builtin cd $argv; and ls
+end
 
 function fish_command_not_found
     set cmd $argv[1]
@@ -56,3 +54,9 @@ end
 # 起動時のメッセージをなしに
 function fish_greeting
 end
+
+export EDITOR=nvim
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export PATH="$HOME/dev/depot_tools:$PATH"
+export GTK_THEME="Catppuccin-Dark-Macchiato"
