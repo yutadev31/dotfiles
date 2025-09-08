@@ -70,6 +70,9 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldenable = true
 
+-- Diagnostic
+vim.diagnostic.config({ virtual_text = true })
+
 -- Auto Commands
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "*",

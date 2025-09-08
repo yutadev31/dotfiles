@@ -40,3 +40,19 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export PATH="$HOME/dev/depot_tools:$PATH"
 export GTK_THEME="Catppuccin-Dark-Macchiato"
+
+function fish_command_not_found
+    set cmd $argv[1]
+    echo "Command '$cmd' not found. Searching packages..."
+    set results (pacman -Fq $cmd ^/dev/null)
+
+    if test (count $results) -eq 0
+        echo "No packages provide '$cmd'."
+    else
+        echo (string join ", " $results)
+    end
+end
+
+# 起動時のメッセージをなしに
+function fish_greeting
+end
