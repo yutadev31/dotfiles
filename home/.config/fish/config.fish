@@ -58,5 +58,5 @@ end
 export EDITOR=nvim
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export PATH="$HOME/dev/depot_tools:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export GTK_THEME="Catppuccin-Dark-Macchiato"
