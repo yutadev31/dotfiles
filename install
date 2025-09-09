@@ -46,11 +46,20 @@ install_tpm() {
   fi
 }
 
+install_packages() {
+  pacman -S --noconfirm --needed $(cat packages/cli.txt)
+
+  if [ $1 = "desktop" ]; then
+    pacman -S --noconfirm --needed $(cat packages/desktop.txt)
+  fi
+}
+
 install() {
   echo "Installing dotfiles..."
 
   echo $1 >config.txt
 
+  install_packages $1
   install_files $1
   install_tpm
 

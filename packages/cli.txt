@@ -1,0 +1,13 @@
+eza
+fastfetch
+fish
+ghq
+git
+github-cli
+htop
+less
+neovim
+tmux
+unzip
+wget
+zip
