@@ -47,10 +47,12 @@ install_tpm() {
 }
 
 install_packages() {
-  pacman -S --noconfirm --needed $(cat packages/cli.txt)
+  echo "Installing packages..."
+
+  sudo pacman -S --noconfirm --needed $(cat packages/cli.txt)
 
   if [ $1 = "desktop" ]; then
-    pacman -S --noconfirm --needed $(cat packages/desktop.txt)
+    sudo pacman -S --noconfirm --needed $(cat packages/desktop.txt)
   fi
 }
 
