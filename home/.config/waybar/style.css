@@ -5,10 +5,10 @@
 }
 
 window#waybar {
-  background-color: rgba(30, 31, 45, 0.8);
+  background-color: #33374d;
   transition-property: background-color;
   transition-duration: 0.5s;
-  color: #f9f9fa;
+  color: #f2f2f2;
 }
 
 window#waybar.hidden {
@@ -24,12 +24,12 @@ box.module {
   padding: 0 4px;
   margin: 0 2px;
   border: none;
-  color: #b9bac6;
+  color: #d9d9d9;
   transition-property: color;
   transition-duration: 0.1s;
 }
 
 #workspaces button.focused,
 #workspaces button.active {
-  color: #708eea;
+  color: #788ced;
 }

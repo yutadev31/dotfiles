@@ -1,8 +1,3 @@
-[general]
-import = [
-  "~/.config/alacritty/catppuccin-macchiato.toml"
-]
-
 [terminal]
 shell = "/bin/fish"
 
@@ -16,3 +11,36 @@ bold_italic = { family = "Hack Nerd Font", style = "Bold Italic" }
 [window]
 padding = { x = 4, y = 4 }
 opacity = 0.95
+
+[colors.primary]
+background = "#292d3d"
+foreground = "#f2f2f2"
+
+[colors.cursor]
+text = "#292d3d"
+cursor = "#f2f2f2"
+
+[colors.selection]
+text = "#292d3d"
+cursor = "#3d425c"
+
+[colors.normal]
+black = "#c7c7c7"
+red = "#ec7979"
+green = "#78ed90"
+yellow = "#eccd79"
+blue = "#788ced"
+magenta = "#9f78ed"
+cyan = "#78eded"
+white = "#d9d9d9"
+
+[colors.bright]
+black = "#c7c7c7"
+red = "#ec7979"
+green = "#78ed90"
+yellow = "#eccd79"
+blue = "#788ced"
+magenta = "#9f78ed"
+cyan = "#78eded"
+white = "#d9d9d9"
+
