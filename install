@@ -18,23 +18,25 @@ install_file() {
 
 install_files() {
   echo "Installing files..."
-  install_file wallpaper.png
-  install_file .gitmessage
-  install_file .zshrc
-  install_file .config/zsh
-  install_file .config/fish
+
+  install_file .bin
   install_file .config/fastfetch
+  install_file .config/fish
   install_file .config/nvim
   install_file .config/tmux
-  install_file .config/alacritty
-  install_file .config/hypr
-  install_file .config/mako
-  install_file .config/waybar
-  install_file .config/wofi
-  install_file .config/rofi
-  install_file .config/gtk-2.0
-  install_file .config/gtk-3.0
-  install_file .bin
+  install_file .gitmessage
+  install_file .zshrc
+
+  if [ $1 = "desktop" ]; then
+    install_file .config/alacritty
+    install_file .config/gtk-2.0
+    install_file .config/gtk-3.0
+    install_file .config/hypr
+    install_file .config/mako
+    install_file .config/rofi
+    install_file .config/waybar
+    install_file wallpaper.png
+  fi
 }
 
 install_tpm() {
@@ -47,10 +49,47 @@ install_tpm() {
 install() {
   echo "Installing dotfiles..."
 
-  install_files
+  echo $1 >config.txt
+
+  install_files $1
   install_tpm
 
   echo "Installed dotfiles successfully."
 }
 
-install
+show_help() {
+  echo "Usage: ./install [OPTIONS]"
+  echo ""
+  echo "Options:"
+  echo "  -c    Install CLI tools only"
+  echo "  -d    Install desktop environment (includes CLI tools)"
+  echo "  -h    Show this help message and exit"
+  echo ""
+  echo "Notes:"
+  echo "  - Once you choose an option, it will be remembered."
+  echo "  - The next time you run this script, the previously chosen option"
+  echo "    will be used as the default."
+  exit 0
+}
+
+while getopts "cdh" opt; do
+  case "$opt" in
+  c)
+    install cli
+    exit 0
+    ;;
+  d)
+    install desktop
+    exit 0
+    ;;
+  h) show_help ;;
+  ?) exit 1 ;;
+  esac
+done
+
+if [ -e "config.txt" ]; then
+  install $(cat config.txt)
+else
+  show_help
+  exit 1
+fi
