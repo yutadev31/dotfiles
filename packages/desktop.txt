@@ -8,7 +8,7 @@ fcitx5-qt
 firefox
 grim
 hyprland
-hyprpaper
+hyprpicker
 mako
 noto-fonts
 noto-fonts-cjk
@@ -24,3 +24,4 @@ spotify-launcher
 ttf-hack-nerd
 waybar
 wl-clipboard
+xdg-desktop-portal-hyprland
