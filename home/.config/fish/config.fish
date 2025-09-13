@@ -60,3 +60,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export PATH="$HOME/.cargo/bin:$PATH"
 export GTK_THEME="Catppuccin-Dark-Macchiato"
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
