@@ -21,7 +21,7 @@ alias gaa="git add ."
 alias gc="git commit"
 alias gcinit="git commit -m \"Initial commit\""
 alias gp="git push"
-alias gl="git pull"
+alias gl="git pull --autostash"
 alias gr="git remote"
 alias gs="git status -sb"
 alias gd="git diff"
@@ -58,7 +58,7 @@ end
 export EDITOR=nvim
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.nix-profile/bin:$HOME/.cargo/bin:$PATH"
 export GTK_THEME="Catppuccin-Dark-Macchiato"
 
 # bun

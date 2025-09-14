@@ -14,6 +14,7 @@ return {
       javascriptreact = js_formatters,
       typescript = js_formatters,
       typescriptreact = js_formatters,
+      nix = { "nixfmt" },
     },
     format_on_save = {
       timeout_ms = 2000,
