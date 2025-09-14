@@ -104,3 +104,6 @@ vim.api.nvim_create_autocmd("DirChanged", {
     vim.o.titlestring = "nvim " .. cwd_as_tilde()
   end,
 })
+
+vim.opt.rtp:prepend("~/dev/github.com/yutadev31/yoru.nvim")
+vim.cmd.colorscheme("yoru")
