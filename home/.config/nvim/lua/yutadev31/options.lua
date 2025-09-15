@@ -10,7 +10,6 @@ vim.opt.termguicolors = true
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.timeout = true
 vim.opt.timeoutlen = 1000
-vim.opt.shell = "/bin/fish"
 
 -- UI / Display
 vim.opt.number = true

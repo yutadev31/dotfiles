@@ -25,23 +25,13 @@ install_files() {
   install_file .config/nvim
   install_file .config/tmux
   install_file .gitmessage
-  install_file .zshrc
 
   if [ $1 = "desktop" ]; then
     install_file .config/alacritty
-    install_file .config/gtk-2.0
-    install_file .config/gtk-3.0
     install_file .config/hypr
     install_file .config/mako
     install_file .config/rofi
     install_file .config/waybar
-  fi
-}
-
-install_tpm() {
-  if [ ! -d ~/.tmux/plugins/tpm ]; then
-    echo "Installing tpm..."
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
 }
 
@@ -62,7 +52,6 @@ install() {
 
   install_packages $1
   install_files $1
-  install_tpm
 
   echo "Installed dotfiles successfully."
 }
