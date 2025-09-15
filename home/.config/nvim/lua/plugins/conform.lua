@@ -1,20 +1,22 @@
-local js_formatters = { "biome", "prettierd", "prettier" }
+local js_formatters = { { "biome", "prettierd", "prettier" } }
 
 return {
   "stevearc/conform.nvim",
   opts = {
     formatters_by_ft = {
+      nix = { "nixfmt" },
       sh = { "shfmt" },
       lua = { "stylua" },
       python = { "isort", "black" },
       rust = { "rustfmt" },
       markdown = { "markdownlint" },
+      html = js_formatters,
+      css = js_formatters,
       json = js_formatters,
       javascript = js_formatters,
       javascriptreact = js_formatters,
       typescript = js_formatters,
       typescriptreact = js_formatters,
-      nix = { "nixfmt" },
     },
     format_on_save = {
       timeout_ms = 2000,
