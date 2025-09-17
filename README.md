@@ -3,6 +3,6 @@
 ## Installation
 
 ```sh
-./install -c # Install CLI tools only
-./install -d # Install desktop environment (includes CLI tools)
+./install.sh -c # Install CLI tools only
+./install.sh -d # Install desktop environment (includes CLI tools)
 ```

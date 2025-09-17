@@ -38,7 +38,7 @@
 !/README.md
 !/LICENSE
 !/.gitignore
-!/install
+!/install.sh
 !/stylua.toml
 !/scripts/
 !/packages/
