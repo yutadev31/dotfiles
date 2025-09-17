@@ -30,12 +30,13 @@ return {
           },
           ellipsis_char = "...",
           show_labelDetails = true,
-          before = function(entry, vim_item)
+          before = function(_, vim_item)
             return vim_item
           end,
         }),
       },
       sources = cmp.config.sources({
+        { name = "lazydev" },
         { name = "nvim_lsp" },
         { name = "spell" },
         { name = "buffer" },

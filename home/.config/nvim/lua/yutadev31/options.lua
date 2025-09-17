@@ -70,7 +70,13 @@ vim.opt.foldlevel = 99
 vim.opt.foldenable = true
 
 -- Diagnostic
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  severity_sort = true,
+  float = { border = "rounded", source = true },
+})
 
 -- Auto Commands
 vim.api.nvim_create_autocmd("TermOpen", {
@@ -103,6 +109,3 @@ vim.api.nvim_create_autocmd("DirChanged", {
     vim.o.titlestring = "nvim " .. cwd_as_tilde()
   end,
 })
-
--- vim.opt.rtp:prepend("~/dev/github.com/yutadev31/yoru.nvim")
--- vim.cmd.colorscheme("yoru")

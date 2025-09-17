@@ -12,3 +12,7 @@ h.nmap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover Info")
 h.nmap("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename Symbol")
 h.nmap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action")
 h.nmap("<leader>k", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help")
+
+-- Lazy.nvim
+h.nmap("<leader>pl", "<cmd>Lazy<cr>", "Lazy")
+h.nmap("<leader>pm", "<cmd>Mason<cr>", "Mason")
