@@ -1,6 +1,10 @@
 #!/bin/sh
-set -ue
+set -euo pipefail
 
+# Config filename
+CONFIG_FILE="config.txt"
+
+# Install a single dotfile
 install_file() {
   path=$1
   dotdir=$(pwd)
@@ -16,6 +20,7 @@ install_file() {
   ln -sf $dotdir/home/$path $HOME/$path
 }
 
+# Install all relevant dotfiles
 install_files() {
   echo "Installing files..."
 
@@ -35,6 +40,7 @@ install_files() {
   fi
 }
 
+# Install packages from text files
 install_packages() {
   echo "Installing packages..."
 
@@ -45,32 +51,37 @@ install_packages() {
   fi
 }
 
+# Main installation logic
 install() {
-  echo "Installing dotfiles..."
+  local mode="$1"
+  echo "Installing dotfiles in '$mode' mode..."
+  echo "$mode" >$CONFIG_FILE
 
-  echo $1 >config.txt
-
-  install_packages $1
-  install_files $1
+  install_packages "$mode"
+  install_files "$mode"
 
   echo "Installed dotfiles successfully."
 }
 
+# Display help
 show_help() {
-  echo "Usage: ./install [OPTIONS]"
-  echo ""
-  echo "Options:"
-  echo "  -c    Install CLI tools only"
-  echo "  -d    Install desktop environment (includes CLI tools)"
-  echo "  -h    Show this help message and exit"
-  echo ""
-  echo "Notes:"
-  echo "  - Once you choose an option, it will be remembered."
-  echo "  - The next time you run this script, the previously chosen option"
-  echo "    will be used as the default."
+  cat <<EOF
+Usage: ./install [OPTIONS]
+
+Options:
+  -c    Install CLI tools only
+  -d    Install desktop environment (includes CLI tools)
+  -h    Show this help message and exit
+
+Notes:
+  - Once you choose an option, it will be remembered.
+  - The next time you run this script, the previously chosen option
+    will be used as the default.
+EOF
   exit 0
 }
 
+# Parse options
 while getopts "cdh" opt; do
   case "$opt" in
   c)
@@ -86,8 +97,9 @@ while getopts "cdh" opt; do
   esac
 done
 
-if [ -e "config.txt" ]; then
-  install $(cat config.txt)
+# If no options given, use saved config
+if [ -e $CONFIG_FILE ]; then
+  install $(cat $CONFIG_FILE)
 else
   show_help
   exit 1
