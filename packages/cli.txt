@@ -1,5 +1,7 @@
+bat
 eza
 fastfetch
+fd
 fish
 ghq
 git
@@ -7,6 +9,7 @@ github-cli
 htop
 less
 neovim
+ripgrep
 tmux
 unzip
 wget
