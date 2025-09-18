@@ -61,8 +61,8 @@ install() {
   echo "Installing dotfiles in '$mode' mode..."
   echo "$mode" >$CONFIG_FILE
 
-  install_packages "$mode"
   install_files "$mode"
+  install_packages "$mode"
 
   echo "Installed dotfiles successfully."
 }
