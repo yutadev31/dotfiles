@@ -45,3 +45,6 @@
 !/stylua.toml
 !/scripts/
 !/packages/
+!/package.json
+!/pnpm-lock.yaml
+!/commitlint.config.js
