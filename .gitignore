@@ -1,5 +1,6 @@
-/*
-/.**
+/config.txt
+
+/home/**
 /home/.**
 
 !/home/
@@ -36,12 +37,3 @@
 !/home/.config/wofi/
 !/home/.config/wofi/style.css
 !/home/.config/zsh/
-!/home/.config/zsh/*.zsh
-
-!/README.md
-!/LICENSE
-!/.gitignore
-!/install.sh
-!/stylua.toml
-!/scripts/
-!/packages/
