@@ -1,0 +1,16 @@
+{
+  "language": "ja,en",
+  "userWords": [
+    "yuta",
+    "yutadev31"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "custom-words",
+      "path": "~/.config/cspell/dictionary.txt"
+    }
+  ],
+  "dictionaries": [
+    "custom-words"
+  ]
+}

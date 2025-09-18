@@ -25,6 +25,7 @@ install_files() {
   echo "Installing files..."
 
   install_file .bin
+  install_file .config/cspell
   install_file .config/fastfetch
   install_file .config/fish
   install_file .config/nvim

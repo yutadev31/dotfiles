@@ -11,6 +11,9 @@
 !/home/.config/starship.toml
 !/home/.config/alacritty/
 !/home/.config/alacritty/alacritty.toml
+!/home/.config/cspell/
+!/home/.config/cspell/cspell.json
+!/home/.config/cspell/dictionary.txt
 !/home/.config/fastfetch/
 !/home/.config/fastfetch/config.jsonc
 !/home/.config/fish/
