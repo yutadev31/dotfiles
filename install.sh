@@ -9,13 +9,16 @@ install_file() {
   path=$1
   dotdir=$(pwd)
 
+  # Check if a symbolic link exists
   if [ -L "$HOME/$path" ]; then return; fi
 
+  # Move to directory if it exists
   if [ -e "$HOME/$path" ]; then
     mv $HOME/$path $HOME/$path.old
     echo "Move ~/$path"
   fi
 
+  # Create a symbolic link
   mkdir -p $(dirname $HOME/$path)
   ln -sf $dotdir/home/$path $HOME/$path
 }
