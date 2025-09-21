@@ -4,12 +4,10 @@
 /home/.**
 
 !/home/
-!/home/.zshrc
 !/home/.gitmessage
 !/home/.bin/
 !/home/.bin/*
 !/home/.config/
-!/home/.config/starship.toml
 !/home/.config/alacritty/
 !/home/.config/alacritty/alacritty.toml
 !/home/.config/cspell/
@@ -34,6 +32,3 @@
 !/home/.config/waybar/
 !/home/.config/waybar/config.jsonc
 !/home/.config/waybar/style.css
-!/home/.config/wofi/
-!/home/.config/wofi/style.css
-!/home/.config/zsh/
