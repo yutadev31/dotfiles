@@ -19,10 +19,12 @@ mozc
 noconfirm
 noto
 nvim
+ollama
 pacman
 pavucontrol
 pipefail
 pipewire
+pulseaudio
 rasi
 rgba
 rofi
