@@ -52,7 +52,7 @@ end
 export EDITOR=nvim
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export PATH="$HOME/.cargo/bin:$HOME/go/bin:$PATH"
+export PATH="$HOME/.bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
