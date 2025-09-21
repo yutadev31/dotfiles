@@ -57,3 +57,6 @@ export PATH="$HOME/.bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+# Ollama
+export OLLAMA_HOST=0.0.0.0
