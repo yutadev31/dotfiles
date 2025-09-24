@@ -4,43 +4,31 @@ return {
     event = "VeryLazy",
     opts = {
       ensure_installed = {
+        "clangd",
         "lua-language-server",
+        "rust-analyzer",
+        "pyright",
+        "html-lsp",
+        "css-lsp",
+        "json-lsp",
+        "typescript-language-server",
+        "bash-language-server",
+        "fish-lsp",
       },
     },
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "williamboman/mason.nvim",
-    },
-    event = "VeryLazy",
-    config = function()
-      require("mason-lspconfig").setup({
-        automatic_installation = true,
-      })
-
-      require("lspconfig").lua_ls.setup({
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-            format = {
-              enable = false,
-            },
-          },
-        },
-      })
-
-      require("lspconfig").rust_analyzer.setup({
-        settings = {
-          ["rust-analyzer"] = {
-            diagnostic = {
-              refreshSupport = false,
-            },
-          },
-        },
+    config = function(opts)
+      require("mason").setup(opts)
+      vim.lsp.enable({
+        "bashls",
+        "clangd",
+        "cssls",
+        "fish_lsp",
+        "html",
+        "jsonls",
+        "lua_ls",
+        "pyright",
+        "rust_analyzer",
+        "ts_ls",
       })
     end,
   },

@@ -25,6 +25,8 @@
 !/home/.config/nvim/*.lua
 !/home/.config/nvim/lua/
 !/home/.config/nvim/lua/**
+!/home/.config/nvim/lsp/
+!/home/.config/nvim/lsp/**
 !/home/.config/rofi/
 !/home/.config/rofi/config.rasi
 !/home/.config/tmux/
