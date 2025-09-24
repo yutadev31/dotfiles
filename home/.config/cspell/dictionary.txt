@@ -1,6 +1,7 @@
 autostash
 configtool
 conlang
+clippy
 dotdir
 drun
 esac
