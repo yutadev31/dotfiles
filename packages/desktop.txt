@@ -7,9 +7,11 @@ fcitx5-mozc
 fcitx5-qt
 firefox
 grim
-hyprland
+hyprpaper
 hyprpicker
 mako
+nemo
+niri
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
@@ -25,3 +27,5 @@ ttf-hack-nerd
 waybar
 wl-clipboard
 xdg-desktop-portal-hyprland
+xdg-user-dirs
+xorg-xwayland

@@ -39,6 +39,7 @@ install_files() {
     install_file .config/alacritty
     install_file .config/hypr
     install_file .config/mako
+    install_file .config/niri
     install_file .config/rofi
     install_file .config/waybar
   fi
@@ -55,6 +56,14 @@ install_packages() {
   fi
 }
 
+setup_git() {
+  git config --global user.name Yuta
+  git config --global user.email yuta256dev@gmail.com
+  git config --global commit.template ~/.gitmessage
+  git config --global init.defaultBranch main
+  git config --global ghq.root '~/dev'
+}
+
 # Main installation logic
 install() {
   local mode="$1"
@@ -63,6 +72,7 @@ install() {
 
   install_files "$mode"
   install_packages "$mode"
+  setup_git
 
   echo "Installed dotfiles successfully."
 }

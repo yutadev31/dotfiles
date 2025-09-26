@@ -1,4 +1,5 @@
 bat
+btop
 eza
 fastfetch
 fd
@@ -6,7 +7,6 @@ fish
 ghq
 git
 github-cli
-htop
 less
 neovim
 ripgrep

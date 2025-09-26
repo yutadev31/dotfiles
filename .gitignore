@@ -21,6 +21,8 @@
 !/home/.config/hypr/*.conf
 !/home/.config/mako/
 !/home/.config/mako/config
+!/home/.config/niri/
+!/home/.config/niri/config.kdl
 !/home/.config/nvim/
 !/home/.config/nvim/*.lua
 !/home/.config/nvim/lua/

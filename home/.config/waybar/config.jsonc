@@ -1,10 +1,10 @@
 {
   "spacing": 8,
   "height": 32,
-  "modules-left": ["hyprland/workspaces"],
-  "modules-center": ["hyprland/window"],
+  "modules-left": ["niri/workspaces"],
+  "modules-center": ["niri/window"],
   "modules-right": ["tray", "battery", "pulseaudio", "clock"],
-  "hyprland/workspaces": {
+  "niri/workspaces": {
     "persistent-workspaces": {
       "1": [],
       "2": [],

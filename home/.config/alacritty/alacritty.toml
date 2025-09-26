@@ -1,5 +1,5 @@
-[general]
-import = ["~/.config/alacritty/tokyonight_moon.toml"]
+# [general]
+# import = ["~/.config/alacritty/tokyonight_moon.toml"]
 
 [font]
 size = 12

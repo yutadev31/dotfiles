@@ -29,6 +29,7 @@ return {
         "pyright",
         "rust_analyzer",
         "ts_ls",
+        "nil_ls",
       })
     end,
   },

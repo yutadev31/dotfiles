@@ -54,6 +54,10 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export PATH="$HOME/.bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
