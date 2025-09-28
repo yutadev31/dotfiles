@@ -64,3 +64,6 @@ set --export PATH $BUN_INSTALL/bin $PATH
 
 # Ollama
 export OLLAMA_HOST=0.0.0.0
+
+# Mise
+mise activate fish | source
