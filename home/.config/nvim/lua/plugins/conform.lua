@@ -8,7 +8,7 @@ return {
       sh = { "shfmt" },
       lua = { "stylua" },
       python = { "isort", "black" },
-      rust = { "rustfmt" },
+      rust = { "rust_analyzer" },
       markdown = { "markdownlint" },
       javascript = js_formatters,
       javascriptreact = js_formatters,
