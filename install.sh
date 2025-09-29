@@ -64,6 +64,10 @@ setup_git() {
   git config --global ghq.root '~/dev'
 }
 
+setup_xdg() {
+  xdg-settings set default-web-browser firefox.desktop
+}
+
 # Main installation logic
 install() {
   local mode="$1"
@@ -73,6 +77,10 @@ install() {
   install_files "$mode"
   install_packages "$mode"
   setup_git
+
+  if [ $1 = "desktop" ]; then
+    setup_xdg
+  fi
 
   echo "Installed dotfiles successfully."
 }
