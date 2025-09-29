@@ -10,3 +10,37 @@ bold_italic = { family = "Hack Nerd Font", style = "Bold Italic" }
 
 [window]
 padding = { x = 4, y = 4 }
+opacity = 0.95
+
+[colors.primary]
+background = "#252537"
+foreground = "#f2f2f2"
+
+[colors.cursor]
+text = "#565681"
+cursor = "#d1d1e0"
+
+[colors.selection]
+text = "#565681"
+background = "#d1d1e0"
+
+[colors.normal]
+black = "#565681"
+red = "#ff9999"
+green = "#99ffad"
+yellow = "#ffe499"
+blue = "#99b2ff"
+magenta = "#dd99ff"
+cyan = "#99ffff"
+white = "#d1d1e0"
+
+[colors.bright]
+black = "#565681"
+red = "#ff9999"
+green = "#99ffad"
+yellow = "#ffe499"
+blue = "#99b2ff"
+magenta = "#dd99ff"
+cyan = "#99ffff"
+white = "#d1d1e0"
+
