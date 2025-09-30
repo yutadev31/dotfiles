@@ -15,6 +15,9 @@
 !/home/.config/cspell/dictionary.txt
 !/home/.config/fastfetch/
 !/home/.config/fastfetch/config.jsonc
+!/home/.config/fcitx5/
+!/home/.config/fcitx5/config
+!/home/.config/fcitx5/profile
 !/home/.config/fish/
 !/home/.config/fish/config.fish
 !/home/.config/hypr/

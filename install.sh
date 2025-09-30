@@ -37,6 +37,7 @@ install_files() {
 
   if [ $1 = "desktop" ]; then
     install_file .config/alacritty
+    install_file .config/fcitx5
     install_file .config/hypr
     install_file .config/mako
     install_file .config/niri
