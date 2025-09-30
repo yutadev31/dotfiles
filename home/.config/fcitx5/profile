@@ -1,23 +1,30 @@
 [Groups/0]
-# Group Name
-Name=Default
-# Layout
+Name=Japanese
 Default Layout=jp
-# Default Input Method
 DefaultIM=mozc
 
 [Groups/0/Items/0]
-# Name
 Name=keyboard-jp
-# Layout
 Layout=
 
 [Groups/0/Items/1]
-# Name
 Name=mozc
-# Layout
+Layout=
+
+[Groups/1]
+Name=Korean
+Default Layout=kr
+DefaultIM=hangul
+
+[Groups/1/Items/0]
+Name=keyboard-kr
+Layout=
+
+[Groups/1/Items/1]
+Name=hangul
 Layout=
 
 [GroupOrder]
-0=Default
+0=Japanese
+1=Korean
 
