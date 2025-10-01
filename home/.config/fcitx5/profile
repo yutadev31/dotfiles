@@ -1,44 +1,18 @@
 [Groups/0]
 # Group Name
-Name=Japanese
+Name=English
 # Layout
-Default Layout=jp
+Default Layout=us
 # Default Input Method
-DefaultIM=mozc
+DefaultIM=keyboard-us
 
 [Groups/0/Items/0]
 # Name
-Name=keyboard-jp
-# Layout
-Layout=
-
-[Groups/0/Items/1]
-# Name
-Name=mozc
+Name=keyboard-us
 # Layout
 Layout=
 
 [Groups/1]
-# Group Name
-Name=Korean
-# Layout
-Default Layout=kr
-# Default Input Method
-DefaultIM=hangul
-
-[Groups/1/Items/0]
-# Name
-Name=keyboard-kr
-# Layout
-Layout=
-
-[Groups/1/Items/1]
-# Name
-Name=hangul
-# Layout
-Layout=
-
-[Groups/2]
 # Group Name
 Name=Chinese
 # Layout
@@ -46,29 +20,55 @@ Default Layout=cn
 # Default Input Method
 DefaultIM=pinyin
 
-[Groups/2/Items/0]
+[Groups/1/Items/0]
 # Name
 Name=keyboard-cn
 # Layout
 Layout=
 
-[Groups/2/Items/1]
+[Groups/1/Items/1]
 # Name
 Name=pinyin
 # Layout
 Layout=
 
+[Groups/2]
+# Group Name
+Name=Korean
+# Layout
+Default Layout=kr
+# Default Input Method
+DefaultIM=hangul
+
+[Groups/2/Items/0]
+# Name
+Name=keyboard-kr
+# Layout
+Layout=
+
+[Groups/2/Items/1]
+# Name
+Name=hangul
+# Layout
+Layout=
+
 [Groups/3]
 # Group Name
-Name=English
+Name=Japanese
 # Layout
-Default Layout=us
+Default Layout=jp
 # Default Input Method
-DefaultIM=keyboard-us
+DefaultIM=mozc
 
 [Groups/3/Items/0]
 # Name
-Name=keyboard-us
+Name=keyboard-jp
+# Layout
+Layout=
+
+[Groups/3/Items/1]
+# Name
+Name=mozc
 # Layout
 Layout=
 

@@ -21,6 +21,7 @@ alias gaa="git add ."
 alias gc="git commit"
 alias gcinit="git commit -m \"Initial commit\""
 alias gp="git push"
+alias gph="git push -u origin HEAD"
 alias gl="git pull --autostash"
 alias gr="git remote"
 alias gs="git status -sb"
@@ -29,6 +30,8 @@ alias gco="git checkout"
 alias gcb="git checkout -b"
 alias gb="git branch"
 alias gbr="git branch -r"
+alias gw="git switch"
+alias gwm="git switch main"
 alias gm="git merge"
 alias grh="git reset --hard HEAD"
 alias gstash="git stash"
@@ -68,3 +71,5 @@ export OLLAMA_HOST=0.0.0.0
 
 # Mise
 mise activate fish | source
+
+source ~/.env.fish
