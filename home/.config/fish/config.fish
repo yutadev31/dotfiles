@@ -43,36 +43,23 @@ alias glg="git log --oneline --graph --all --decorate"
 
 set fish_greeting
 
-function fish_command_not_found
-    set cmd $argv[1]
-    echo "Command '$cmd' not found. Searching packages..."
-    set results (pacman -Fq $cmd ^/dev/null)
-
-    if test (count $results) -eq 0
-        echo "No packages provide '$cmd'."
-    else
-        echo (string join ", " $results)
-    end
-end
-
-export EDITOR=nvim
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export PATH="$HOME/.bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
+# bun
+export BUN_INSTALL="$HOME/.bun"
 
 # fcitx5
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-
 # Ollama
 export OLLAMA_HOST=0.0.0.0
 
 # Mise
 mise activate fish | source
+
+export EDITOR=nvim
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export PATH="$HOME/.bin:$BUN_INSTALL/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 
 source ~/.env.fish
