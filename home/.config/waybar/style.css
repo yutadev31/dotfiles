@@ -24,12 +24,12 @@ box.module {
   padding: 0 4px;
   margin: 0 2px;
   border: none;
-  color: #d9d9d9;
+  color: #d1d1e0;
   transition-property: color;
   transition-duration: 0.1s;
 }
 
 #workspaces button.focused,
 #workspaces button.active {
-  color: #788ced;
+  color: #8fabff;
 }
