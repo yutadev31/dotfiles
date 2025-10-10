@@ -40,7 +40,6 @@ install_files() {
     install_file .config/fcitx5
     install_file .config/hypr
     install_file .config/mako
-    install_file .config/niri
     install_file .config/rofi
     install_file .config/waybar
   fi
