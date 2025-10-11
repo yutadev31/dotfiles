@@ -37,7 +37,6 @@ install_files() {
 
   if [ $1 = "desktop" ]; then
     install_file .config/alacritty
-    install_file .config/fcitx5
     install_file .config/hypr
     install_file .config/mako
     install_file .config/rofi
@@ -49,10 +48,10 @@ install_files() {
 install_packages() {
   echo "Installing packages..."
 
-  sudo pacman -S --noconfirm --needed $(cat packages/cli.txt)
+  sudo paru -S --noconfirm --needed $(cat packages/cli.txt)
 
   if [ $1 = "desktop" ]; then
-    sudo pacman -S --noconfirm --needed $(cat packages/desktop.txt)
+    sudo paru -S --noconfirm --needed $(cat packages/desktop.txt)
   fi
 }
 
