@@ -44,14 +44,39 @@ install_files() {
   fi
 }
 
+install_packages_for_ubuntu() {
+  exit 1 # TODO
+}
+
+install_packages_for_arch() {
+  sudo paru -S --noconfirm --needed $(cat packages/arch-cli.txt)
+
+  if [ $1 = "desktop" ]; then
+    sudo paru -S --noconfirm --needed $(cat packages/arch-desktop.txt)
+  fi
+}
+
 # Install packages from text files
 install_packages() {
   echo "Installing packages..."
 
-  sudo paru -S --noconfirm --needed $(cat packages/cli.txt)
-
-  if [ $1 = "desktop" ]; then
-    sudo paru -S --noconfirm --needed $(cat packages/desktop.txt)
+  if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    case "$ID" in
+    ubuntu)
+      install_packages_for_ubuntu $1
+      ;;
+    arch)
+      install_packages_for_arch $1
+      ;;
+    *)
+      echo "Error: Your Linux distribution '$NAME' is not supported by this installer." >&2
+      exit 1
+      ;;
+    esac
+  else
+    echo "Error: Unable to determine your Linux distribution. '/etc/os-release' file not found." >&2
+    exit 1
   fi
 }
 
