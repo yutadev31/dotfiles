@@ -7,5 +7,7 @@ return {
   version = "*",
   config = function()
     setup("pairs", {})
+    setup("icons", {})
+    setup("statusline", {})
   end,
 }
