@@ -1,0 +1,12 @@
+grim
+hyprland
+hyprpaper
+hyprpicker
+mako
+nemo
+pavucontrol
+rofi
+slurp
+waybar
+xdg-desktop-portal-hyprland
+xorg-xwayland

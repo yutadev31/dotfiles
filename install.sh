@@ -35,8 +35,11 @@ install_files() {
   install_file .config/tmux
   install_file .gitmessage
 
-  if [ $1 = "desktop" ]; then
+  if [ $SETUP_DESKTOP = 1 ]; then
     install_file .config/alacritty
+  fi
+
+  if [ $DESKTOP_ENVIRONMENT = "hyprland" ]; then
     install_file .config/hypr
     install_file .config/mako
     install_file .config/rofi
@@ -51,8 +54,12 @@ install_packages_for_ubuntu() {
 install_packages_for_arch() {
   sudo paru -S --noconfirm --needed $(cat packages/arch-cli.txt)
 
-  if [ $1 = "desktop" ]; then
+  if [ $SETUP_DESKTOP = 1 ]; then
     sudo paru -S --noconfirm --needed $(cat packages/arch-desktop.txt)
+  fi
+
+  if [ $DESKTOP_ENVIRONMENT = "hyprland" ]; then
+    sudo paru -S --noconfirm --needed $(cat packages/arch-hyprland.txt)
   fi
 }
 
@@ -64,10 +71,10 @@ install_packages() {
     . /etc/os-release
     case "$ID" in
     ubuntu)
-      install_packages_for_ubuntu $1
+      install_packages_for_ubuntu
       ;;
     arch)
-      install_packages_for_arch $1
+      install_packages_for_arch
       ;;
     *)
       echo "Error: Your Linux distribution '$NAME' is not supported by this installer." >&2
@@ -98,55 +105,29 @@ install() {
   echo "Installing dotfiles in '$mode' mode..."
   echo "$mode" >$CONFIG_FILE
 
-  install_files "$mode"
-  install_packages "$mode"
+  case "$mode" in
+  cli) ;;
+  hyprland)
+    export SETUP_DESKTOP=1
+    export DESKTOP_ENVIRONMENT="hyprland"
+    ;;
+  esac
+
+  install_files
+  install_packages
   setup_git
 
-  if [ $1 = "desktop" ]; then
+  if [ $SETUP_DESKTOP = 1 ]; then
     setup_xdg
   fi
 
   echo "Installed dotfiles successfully."
 }
 
-# Display help
-show_help() {
-  cat <<EOF
-Usage: ./install [OPTIONS]
-
-Options:
-  -c    Install CLI tools only
-  -d    Install desktop environment (includes CLI tools)
-  -h    Show this help message and exit
-
-Notes:
-  - Once you choose an option, it will be remembered.
-  - The next time you run this script, the previously chosen option
-    will be used as the default.
-EOF
-  exit 0
-}
-
-# Parse options
-while getopts "cdh" opt; do
-  case "$opt" in
-  c)
-    install cli
-    exit 0
-    ;;
-  d)
-    install desktop
-    exit 0
-    ;;
-  h) show_help ;;
-  ?) exit 1 ;;
-  esac
-done
-
-# If no options given, use saved config
-if [ -e $CONFIG_FILE ]; then
-  install $(cat $CONFIG_FILE)
+if [ -z "$1" ]; then
+  if [ -e $CONFIG_FILE ]; then
+    install $(cat $CONFIG_FILE)
+  fi
 else
-  show_help
-  exit 1
+  install "$1"
 fi
