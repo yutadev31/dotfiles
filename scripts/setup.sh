@@ -95,6 +95,6 @@ initrd  /initramfs-linux.img
 options root=UUID=$(blkid -s UUID -o value /dev/sda2) rw
 EOF
 
-arch-chroot /mnt bash /setup.sh
+arch-chroot /mnt /bin/bash /setup.sh
 
 echo "Installation completed successfully!"
