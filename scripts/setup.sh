@@ -1,4 +1,5 @@
 #!/bin/sh
+set -euo pipefail
 
 disk_dev="/dev/sda"
 root_part_dev="/dev/sda1"
