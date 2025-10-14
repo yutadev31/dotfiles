@@ -43,8 +43,7 @@ cat <<EOF >/mnt/setup.sh
 pacman-key --init
 pacman-key --populate archlinux
 
-sed 's/^#\(Color\)/\1/'
-
+sed 's/^#\(Color\)/\1/' /etc/pacman.conf
 pacman -Syu $package_list
 
 timedatectl set-timezone $time_zone
@@ -96,5 +95,6 @@ options root=UUID=$(blkid -s UUID -o value /dev/sda2) rw
 EOF
 
 arch-chroot /mnt /bin/bash /setup.sh
+rm /mnt/setup.sh
 
 echo "Installation completed successfully!"
