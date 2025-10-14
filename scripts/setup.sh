@@ -8,10 +8,13 @@ boot_part_dev="/dev/sda2"
 time_zone="Asia/Tokyo"
 lang="en_US.UTF-8"
 keymap="jp106"
+hostname=""
+ucode=""
 username="yuta"
 shell="fish"
 editor="nvim"
-package_list="networkmanager sudo openssh ufw $shell $editor"
+
+package_list="networkmanager grub efibootmgr $ucode sudo openssh ufw $shell $editor wget curl"
 
 read -p "Hostname: " hostname
 read -s -p "Password: " password
@@ -45,7 +48,7 @@ pacman-key --init
 pacman-key --populate archlinux
 
 sed 's/^#\(Color\)/\1/' /etc/pacman.conf
-pacman -Syu $package_list
+pacman -Syu --noconfirm --needed
 
 timedatectl set-timezone $time_zone
 hwclock --systohc
@@ -58,14 +61,10 @@ locale-gen
 
 echo "$hostname" >/etc/hostname
 
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB_UEFI
+grub-mkconfig -o /boot/grub/grub.cfg
+
 systemctl enable NetworkManager
-
-bootctl --path=/boot install
-systemctl enable systemd-boot-update
-
-mv /tmp/loader.conf /boot/loader/loader.conf
-mv /tmp/arch.conf /boot/loader/entries/arch.conf
-
 systemctl enable sshd
 
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
@@ -77,22 +76,6 @@ echo $password | passwd --stdin
 echo $password | passwd $username --stdin
 
 mkinitcpio -P
-EOF
-
-mkdir -p /mnt/tmp
-
-cat <<EOF >/mnt/tmp/loader.conf
-default arch.conf
-timeout 0
-editor no
-EOF
-
-cat <<EOF >/mnt/tmp/arch.conf
-title   Arch Linux
-linux   /vmlinuz-linux
-initrd  /intel-ucode.img
-initrd  /initramfs-linux.img
-options root=UUID=$(blkid -s UUID -o value /dev/sda2) rw
 EOF
 
 arch-chroot /mnt /bin/bash /setup.sh
