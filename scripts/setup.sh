@@ -16,7 +16,6 @@ editor="nvim"
 
 package_list="networkmanager grub efibootmgr $ucode sudo openssh ufw $shell $editor wget curl"
 
-read -p "Hostname: " hostname
 read -s -p "Password: " password
 
 read -p "Do you want to install? (y/N): " answer
@@ -44,11 +43,13 @@ pacstrap -K /mnt base linux linux-firmware
 genfstab -U /mnt >>/mnt/etc/fstab
 
 cat <<EOF >/mnt/setup.sh
+set -euo pipefail
+
 pacman-key --init
 pacman-key --populate archlinux
 
 sed 's/^#\(Color\)/\1/' /etc/pacman.conf
-pacman -Syu --noconfirm --needed
+pacman -Syu --noconfirm --needed $package_list
 
 timedatectl set-timezone $time_zone
 hwclock --systohc
