@@ -61,5 +61,6 @@ export EDITOR=nvim
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export PATH="$HOME/.bin:$BUN_INSTALL/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
+export GTK_THEME="Adwaita:dark"
 
 source ~/.env.fish
