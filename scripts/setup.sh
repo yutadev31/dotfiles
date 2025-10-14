@@ -36,7 +36,7 @@ mkfs.fat -F 32 -n boot $boot_part_dev
 mount --mkdir $root_part_dev /mnt
 mount --mkdir $boot_part_dev /mnt/boot
 
-pacstrap -K /mnt /mnt base linux linux-firmware
+pacstrap -K /mnt base linux linux-firmware
 genfstab -U /mnt >>/mnt/etc/fstab
 
 cat <<EOF >/mnt/setup.sh
