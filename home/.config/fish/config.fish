@@ -64,3 +64,9 @@ export PATH="$HOME/.bin:$BUN_INSTALL/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 export GTK_THEME="Adwaita:dark"
 
 source ~/.env.fish
+
+if status --is-login
+  if uwsm check may-start && uwsm select
+    exec uwsm start default
+  end
+end

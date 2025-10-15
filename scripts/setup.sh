@@ -2,17 +2,26 @@
 set -euo pipefail
 
 disk_dev="/dev/sda"
-root_part_dev="/dev/sda1"
 root_part_pos="512MB"
-boot_part_dev="/dev/sda2"
 time_zone="Asia/Tokyo"
 lang="en_US.UTF-8"
 keymap="jp106"
 hostname=""
-ucode=""
 username="yuta"
 shell="fish"
 editor="nvim"
+
+root_part_dev="${disk_dev}$([[ $dev == *nvme* ]] && echo p)1"
+boot_part_dev="${disk_dev}$([[ $dev == *nvme* ]] && echo p)2"
+
+vendor=$(grep -m1 "vendor_id" /proc/cpuinfo | awk '{print $3}')
+if [[ "$vendor" == "GenuineIntel" ]]; then
+  ucode="intel-ucode"
+elif [[ "$vendor" == "AuthenticAMD" ]]; then
+  ucode="amd-ucode"
+else
+  ucode=""
+fi
 
 package_list="networkmanager grub efibootmgr $ucode sudo openssh ufw $shell $editor wget curl"
 
@@ -62,7 +71,7 @@ locale-gen
 
 echo "$hostname" >/etc/hostname
 
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB_UEFI
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
 systemctl enable NetworkManager

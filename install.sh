@@ -124,7 +124,7 @@ install() {
   echo "Installed dotfiles successfully."
 }
 
-if [ -z "$1" ]; then
+if [ -z "${1:-}" ]; then
   if [ -e $CONFIG_FILE ]; then
     install $(cat $CONFIG_FILE)
   fi
