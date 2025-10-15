@@ -11,8 +11,8 @@ username="yuta"
 shell="fish"
 editor="nvim"
 
-root_part_dev="${disk_dev}$([[ $dev == *nvme* ]] && echo p)1"
-boot_part_dev="${disk_dev}$([[ $dev == *nvme* ]] && echo p)2"
+root_part_dev="${disk_dev}$([[ $disk_dev == *nvme* ]] && echo p)1"
+boot_part_dev="${disk_dev}$([[ $disk_dev == *nvme* ]] && echo p)2"
 
 vendor=$(grep -m1 "vendor_id" /proc/cpuinfo | awk '{print $3}')
 if [[ "$vendor" == "GenuineIntel" ]]; then
