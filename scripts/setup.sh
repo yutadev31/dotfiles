@@ -107,7 +107,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 systemctl enable NetworkManager
 systemctl enable sshd
 
-sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
+sed -i 's/^# \(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
 visudo -c
 
 useradd -m -G wheel -s /bin/$shell $username
