@@ -1,5 +1,7 @@
 /config.txt
 
+/.tmp/
+
 /home/**
 /home/.**
 

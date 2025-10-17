@@ -1,13 +1,13 @@
-grim
-hyprland
+gnome-keyring
 hyprpaper
 hyprpicker
+libnewt
 mako
 nemo
+niri
 pavucontrol
 rofi
-slurp
 uwsm
 waybar
-xdg-desktop-portal-hyprland
 xorg-xwayland
+xwayland-satellite

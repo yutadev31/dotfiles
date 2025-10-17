@@ -39,10 +39,10 @@ install_files() {
     install_file .config/alacritty
   fi
 
-  if [ $DESKTOP_ENVIRONMENT = "hyprland" ]; then
-    install_file .config/hypr
+  if [ $DESKTOP_ENVIRONMENT = "niri" ]; then
     install_file .config/mako
     install_file .config/rofi
+    install_file .config/niri
     install_file .config/waybar
   fi
 }
@@ -58,8 +58,8 @@ install_packages_for_arch() {
     sudo paru -S --noconfirm --needed $(cat packages/arch-desktop.txt)
   fi
 
-  if [ $DESKTOP_ENVIRONMENT = "hyprland" ]; then
-    sudo paru -S --noconfirm --needed $(cat packages/arch-hyprland.txt)
+  if [ $DESKTOP_ENVIRONMENT = "niri" ]; then
+    sudo paru -S --noconfirm --needed $(cat packages/arch-niri.txt)
   fi
 }
 
@@ -107,14 +107,14 @@ install() {
 
   case "$mode" in
   cli) ;;
-  hyprland)
+  niri)
     export SETUP_DESKTOP=1
-    export DESKTOP_ENVIRONMENT="hyprland"
+    export DESKTOP_ENVIRONMENT="niri"
     ;;
   esac
 
   install_files
-  install_packages
+  # install_packages
   setup_git
 
   if [ $SETUP_DESKTOP = 1 ]; then

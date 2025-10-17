@@ -1,6 +1,14 @@
 #!/bin/sh
 set -euo pipefail
 
+read_password() {
+  local prompt="$1"
+  local pw
+  read -r -s -p "$prompt" pw
+  echo    # プロンプトの後に改行
+  printf '%s\n' "$pw"
+}
+
 disk_dev="/dev/sda"
 root_part_pos="512MB"
 time_zone="Asia/Tokyo"
@@ -20,12 +28,18 @@ if [[ "$vendor" == "GenuineIntel" ]]; then
 elif [[ "$vendor" == "AuthenticAMD" ]]; then
   ucode="amd-ucode"
 else
-  ucode=""
+  exit 1
 fi
 
-package_list="networkmanager grub efibootmgr $ucode sudo openssh ufw $shell $editor wget curl"
+p1=$(read_password "Enter password: ")
+p2=$(read_password "Confirm password: ")
 
-read -s -p "Password: " password
+if [[ ! "$p1" == "$p2" ]]; then
+  echo Error: Passwords do not match.
+  exit 1
+fi
+
+password="$p1"
 
 read -p "Do you want to install? (y/N): " answer
 answer=${answer:-n}
@@ -34,6 +48,16 @@ if [[ ! "$answer" =~ ^[Yy]$ ]]; then
   echo "Installation canceled."
   exit 1
 fi
+
+pacman -S --needed --noconfirm git
+git clone http://github.com/yutadev31/dotfiles.git
+cd dotfiles
+
+base_packages="$ucode $(cat packages/arch/01_base.txt)"
+cli_packages="$(cat packages/arch/02_cli.txt)"
+dev_packages="$(cat packages/arch/03_dev.txt)"
+desktop_packages="$(cat packages/arch/04_desktop.txt)"
+niri_packages="$(cat packages/arch/05_niri.txt)"
 
 echo "Starting installation..."
 
@@ -48,7 +72,7 @@ mkfs.fat -F 32 -n boot $boot_part_dev
 mount --mkdir $root_part_dev /mnt
 mount --mkdir $boot_part_dev /mnt/boot
 
-pacstrap -K /mnt base linux linux-firmware
+pacstrap -K /mnt $base_packages
 genfstab -U /mnt >>/mnt/etc/fstab
 
 cat <<EOF >/mnt/setup.sh
@@ -58,7 +82,12 @@ pacman-key --init
 pacman-key --populate archlinux
 
 sed 's/^#\(Color\)/\1/' /etc/pacman.conf
-pacman -Syu --noconfirm --needed $package_list
+pacman -Sy
+
+pacman -S --noconfirm --needed $cli_packages
+pacman -S --noconfirm --needed $dev_packages
+pacman -S --noconfirm --needed $desktop_packages
+pacman -S --noconfirm --needed $niri_packages
 
 timedatectl set-timezone $time_zone
 hwclock --systohc

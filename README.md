@@ -3,6 +3,6 @@
 ## Installation
 
 ```sh
-./install.sh -c # Install CLI tools only
-./install.sh -d # Install desktop environment (includes CLI tools)
+./install.sh cli # Install CLI tools only
+./install.sh niri # Install niri desktop (includes CLI tools)
 ```

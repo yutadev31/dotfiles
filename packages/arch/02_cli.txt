@@ -1,5 +1,6 @@
 bat
 btop
+curl
 eza
 fastfetch
 fd
@@ -10,6 +11,8 @@ github-cli
 less
 neovim
 ripgrep
+rsync
+sudo
 tmux
 unzip
 wget
