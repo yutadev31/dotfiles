@@ -61,6 +61,7 @@ niri_packages="$(cat packages/arch/05_niri.txt)"
 
 echo "Starting installation..."
 
+wipefs -a $disk_dev
 parted $disk_dev -- mklabel gpt
 parted $disk_dev -- mkpart root ext4 $root_part_pos 100%
 parted $disk_dev -- mkpart ESP fat32 1MB $root_part_pos
