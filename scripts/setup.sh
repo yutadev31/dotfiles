@@ -28,7 +28,7 @@ if [[ "$vendor" == "GenuineIntel" ]]; then
 elif [[ "$vendor" == "AuthenticAMD" ]]; then
   ucode="amd-ucode"
 else
-  exit 1
+  ucode=""
 fi
 
 p1=$(read_password "Enter password: ")
