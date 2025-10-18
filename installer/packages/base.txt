@@ -1,7 +1,6 @@
 base
 base-devel
 bat
-btop
 curl
 efibootmgr
 eza
@@ -12,6 +11,7 @@ ghq
 git
 github-cli
 grub
+htop
 less
 linux
 linux-firmware
