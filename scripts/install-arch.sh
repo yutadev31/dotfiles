@@ -58,8 +58,7 @@ if [[ ! "$answer" =~ ^[Yy]$ ]]; then
   exit 1
 fi
 
-base_packages="$ucode $(cat packages/arch/base.txt)"
-desktop_packages="$(cat packages/arch/desktop.txt)"
+base_packages="$ucode $(cat packages/arch/base.txt) $(cat packages/arch/desktop.txt)"
 
 log "Starting installation..."
 
@@ -105,7 +104,7 @@ log "Enabling colors in pacman..."
 sed -i 's/^#\(Color\)/\1/' /etc/pacman.conf
 
 log "Installing desktop packages..."
-pacman -Sy $desktop_packages
+pacman -Sy --needed --noconfirm $desktop_packages
 
 log "Configuring timezone and clock..."
 timedatectl set-timezone $time_zone
