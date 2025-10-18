@@ -58,7 +58,7 @@ if [[ ! "$answer" =~ ^[Yy]$ ]]; then
   exit 1
 fi
 
-base_packages="$ucode $(cat packages/arch/base.txt) $(cat packages/arch/desktop.txt)"
+packages="$ucode $(cat packages/arch/base.txt) $(cat packages/arch/desktop.txt)"
 
 log "Starting installation..."
 
@@ -80,7 +80,7 @@ mount --mkdir "$root_part_dev" /mnt
 mount --mkdir "$boot_part_dev" /mnt/boot
 
 log "Installing base system..."
-pacstrap -K /mnt $base_packages
+pacstrap -K /mnt $packages
 
 log "Generating fstab..."
 genfstab -U /mnt >>/mnt/etc/fstab
@@ -103,8 +103,8 @@ pacman-key --populate archlinux
 log "Enabling colors in pacman..."
 sed -i 's/^#\(Color\)/\1/' /etc/pacman.conf
 
-log "Installing desktop packages..."
-pacman -Sy --needed --noconfirm $desktop_packages
+log "Download package databases..."
+pacman -Sy
 
 log "Configuring timezone and clock..."
 timedatectl set-timezone $time_zone
