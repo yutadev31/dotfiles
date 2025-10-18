@@ -16,6 +16,7 @@ less
 linux
 linux-firmware
 linux-headers
+mise
 neovim
 networkmanager
 openssh
@@ -26,4 +27,3 @@ ufw
 unzip
 wget
 zip
-mise

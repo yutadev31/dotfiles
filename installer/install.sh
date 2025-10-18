@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -euo pipefail
 
 # ===== Color setup =====
@@ -30,12 +30,24 @@ get_ucode() {
   fi
 }
 
+add_partition() {
+  local device="$1"
+  local num="$2"
+
+  if [[ "$device" == /dev/nvme* || "$device" == /dev/mmcblk* ]]; then
+    echo "${device}p${num}"
+  else
+    echo "${device}${num}"
+  fi
+}
+
 log "Loading configuration..."
 source ./config.sh
 
+boot_part_dev="$(add_partition $disk_dev 1)"
+root_part_dev="$(add_partition $disk_dev 2)"
+
 ucode="$(get_ucode)"
-shell="fish"
-editor="nvim"
 
 p1=$(read_password "Enter password: ")
 echo
@@ -58,7 +70,11 @@ if [[ ! "$answer" =~ ^[Yy]$ ]]; then
   exit 1
 fi
 
-packages="$ucode $(cat packages/arch/base.txt) $(cat packages/arch/desktop.txt)"
+kernel_packages="$(get_kernel $kernel)"
+shell_packages="$(get_shell $shell)"
+
+read -r -a base_packages <packages/base.txt
+read -r -a desktop_packages <packages/desktop.txt
 
 log "Starting installation..."
 
@@ -67,20 +83,20 @@ wipefs -a "$disk_dev"
 
 log "Creating partitions..."
 parted "$disk_dev" -- mklabel gpt
-parted "$disk_dev" -- mkpart root ext4 "$root_part_start" 100%
 parted "$disk_dev" -- mkpart ESP fat32 1MB "$root_part_start"
-parted "$disk_dev" -- set 2 esp on
+parted "$disk_dev" -- set 1 esp on
+parted "$disk_dev" -- mkpart root ext4 "$root_part_start" 100%
 
 log "Formatting partitions..."
-mkfs.ext4 -L root "$root_part_dev"
 mkfs.fat -F 32 -n boot "$boot_part_dev"
+mkfs.ext4 -L root "$root_part_dev"
 
 log "Mounting partitions..."
 mount --mkdir "$root_part_dev" /mnt
 mount --mkdir "$boot_part_dev" /mnt/boot
 
 log "Installing base system..."
-pacstrap -K /mnt $packages
+pacstrap -K /mnt "${base_packages[@]}" "${desktop_packages[@]}"
 
 log "Generating fstab..."
 genfstab -U /mnt >>/mnt/etc/fstab
@@ -104,7 +120,7 @@ log "Enabling colors in pacman..."
 sed -i 's/^#\(Color\)/\1/' /etc/pacman.conf
 
 log "Download package databases..."
-pacman -Sy
+pacman -Syu
 
 log "Configuring timezone and clock..."
 timedatectl set-timezone $time_zone
@@ -114,7 +130,6 @@ log "Setting locale and keyboard layout..."
 echo "LANG=$lang" >/etc/locale.conf
 echo "KEYMAP=$keymap" >/etc/vconsole.conf
 sed -i 's/^#\(en_US\.UTF-8 UTF-8\)/\1/' /etc/locale.gen
-sed -i 's/^#\(ja_JP\.UTF-8 UTF-8\)/\1/' /etc/locale.gen
 locale-gen
 
 log "Setting hostname..."
@@ -125,8 +140,27 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
 log "Enabling essential services..."
-systemctl enable NetworkManager
-systemctl enable sshd
+systemctl enable NetworkManager sshd
+
+log "Configuring /etc/hosts..."
+cat <<END >/etc/hosts
+127.0.0.1   localhost
+::1         localhost
+127.0.1.1   $hostname.localdomain $hostname
+END
+
+log "Configuring NetworkManager to use Cloudflare DNS..."
+mkdir -p /etc/NetworkManager/conf.d
+cat <<END >/etc/NetworkManager/conf.d/dns.conf
+[main]
+dns=none
+END
+
+log "Setting Cloudflare DNS..."
+cat <<END >/etc/resolv.conf
+nameserver 1.1.1.2
+nameserver 1.0.0.2
+END
 
 log "Configuring sudo permissions..."
 sed -i 's/^# \(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
@@ -137,11 +171,12 @@ useradd -m -G wheel -s /bin/$shell $username
 
 log "Generating initramfs..."
 mkinitcpio -P
+
+rm /post-install.sh
 EOF
 
 log "Running chroot setup..."
-arch-chroot /mnt /bin/bash /setup.sh
-rm /mnt/setup.sh
+arch-chroot /mnt /bin/bash /post-install.sh
 
 log "Setting root and user passwords..."
 echo "$password" | arch-chroot /mnt /bin/passwd --stdin
