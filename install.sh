@@ -39,51 +39,11 @@ install_files() {
     install_file .config/alacritty
   fi
 
-  if [ $DESKTOP_ENVIRONMENT = "niri" ]; then
+  if [ $DESKTOP_ENVIRONMENT = "hyprland" ]; then
+    install_file .config/hypr
     install_file .config/mako
     install_file .config/rofi
-    install_file .config/niri
     install_file .config/waybar
-  fi
-}
-
-install_packages_for_ubuntu() {
-  exit 1 # TODO
-}
-
-install_packages_for_arch() {
-  sudo paru -S --noconfirm --needed $(cat packages/arch-cli.txt)
-
-  if [ $SETUP_DESKTOP = 1 ]; then
-    sudo paru -S --noconfirm --needed $(cat packages/arch-desktop.txt)
-  fi
-
-  if [ $DESKTOP_ENVIRONMENT = "niri" ]; then
-    sudo paru -S --noconfirm --needed $(cat packages/arch-niri.txt)
-  fi
-}
-
-# Install packages from text files
-install_packages() {
-  echo "Installing packages..."
-
-  if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    case "$ID" in
-    ubuntu)
-      install_packages_for_ubuntu
-      ;;
-    arch)
-      install_packages_for_arch
-      ;;
-    *)
-      echo "Error: Your Linux distribution '$NAME' is not supported by this installer." >&2
-      exit 1
-      ;;
-    esac
-  else
-    echo "Error: Unable to determine your Linux distribution. '/etc/os-release' file not found." >&2
-    exit 1
   fi
 }
 
@@ -107,14 +67,13 @@ install() {
 
   case "$mode" in
   cli) ;;
-  niri)
+  hyprland)
     export SETUP_DESKTOP=1
-    export DESKTOP_ENVIRONMENT="niri"
+    export DESKTOP_ENVIRONMENT="hyprland"
     ;;
   esac
 
   install_files
-  # install_packages
   setup_git
 
   if [ $SETUP_DESKTOP = 1 ]; then

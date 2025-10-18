@@ -1,9 +1,0 @@
-base
-base-devel
-efibootmgr
-linux
-linux-firmware
-linux-headers
-networkmanager
-openssh
-ufw

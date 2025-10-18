@@ -12,7 +12,6 @@ alias sl="ls"
 alias ll="ls -l"
 alias la="ls -la"
 alias pacman="sudo pacman"
-alias apt="sudo apt"
 alias emacs="nvim"
 alias vim="nvim"
 alias vi="nvim"
@@ -43,26 +42,21 @@ alias glg="git log --oneline --graph --all --decorate"
 
 set fish_greeting
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-
 # fcitx5
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
-
-# Ollama
-export OLLAMA_HOST=0.0.0.0
+set -x GTK_IM_MODULE fcitx
+set -x QT_IM_MODULE fcitx
+set -x XMODIFIERS @im=fcitx
 
 # Mise
 mise activate fish | source
 
-export EDITOR=nvim
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export PATH="$HOME/.bin:$BUN_INSTALL/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
-export GTK_THEME="Adwaita:dark"
+set -x EDITOR nvim
+set -x LANG en_US.UTF-8
+set -x LC_ALL en_US.UTF-8
+set -x PATH "$HOME/.bin:$BUN_INSTALL/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
+set -x GTK_THEME "Adwaita:dark"
 
+touch ~/.env.fish
 source ~/.env.fish
 
 if status --is-login
