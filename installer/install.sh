@@ -100,7 +100,7 @@ log "Generating fstab..."
 genfstab -U /mnt >>/mnt/etc/fstab
 
 log "Creating post-install script..."
-cat <<EOF >/mnt/setup.sh
+cat <<EOF >/mnt/post-install.sh
 set -euo pipefail
 
 GREEN='\033[1;32m'
