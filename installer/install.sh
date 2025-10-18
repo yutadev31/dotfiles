@@ -70,9 +70,6 @@ if [[ ! "$answer" =~ ^[Yy]$ ]]; then
   exit 1
 fi
 
-read -r -a base_packages <packages/base.txt
-read -r -a desktop_packages <packages/desktop.txt
-
 log "Starting installation..."
 
 log "Wiping disk..."
@@ -93,7 +90,7 @@ mount --mkdir "$root_part_dev" /mnt
 mount --mkdir "$boot_part_dev" /mnt/boot
 
 log "Installing base system..."
-pacstrap -K /mnt $base_packages
+pacstrap -K /mnt $(cat packages/base.txt)
 
 log "Generating fstab..."
 genfstab -U /mnt >>/mnt/etc/fstab
