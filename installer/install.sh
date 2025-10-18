@@ -70,9 +70,6 @@ if [[ ! "$answer" =~ ^[Yy]$ ]]; then
   exit 1
 fi
 
-kernel_packages="$(get_kernel $kernel)"
-shell_packages="$(get_shell $shell)"
-
 read -r -a base_packages <packages/base.txt
 read -r -a desktop_packages <packages/desktop.txt
 
