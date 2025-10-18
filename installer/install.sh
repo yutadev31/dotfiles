@@ -93,8 +93,7 @@ mount --mkdir "$root_part_dev" /mnt
 mount --mkdir "$boot_part_dev" /mnt/boot
 
 log "Installing base system..."
-pacstrap -K /mnt "${base_packages[@]}"
-# "${desktop_packages[@]}"
+pacstrap -K /mnt $base_packages
 
 log "Generating fstab..."
 genfstab -U /mnt >>/mnt/etc/fstab
