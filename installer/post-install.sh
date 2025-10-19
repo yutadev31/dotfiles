@@ -8,8 +8,6 @@ log() {
   echo -e "\${GREEN}[*] \$1\${RESET}"
 }
 
-source /tmp/vars.sh
-
 log "Initializing pacman keys..."
 pacman-key --init
 pacman-key --populate archlinux
