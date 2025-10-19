@@ -113,4 +113,7 @@ log "Setting root and user passwords..."
 echo "$password" | arch-chroot /mnt /bin/passwd --stdin
 echo "$password" | arch-chroot /mnt /bin/passwd "$username" --stdin
 
+log "Installing desktop..."
+arch-chroot /mnt /bin/pacman -S --needed --noconfirm $(cat packages/desktop.txt)
+
 echo -e "${GREEN}Installation completed successfully!${RESET}"

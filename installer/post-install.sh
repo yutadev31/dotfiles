@@ -5,7 +5,7 @@ GREEN='\033[1;32m'
 RESET='\033[0m'
 
 log() {
-  echo -e "\${GREEN}[*] \$1\${RESET}"
+  echo -e "${GREEN}[*] $1${RESET}"
 }
 
 log "Initializing pacman keys..."
