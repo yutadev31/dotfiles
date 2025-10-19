@@ -12,7 +12,7 @@
 !/home/.bin/*
 !/home/.config/
 !/home/.config/alacritty/
-!/home/.config/alacritty/alacritty.toml
+!/home/.config/alacritty/*.toml
 !/home/.config/cspell/
 !/home/.config/cspell/cspell.json
 !/home/.config/cspell/dictionary.txt
