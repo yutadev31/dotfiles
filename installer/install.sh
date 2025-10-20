@@ -98,16 +98,10 @@ genfstab -U /mnt >>/mnt/etc/fstab
 
 log "Copying post-install script..."
 cp post-install.sh /mnt/post-install.sh
+mkdir /mnt/tmp && cp config.sh /mnt/tmp/config.sh
 
 log "Running chroot setup..."
-arch-chroot /mnt /bin/env \
-  username="$username" \
-  time_zone="$time_zone" \
-  lang="$lang" \
-  keymap="$keymap" \
-  hostname="$hostname" \
-  shell="$shell" \
-  /post-install.sh
+arch-chroot /mnt /post-install.sh
 
 log "Setting root and user passwords..."
 echo "$password" | arch-chroot /mnt /bin/passwd --stdin

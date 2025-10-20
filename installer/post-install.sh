@@ -8,6 +8,8 @@ log() {
   echo -e "${GREEN}[*] $1${RESET}"
 }
 
+source /config.sh
+
 log "Initializing pacman keys..."
 pacman-key --init
 pacman-key --populate archlinux
@@ -68,4 +70,4 @@ useradd -m -G wheel -s /bin/$shell $username
 log "Generating initramfs..."
 mkinitcpio -P
 
-rm /post-install.sh
+rm -rf /post-install.sh /tmp
