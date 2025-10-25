@@ -12,6 +12,7 @@ alias sl="ls"
 alias ll="ls -l"
 alias la="ls -la"
 alias pacman="sudo pacman"
+alias apt="sudo apt"
 alias emacs="nvim"
 alias vim="nvim"
 alias vi="nvim"
@@ -48,7 +49,9 @@ set -x QT_IM_MODULE fcitx
 set -x XMODIFIERS @im=fcitx
 
 # Mise
-mise activate fish | source
+if command -v mise >/dev/null 2>&1
+  mise activate fish | source
+end
 
 set -x EDITOR nvim
 set -x LANG en_US.UTF-8
@@ -59,7 +62,7 @@ set -x GTK_THEME "Adwaita:dark"
 touch ~/.env.fish
 source ~/.env.fish
 
-if status --is-login
+if command -v uwsm && status --is-login
   if uwsm check may-start && uwsm select
     exec uwsm start default
   end

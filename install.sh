@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -euo pipefail
 
 # Config filename
@@ -35,11 +35,11 @@ install_files() {
   install_file .config/tmux
   install_file .gitmessage
 
-  if [ $SETUP_DESKTOP = 1 ]; then
+  if [[ $SETUP_DESKTOP == 1 ]]; then
     install_file .config/alacritty
   fi
 
-  if [ $DESKTOP_ENVIRONMENT = "hyprland" ]; then
+  if [[ $DESKTOP_ENVIRONMENT == "hyprland" ]]; then
     install_file .config/hypr
     install_file .config/mako
     install_file .config/rofi
@@ -66,7 +66,10 @@ install() {
   echo "$mode" >$CONFIG_FILE
 
   case "$mode" in
-  cli) ;;
+  cli)
+    export SETUP_DESKTOP=0
+    export DESKTOP_ENVIRONMENT=""
+    ;;
   hyprland)
     export SETUP_DESKTOP=1
     export DESKTOP_ENVIRONMENT="hyprland"
@@ -76,7 +79,7 @@ install() {
   install_files
   setup_git
 
-  if [ $SETUP_DESKTOP = 1 ]; then
+  if [[ $SETUP_DESKTOP == 1 ]]; then
     setup_xdg
   fi
 
