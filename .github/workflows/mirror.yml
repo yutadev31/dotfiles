@@ -11,11 +11,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+      - name: Fetch unshallow
+        run: git fetch --unshallow
       - name: Push to GitLab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          git fetch --unshallow
           git remote add gitlab https://yuta31:$GITLAB_TOKEN@gitlab.com/yuta31/dotfiles.git
           git push gitlab main
