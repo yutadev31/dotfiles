@@ -62,7 +62,7 @@ set -x GTK_THEME "Adwaita:dark"
 touch ~/.env.fish
 source ~/.env.fish
 
-if command -v uwsm && status --is-login
+if command -v uwsm >/dev/null && status --is-login
   if uwsm check may-start && uwsm select
     exec uwsm start default
   end
