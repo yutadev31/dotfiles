@@ -37,6 +37,7 @@ install_files() {
 
   if [[ $SETUP_DESKTOP == 1 ]]; then
     install_file .config/alacritty
+    install_file .config/fcitx5
   fi
 
   if [[ $DESKTOP_ENVIRONMENT == "hyprland" ]]; then

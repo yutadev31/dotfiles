@@ -3,20 +3,7 @@ return {
     "williamboman/mason.nvim",
     event = "VeryLazy",
     config = function()
-      require("mason").setup({
-        ensure_installed = {
-          "clangd",
-          "lua-language-server",
-          "rust-analyzer",
-          "pyright",
-          "html-lsp",
-          "css-lsp",
-          "json-lsp",
-          "typescript-language-server",
-          "bash-language-server",
-          "fish-lsp",
-        },
-      })
+      require("mason").setup({})
       vim.lsp.enable({
         "bashls",
         "clangd",
