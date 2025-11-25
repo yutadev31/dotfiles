@@ -53,12 +53,10 @@ if command -v mise >/dev/null 2>&1
   mise activate fish | source
 end
 
-set --export BUN_INSTALL "$HOME/.bun"
-
 set -x EDITOR nvim
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
-set -x PATH "$HOME/.bin:$BUN_INSTALL/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
+set -x PATH "$HOME/dev/depot_tools:$HOME/.bin:$BUN_INSTALL/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 set -x GTK_THEME "Adwaita:dark"
 
 touch ~/.env.fish
