@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Japanese",
+    "layout": "jp",
+    "im": "mozc"
+  },
+  {
+    "name": "Korean",
+    "layout": "kr",
+    "im": "hangul"
+  },
+  {
+    "name": "Chinese",
+    "layout": "cn",
+    "im": "pinyin"
+  }
+]

@@ -1,31 +1,31 @@
 [colors.primary]
-background = "#252537"
+background = "#232538"
 foreground = "#f2f2f2"
 
 [colors.cursor]
 text = "CellForeground"
-cursor = "#d1d1e0"
+cursor = "#d1d2e0"
 
 [colors.selection]
 text = "CellForeground"
-background = "#3d3d5c"
+background = "#3b3e5e"
 
 [colors.normal]
-black = "#5c5c8a"
-red = "#ff8f8f"
-green = "#8fffa5"
-yellow = "#ffe18f"
-blue = "#8fabff"
-magenta = "#da8fff"
-cyan = "#8fecff"
-white = "#d1d1e0"
+black = "#5c608a"
+red = "#ff8080"
+green = "#80ff99"
+yellow = "#ffdd80"
+blue = "#809fff"
+magenta = "#d580ff"
+cyan = "#80eaff"
+white = "#d1d2e0"
 
 [colors.bright]
-black = "#5c5c8a"
-red = "#ff8f8f"
-green = "#8fffa5"
-yellow = "#ffe18f"
-blue = "#8fabff"
-magenta = "#da8fff"
-cyan = "#8fecff"
-white = "#d1d1e0"
+black = "#5c608a"
+red = "#ff8080"
+green = "#80ff99"
+yellow = "#ffdd80"
+blue = "#809fff"
+magenta = "#d580ff"
+cyan = "#80eaff"
+white = "#d1d2e0"
