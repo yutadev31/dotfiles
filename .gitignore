@@ -13,6 +13,8 @@
 !/home/.config/
 !/home/.config/alacritty/
 !/home/.config/alacritty/*.toml
+!/home/.config/btop/
+!/home/.config/btop/*
 !/home/.config/cspell/
 !/home/.config/cspell/cspell.json
 !/home/.config/cspell/dictionary.txt

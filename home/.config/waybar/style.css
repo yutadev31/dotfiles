@@ -5,7 +5,7 @@
 }
 
 window#waybar {
-  background-color: rgba(37, 37, 55, 0.75);
+  background-color: rgba(27, 30, 40, 0.98);
   border-bottom: #2d2d43 1px solid;
   transition-property: background-color;
   transition-duration: 0.5s;
@@ -32,5 +32,5 @@ box.module {
 
 #workspaces button.focused,
 #workspaces button.active {
-  color: #8fabff;
+  color: #e8a47d;
 }

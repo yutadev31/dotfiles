@@ -1,3 +1,62 @@
 configuration {
   show-icons: true;
 }
+
+* {
+  fg: #f2f2f2;
+  bg: #1b1e28;
+  bgdark: #14171f;
+  bglight: #212631;
+  selection: #333b4c;
+  black: #667599;
+  white: #c2c8d6;
+  yellow: #e8cb7d;
+  orange: #e8a47d;
+
+  background-color:   transparent;
+  text-color:         @fg;
+
+  margin:     0px;
+  padding:    0px;
+  spacing:    0px;
+}
+
+window {
+  background-color: @bgdark;
+  border-color: @orange;
+}
+
+inputbar {
+  padding: 2px 4px;
+  children: [ entry ];
+}
+
+listview {
+  lines: 12;
+  columns: 1;
+  spacing: 4px;
+}
+
+entry {
+  text-color: @fg;
+}
+
+element {
+  padding: 2px 4px;
+}
+
+element.normal.normal {
+  background-color: @bglight;
+}
+
+element.alternate.normal {
+  background-color: @bglight;
+}
+
+element.selected.normal {
+  background-color: @orange;
+}
+
+element-text {
+    text-color: @fg;
+}

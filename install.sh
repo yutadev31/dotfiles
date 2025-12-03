@@ -1,10 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-# Config filename
 CONFIG_FILE="config.txt"
 
-# Install a single dotfile
 install_file() {
   path=$1
   dotdir=$(pwd)
@@ -23,11 +21,11 @@ install_file() {
   ln -sf $dotdir/home/$path $HOME/$path
 }
 
-# Install all relevant dotfiles
 install_files() {
   echo "Installing files..."
 
   install_file .bin
+  install_file .config/btop
   install_file .config/cspell
   install_file .config/fastfetch
   install_file .config/fish
@@ -56,11 +54,6 @@ setup_git() {
   git config --global ghq.root '~/dev'
 }
 
-setup_xdg() {
-  xdg-settings set default-web-browser firefox.desktop
-}
-
-# Main installation logic
 install() {
   local mode="$1"
   echo "Installing dotfiles in '$mode' mode..."
@@ -79,10 +72,6 @@ install() {
 
   install_files
   setup_git
-
-  if [[ $SETUP_DESKTOP == 1 ]]; then
-    setup_xdg
-  fi
 
   echo "Installed dotfiles successfully."
 }

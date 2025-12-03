@@ -1,22 +1,11 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
     event = "VeryLazy",
-    config = function()
-      require("mason").setup({})
-      vim.lsp.enable({
-        "bashls",
-        "clangd",
-        "cssls",
-        "fish_lsp",
-        "html",
-        "jsonls",
-        "lua_ls",
-        "pyright",
-        "rust_analyzer",
-        "ts_ls",
-        "nil_ls",
-      })
-    end,
+    opts = {},
   },
 }
