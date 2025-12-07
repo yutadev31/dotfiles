@@ -8,6 +8,6 @@ return {
   config = function()
     setup("pairs", {})
     setup("icons", {})
-    -- setup("statusline", {})
+    setup("surround", {})
   end,
 }

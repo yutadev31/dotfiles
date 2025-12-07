@@ -36,9 +36,6 @@ install_files() {
   if [[ $SETUP_DESKTOP == 1 ]]; then
     install_file .config/alacritty
     install_file .config/fcitx5
-  fi
-
-  if [[ $DESKTOP_ENVIRONMENT == "hyprland" ]]; then
     install_file .config/hypr
     install_file .config/mako
     install_file .config/rofi
@@ -62,11 +59,9 @@ install() {
   case "$mode" in
   cli)
     export SETUP_DESKTOP=0
-    export DESKTOP_ENVIRONMENT=""
     ;;
-  hyprland)
+  desktop)
     export SETUP_DESKTOP=1
-    export DESKTOP_ENVIRONMENT="hyprland"
     ;;
   esac
 
