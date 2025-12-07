@@ -4,5 +4,5 @@
 
 ```sh
 ./install.sh cli # Install CLI tools only
-./install.sh hyprland # Install hyprland desktop (includes CLI tools)
+./install.sh desktop # Install hyprland desktop (includes CLI tools)
 ```
