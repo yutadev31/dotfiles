@@ -10,6 +10,4 @@ return {
       },
     },
   },
-  root_markers = { "stylua.toml", ".stylua.toml" },
-  filetypes = { "lua" },
 }

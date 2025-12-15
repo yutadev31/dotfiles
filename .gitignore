@@ -15,6 +15,7 @@
 !/home/.config/alacritty/*.toml
 !/home/.config/btop/
 !/home/.config/btop/*
+!/home/.config/btop/themes/*
 !/home/.config/cspell/
 !/home/.config/cspell/cspell.json
 !/home/.config/cspell/dictionary.txt

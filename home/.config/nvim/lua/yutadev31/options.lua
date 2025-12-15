@@ -110,5 +110,5 @@ vim.api.nvim_create_autocmd("DirChanged", {
   end,
 })
 
-vim.opt.rtp:prepend("~/dev/github.com/yutadev31/yoru.nvim")
-vim.cmd.colorscheme("yoru")
+-- vim.opt.rtp:prepend("~/dev/github.com/yutadev31/yoru.nvim")
+-- vim.cmd.colorscheme("yoru")

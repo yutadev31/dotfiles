@@ -7,11 +7,4 @@ return {
       },
     },
   },
-  capabilities = {
-    experimental = {
-      serverStatusNotification = true,
-    },
-  },
-  root_markers = { "Cargo.toml" },
-  filetypes = { "rust" },
 }
