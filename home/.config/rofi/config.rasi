@@ -3,15 +3,15 @@ configuration {
 }
 
 * {
-  fg: #f2f2f2;
-  bg: #1b1e28;
+  fg: #e0e0e0;
+  bg: #1f222e;
   bgdark: #14171f;
-  bglight: #212631;
-  selection: #333b4c;
-  black: #667599;
-  white: #c2c8d6;
-  yellow: #e8cb7d;
-  orange: #e8a47d;
+  bglight: #292d3d;
+  selection: #243b6b;
+  black: #757fa3;
+  white: #a9b0c6;
+  yellow: #dccb74;
+  orange: #dea57c;
 
   background-color:   transparent;
   text-color:         @fg;
