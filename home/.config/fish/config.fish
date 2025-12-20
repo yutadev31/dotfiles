@@ -55,8 +55,7 @@ set -x BUN_INSTALL "$HOME/.bun"
 set -x EDITOR nvim
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
-set -x PATH "$HOME/dev/depot_tools:$HOME/.bin:$BUN_INSTALL/bin:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
-set -x GTK_THEME "Adwaita:dark"
+set -x PATH "$HOME/.bin:$BUN_INSTALL/bin:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 
 touch ~/.env.fish
 source ~/.env.fish
