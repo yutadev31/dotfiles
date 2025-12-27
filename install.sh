@@ -19,6 +19,7 @@ install_file() {
   # Create a symbolic link
   mkdir -p $(dirname $HOME/$path)
   ln -sf $dotdir/home/$path $HOME/$path
+  echo "Create ~/$path"
 }
 
 install_files() {

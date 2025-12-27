@@ -1,7 +1,5 @@
 local h = require("yutadev31.utils.helper")
 
-h.nmap("<C-a>", "gg<S-v>G")
-
 -- Terminal
 h.tmap("<ESC>", "<C-\\><C-n>")
 
