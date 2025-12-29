@@ -1,4 +1,5 @@
 vim.lsp.enable({
+  "astro",
   "bashls",
   "clangd",
   "cssls",

@@ -1,20 +1,20 @@
 [Groups/0]
 # Group Name
-Name=Japanese
+Name=Chinese
 # Layout
-Default Layout=jp
+Default Layout=cn
 # Default Input Method
-DefaultIM=mozc
+DefaultIM=pinyin
 
 [Groups/0/Items/0]
 # Name
-Name=keyboard-jp
+Name=keyboard-cn
 # Layout
 Layout=
 
 [Groups/0/Items/1]
 # Name
-Name=mozc
+Name=pinyin
 # Layout
 Layout=
 
@@ -40,21 +40,21 @@ Layout=
 
 [Groups/2]
 # Group Name
-Name=Chinese
+Name=Japanese
 # Layout
-Default Layout=cn
+Default Layout=jp
 # Default Input Method
-DefaultIM=pinyin
+DefaultIM=mozc
 
 [Groups/2/Items/0]
 # Name
-Name=keyboard-cn
+Name=keyboard-jp
 # Layout
 Layout=
 
 [Groups/2/Items/1]
 # Name
-Name=pinyin
+Name=mozc
 # Layout
 Layout=
 

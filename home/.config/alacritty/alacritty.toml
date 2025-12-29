@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/yoru.toml"]
+import = ["~/.config/alacritty/tokyonight_night.toml"]
 
 [font]
 size = 12
@@ -10,4 +10,4 @@ bold_italic = { family = "Hack Nerd Font", style = "Bold Italic" }
 
 [window]
 padding = { x = 12, y = 12 }
-opacity = 0.8
+opacity = 0.95

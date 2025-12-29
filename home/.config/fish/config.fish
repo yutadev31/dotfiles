@@ -38,6 +38,7 @@ alias grh="git reset --hard HEAD"
 alias gstash="git stash"
 alias gpop="git stash pop"
 alias glg="git log --oneline --graph --all --decorate"
+alias lg="lazygit"
 
 set fish_greeting
 

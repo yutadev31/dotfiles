@@ -40,6 +40,7 @@ install_files() {
     install_file .config/hypr
     install_file .config/mako
     install_file .config/rofi
+    install_file .config/niri
     install_file .config/sway
     install_file .config/waybar
     install_file .config/chrome-flags.conf
