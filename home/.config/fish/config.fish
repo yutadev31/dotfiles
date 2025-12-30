@@ -52,13 +52,6 @@ if command -v mise >/dev/null 2>&1
     mise activate fish | source
 end
 
-# Zoxide
-if command -v zoxide >/dev/null 2>&1
-    zoxide init fish | source
-    zoxide add ~/dev
-    zoxide add ~/dev/github.com/yutadev31/*
-end
-
 set -x EDITOR nvim
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8

@@ -3,6 +3,8 @@ vim.lsp.enable({
   "bashls",
   "clangd",
   "cssls",
+  "docker_compose_language_service",
+  "docker_language_server",
   "fish_lsp",
   "html",
   "jsonls",
