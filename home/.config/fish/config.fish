@@ -49,22 +49,30 @@ set -x XMODIFIERS @im=fcitx
 
 # Mise
 if command -v mise >/dev/null 2>&1
-  mise activate fish | source
+    mise activate fish | source
 end
 
-set -x BUN_INSTALL "$HOME/.bun"
+# Zoxide
+if command -v zoxide >/dev/null 2>&1
+    zoxide init fish | source
+    zoxide add ~/dev
+    zoxide add ~/dev/github.com/yutadev31/*
+end
+
 set -x EDITOR nvim
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
+
+set -x BUN_INSTALL "$HOME/.bun"
 set -x PATH "$HOME/.bin:$BUN_INSTALL/bin:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 
 touch ~/.env.fish
 source ~/.env.fish
 
 if not set -q SSH_CONNECTION; and not set -q SSH_TTY
-  if command -v uwsm >/dev/null && status --is-login
-    if uwsm check may-start && uwsm select
-      exec uwsm start default
+    if command -v uwsm >/dev/null && status --is-login
+        if uwsm check may-start && uwsm select
+            exec uwsm start default
+        end
     end
-  end
 end

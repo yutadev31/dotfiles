@@ -9,5 +9,11 @@ return {
     setup("pairs", {})
     setup("icons", {})
     setup("surround", {})
+    setup("cursorword", {})
+    setup("indentscope", {})
+    setup("trailspace", {})
+    setup("misc", {})
+
+    MiniMisc.setup_restore_cursor()
   end,
 }
