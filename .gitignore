@@ -44,4 +44,6 @@
 !/home/.config/waybar/
 !/home/.config/waybar/config.jsonc
 !/home/.config/waybar/style.css
+!/home/.config/zed/
+!/home/.config/zed/*
 !/home/.config/chrome-flags.conf
