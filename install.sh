@@ -51,8 +51,12 @@ install_files() {
 setup_git() {
   git config --global user.name Yuta
   git config --global user.email yuta256dev@gmail.com
+  git config --global user.signingkey ~/.ssh/github_ed25519.pub
   git config --global commit.template ~/.gitmessage
+  git config --global commit.gpgsign true
   git config --global init.defaultBranch main
+  git config --global gpg.format ssh
+  git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
   git config --global ghq.root '~/dev'
 }
 
