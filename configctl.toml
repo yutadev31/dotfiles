@@ -1,1 +1,3 @@
-policy = "../config-policies/base"
+[policy]
+repository = "https://github.com/yutadev31/config-policies.git"
+path = "base"
