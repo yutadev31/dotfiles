@@ -13,6 +13,9 @@ return {
     setup("indentscope", {})
     setup("trailspace", {})
     setup("misc", {})
+    setup("sessions", {})
+
+    setup("starter", {})
 
     MiniMisc.setup_restore_cursor()
   end,

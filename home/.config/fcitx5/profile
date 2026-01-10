@@ -18,48 +18,6 @@ Name=mozc
 # Layout
 Layout=
 
-[Groups/1]
-# Group Name
-Name=Korean
-# Layout
-Default Layout=kr
-# Default Input Method
-DefaultIM=hangul
-
-[Groups/1/Items/0]
-# Name
-Name=keyboard-kr
-# Layout
-Layout=
-
-[Groups/1/Items/1]
-# Name
-Name=hangul
-# Layout
-Layout=
-
-[Groups/2]
-# Group Name
-Name=Chinese
-# Layout
-Default Layout=cn
-# Default Input Method
-DefaultIM=pinyin
-
-[Groups/2/Items/0]
-# Name
-Name=keyboard-cn
-# Layout
-Layout=
-
-[Groups/2/Items/1]
-# Name
-Name=pinyin
-# Layout
-Layout=
-
 [GroupOrder]
 0=Japanese
-1=Korean
-2=Chinese
 
