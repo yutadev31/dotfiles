@@ -57,7 +57,7 @@ set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
 
 set -x BUN_INSTALL "$HOME/.bun"
-set -x PATH "$HOME/.bin:$BUN_INSTALL/bin:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
+set -x PATH "$HOME/.bin:$BUN_INSTALL/bin:$HOME/dev/flutter-sdk/flutter/bin:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 
 touch ~/.env.fish
 source ~/.env.fish

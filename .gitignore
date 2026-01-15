@@ -46,4 +46,7 @@
 !/home/.config/waybar/style.css
 !/home/.config/zed/
 !/home/.config/zed/*
+!/home/.config/VSCodium
+!/home/.config/VSCodium/User
+!/home/.config/VSCodium/User/settings.json
 !/home/.config/chrome-flags.conf

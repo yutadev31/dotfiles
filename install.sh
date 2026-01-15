@@ -44,6 +44,7 @@ install_files() {
     install_file .config/sway
     install_file .config/waybar
     install_file .config/zed
+    install_file .config/VSCodium
     install_file .config/chrome-flags.conf
   fi
 }

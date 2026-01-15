@@ -1,0 +1,74 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "GitHub Dark Default",
+  "editor.fontFamily": "Hack Nerd Font",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "editor.autoIndentOnPaste": true,
+  "editor.unfoldOnClickAfterEndOfLine": true,
+  "license.author": "Yuta",
+  "files.insertFinalNewline": true,
+  "workbench.editor.empty.hint": "hidden",
+  "terminal.integrated.suggest.enabled": false,
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "terminal.integrated.stickyScroll.enabled": false,
+  "git.autofetch": true,
+  "git.blame.editorDecoration.enabled": true,
+  "git.confirmSync": false,
+  "markdown-preview-enhanced.previewTheme": "github-dark.css",
+  "markdown-preview-enhanced.codeBlockTheme": "github-dark.css",
+  "markdown-preview-enhanced.revealjsTheme": "black.css",
+
+  "[html]": {
+    "editor.defaultFormatter": "prettier.prettier-vscode",
+  },
+  "[css]": {
+    "editor.defaultFormatter": "prettier.prettier-vscode",
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "prettier.prettier-vscode",
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "prettier.prettier-vscode",
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "prettier.prettier-vscode",
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "prettier.prettier-vscode",
+  },
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+  },
+  "[rust]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+  },
+  "[json]": {
+    "editor.defaultFormatter": "prettier.prettier-vscode",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "prettier.prettier-vscode",
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
+  },
+  "files.exclude": {
+    "**/.git": false,
+  },
+  "[dart]": {
+    "editor.selectionHighlight": false,
+    "editor.wordBasedSuggestions": "off",
+  },
+}
