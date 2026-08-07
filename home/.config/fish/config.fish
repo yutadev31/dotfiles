@@ -6,7 +6,6 @@ alias mv="mv -i"
 alias rm="rm -i"
 alias cp="cp -i"
 alias cl="clear"
-alias ls="eza --icons"
 alias l="ls"
 alias sl="ls"
 alias ll="ls -l"
@@ -19,7 +18,11 @@ alias gi="git init"
 alias gcl="git clone"
 alias ga="git add"
 alias gaa="git add ."
+alias grs="git restore --staged"
+alias grsa="git restore --staged"
 alias gc="git commit"
+alias gca="git commit --amend"
+alias gci="git commit -m \"Initial commit\""
 alias gcinit="git commit -m \"Initial commit\""
 alias gp="git push"
 alias gph="git push -u origin HEAD"
@@ -27,6 +30,7 @@ alias gl="git pull --autostash"
 alias gr="git remote"
 alias gs="git status -sb"
 alias gd="git diff"
+alias gdc="git diff --cached"
 alias gco="git checkout"
 alias gcb="git checkout -b"
 alias gb="git branch"
@@ -42,30 +46,4 @@ alias lg="lazygit"
 
 set fish_greeting
 
-# fcitx5
-set -x GTK_IM_MODULE fcitx
-set -x QT_IM_MODULE fcitx
-set -x XMODIFIERS @im=fcitx
-
-# Mise
-if command -v mise >/dev/null 2>&1
-    mise activate fish | source
-end
-
 set -x EDITOR nvim
-set -x LANG en_US.UTF-8
-set -x LC_ALL en_US.UTF-8
-
-set -x BUN_INSTALL "$HOME/.bun"
-set -x PATH "$HOME/.bin:$BUN_INSTALL/bin:$HOME/dev/flutter-sdk/flutter/bin:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
-
-touch ~/.env.fish
-source ~/.env.fish
-
-if not set -q SSH_CONNECTION; and not set -q SSH_TTY
-    if command -v uwsm >/dev/null && status --is-login
-        if uwsm check may-start && uwsm select
-            exec uwsm start default
-        end
-    end
-end

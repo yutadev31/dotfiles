@@ -1,5 +1,4 @@
-/config.txt
-/config.sh
+/dotconf.sh
 
 /.tmp/
 
@@ -15,22 +14,12 @@
 !/home/.config/alacritty/alacritty.toml
 !/home/.config/btop/
 !/home/.config/btop/*
-!/home/.config/btop/themes/*
-!/home/.config/cspell/
-!/home/.config/cspell/cspell.json
-!/home/.config/cspell/dictionary.txt
-!/home/.config/fastfetch/
-!/home/.config/fastfetch/config.jsonc
 !/home/.config/fcitx5/
 !/home/.config/fcitx5/*
 !/home/.config/fish/
 !/home/.config/fish/config.fish
-!/home/.config/hypr/
-!/home/.config/hypr/*.conf
 !/home/.config/mako/
 !/home/.config/mako/config
-!/home/.config/niri/
-!/home/.config/niri/config.kdl
 !/home/.config/nvim/
 !/home/.config/nvim/*.lua
 !/home/.config/nvim/lua/
@@ -39,14 +28,13 @@
 !/home/.config/nvim/lsp/**
 !/home/.config/rofi/
 !/home/.config/rofi/config.rasi
+!/home/.config/sway/
+!/home/.config/sway/config
+!/home/.config/sway/config-rm
+!/home/.config/sway/config-vm
 !/home/.config/tmux/
 !/home/.config/tmux/tmux.conf
 !/home/.config/waybar/
 !/home/.config/waybar/config.jsonc
 !/home/.config/waybar/style.css
-!/home/.config/zed/
-!/home/.config/zed/*
-!/home/.config/VSCodium
-!/home/.config/VSCodium/User
-!/home/.config/VSCodium/User/settings.json
 !/home/.config/chrome-flags.conf
