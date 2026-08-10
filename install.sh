@@ -41,9 +41,9 @@ gen_files() {
   . dotconf.sh
 
   if [ "${vm:-no}" = "yes" ]; then
-    cp "$(pwd)/home/.config/sway/config-vm" "$(pwd)/home/.config/sway/config-env"
+    cp "$(pwd)/home/.config/sway/config-vm" "$(pwd)/home/.config/sway/config-gen"
   else
-    cp "$(pwd)/home/.config/sway/config-rm" "$(pwd)/home/.config/sway/config-env"
+    cp "$(pwd)/home/.config/sway/config-rm" "$(pwd)/home/.config/sway/config-gen"
   fi
 }
 
