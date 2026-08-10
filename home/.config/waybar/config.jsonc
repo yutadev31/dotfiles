@@ -17,9 +17,6 @@
     "format-alt": "{:%A, %B %d, %Y (%R)}",
   },
   "layer": "top",
-  "margin-left": 8,
-  "margin-right": 8,
-  "margin-top": 4,
   "memory": {
     "format": "{}%  ",
     "interval": 5,
@@ -27,9 +24,6 @@
   "modules-center": ["sway/window"],
   "modules-left": ["sway/workspaces"],
   "modules-right": ["tray", "memory", "battery", "pulseaudio", "clock"],
-  "niri/workspaces": {
-    "all-outputs": true,
-  },
   "position": "top",
   "pulseaudio": {
     "format": "{volume}% {icon} {format_source}",

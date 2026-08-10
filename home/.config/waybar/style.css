@@ -1,33 +1,36 @@
 * {
+  border: none;
+  border-radius: 0;
   font-family: "Hack Nerd Font", FontAwesome, sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
 }
 
-window#waybar {
-  background-color: rgba(31, 34, 46, 0.8);
-  color: #e0e0e0;
-}
-
-window#waybar.hidden {
-  opacity: 0.2;
-}
-
-label.module,
-box.module {
-  padding: 4px 4px;
+#waybar {
+  background: #24283b;
+  color: #c0caf5;
 }
 
 #workspaces button {
-  padding: 0 4px;
+  padding: 4px 8px;
   margin: 0 2px;
-  border: none;
-  color: #e0e0e0;
-  transition-property: color;
-  transition-duration: 0.1s;
+  background: transparent;
+  color: #c0caf5;
+  border-radius: 8px;
 }
 
-#workspaces button.focused,
 #workspaces button.active {
-  color: #dea57c;
+  color: #7aa2f7;
+}
+
+#window,
+#tray,
+#cpu,
+#memory,
+#battery,
+#pulseaudio,
+#clock {
+  padding: 4px 12px;
+  color: #c0caf5;
+  border-radius: 8px;
 }
