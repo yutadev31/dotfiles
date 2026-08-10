@@ -38,3 +38,8 @@
 !/home/.config/waybar/config.jsonc
 !/home/.config/waybar/style.css
 !/home/.config/chrome-flags.conf
+!/home/.local/
+!/home/.local/share/
+!/home/.local/share/rofi/
+!/home/.local/share/rofi/themes/
+!/home/.local/share/rofi/themes/*

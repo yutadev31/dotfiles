@@ -34,6 +34,7 @@ install_files() {
   install_file .config/rofi
   install_file .config/sway
   install_file .config/waybar
+  install_file .local/share/rofi/themes
   install_file .gitmessage
 }
 
