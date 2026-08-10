@@ -1,5 +1,5 @@
 [general]
-imports = ["~/.config/alacritty/tokyo_night_storm.toml"]
+import = ["~/.config/alacritty/tokyo_night_storm.toml"]
 
 [font]
 size = 12
