@@ -1,3 +1,6 @@
+[general]
+imports = ["~/.config/alacritty/tokyo_night_storm.toml"]
+
 [font]
 size = 12
 normal = { family = "Hack Nerd Font", style = "Regular" }
