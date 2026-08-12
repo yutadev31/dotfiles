@@ -1,11 +1,11 @@
 return {
   "folke/tokyonight.nvim",
-  opts = {
-    style = "storm",
-    transparent = true,
-  },
   config = function(opts)
-    require("tokyonight").setup(opts)
+    require("tokyonight").setup({
+      style = "storm",
+      transparent = true,
+    })
+
     vim.cmd("colorscheme tokyonight")
   end,
 }
