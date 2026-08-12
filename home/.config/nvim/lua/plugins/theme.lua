@@ -4,4 +4,8 @@ return {
     style = "storm",
     transparent = true,
   },
+  config = function(opts)
+    require("tokyonight").setup(opts)
+    vim.cmd("colorscheme tokyonight")
+  end,
 }
