@@ -1,21 +1,18 @@
-local js_formatters = { { "biome", "prettierd", "prettier" } }
-
 return {
   "stevearc/conform.nvim",
   opts = {
     formatters_by_ft = {
-      c = { "clang-format" },
-      cpp = { "clang-format" },
+      html = { "biome-check", "oxfmt" },
+      css = { "biome-check", "oxfmt" },
+      json = { "biome-check", "oxfmt" },
+      javascript = { "biome-check", "oxfmt" },
+      javascriptreact = { "biome-check", "oxfmt" },
+      typescript = { "biome-check", "oxfmt" },
+      typescriptreact = { "biome-check", "oxfmt" },
       nix = { "nixfmt" },
-      sh = { "shfmt" },
-      lua = { "stylua" },
-      python = { "isort", "black" },
-      rust = { "rust_analyzer" },
-      markdown = { "markdownlint" },
-      javascript = js_formatters,
-      javascriptreact = js_formatters,
-      typescript = js_formatters,
-      typescriptreact = js_formatters,
+      go = { "gofmt" },
+      asm = { "asmfmt" },
+      make = { "bake" },
     },
     format_on_save = {
       timeout_ms = 2000,

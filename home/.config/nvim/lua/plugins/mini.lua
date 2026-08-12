@@ -7,16 +7,12 @@ return {
   version = "*",
   config = function()
     setup("pairs", {})
-    setup("icons", {})
+    setup("icons", { mock_nvim_web_devicons = true })
     setup("surround", {})
     setup("cursorword", {})
     setup("indentscope", {})
     setup("trailspace", {})
-    setup("misc", {})
-    setup("sessions", {})
-
-    setup("starter", {})
-
-    MiniMisc.setup_restore_cursor()
+    setup("notify", {})
+    vim.notify = require("mini.notify").make_notify()
   end,
 }

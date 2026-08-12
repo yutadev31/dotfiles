@@ -1,11 +1,4 @@
-local function cwd_as_tilde()
-  return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
-end
-
--- Basic Settings
 vim.opt.encoding = "utf-8"
-vim.opt.title = true
-vim.opt.titlestring = "nvim " .. cwd_as_tilde()
 vim.opt.termguicolors = true
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.timeout = true
@@ -21,8 +14,8 @@ vim.opt.winblend = 0
 vim.opt.pumblend = 0
 vim.opt.wrap = true
 vim.opt.linebreak = true
-vim.opt.whichwrap:append("<,>,h,l")
-vim.opt.fillchars:append({ eob = "~" })
+vim.opt.whichwrap = "<,>,h,l"
+vim.opt.fillchars = { eob = "~" }
 
 -- Indentation
 vim.opt.expandtab = true
@@ -38,7 +31,7 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 
 -- Clipboard Integration
-vim.opt.clipboard:append("unnamedplus")
+vim.opt.clipboard = "unnamedplus"
 
 -- Whitespace Characters
 vim.opt.list = true
@@ -48,7 +41,7 @@ vim.opt.listchars = { tab = "> ", trail = "-", nbsp = "+" }
 vim.opt.backspace = "indent,eol,start"
 
 -- Completion & Performance
-vim.opt.shortmess:append("c")
+vim.opt.shortmess = "c"
 vim.opt.updatetime = 300
 
 -- Disable Swap Files
@@ -69,46 +62,16 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldenable = true
 
+vim.opt.shell = "fish"
+
 -- Diagnostic
 vim.diagnostic.config({
   virtual_text = true,
-  signs = true,
-  underline = true,
   severity_sort = true,
-  float = { border = "rounded", source = true },
-})
-
--- Auto Commands
-vim.api.nvim_create_autocmd("TermOpen", {
-  pattern = "*",
-  callback = function()
-    vim.opt_local.number = false
-    vim.cmd("startinsert")
-  end,
-})
-
-vim.api.nvim_create_autocmd("TermEnter", {
-  pattern = "*",
-  callback = function()
-    vim.cmd("startinsert")
-  end,
-})
-
-vim.api.nvim_create_autocmd("FocusGained", {
-  command = "checktime",
 })
 
 vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
-    os.execute("fcitx5-remote -c")
+    vim.fn.jobstart({ "fcitx5-remote", "-c" }, { detach = true })
   end,
 })
-
-vim.api.nvim_create_autocmd("DirChanged", {
-  callback = function()
-    vim.o.titlestring = "nvim " .. cwd_as_tilde()
-  end,
-})
-
--- vim.opt.rtp:prepend("~/dev/github.com/yutadev31/my-theme.nvim")
--- vim.cmd.colorscheme("yoru")

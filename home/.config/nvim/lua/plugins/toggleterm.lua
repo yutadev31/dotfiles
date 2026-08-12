@@ -3,8 +3,7 @@ return {
   event = "VeryLazy",
   opts = {
     direction = "float",
-  },
-  keys = {
-    { "<leader>tt", "<cmd>ToggleTerm<cr>" },
+    start_in_insert = true,
+    persist_size = true,
   },
 }
