@@ -1,9 +1,40 @@
 # Dotfiles
 
+Personal dotfiles for non-NixOS environments.
+
+## Managed configurations
+
+- Sway, Waybar, Rofi, and Mako
+- Alacritty and Fish
+- Neovim
+- fcitx5
+- Git message template and helper scripts
+
+## Requirements
+
+Install the required packages before running the installer. A package-installation helper is included:
+
+```sh
+./scripts/install-packages.sh
+```
+
 ## Installation
 
 ```sh
+git clone https://github.com/yutadev31/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 ./install.sh
+```
+
+The installer moves an existing managed path to a matching `*.old` path, then creates a symbolic link to this repository.
+
+## Local configuration
+
+`dotconf.sh` contains machine-specific settings and is not tracked by Git. Create or edit it before installing as needed:
+
+```sh
+# Example: use the virtual-machine Sway configuration
+vm=yes
 ```
 
 ## License
