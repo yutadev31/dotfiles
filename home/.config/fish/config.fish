@@ -1,3 +1,6 @@
+set fish_greeting
+set -x EDITOR nvim
+fish_add_path ~/.bin
 fish_vi_key_bindings
 
 alias grep="grep --color=auto"
@@ -6,6 +9,7 @@ alias mv="mv -i"
 alias rm="rm -i"
 alias cp="cp -i"
 alias cl="clear"
+alias ls="eza --icons auto"
 alias l="ls"
 alias sl="ls"
 alias ll="ls -l"
@@ -43,7 +47,3 @@ alias gstash="git stash"
 alias gpop="git stash pop"
 alias glg="git log --oneline --graph --all --decorate"
 alias lg="lazygit"
-
-set fish_greeting
-
-set -x EDITOR nvim
