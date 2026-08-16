@@ -114,6 +114,8 @@ default_floating_border pixel 3
 gaps inner 8
 gaps outer 8
 
+output * bg ~/.local/share/wallpapers/smile_original.png fill
+
 client.focused          #7aa2f7 #000000 #ffffff #7aa2f7 #7aa2f7
 client.focused_inactive #414868 #000000 #ffffff #414868 #414868
 client.unfocused        #414868 #000000 #ffffff #414868 #414868

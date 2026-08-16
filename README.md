@@ -42,3 +42,8 @@ vm=yes
 Unless otherwise noted, this repository is licensed under the [MIT License](./LICENSE).
 
 Some files are subject to different licenses. The applicable license notices for those files can be found in [`LICENSES/`](./LICENSES/).
+
+`home/.local/share/wallpapers/smile_original.png` is an unmodified copy from
+[atraxsrc/tokyonight-wallpapers](https://github.com/atraxsrc/tokyonight-wallpapers/blob/main/smile_original.png)
+and is licensed under GPL-2.0-only. Its license text and notice are available in
+[`LICENSES/`](./LICENSES/).
