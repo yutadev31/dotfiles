@@ -27,6 +27,7 @@ install_files() {
 
   install_file .bin
   install_file .config/alacritty
+  install_file .config/fastfetch
   install_file .config/fcitx5
   install_file .config/fish
   install_file .config/mako

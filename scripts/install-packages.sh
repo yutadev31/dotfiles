@@ -37,7 +37,7 @@ install() {
     NetBSD)
       install_netbsd ;;
     DragonFly) 
-      install_dragonflybsd ;;
+      install_dragonfly ;;
     *)
       echo "$os is not supported."
       exit 1 ;;
