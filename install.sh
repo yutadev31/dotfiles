@@ -1,6 +1,11 @@
 #!/bin/sh
 set -eu
 
+if [ "$(uname -s)" = "Linux" ] && [ -r /etc/os-release ] && grep -qx 'ID=nixos' /etc/os-release; then
+  echo "Error: install.sh cannot be run on NixOS." >&2
+  exit 1
+fi
+
 CONFIG_FILE="config.txt"
 
 install_file() {
