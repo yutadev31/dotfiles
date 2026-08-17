@@ -27,9 +27,7 @@ install_arch() {
     eza \
     fish \
     git \
-    lazygit \
-    neovim \
-    tmux
+    neovim
 
   if [ "$gui" = "yes" ]; then
     pacman -S --noconfirm --needed \
