@@ -26,6 +26,7 @@ install_arch() {
   pacman -S --noconfirm --needed \
     eza \
     fd \
+    fastfetch \
     fish \
     git \
     git-delta \
