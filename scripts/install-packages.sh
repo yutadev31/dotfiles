@@ -25,9 +25,12 @@ load_configuration() {
 install_arch() {
   pacman -S --noconfirm --needed \
     eza \
+    fd \
     fish \
     git \
-    neovim
+    git-delta \
+    neovim \
+    ripgrep
 
   if [ "$gui" = "yes" ]; then
     pacman -S --noconfirm --needed \
