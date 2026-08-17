@@ -3,7 +3,49 @@ set -eu
 
 install_arch() {
   pacman -S --noconfirm --needed \
-    fish neovim
+    alacritty \
+    eza \
+    fcitx5 \
+    fcitx5-mozc \
+    fish \
+    git \
+    grim \
+    lazygit \
+    mako \
+    neovim \
+    rofi \
+    slurp \
+    sway \
+    swaync \
+    tmux \
+    waybar \
+    wayvnc
+}
+
+not_implemented() {
+  os=${1:?not_implemented: missing OS name}
+  echo "Error: package installation for $os is not implemented yet." >&2
+  exit 1
+}
+
+install_void() {
+  not_implemented "Void Linux"
+}
+
+install_freebsd() {
+  not_implemented "FreeBSD"
+}
+
+install_openbsd() {
+  not_implemented "OpenBSD"
+}
+
+install_netbsd() {
+  not_implemented "NetBSD"
+}
+
+install_dragonfly() {
+  not_implemented "DragonFly BSD"
 }
 
 install_linux() {
@@ -15,32 +57,41 @@ install_linux() {
   fi
 
   case "$ID" in
-    arch)
-      install_arch ;;
-    void)
-      install_void ;;
-    *)
-      echo "$NAME is not supported."
-      exit 1 ;;
+  arch)
+    install_arch
+    ;;
+  void)
+    install_void
+    ;;
+  *)
+    echo "Error: $NAME is not supported." >&2
+    exit 1
+    ;;
   esac
 }
 
 install() {
   os="$(uname -s)"
   case "$os" in
-    Linux)
-      install_linux ;;
-    FreeBSD)
-      install_freebsd ;;
-    OpenBSD)
-      install_openbsd ;;
-    NetBSD)
-      install_netbsd ;;
-    DragonFly)
-      install_dragonfly ;;
-    *)
-      echo "$os is not supported."
-      exit 1 ;;
+  Linux)
+    install_linux
+    ;;
+  FreeBSD)
+    install_freebsd
+    ;;
+  OpenBSD)
+    install_openbsd
+    ;;
+  NetBSD)
+    install_netbsd
+    ;;
+  DragonFly)
+    install_dragonfly
+    ;;
+  *)
+    echo "Error: $os is not supported." >&2
+    exit 1
+    ;;
   esac
 }
 

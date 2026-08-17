@@ -6,17 +6,55 @@ if [ "$(uname -s)" = "Linux" ] && [ -r /etc/os-release ] && grep -qx 'ID=nixos' 
   exit 1
 fi
 
-CONFIG_FILE="config.txt"
+dotdir=$(CDPATH= cd "$(dirname "$0")" && pwd)
+
+managed_paths='.bin
+.config/alacritty
+.config/chrome-flags.conf
+.config/fastfetch
+.config/fcitx5
+.config/fish
+.config/mako
+.config/nvim
+.config/rofi
+.config/sway
+.config/tmux
+.config/waybar
+.local/share/rofi/themes
+.local/share/wallpapers
+.gitmessage
+'
+
+is_managed_link() {
+  path=${1:?is_managed_link: missing path}
+
+  [ -L "$HOME/$path" ] && [ "$(readlink "$HOME/$path")" = "$dotdir/home/$path" ]
+}
+
+preflight() {
+  if [ ! -f "$dotdir/dotconf.sh" ]; then
+    echo "Error: create $dotdir/dotconf.sh before running the installer." >&2
+    exit 1
+  fi
+
+  for path in $managed_paths; do
+    if is_managed_link "$path"; then continue; fi
+
+    if { [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; } && { [ -e "$HOME/$path.old" ] || [ -L "$HOME/$path.old" ]; }; then
+      echo "Error: refusing to overwrite existing backup ~/$path.old." >&2
+      exit 1
+    fi
+  done
+}
 
 install_file() {
   path=${1:?install_file: missing path}
-  dotdir=$(pwd)
 
-  # Check if a symbolic link exists
-  if [ -L "$HOME/$path" ]; then return; fi
+  # Leave links created by this installer untouched.
+  if is_managed_link "$path"; then return; fi
 
-  # Move to directory if it exists
-  if [ -e "$HOME/$path" ]; then
+  # Move an existing file, directory, or incorrect symbolic link aside.
+  if [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; then
     mv "$HOME/$path" "$HOME/$path.old"
     echo "Move ~/$path"
   fi
@@ -30,36 +68,27 @@ install_file() {
 install_files() {
   echo "Installing files..."
 
-  install_file .bin
-  install_file .config/alacritty
-  install_file .config/fastfetch
-  install_file .config/fcitx5
-  install_file .config/fish
-  install_file .config/mako
-  install_file .config/nvim
-  install_file .config/rofi
-  install_file .config/sway
-  install_file .config/waybar
-  install_file .local/share/rofi/themes
-  install_file .local/share/wallpapers
-  install_file .gitmessage
+  for path in $managed_paths; do
+    install_file "$path"
+  done
 }
 
 gen_files() {
-  . dotconf.sh
+  . "$dotdir/dotconf.sh"
 
   if [ "${vm:-no}" = "yes" ]; then
-    cp "$(pwd)/home/.config/sway/config-vm" "$(pwd)/home/.config/sway/config-gen"
+    cp "$dotdir/home/.config/sway/config-vm" "$dotdir/home/.config/sway/config-gen"
   else
-    cp "$(pwd)/home/.config/sway/config-rm" "$(pwd)/home/.config/sway/config-gen"
+    cp "$dotdir/home/.config/sway/config-rm" "$dotdir/home/.config/sway/config-gen"
   fi
 }
 
 install() {
   echo "Installing dotfiles..."
 
-  install_files
+  preflight
   gen_files
+  install_files
 
   echo "Installed dotfiles successfully."
 }

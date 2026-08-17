@@ -18,6 +18,10 @@ Install the required packages before running the installer. A package-installati
 ./scripts/install-packages.sh
 ```
 
+The helper installs packages on Arch Linux. It also detects Void Linux, FreeBSD,
+OpenBSD, NetBSD, and DragonFly BSD, but package installation for those systems is
+not implemented yet and exits with an error.
+
 ## Installation
 
 ```sh
@@ -30,7 +34,7 @@ The installer moves an existing managed path to a matching `*.old` path, then cr
 
 ## Local configuration
 
-`dotconf.sh` contains machine-specific settings and is not tracked by Git. Create or edit it before installing as needed:
+`dotconf.sh` contains machine-specific settings and is not tracked by Git. Create it in the repository root before installing:
 
 ```sh
 # Example: use the virtual-machine Sway configuration
