@@ -16,7 +16,6 @@ install_arch() {
     rofi \
     slurp \
     sway \
-    swaync \
     tmux \
     waybar \
     wayvnc

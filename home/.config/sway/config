@@ -13,7 +13,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 
 bindsym $mod+d exec $menu
-bindsym $mod+n exec swaync-client -t -sw
+bindsym $mod+n exec makoctl dismiss --all
 
 floating_modifier $mod normal
 
@@ -124,4 +124,5 @@ client.urgent           #f7768e #000000 #ffffff #f7768e #f7768e
 bindsym $mod+r mode "resize"
 
 exec waybar
+exec mako
 exec fcitx5 -rd
