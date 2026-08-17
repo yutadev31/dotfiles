@@ -22,6 +22,14 @@ The helper installs packages on Arch Linux. It also detects Void Linux, FreeBSD,
 OpenBSD, NetBSD, and DragonFly BSD, but package installation for those systems is
 not implemented yet and exits with an error.
 
+## Git setup
+
+After installing Git and delta, configure them with:
+
+```sh
+./scripts/setup-git.sh
+```
+
 ## Installation
 
 ```sh
