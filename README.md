@@ -37,9 +37,16 @@ The installer moves an existing managed path to a matching `*.old` path, then cr
 `dotconf.sh` contains machine-specific settings and is not tracked by Git. Create it in the repository root before installing:
 
 ```sh
+# Install GUI packages and configurations (default: yes)
+gui=yes
+
 # Example: use the virtual-machine Sway configuration
 vm=yes
 ```
+
+Set `gui=no` to skip GUI-related packages and configurations, including Sway,
+Waybar, Rofi, Mako, Alacritty, fcitx5, wallpapers, and the Sway configuration
+generation step.
 
 ## License
 

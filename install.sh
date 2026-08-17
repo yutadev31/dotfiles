@@ -8,22 +8,51 @@ fi
 
 dotdir=$(CDPATH= cd "$(dirname "$0")" && pwd)
 
-managed_paths='.bin
-.config/alacritty
-.config/chrome-flags.conf
+base_paths='.bin
 .config/fastfetch
-.config/fcitx5
 .config/fish
-.config/mako
 .config/nvim
+.config/tmux
+.gitmessage
+'
+
+gui_paths='.config/alacritty
+.config/chrome-flags.conf
+.config/fcitx5
+.config/mako
 .config/rofi
 .config/sway
-.config/tmux
 .config/waybar
 .local/share/rofi/themes
 .local/share/wallpapers
-.gitmessage
 '
+
+load_configuration() {
+  if [ ! -f "$dotdir/dotconf.sh" ]; then
+    echo "Error: create $dotdir/dotconf.sh before running the installer." >&2
+    exit 1
+  fi
+
+  . "$dotdir/dotconf.sh"
+
+  gui=${gui:-yes}
+
+  case "$gui" in
+  yes | no) ;;
+  *)
+    echo "Error: gui must be yes or no in $dotdir/dotconf.sh." >&2
+    exit 1
+    ;;
+  esac
+}
+
+managed_paths() {
+  printf '%s\n' "$base_paths"
+
+  if [ "$gui" = "yes" ]; then
+    printf '%s\n' "$gui_paths"
+  fi
+}
 
 is_managed_link() {
   path=${1:?is_managed_link: missing path}
@@ -32,12 +61,9 @@ is_managed_link() {
 }
 
 preflight() {
-  if [ ! -f "$dotdir/dotconf.sh" ]; then
-    echo "Error: create $dotdir/dotconf.sh before running the installer." >&2
-    exit 1
-  fi
+  load_configuration
 
-  for path in $managed_paths; do
+  for path in $(managed_paths); do
     if is_managed_link "$path"; then continue; fi
 
     if { [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; } && { [ -e "$HOME/$path.old" ] || [ -L "$HOME/$path.old" ]; }; then
@@ -68,13 +94,13 @@ install_file() {
 install_files() {
   echo "Installing files..."
 
-  for path in $managed_paths; do
+  for path in $(managed_paths); do
     install_file "$path"
   done
 }
 
 gen_files() {
-  . "$dotdir/dotconf.sh"
+  if [ "$gui" = "no" ]; then return; fi
 
   if [ "${vm:-no}" = "yes" ]; then
     cp "$dotdir/home/.config/sway/config-vm" "$dotdir/home/.config/sway/config-gen"
