@@ -1,0 +1,36 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Hack Nerd Font", FontAwesome, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#waybar {
+  background: #24283b;
+  color: #c0caf5;
+}
+
+#workspaces button {
+  padding: 4px 8px;
+  margin: 0 2px;
+  background: transparent;
+  color: #c0caf5;
+  border-radius: 8px;
+}
+
+#workspaces button.active {
+  color: #7aa2f7;
+}
+
+#window,
+#tray,
+#cpu,
+#memory,
+#battery,
+#pulseaudio,
+#clock {
+  padding: 4px 12px;
+  color: #c0caf5;
+  border-radius: 8px;
+}
