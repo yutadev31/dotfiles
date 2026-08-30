@@ -1,6 +1,8 @@
 # Dotfiles
 
-Personal dotfiles for non-NixOS environments.
+Personal dotfiles and Nix configuration.
+
+The [`nix/`](./nix/) directory contains NixOS and Home Manager configurations.
 
 ## Managed configurations
 
