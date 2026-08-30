@@ -22,7 +22,6 @@
   # Sudo
   security.sudo = {
     enable = true;
-    wheelNeedsPassword = false;
   };
 
   # RTKit

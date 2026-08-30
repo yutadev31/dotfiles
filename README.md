@@ -40,7 +40,15 @@ cd ~/dotfiles
 ./install.sh
 ```
 
-The installer moves an existing managed path to a matching `*.old` path, then creates a symbolic link to this repository.
+The installer moves existing managed paths to a unique directory under
+`~/.dotfiles-backup`, then creates symbolic links to this repository. If an
+installation step fails, it restores paths changed during that run.
+
+Preview the changes without modifying your home directory:
+
+```sh
+./install.sh --dry-run
+```
 
 ## Local configuration
 

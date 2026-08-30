@@ -1,12 +1,70 @@
 #!/bin/sh
 set -eu
 
+dry_run=no
+
+usage() {
+  cat <<'EOF'
+Usage: ./install.sh [--dry-run]
+
+Install the managed dotfiles into $HOME. Existing paths are moved to a unique
+backup directory under ~/.dotfiles-backup. Use --dry-run to preview changes.
+EOF
+}
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+  --dry-run) dry_run=yes ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  *)
+    echo "Error: unknown option: $1" >&2
+    usage >&2
+    exit 2
+    ;;
+  esac
+  shift
+done
+
 if [ "$(uname -s)" = "Linux" ] && [ -r /etc/os-release ] && grep -qx 'ID=nixos' /etc/os-release; then
   echo "Error: install.sh cannot be run on NixOS." >&2
   exit 1
 fi
 
 dotdir=$(CDPATH= cd "$(dirname "$0")" && pwd)
+backup_root="$HOME/.dotfiles-backup"
+backup_dir=
+moved_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-moved.XXXXXX")
+created_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-created.XXXXXX")
+
+rollback() {
+  [ "$dry_run" = "yes" ] && return
+
+  while IFS= read -r path; do
+    rm -f "$HOME/$path"
+  done < "$created_paths"
+
+  while IFS= read -r path; do
+    if [ -e "$backup_dir/$path" ] || [ -L "$backup_dir/$path" ]; then
+      mkdir -p "$(dirname "$HOME/$path")"
+      mv "$backup_dir/$path" "$HOME/$path"
+    fi
+  done < "$moved_paths"
+}
+
+cleanup() {
+  status=$?
+  if [ "$status" -ne 0 ]; then
+    echo "Installation failed; restoring changed paths..." >&2
+    rollback
+  fi
+  rm -f "$moved_paths" "$created_paths"
+  exit "$status"
+}
+
+trap cleanup EXIT HUP INT TERM
 
 base_paths='.bin
 .config/fastfetch
@@ -44,6 +102,15 @@ load_configuration() {
     exit 1
     ;;
   esac
+
+  vm=${vm:-no}
+  case "$vm" in
+  yes | no) ;;
+  *)
+    echo "Error: vm must be yes or no in $dotdir/dotconf.sh." >&2
+    exit 1
+    ;;
+  esac
 }
 
 managed_paths() {
@@ -63,14 +130,23 @@ is_managed_link() {
 preflight() {
   load_configuration
 
-  for path in $(managed_paths); do
-    if is_managed_link "$path"; then continue; fi
-
-    if { [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; } && { [ -e "$HOME/$path.old" ] || [ -L "$HOME/$path.old" ]; }; then
-      echo "Error: refusing to overwrite existing backup ~/$path.old." >&2
+  while IFS= read -r path; do
+    if [ ! -e "$dotdir/home/$path" ]; then
+      echo "Error: managed source does not exist: $dotdir/home/$path" >&2
       exit 1
     fi
-  done
+
+    if is_managed_link "$path"; then continue; fi
+  done <<EOF
+$(managed_paths)
+EOF
+}
+
+ensure_backup_dir() {
+  if [ -n "$backup_dir" ]; then return; fi
+
+  mkdir -p "$backup_root"
+  backup_dir=$(mktemp -d "$backup_root/install.XXXXXXXX")
 }
 
 install_file() {
@@ -79,33 +155,64 @@ install_file() {
   # Leave links created by this installer untouched.
   if is_managed_link "$path"; then return; fi
 
+  if [ "$dry_run" = "yes" ]; then
+    if [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; then
+      echo "Would move ~/$path to a new backup directory"
+    fi
+    echo "Would create ~/$path"
+    return
+  fi
+
   # Move an existing file, directory, or incorrect symbolic link aside.
   if [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; then
-    mv "$HOME/$path" "$HOME/$path.old"
-    echo "Move ~/$path"
+    ensure_backup_dir
+    mkdir -p "$(dirname "$backup_dir/$path")"
+    printf '%s\n' "$path" >> "$moved_paths"
+    mv "$HOME/$path" "$backup_dir/$path"
+    echo "Move ~/$path to $backup_dir/$path"
   fi
 
   # Create a symbolic link
   mkdir -p "$(dirname "$HOME/$path")"
   ln -s "$dotdir/home/$path" "$HOME/$path"
+  printf '%s\n' "$path" >> "$created_paths"
   echo "Create ~/$path"
 }
 
 install_files() {
   echo "Installing files..."
 
-  for path in $(managed_paths); do
+  while IFS= read -r path; do
     install_file "$path"
-  done
+  done <<EOF
+$(managed_paths)
+EOF
 }
 
 gen_files() {
   if [ "$gui" = "no" ]; then return; fi
 
-  if [ "${vm:-no}" = "yes" ]; then
-    cp "$dotdir/home/.config/sway/config-vm" "$dotdir/home/.config/sway/config-gen"
+  if [ "$vm" = "yes" ]; then
+    source="$dotdir/home/.config/sway/config-vm"
   else
-    cp "$dotdir/home/.config/sway/config-rm" "$dotdir/home/.config/sway/config-gen"
+    source="$dotdir/home/.config/sway/config-rm"
+  fi
+
+  if [ "$dry_run" = "yes" ]; then
+    echo "Would generate ~/.config/sway/config-gen from $(basename "$source")"
+    return
+  fi
+
+  generated="$dotdir/home/.config/sway/config-gen"
+  temporary=$(mktemp "$dotdir/home/.config/sway/config-gen.XXXXXXXX")
+  cp "$source" "$temporary"
+  mv "$temporary" "$generated"
+  echo "Generate ~/.config/sway/config-gen"
+}
+
+finish() {
+  if [ -n "$backup_dir" ]; then
+    echo "Backups are available in $backup_dir"
   fi
 }
 
@@ -115,6 +222,7 @@ install() {
   preflight
   gen_files
   install_files
+  finish
 
   echo "Installed dotfiles successfully."
 }
