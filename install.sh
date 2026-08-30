@@ -28,30 +28,60 @@ while [ "$#" -gt 0 ]; do
   shift
 done
 
-if [ "$(uname -s)" = "Linux" ] && [ -r /etc/os-release ] && grep -qx 'ID=nixos' /etc/os-release; then
+if [ "$(uname -s)" = "Linux" ] && [ -r /etc/os-release ] && grep -Eq '^ID="?nixos"?$' /etc/os-release; then
   echo "Error: install.sh cannot be run on NixOS." >&2
   exit 1
 fi
 
-dotdir=$(CDPATH= cd "$(dirname "$0")" && pwd)
+resolve_script_path() {
+  script=$1
+
+  case "$script" in
+  /*) ;;
+  */*) script=$(CDPATH= cd "$(dirname "$script")" && pwd)/$(basename "$script") ;;
+  *)
+    script=$(command -v "$script") || {
+      echo "Error: cannot locate installer: $1" >&2
+      exit 1
+    }
+    ;;
+  esac
+
+  while [ -L "$script" ]; do
+    target=$(readlink "$script")
+    case "$target" in
+    /*) script=$target ;;
+    *) script=$(dirname "$script")/$target ;;
+    esac
+  done
+
+  printf '%s\n' "$script"
+}
+
+script_path=$(resolve_script_path "$0")
+dotdir=$(CDPATH= cd -P "$(dirname "$script_path")" && pwd)
 backup_root="$HOME/.dotfiles-backup"
 backup_dir=
 moved_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-moved.XXXXXX")
 created_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-created.XXXXXX")
 
+reverse_paths() {
+  awk '{ paths[NR] = $0 } END { for (i = NR; i > 0; i--) print paths[i] }' "$1"
+}
+
 rollback() {
   [ "$dry_run" = "yes" ] && return
 
-  while IFS= read -r path; do
+  reverse_paths "$created_paths" | while IFS= read -r path; do
     rm -f "$HOME/$path"
-  done < "$created_paths"
+  done
 
-  while IFS= read -r path; do
+  reverse_paths "$moved_paths" | while IFS= read -r path; do
     if [ -e "$backup_dir/$path" ] || [ -L "$backup_dir/$path" ]; then
       mkdir -p "$(dirname "$HOME/$path")"
       mv "$backup_dir/$path" "$HOME/$path"
     fi
-  done < "$moved_paths"
+  done
 }
 
 cleanup() {
@@ -114,31 +144,52 @@ load_configuration() {
 }
 
 managed_paths() {
-  printf '%s\n' "$base_paths"
+  printf '%s' "$base_paths"
 
   if [ "$gui" = "yes" ]; then
-    printf '%s\n' "$gui_paths"
+    printf '%s' "$gui_paths"
   fi
 }
 
 is_managed_link() {
   path=${1:?is_managed_link: missing path}
 
-  [ -L "$HOME/$path" ] && [ "$(readlink "$HOME/$path")" = "$dotdir/home/$path" ]
+  [ -L "$HOME/$path" ] || return 1
+
+  target=$(readlink "$HOME/$path")
+  case "$target" in
+  /*) ;;
+  *) target=$(dirname "$HOME/$path")/$target ;;
+  esac
+
+  target_dir=$(CDPATH= cd -P "$(dirname "$target")" 2>/dev/null && pwd) || return 1
+  source_dir=$(CDPATH= cd -P "$(dirname "$dotdir/home/$path")" && pwd)
+  [ "$target_dir/$(basename "$target")" = "$source_dir/$(basename "$path")" ]
 }
 
 preflight() {
   load_configuration
 
+  managed_list=$(managed_paths)
   while IFS= read -r path; do
     if [ ! -e "$dotdir/home/$path" ]; then
       echo "Error: managed source does not exist: $dotdir/home/$path" >&2
       exit 1
     fi
 
+    for other_path in $managed_list; do
+      [ "$path" = "$other_path" ] && continue
+      case "$path" in
+      "$other_path"/*)
+        echo "Error: managed paths must not overlap: $other_path and $path" >&2
+        exit 1
+        ;;
+      esac
+    done
+
     if is_managed_link "$path"; then continue; fi
   done <<EOF
-$(managed_paths)
+$managed_list
 EOF
 }
 
@@ -198,16 +249,30 @@ gen_files() {
     source="$dotdir/home/.config/sway/config-rm"
   fi
 
+  path=.local/share/dotfiles/sway/config-gen
+
   if [ "$dry_run" = "yes" ]; then
-    echo "Would generate ~/.config/sway/config-gen from $(basename "$source")"
+    if [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; then
+      echo "Would move ~/$path to a new backup directory"
+    fi
+    echo "Would generate ~/$path from $(basename "$source")"
     return
   fi
 
-  generated="$dotdir/home/.config/sway/config-gen"
-  temporary=$(mktemp "$dotdir/home/.config/sway/config-gen.XXXXXXXX")
+  if [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; then
+    ensure_backup_dir
+    mkdir -p "$(dirname "$backup_dir/$path")"
+    printf '%s\n' "$path" >> "$moved_paths"
+    mv "$HOME/$path" "$backup_dir/$path"
+    echo "Move ~/$path to $backup_dir/$path"
+  fi
+
+  mkdir -p "$(dirname "$HOME/$path")"
+  temporary=$(mktemp "$HOME/$path.XXXXXXXX")
   cp "$source" "$temporary"
-  mv "$temporary" "$generated"
-  echo "Generate ~/.config/sway/config-gen"
+  mv "$temporary" "$HOME/$path"
+  printf '%s\n' "$path" >> "$created_paths"
+  echo "Generate ~/$path"
 }
 
 finish() {
@@ -220,8 +285,8 @@ install() {
   echo "Installing dotfiles..."
 
   preflight
-  gen_files
   install_files
+  gen_files
   finish
 
   echo "Installed dotfiles successfully."

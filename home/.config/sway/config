@@ -1,4 +1,4 @@
-include ~/.config/sway/config-gen
+include ~/.local/share/dotfiles/sway/config-gen
 
 set $left h
 set $down j
