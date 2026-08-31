@@ -1,0 +1,17 @@
+# Format: scope path
+# scope is either "base" (always installed) or "gui" (installed when gui=yes).
+base .bin
+base .config/fastfetch
+base .config/fish
+base .config/nvim
+base .config/tmux
+base .gitmessage
+gui .config/alacritty
+gui .config/chrome-flags.conf
+gui .config/fcitx5
+gui .config/mako
+gui .config/rofi
+gui .config/sway
+gui .config/waybar
+gui .local/share/rofi/themes
+gui .local/share/wallpapers
