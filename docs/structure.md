@@ -19,6 +19,7 @@ the shell installer, while `nix/` contains declarative Nix configurations.
 ├── docker/        Arch Linux development container
 ├── docs/          Repository documentation
 ├── LICENSES/      License notices for included third-party files
+├── install.sh     Interactive launcher for package and dotfile installation
 ├── dotlist.txt    Inventory of paths managed by the portable installer
 ├── dotconf.sh     Local, machine-specific installer settings (not tracked)
 ├── flake.nix      Development-shell flake for repository tooling
@@ -31,7 +32,7 @@ the shell installer, while `nix/` contains declarative Nix configurations.
 helpers and application configuration, but its internal files are intentionally
 not catalogued here; each top-level path is selected through `dotlist.txt`.
 
-`scripts/install-files.sh` is the entry point for this mode. It reads `dotlist.txt`,
+`scripts/install-files.sh` is the entry point for individual dotfile installation. It reads `dotlist.txt`,
 which separates always-installed paths (`base`) from graphical paths
 (`gui`). Local options in `dotconf.sh` control whether GUI paths are
 included and which generated Sway configuration is used.
@@ -84,6 +85,8 @@ maintenance:
 
 - `scripts/install-files.sh` links the selected portable dotfiles into `$HOME`, with
   backups, rollback, and a dry-run mode.
+- `install.sh` prompts before running the package and dotfile installers in
+  sequence.
 - `scripts/install-packages.sh` installs the packages required by the
   portable setup. It currently implements Arch Linux installation and detects
   several other operating systems.

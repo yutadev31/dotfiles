@@ -37,10 +37,11 @@ After installing Git and delta, configure them with:
 ```sh
 git clone https://github.com/yutadev31/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./scripts/install-files.sh
+./install.sh
 ```
 
-The installer moves existing managed paths to a unique directory under
+The launcher asks for confirmation before installing packages and dotfiles. The
+dotfile installer moves existing managed paths to a unique directory under
 `~/.dotfiles-backup`, then creates symbolic links to this repository. If an
 installation step fails, it restores paths changed during that run.
 
