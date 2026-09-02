@@ -2,6 +2,7 @@
 set -eu
 
 dotdir=$(CDPATH= cd "$(dirname "$0")/.." && pwd)
+. "$dotdir/scripts/platform.sh"
 
 load_configuration() {
   if [ ! -f "$dotdir/dotconf.sh" ]; then
@@ -75,14 +76,7 @@ install_dragonfly() {
 }
 
 install_linux() {
-  if [ -r /etc/os-release ]; then
-    . /etc/os-release
-  else
-    echo "Unable to detect the Linux distribution: /etc/os-release not found."
-    exit 1
-  fi
-
-  case "$ID" in
+  case "$distro" in
   arch)
     install_arch
     ;;
@@ -90,7 +84,7 @@ install_linux() {
     install_void
     ;;
   *)
-    echo "Error: $NAME is not supported." >&2
+    echo "Error: $distro is not supported." >&2
     exit 1
     ;;
   esac
@@ -98,8 +92,8 @@ install_linux() {
 
 install() {
   load_configuration
+  detect_platform
 
-  os="$(uname -s)"
   case "$os" in
   Linux)
     install_linux

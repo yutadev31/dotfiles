@@ -28,16 +28,6 @@ while [ "$#" -gt 0 ]; do
   shift
 done
 
-if [ "$(uname -s)" = "Linux" ] && [ -r /etc/os-release ] && grep -Eq '^ID="?nixos"?$' /etc/os-release; then
-  case "$HOME" in
-  /tmp/*) ;;
-  *)
-    echo "Error: install-files.sh can only run on NixOS when \$HOME is under /tmp." >&2
-    exit 1
-    ;;
-  esac
-fi
-
 resolve_script_path() {
   script=$1
 
@@ -65,6 +55,19 @@ resolve_script_path() {
 
 script_path=$(resolve_script_path "$0")
 dotdir=$(CDPATH= cd -P "$(dirname "$script_path")/.." && pwd)
+. "$dotdir/scripts/platform.sh"
+detect_platform
+
+if [ "$os" = "Linux" ] && [ "$distro" = "nixos" ]; then
+  case "$HOME" in
+  /tmp/*) ;;
+  *)
+    echo "Error: install-files.sh can only run on NixOS when \$HOME is under /tmp." >&2
+    exit 1
+    ;;
+  esac
+fi
+
 backup_root="$HOME/.dotfiles-backup"
 backup_dir=
 moved_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-moved.XXXXXX")
