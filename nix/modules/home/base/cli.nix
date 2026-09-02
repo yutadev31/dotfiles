@@ -46,7 +46,5 @@
   programs.lazygit.enable = true;
 
   # Fzf
-  programs.fzf = {
-    enable = true;
-  };
+  programs.fzf.enable = true;
 }
