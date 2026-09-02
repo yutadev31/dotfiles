@@ -5,7 +5,7 @@ dry_run=no
 
 usage() {
   cat <<'EOF'
-Usage: ./install.sh [--dry-run]
+Usage: ./scripts/install-files.sh [--dry-run]
 
 Install the managed dotfiles into $HOME. Existing paths are moved to a unique
 backup directory under ~/.dotfiles-backup. Use --dry-run to preview changes.
@@ -32,7 +32,7 @@ if [ "$(uname -s)" = "Linux" ] && [ -r /etc/os-release ] && grep -Eq '^ID="?nixo
   case "$HOME" in
   /tmp/*) ;;
   *)
-    echo "Error: install.sh can only run on NixOS when \$HOME is under /tmp." >&2
+    echo "Error: install-files.sh can only run on NixOS when \$HOME is under /tmp." >&2
     exit 1
     ;;
   esac
@@ -64,7 +64,7 @@ resolve_script_path() {
 }
 
 script_path=$(resolve_script_path "$0")
-dotdir=$(CDPATH= cd -P "$(dirname "$script_path")" && pwd)
+dotdir=$(CDPATH= cd -P "$(dirname "$script_path")/.." && pwd)
 backup_root="$HOME/.dotfiles-backup"
 backup_dir=
 moved_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-moved.XXXXXX")

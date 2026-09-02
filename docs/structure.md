@@ -15,12 +15,11 @@ the shell installer, while `nix/` contains declarative Nix configurations.
 .
 ├── home/          Portable dotfiles linked into $HOME
 ├── nix/           NixOS and Home Manager flake
-├── scripts/       Helpers for non-Nix installation and Git setup
+├── scripts/       Installer and setup helpers
 ├── docker/        Arch Linux development container
 ├── docs/          Repository documentation
 ├── LICENSES/      License notices for included third-party files
-├── install.sh     Portable dotfile installer
-├── dotlist.txt    Inventory of paths managed by install.sh
+├── dotlist.txt    Inventory of paths managed by the portable installer
 ├── dotconf.sh     Local, machine-specific installer settings (not tracked)
 ├── flake.nix      Development-shell flake for repository tooling
 └── stylua.toml    Lua formatter configuration
@@ -32,7 +31,7 @@ the shell installer, while `nix/` contains declarative Nix configurations.
 helpers and application configuration, but its internal files are intentionally
 not catalogued here; each top-level path is selected through `dotlist.txt`.
 
-`install.sh` is the entry point for this mode. It reads `dotlist.txt`,
+`scripts/install-files.sh` is the entry point for this mode. It reads `dotlist.txt`,
 which separates always-installed paths (`base`) from graphical paths
 (`gui`). Local options in `dotconf.sh` control whether GUI paths are
 included and which generated Sway configuration is used.
@@ -83,7 +82,7 @@ system and user-environment features reusable.
 The repository includes a small set of scripts for routine setup and
 maintenance:
 
-- `install.sh` links the selected portable dotfiles into `$HOME`, with
+- `scripts/install-files.sh` links the selected portable dotfiles into `$HOME`, with
   backups, rollback, and a dry-run mode.
 - `scripts/install-packages.sh` installs the packages required by the
   portable setup. It currently implements Arch Linux installation and detects

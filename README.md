@@ -37,7 +37,7 @@ After installing Git and delta, configure them with:
 ```sh
 git clone https://github.com/yutadev31/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./install.sh
+./scripts/install-files.sh
 ```
 
 The installer moves existing managed paths to a unique directory under
@@ -47,7 +47,7 @@ installation step fails, it restores paths changed during that run.
 Preview the changes without modifying your home directory:
 
 ```sh
-./install.sh --dry-run
+./scripts/install-files.sh --dry-run
 ```
 
 ## Local configuration
