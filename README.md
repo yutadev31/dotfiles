@@ -53,14 +53,11 @@ Preview the changes without modifying your home directory:
 
 ## Local configuration
 
-`dotconf.sh` contains machine-specific settings and is not tracked by Git. Create it in the repository root before installing:
+`dotconf.sh` contains machine-specific settings and is not tracked by Git.
+Create it from the example before installing:
 
 ```sh
-# Install GUI packages and configurations (default: yes)
-gui=yes
-
-# Example: use the virtual-machine Sway configuration
-vm=yes
+cp dotconf.example.sh dotconf.sh
 ```
 
 Set `gui=no` to skip GUI-related packages and configurations, including Sway,
