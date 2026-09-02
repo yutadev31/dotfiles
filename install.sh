@@ -29,8 +29,13 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$(uname -s)" = "Linux" ] && [ -r /etc/os-release ] && grep -Eq '^ID="?nixos"?$' /etc/os-release; then
-  echo "Error: install.sh cannot be run on NixOS." >&2
-  exit 1
+  case "$HOME" in
+  /tmp/*) ;;
+  *)
+    echo "Error: install.sh can only run on NixOS when \$HOME is under /tmp." >&2
+    exit 1
+    ;;
+  esac
 fi
 
 resolve_script_path() {
