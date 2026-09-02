@@ -2,6 +2,7 @@
 {
   imports = [
     ./fcitx5
+    ./dunst
     ./hyprland
     ./hyprlock
     ./keyring.nix
