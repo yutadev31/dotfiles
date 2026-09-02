@@ -45,6 +45,9 @@ dotfile installer moves existing managed paths to a unique directory under
 `~/.dotfiles-backup`, then creates symbolic links to this repository. If an
 installation step fails, it restores paths changed during that run.
 
+See the [installer guide](./docs/installers.md) for the behavior, supported
+platforms, options, and side effects of every installer and setup helper.
+
 Preview the changes without modifying your home directory:
 
 ```sh
