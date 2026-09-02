@@ -96,25 +96,6 @@ cleanup() {
 
 trap cleanup EXIT HUP INT TERM
 
-base_paths='.bin
-.config/fastfetch
-.config/fish
-.config/nvim
-.config/tmux
-.gitmessage
-'
-
-gui_paths='.config/alacritty
-.config/chrome-flags.conf
-.config/fcitx5
-.config/mako
-.config/rofi
-.config/sway
-.config/waybar
-.local/share/rofi/themes
-.local/share/wallpapers
-'
-
 load_configuration() {
   if [ ! -f "$dotdir/dotconf.sh" ]; then
     echo "Error: create $dotdir/dotconf.sh before running the installer." >&2
@@ -144,11 +125,24 @@ load_configuration() {
 }
 
 managed_paths() {
-  printf '%s' "$base_paths"
-
-  if [ "$gui" = "yes" ]; then
-    printf '%s' "$gui_paths"
-  fi
+  awk -v gui="$gui" '
+    /^[[:space:]]*($|#)/ { next }
+    NF != 2 {
+      printf "Error: invalid dotlist entry on line %d: expected scope and path\n", NR > "/dev/stderr"
+      invalid = 1
+      next
+    }
+    $1 == "base" { print $2; next }
+    $1 == "gui" {
+      if (gui == "yes") print $2
+      next
+    }
+    {
+      printf "Error: invalid dotlist scope on line %d: %s\n", NR, $1 > "/dev/stderr"
+      invalid = 1
+    }
+    END { exit invalid }
+  ' "$dotdir/dotlist.txt"
 }
 
 is_managed_link() {
@@ -170,7 +164,12 @@ is_managed_link() {
 preflight() {
   load_configuration
 
-  managed_list=$(managed_paths)
+  if [ ! -f "$dotdir/dotlist.txt" ]; then
+    echo "Error: dotfile list does not exist: $dotdir/dotlist.txt" >&2
+    exit 1
+  fi
+
+  managed_list=$(managed_paths) || exit 1
   while IFS= read -r path; do
     if [ ! -e "$dotdir/home/$path" ]; then
       echo "Error: managed source does not exist: $dotdir/home/$path" >&2
