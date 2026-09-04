@@ -10,6 +10,7 @@
 !/home/.bin/
 !/home/.bin/*
 !/home/.config/
+!/home/.config/aliases.sh
 !/home/.config/alacritty/
 !/home/.config/alacritty/*
 !/home/.config/fastfetch/

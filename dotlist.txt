@@ -1,6 +1,7 @@
 # Format: scope path
 # scope is either "base" (always installed) or "gui" (installed when gui=yes).
 base .bin
+base .config/aliases.sh
 base .config/fastfetch
 base .config/fish
 base .config/nvim
