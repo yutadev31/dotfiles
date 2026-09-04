@@ -115,10 +115,6 @@
       };
     };
 
-    plugins.cord = {
-      enable = true;
-    };
-
     extraConfigLua = ''
       vim.notify = require("mini.notify").make_notify()
     '';
