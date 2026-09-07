@@ -5,7 +5,7 @@
     # inkscape
     # qgis
     # voicevox
-    # kdePackages.kdenlive
+    kdePackages.kdenlive
     # blender
     # anki-bin
     # zed-editor
