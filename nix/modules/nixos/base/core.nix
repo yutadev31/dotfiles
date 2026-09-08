@@ -1,11 +1,7 @@
-{ pkgs, ... }:
 {
   # Boot Loader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   # Time Zone
   time.timeZone = "Asia/Tokyo";

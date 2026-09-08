@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +27,6 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-stable,
       home-manager,
       rust-overlay,
       nixvim,
@@ -74,7 +72,7 @@
     in
     {
       nixosConfigurations = mkConfigurations (
-        hostName: nixpkgs-stable.lib.nixosSystem { modules = [ (./. + "/hosts/${hostName}") ]; }
+        hostName: nixpkgs.lib.nixosSystem { modules = [ (./. + "/hosts/${hostName}") ]; }
       );
 
       homeConfigurations = mkConfigurations buildHomeConfiguration;
