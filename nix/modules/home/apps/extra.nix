@@ -6,6 +6,7 @@
     # qgis
     # voicevox
     kdePackages.kdenlive
+    audacity
     # blender
     # anki-bin
     # zed-editor

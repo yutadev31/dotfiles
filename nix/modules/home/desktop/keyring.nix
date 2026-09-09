@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    gcr
+    gcr_4
     polkit_gnome
   ];
 
