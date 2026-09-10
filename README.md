@@ -12,60 +12,46 @@ The [`nix/`](./nix/) directory contains NixOS and Home Manager configurations.
 - fcitx5
 - Git message template and helper scripts
 
-## Requirements
-
-Install the required packages before running the installer. A package-installation helper is included:
-
-```sh
-./scripts/install-packages.sh
-```
-
-The helper installs packages on Arch Linux. It also detects Void Linux, FreeBSD,
-OpenBSD, NetBSD, and DragonFly BSD, but package installation for those systems is
-not implemented yet and exits with an error.
-
-## Git setup
-
-After installing Git and delta, configure them with:
-
-```sh
-./scripts/setup-git.sh
-```
-
 ## Installation
+
+Clone the repository and create the local configuration file:
 
 ```sh
 git clone https://github.com/yutadev31/dotfiles.git ~/dotfiles
 cd ~/dotfiles
+cp dotconf.example.sh dotconf.sh
+```
+
+Edit `dotconf.sh` to suit the machine. Set `gui=no` to skip GUI-related packages
+and configurations, including Sway, Waybar, Rofi, Mako, Alacritty, fcitx5,
+wallpapers, and Sway configuration generation. Set `vm=yes` to use the
+VM-specific Sway configuration.
+
+Then run the interactive installer:
+
+```sh
 ./install.sh
 ```
 
-The launcher asks for confirmation before installing packages and dotfiles. The
-dotfile installer moves existing managed paths to a unique directory under
+It asks separately whether to install packages and dotfiles, in that order.
+The package installer currently installs packages on Arch Linux; package
+installation on Void Linux, FreeBSD, OpenBSD, NetBSD, and DragonFly BSD is not
+implemented.
+
+The dotfile installer moves existing managed paths to a unique directory under
 `~/.dotfiles-backup`, then creates symbolic links to this repository. If an
 installation step fails, it restores paths changed during that run.
 
 See the [installer guide](./docs/installers.md) for the behavior, supported
 platforms, options, and side effects of every installer and setup helper.
 
-Preview the changes without modifying your home directory:
+## Post-installation
+
+After installing Git and delta, configure them with:
 
 ```sh
-./scripts/install-files.sh --dry-run
+./scripts/setup-git.sh
 ```
-
-## Local configuration
-
-`dotconf.sh` contains machine-specific settings and is not tracked by Git.
-Create it from the example before installing:
-
-```sh
-cp dotconf.example.sh dotconf.sh
-```
-
-Set `gui=no` to skip GUI-related packages and configurations, including Sway,
-Waybar, Rofi, Mako, Alacritty, fcitx5, wallpapers, and the Sway configuration
-generation step.
 
 ## License
 
