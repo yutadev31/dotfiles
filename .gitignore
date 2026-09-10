@@ -6,7 +6,6 @@
 /home/.**
 
 !/home/
-!/home/.gitmessage
 !/home/.bin/
 !/home/.bin/*
 !/home/.config/
