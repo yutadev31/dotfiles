@@ -1,19 +1,22 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-voicevox, ... }:
 {
-  home.packages = with pkgs; [
-    # gimp
-    # inkscape
-    # qgis
-    # voicevox
-    kdePackages.kdenlive
-    audacity
-    # blender
-    # anki-bin
-    # zed-editor
-    vlc
-    brave
-    jetbrains.idea
-  ];
+  home.packages =
+    with pkgs;
+    [
+      gimp
+      inkscape
+      # qgis
+      # voicevox
+      kdePackages.kdenlive
+      audacity
+      blender
+      # anki-bin
+      # zed-editor
+      vlc
+      brave
+      jetbrains.idea
+    ]
+    ++ [ pkgs-voicevox.voicevox ];
 
   programs.google-chrome.enable = true;
 
