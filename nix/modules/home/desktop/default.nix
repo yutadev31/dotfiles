@@ -21,6 +21,7 @@
     xdg-utils
     dconf
     wl-clipboard # includes wl-copy & wl-paste
+    wlr-utils
     grim
     slurp
     playerctl
