@@ -4,7 +4,7 @@
     ./fcitx5
     ./dunst
     ./hyprland
-    ./hyprlock
+    # ./hyprlock
     ./keyring.nix
     # ./niri
     ./rofi
