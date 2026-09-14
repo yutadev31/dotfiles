@@ -9,7 +9,8 @@
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     discord
     slack
-    nemo
+    kdePackages.dolphin
   ];
+
   services.syncthing.enable = true;
 }
