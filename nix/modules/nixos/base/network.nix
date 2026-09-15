@@ -24,7 +24,8 @@
   services.resolved.enable = false;
 
   # Firewall
-  networking.firewall.allowedTCPPorts = [
-    22
-  ];
+  networking.firewall.enable = false;
+  # networking.firewall.allowedTCPPorts = [
+  #   22
+  # ];
 }

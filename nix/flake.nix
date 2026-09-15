@@ -26,6 +26,7 @@
       url = "github:zjeffer/split-monitor-workspaces";
       flake = false;
     };
+    llm-agents.url = "github:numtide/llm-agents.nix";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
   outputs =
