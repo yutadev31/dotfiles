@@ -1,5 +1,7 @@
+{ inputs, ... }:
 {
   xdg.configFile."hypr/hyprland.lua".source = ./hyprland.lua;
+  xdg.configFile."hypr/plugins/split-monitor-workspaces".source = inputs.split-monitor-workspaces;
 
   systemd.user.targets.hyprland-session = {
     Unit = {
@@ -11,4 +13,5 @@
       After = [ "graphical-session-pre.target" ];
     };
   };
+
 }

@@ -140,6 +140,7 @@
         "nixpkgs-voicevox": "nixpkgs-voicevox",
         "nixvim": "nixvim",
         "rust-overlay": "rust-overlay_2",
+        "split-monitor-workspaces": "split-monitor-workspaces",
         "treefmt-nix": "treefmt-nix",
         "zen-browser": "zen-browser"
       }
@@ -182,6 +183,22 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "split-monitor-workspaces": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788534614,
+        "narHash": "sha256-XWYr2htfeFVvgXYKe2uO32mDON5E6gi16lqq0DlWoO8=",
+        "owner": "zjeffer",
+        "repo": "split-monitor-workspaces",
+        "rev": "ccea60995001207be0d7a5cda25795f6300d806b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zjeffer",
+        "repo": "split-monitor-workspaces",
         "type": "github"
       }
     },

@@ -40,7 +40,17 @@ in
         all-outputs = true;
       };
       "hyprland/workspaces" = {
-        all-outputs = true;
+        format = "{icon}";
+        format-icons = {
+          urgent = "";
+          active = "";
+          visible = "";
+          default = "";
+          empty = "";
+        };
+        on-scroll-up = "hyprctl dispatch split-cycleworkspaces -1";
+        on-scroll-down = "hyprctl dispatch split-cycleworkspaces +1";
+        all-outputs = false;
       };
       "niri/workspaces" = {
         all-outputs = true;

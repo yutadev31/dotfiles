@@ -22,6 +22,10 @@
       url = "github:ogulcancelik/herdr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    split-monitor-workspaces = {
+      url = "github:zjeffer/split-monitor-workspaces";
+      flake = false;
+    };
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
   outputs =

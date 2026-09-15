@@ -1,5 +1,7 @@
 local main_mod = "SUPER"
 
+package.path = package.path .. ";./?.lua;./?/init.lua"
+
 hl.monitor({
     output = "HDMI-A-1",
     mode = "preferred",
@@ -14,53 +16,20 @@ hl.monitor({
     scale = 1,
 })
 
-hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
-hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })
-hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
-hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 } } })
-hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
+hl.curve("easeOutQuart", { type = "bezier", points = { { 0.25, 1 }, { 0.5, 1 } } })
+hl.curve("easeInOutSine", { type = "bezier", points = { { 0.37, 0 }, { 0.63, 1 } } })
 
-hl.curve("easy", { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
-
-hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
-hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
-hl.animation({ leaf = "windows", enabled = true, speed = 4.79, spring = "easy" })
-hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, spring = "easy", style = "popin 87%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
-hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
-hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
-hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
-hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQuint", style = "fade" })
-hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "fade" })
-hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
-
-hl.workspace_rule({
-    workspace = "1",
-    monitor = "eDP-1",
-})
-
-for workspace = 2, 9 do
-    hl.workspace_rule({
-        workspace = tostring(workspace),
-        monitor = "HDMI-A-1",
-    })
-end
-
-hl.workspace_rule({
-    workspace = "10",
-    monitor = "eDP-1",
-})
+hl.animation({ leaf = "global", enabled = true, speed = 4, bezier = "easeOutQuart" })
+hl.animation({ leaf = "windows", enabled = true, speed = 4, bezier = "easeOutQuart", style = "popin" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 3, bezier = "easeOutQuart", style = "popin" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 2, bezier = "easeOutQuart", style = "popin" })
+hl.animation({ leaf = "windowsMove", enabled = true, speed = 3, bezier = "easeOutQuart", style = "popin" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 2, bezier = "easeOutQuart", style = "slide" })
 
 hl.config({
     general = {
         gaps_in = 8,
-        gaps_out = 12,
+        gaps_out = 15,
         border_size = 3,
         col = {
             active_border = "rgb(7aa2f7)",
@@ -69,7 +38,7 @@ hl.config({
         layout = "dwindle",
     },
     decoration = {
-        rounding = 8,
+        rounding = 0,
     },
     dwindle = {
         preserve_split = true,
@@ -124,12 +93,6 @@ hl.bind(main_mod .. " + SHIFT + J", hl.dsp.window.move({ direction = "d" }))
 hl.bind(main_mod .. " + SHIFT + K", hl.dsp.window.move({ direction = "u" }))
 hl.bind(main_mod .. " + SHIFT + L", hl.dsp.window.move({ direction = "r" }))
 
-for workspace = 1, 10 do
-    local key = workspace % 10
-    hl.bind(main_mod .. " + " .. key, hl.dsp.focus({ workspace = workspace }))
-    hl.bind(main_mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = workspace }))
-end
-
 hl.bind(main_mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(main_mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
@@ -146,3 +109,23 @@ hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+
+local smw = require("plugins.split-monitor-workspaces")
+
+smw.setup({
+    workspace_count = 5,
+})
+
+for i = 1, smw.get_amount_of_workspaces() do
+    local n = tostring(i)
+
+    hl.bind(
+        main_mod .. " +" .. n,
+        smw.workspace(n)
+    )
+
+    hl.bind(
+        main_mod .. " + SHIFT +" .. n,
+        smw.move_to_workspace_silent(n)
+    )
+end
