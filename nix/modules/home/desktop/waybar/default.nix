@@ -25,16 +25,13 @@ in
         "niri/workspaces"
       ];
       modules-center = [
-        "hyprland/window"
-        "sway/window"
-        "niri/window"
+        "clock"
       ];
       modules-right = [
         "tray"
         "memory"
-        "battery"
         "pulseaudio"
-        "clock"
+        "battery"
       ];
       "sway/workspaces" = {
         all-outputs = true;
@@ -104,7 +101,7 @@ in
         };
       };
       clock = {
-        format = "{:%H:%M}  ";
+        format = "{:%H:%M}";
         format-alt = "{:%A, %B %d, %Y (%R)}";
       };
     };
