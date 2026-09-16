@@ -5,9 +5,7 @@
       enable = true;
       grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
       settings = {
-        highlight = {
-          enable = true;
-        };
+        highlight.enable = true;
       };
     };
     plugins.ts-autotag = {
@@ -103,42 +101,18 @@
             };
           };
         };
-        html = {
-          enable = true;
-        };
-        cssls = {
-          enable = true;
-        };
-        ts_ls = {
-          enable = true;
-        };
-        tailwindcss = {
-          enable = true;
-        };
-        taplo = {
-          enable = true;
-        };
-        jsonls = {
-          enable = true;
-        };
-        yamlls = {
-          enable = true;
-        };
-        gopls = {
-          enable = true;
-        };
-        clangd = {
-          enable = true;
-        };
-        cmake = {
-          enable = true;
-        };
-        zls = {
-          enable = true;
-        };
-        typos_lsp = {
-          enable = true;
-        };
+        html.enable = true;
+        cssls.enable = true;
+        ts_ls.enable = true;
+        tailwindcss.enable = true;
+        taplo.enable = true;
+        jsonls.enable = true;
+        yamlls.enable = true;
+        gopls.enable = true;
+        clangd.enable = true;
+        cmake.enable = true;
+        zls.enable = true;
+        typos_lsp.enable = true;
       };
     };
   };

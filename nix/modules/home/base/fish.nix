@@ -33,7 +33,6 @@
       gc = "git commit";
       gca = "git commit --amend";
       gci = ''git commit -m "Initial commit"'';
-      gcinit = ''git commit -m "Initial commit"'';
       gp = "git push";
       gph = "git push -u origin HEAD";
       gl = "git pull --autostash";
@@ -46,7 +45,6 @@
       gb = "git branch";
       gbr = "git branch -r";
       gw = "git switch";
-      gwm = "git switch main";
       gm = "git merge";
       grh = "git reset --hard HEAD";
       gstash = "git stash";
