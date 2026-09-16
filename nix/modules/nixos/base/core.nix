@@ -16,9 +16,7 @@
   programs.nix-ld.enable = true;
 
   # Sudo
-  security.sudo = {
-    enable = true;
-  };
+  security.sudo.enable = true;
 
   # RTKit
   security.rtkit.enable = true;
