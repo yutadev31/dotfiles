@@ -3,17 +3,17 @@ local main_mod = "SUPER"
 package.path = package.path .. ";./?.lua;./?/init.lua"
 
 hl.monitor({
-    output = "HDMI-A-1",
-    mode = "preferred",
-    position = "0x0",
-    scale = 1,
+  output = "HDMI-A-1",
+  mode = "preferred",
+  position = "0x0",
+  scale = 1,
 })
 
 hl.monitor({
-    output = "eDP-1",
-    mode = "preferred",
-    position = "0x1080",
-    scale = 1,
+  output = "eDP-1",
+  mode = "preferred",
+  position = "0x1080",
+  scale = 1,
 })
 
 hl.curve("easeOutQuart", { type = "bezier", points = { { 0.25, 1 }, { 0.5, 1 } } })
@@ -27,49 +27,49 @@ hl.animation({ leaf = "windowsMove", enabled = true, speed = 3, bezier = "easeOu
 hl.animation({ leaf = "workspaces", enabled = true, speed = 2, bezier = "easeOutQuart", style = "slide" })
 
 hl.config({
-    general = {
-        gaps_in = 8,
-        gaps_out = 15,
-        border_size = 3,
-        col = {
-            active_border = "rgb(7aa2f7)",
-            inactive_border = "rgb(414868)",
-        },
-        layout = "dwindle",
+  general = {
+    gaps_in = 8,
+    gaps_out = 15,
+    border_size = 3,
+    col = {
+      active_border = "rgb(7aa2f7)",
+      inactive_border = "rgb(414868)",
     },
-    decoration = {
-        rounding = 0,
+    layout = "dwindle",
+  },
+  decoration = {
+    rounding = 0,
+  },
+  dwindle = {
+    preserve_split = true,
+  },
+  animations = {
+    enabled = true,
+  },
+  input = {
+    kb_layout = "jp",
+    kb_options = "ctrl:nocaps,compose:ralt",
+    touchpad = {
+      natural_scroll = true,
+      tap_to_click = true,
+      disable_while_typing = true,
     },
-    dwindle = {
-        preserve_split = true,
-    },
-    animations = {
-        enabled = true,
-    },
-    input = {
-        kb_layout = "jp",
-        kb_options = "ctrl:nocaps,compose:ralt",
-        touchpad = {
-            natural_scroll = true,
-            tap_to_click = true,
-            disable_while_typing = true,
-        },
-    },
-    misc = {
-        disable_hyprland_logo = true,
-    },
+  },
+  misc = {
+    disable_hyprland_logo = true,
+  },
 })
 
 hl.gesture({
-    fingers = 3,
-    direction = "horizontal",
-    action = "workspace",
+  fingers = 3,
+  direction = "horizontal",
+  action = "workspace",
 })
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("systemctl --user start hyprland-session.target")
-    hl.exec_cmd("waybar")
-    hl.exec_cmd("fcitx5 -dr")
+  hl.exec_cmd("systemctl --user start hyprland-session.target")
+  hl.exec_cmd("waybar")
+  hl.exec_cmd("fcitx5 -dr")
 end)
 
 hl.bind(main_mod .. " + Return", hl.dsp.exec_cmd("alacritty"))
@@ -98,11 +98,23 @@ hl.bind(main_mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 hl.bind(main_mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
-hl.bind("Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy"))
+hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
 
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true, repeating = true })
+hl.bind(
+  "XF86AudioRaiseVolume",
+  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
+  { locked = true, repeating = true }
+)
+hl.bind(
+  "XF86AudioLowerVolume",
+  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+  { locked = true, repeating = true }
+)
+hl.bind(
+  "XF86AudioMute",
+  hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
+  { locked = true, repeating = true }
+)
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
@@ -113,19 +125,13 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 local smw = require("plugins.split-monitor-workspaces")
 
 smw.setup({
-    workspace_count = 5,
+  workspace_count = 5,
 })
 
 for i = 1, smw.get_amount_of_workspaces() do
-    local n = tostring(i)
+  local n = tostring(i)
 
-    hl.bind(
-        main_mod .. " +" .. n,
-        smw.workspace(n)
-    )
+  hl.bind(main_mod .. " +" .. n, smw.workspace(n))
 
-    hl.bind(
-        main_mod .. " + SHIFT +" .. n,
-        smw.move_to_workspace_silent(n)
-    )
+  hl.bind(main_mod .. " + SHIFT +" .. n, smw.move_to_workspace_silent(n))
 end
