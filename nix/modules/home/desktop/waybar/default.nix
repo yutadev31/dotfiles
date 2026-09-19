@@ -19,23 +19,13 @@ in
       layer = "top";
       position = "top";
       spacing = 8;
-      modules-left = [
-        "hyprland/workspaces"
-        "sway/workspaces"
-        "niri/workspaces"
-      ];
-      modules-center = [
-        "clock"
-      ];
+      modules-left = [ "hyprland/workspaces" ];
       modules-right = [
         "tray"
-        "memory"
-        "pulseaudio"
         "battery"
+        "pulseaudio"
+        "clock"
       ];
-      "sway/workspaces" = {
-        all-outputs = true;
-      };
       "hyprland/workspaces" = {
         format = "{icon}";
         format-icons = {
@@ -49,15 +39,8 @@ in
         on-scroll-down = "hyprctl dispatch split-cycleworkspaces +1";
         all-outputs = false;
       };
-      "niri/workspaces" = {
-        all-outputs = true;
-      };
       tray = {
         spacing = 4;
-      };
-      memory = {
-        format = "{}%  ";
-        interval = 5;
       };
       battery = {
         states = {
