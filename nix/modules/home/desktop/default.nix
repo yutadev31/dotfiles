@@ -4,14 +4,8 @@
     ./fcitx5
     ./dunst
     ./hyprland
-    # ./hyprlock
     ./keyring.nix
-    # ./niri
     ./rofi
-    # ./sway
-    # ./swayidle
-    # ./swaylock
-    # ./swaync
     ./theme.nix
     ./waybar
   ];
