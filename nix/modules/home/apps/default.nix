@@ -1,7 +1,6 @@
 { inputs, pkgs, ... }:
 {
   imports = [
-    ../programs/alacritty
     ../programs/vscodium
   ];
 

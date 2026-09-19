@@ -1,13 +1,14 @@
 { pkgs, ... }:
 {
   imports = [
-    ./fcitx5
+    ./alacritty
     ./dunst
+    ./fcitx5
     ./hyprland
-    ./keyring.nix
     ./rofi
-    ./theme.nix
     ./waybar
+    ./keyring.nix
+    ./theme.nix
   ];
 
   home.packages = with pkgs; [
