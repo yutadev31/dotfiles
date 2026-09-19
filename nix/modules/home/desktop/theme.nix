@@ -8,10 +8,6 @@
     size = 16;
   };
 
-  gtk = {
-    enable = true;
-  };
-
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
