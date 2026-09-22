@@ -115,3 +115,6 @@ client.urgent           #f7768e #000000 #ffffff #f7768e #f7768e
 
 # Font
 font pango:monospace 8
+
+# Programs
+exec dunst
