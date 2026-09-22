@@ -2,7 +2,7 @@
 {
   # System Tools
   environment.systemPackages = with pkgs; [
-    vim
+    neovim
     curl
     wget
     psmisc
