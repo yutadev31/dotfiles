@@ -18,6 +18,8 @@
 !/home/.config/fcitx5/*
 !/home/.config/fish/
 !/home/.config/fish/config.fish
+!/home/.config/i3/
+!/home/.config/i3/config
 !/home/.config/mako/
 !/home/.config/mako/config
 !/home/.config/nvim/

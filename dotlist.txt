@@ -9,6 +9,7 @@ base .config/tmux
 gui .config/alacritty
 gui .config/chrome-flags.conf
 gui .config/fcitx5
+gui .config/i3
 gui .config/mako
 gui .config/rofi
 gui .config/sway
