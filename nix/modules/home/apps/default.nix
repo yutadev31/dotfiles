@@ -9,6 +9,7 @@
     discord
     slack
     kdePackages.dolphin
+    kdePackages.kde-cli-tools
   ];
 
   services.syncthing.enable = true;
