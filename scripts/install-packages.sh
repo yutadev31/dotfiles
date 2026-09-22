@@ -30,7 +30,6 @@ install_arch() {
     fastfetch \
     fish \
     git \
-    git-delta \
     neovim \
     ripgrep
 
