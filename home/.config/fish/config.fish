@@ -21,6 +21,10 @@ fish_vi_key_bindings
 # Load aliases
 source ~/.config/aliases.sh
 
+# Load .env.fish
+touch ~/.env.fish
+source ~/.env.fish
+
 # Log executed commands with timestamps
 function log_command --on-event fish_preexec
   mkdir -p ~/.local/state/fish
