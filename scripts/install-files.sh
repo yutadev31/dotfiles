@@ -257,29 +257,32 @@ gen_files() {
   fi
 
   path=.local/share/dotfiles/sway/config-gen
+  target="$HOME/$path"
 
-  if [ "$dry_run" = "yes" ]; then
-    if [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; then
-      echo "Would move ~/$path to a new backup directory"
-    fi
-    echo "Would generate ~/$path from $(basename "$source")"
+  if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
     return
   fi
 
-  if [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; then
+  if [ "$dry_run" = "yes" ]; then
+    if [ -e "$target" ] || [ -L "$target" ]; then
+      echo "Would move ~/$path to a new backup directory"
+    fi
+    echo "Would symlink ~/$path -> $source"
+    return
+  fi
+
+  if [ -e "$target" ] || [ -L "$target" ]; then
     ensure_backup_dir
     mkdir -p "$(dirname "$backup_dir/$path")"
     printf '%s\n' "$path" >> "$moved_paths"
-    mv "$HOME/$path" "$backup_dir/$path"
+    mv "$target" "$backup_dir/$path"
     echo "Move ~/$path to $backup_dir/$path"
   fi
 
-  mkdir -p "$(dirname "$HOME/$path")"
-  temporary=$(mktemp "$HOME/$path.XXXXXXXX")
-  cp "$source" "$temporary"
-  mv "$temporary" "$HOME/$path"
+  mkdir -p "$(dirname "$target")"
+  ln -s "$source" "$target"
   printf '%s\n' "$path" >> "$created_paths"
-  echo "Generate ~/$path"
+  echo "Symlink ~/$path -> $source"
 }
 
 finish() {
