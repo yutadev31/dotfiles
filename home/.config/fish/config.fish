@@ -4,6 +4,11 @@ set fish_greeting
 # Set Neovim as the default editor
 set -x EDITOR nvim
 
+# Add NetBSD X11 binaries to PATH
+if test (uname) = NetBSD
+  fish_add_path /usr/X11R7/bin
+end
+
 # Add user-local binaries to PATH
 fish_add_path ~/.bin
 
