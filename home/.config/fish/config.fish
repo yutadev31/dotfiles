@@ -4,6 +4,9 @@ set fish_greeting
 # Set Neovim as the default editor
 set -x EDITOR nvim
 
+# Disable X11 HiDPI scaling for winit applications
+set -x WINIT_X11_SCALE_FACTOR 1
+
 # Add NetBSD X11 binaries to PATH
 if test (uname) = NetBSD
   fish_add_path /usr/X11R7/bin
