@@ -66,6 +66,7 @@
     '';
     interactiveShellInit = ''
       set fish_greeting
+      bind ctrl-backspace backward-kill-path-component
     '';
   };
 }

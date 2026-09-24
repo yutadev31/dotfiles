@@ -1,6 +1,9 @@
 # Disable the startup greeting
 set fish_greeting
 
+# Delete the previous path component with Ctrl+Backspace
+bind ctrl-backspace backward-kill-path-component
+
 # Set Neovim as the default editor
 set -x EDITOR nvim
 
