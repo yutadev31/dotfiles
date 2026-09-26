@@ -103,3 +103,11 @@ $ sudo udevadm control --reload
 $ sudo udevadm trigger
 $ sudo udevadm settle
 ```
+
+## Rofiのアイコンが表示されない
+
+`hicolor-icon-theme`を入れたら解決した。
+
+```sh
+$ sudo xbps-install hicolor-icon-theme
+```
