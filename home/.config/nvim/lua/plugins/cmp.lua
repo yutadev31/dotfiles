@@ -30,6 +30,9 @@ return {
         { name = "path" },
       }, {
         { name = "buffer" },
+      }, {
+        name = "lazydev",
+        group_index = 0,
       }),
     })
   end,
