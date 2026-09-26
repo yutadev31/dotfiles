@@ -11,7 +11,7 @@ vim.lsp.config("nixd", {
       options = {
         nixos = { expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.<hostname>.options" },
         home_manager = {
-          expr = "(builtins.getFlake (toString ./.)).homeConfigurations.\"<username>@<hostname>\".options",
+          expr = '(builtins.getFlake (toString ./.)).homeConfigurations."<username>@<hostname>".options',
         },
       },
     },
@@ -35,4 +35,6 @@ vim.lsp.enable({
   "zls",
   "typos_lsp",
   "biome",
+  "lua_ls",
+  "stylua",
 })

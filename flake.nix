@@ -16,9 +16,10 @@
         pkgs = nixpkgs.legacyPackages.${system};
 
         packages = with pkgs; [
+          bash-language-server
+          lua-language-server
           shfmt
           stylua
-          biome
         ];
       in
       {
