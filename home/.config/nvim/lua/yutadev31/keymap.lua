@@ -14,3 +14,6 @@ h.nmap("<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", "Diagnostics")
 h.nmap("<leader>xq", "<cmd>Trouble qflist toggle<cr>", "Quickfix")
 h.nmap("<leader>xl", "<cmd>Trouble loclist toggle<cr>", "Location List")
 h.nmap("<leader>xt", "<cmd>Trouble todo toggle<cr>", "Todo")
+
+local t = require("yutadev31.terminal")
+h.nmap("<leader>tt", t.toggle)
