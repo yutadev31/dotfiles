@@ -12,7 +12,5 @@ return {
     setup("cursorword", {})
     setup("indentscope", {})
     setup("trailspace", {})
-    setup("notify", {})
-    vim.notify = require("mini.notify").make_notify()
   end,
 }
