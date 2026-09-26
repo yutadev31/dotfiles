@@ -83,6 +83,9 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
+# Screenshot
+bindsym Print exec grim ~/Pictures/screenshot_$(date +'%Y%m%d_%H%M%S').png
+
 # Resize mode
 mode "resize" {
   bindsym $left resize shrink width 10px
