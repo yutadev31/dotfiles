@@ -2,7 +2,7 @@
   imports = [
     ./cli.nix
     ./fish.nix
-    ../programs/neovim
+    ./neovim.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
