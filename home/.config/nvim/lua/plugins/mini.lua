@@ -8,7 +8,6 @@ return {
   config = function()
     setup("pairs", {})
     setup("icons", { mock_nvim_web_devicons = true })
-    setup("surround", {})
     setup("cursorword", {})
     setup("indentscope", {})
     setup("trailspace", {})
