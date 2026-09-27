@@ -27,13 +27,18 @@ and configurations, including Sway, Waybar, Rofi, Mako, Alacritty, fcitx5,
 wallpapers, and Sway configuration generation. Set `vm=yes` to use the
 VM-specific Sway configuration.
 
-Then run the interactive installer:
+Then run the installer:
 
 ```sh
 ./install.sh
 ```
 
-It asks separately whether to install packages and dotfiles, in that order.
+This installs dotfiles. Add `-p` to install packages first:
+
+```sh
+./install.sh -p
+```
+
 The package installer currently installs packages on Arch Linux; package
 installation on Void Linux, FreeBSD, OpenBSD, NetBSD, and DragonFly BSD is not
 implemented.

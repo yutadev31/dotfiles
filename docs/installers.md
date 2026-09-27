@@ -23,13 +23,17 @@ it changes the system.
 
 ## `./install.sh`
 
-This is the interactive launcher. It asks separately whether to run package
-installation and dotfile installation, in that order. Answer `y`, `Y`, `yes`,
-or `YES` to run a step; every other response, including an empty response,
-skips it.
+This runs dotfile installation unconditionally. Package installation is
+included only when the `-p` option is specified.
 
 ```sh
 ./install.sh
+```
+
+To install packages before the dotfiles, run:
+
+```sh
+./install.sh -p
 ```
 
 Use the individual scripts below when only one operation is wanted, or when a

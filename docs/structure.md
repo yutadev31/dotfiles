@@ -85,8 +85,8 @@ maintenance:
 
 - `scripts/install-files.sh` links the selected portable dotfiles into `$HOME`, with
   backups, rollback, and a dry-run mode.
-- `install.sh` prompts before running the package and dotfile installers in
-  sequence.
+- `install.sh` always runs the dotfile installer and runs the package installer
+  only when invoked with `-p`.
 - `scripts/install-packages.sh` installs the packages required by the
   portable setup. It currently implements Arch Linux installation and detects
   several other operating systems.
