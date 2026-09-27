@@ -5,6 +5,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "saadparwaiz1/cmp_luasnip",
   },
   config = function()
     local cmp = require("cmp")
@@ -33,6 +34,8 @@ return {
       }, {
         name = "lazydev",
         group_index = 0,
+      }, {
+        name = "luasnip",
       }),
     })
   end,
