@@ -18,6 +18,9 @@
         packages = with pkgs; [
           bash-language-server
           lua-language-server
+          nixd
+          nixfmt
+          typos-lsp
           shfmt
           stylua
         ];
