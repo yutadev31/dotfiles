@@ -12,7 +12,7 @@ poweroff
 
 ## BSD
 
-FreeBSDやNetBSDなどのBSD系OSでは、`shutdown now`だけで、シャットダウン後に電源が自動で切れない。
+BSD系OSの場合、`shutdown now`だけでは、シャットダウン後に電源が自動で切れない。
 
 電源まで切るには`-p`オプションを指定する。
 
