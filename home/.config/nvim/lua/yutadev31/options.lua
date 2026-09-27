@@ -70,6 +70,13 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
+-- Treesitter
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})
+
 if vim.fn.executable("fcitx5-remote") == 1 then
   vim.api.nvim_create_autocmd("InsertLeave", {
     callback = function()
