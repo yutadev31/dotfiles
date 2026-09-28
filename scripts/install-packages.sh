@@ -47,8 +47,18 @@ load_configuration() {
   esac
 }
 
+not_implemented() {
+  os=${1:?not_implemented: missing OS name}
+  echo "Error: package installation for $os is not implemented yet." >&2
+  exit 1
+}
+
 install_arch() {
-  pacman -S --noconfirm --needed \
+  pacman_install() {
+    pacman -S --noconfirm --needed "$@"
+  }
+
+  pacman_install \
     eza \
     fd \
     fastfetch \
@@ -58,7 +68,7 @@ install_arch() {
     ripgrep
 
   if [ "$gui" = "yes" ]; then
-    pacman -S --noconfirm --needed \
+    pacman_install \
       alacritty \
       dunst \
       fcitx5 \
@@ -73,7 +83,7 @@ install_arch() {
   fi
 
   if [ "$x11" = "yes" ]; then
-    pacman -S --noconfirm --needed \
+    pacman_install \
       i3-wm \
       maim \
       xclip \
@@ -82,7 +92,7 @@ install_arch() {
   fi
 
   if [ "$wayland" = "yes" ]; then
-    pacman -S --noconfirm --needed \
+    pacman_install \
       dbus \
       grim \
       slurp \
@@ -91,15 +101,9 @@ install_arch() {
       wl-clipboard
 
     if [ "$vm" = "yes" ]; then
-      pacman -S --noconfirm --needed wayvnc
+      pacman_install wayvnc
     fi
   fi
-}
-
-not_implemented() {
-  os=${1:?not_implemented: missing OS name}
-  echo "Error: package installation for $os is not implemented yet." >&2
-  exit 1
 }
 
 install_void() {
