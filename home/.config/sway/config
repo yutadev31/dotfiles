@@ -84,7 +84,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Screenshot
-bindsym Print exec grim ~/Pictures/screenshot_$(date +'%Y%m%d_%H%M%S').png
+bindsym Print exec grim - | tee ~/Pictures/Screenshots/$(date +'%Y%m%d_%H%M%S').png | wl-copy --type image/png
 
 # Resize mode
 mode "resize" {
