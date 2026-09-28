@@ -46,7 +46,7 @@ These dependencies are required when using i3 in an X11 session. They are not re
 | --- | --- |
 | `i3-wm` | Window manager |
 | `xorg-server` | X11 server |
-| `xorg-xinit` or a display manager | Starts an X11 session |
+| `xorg-xinit` | Starts an X11 session |
 | `maim` | Screenshots for the i3 configuration |
 | `xclip` | Copies screenshots to the X11 clipboard |
 
