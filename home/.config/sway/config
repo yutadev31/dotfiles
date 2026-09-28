@@ -13,7 +13,6 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 
 bindsym $mod+d exec $menu
-bindsym $mod+n exec makoctl dismiss --all
 
 floating_modifier $mod normal
 
@@ -133,5 +132,5 @@ client.urgent           #f7768e #000000 #ffffff #f7768e #f7768e
 
 # Programs
 exec waybar
-exec mako
+exec dunst
 exec fcitx5 -rd

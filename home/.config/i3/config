@@ -13,7 +13,6 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 
 bindsym $mod+d exec $menu
-bindsym $mod+n exec makoctl dismiss --all
 
 floating_modifier $mod
 
