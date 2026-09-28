@@ -104,7 +104,7 @@
 
       checks.${system}.formatting = treefmtEval.config.build.check self;
 
-      devShells.default = pkgs.mkShell {
+      devShells.${system}.default = pkgs.mkShell {
         packages = devPackages;
       };
     };
