@@ -33,9 +33,9 @@ helpers and application configuration, but its internal files are intentionally
 not catalogued here; each top-level path is selected through `dotlist.txt`.
 
 `scripts/install-files.sh` is the entry point for individual dotfile installation. It reads `dotlist.txt`,
-which separates always-installed paths (`base`) from graphical paths
-(`gui`). Local options in `dotconf.sh` control whether GUI paths are
-included and which generated Sway configuration is used.
+which separates always-installed paths (`base`) from common GUI, X11, and
+Wayland paths (`gui`, `x11`, and `wayland`). Local options in `dotconf.sh`
+control the graphical paths; `gui` is derived from the X11 and Wayland options.
 
 Before replacing a managed path, the installer moves it to a timestamped
 directory under `~/.dotfiles-backup`. It creates symbolic links only after

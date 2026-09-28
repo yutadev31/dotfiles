@@ -22,10 +22,9 @@ cd ~/dotfiles
 cp dotconf.example.sh dotconf.sh
 ```
 
-Edit `dotconf.sh` to suit the machine. Set `gui=no` to skip GUI-related packages
-and configurations, including Sway, Waybar, Rofi, Mako, Alacritty, fcitx5,
-wallpapers, and Sway configuration generation. Set `vm=yes` to use the
-VM-specific Sway configuration.
+Edit `dotconf.sh` to suit the machine. Set `x11=no` or `wayland=no` to skip
+the corresponding window manager packages and configurations. Set `vm=yes` to
+use the VM-specific Sway configuration.
 
 Then run the installer:
 

@@ -1,5 +1,5 @@
 # Format: scope path
-# scope is either "base" (always installed) or "gui" (installed when gui=yes).
+# scope is "base", "gui", "x11", or "wayland".
 base .bin
 base .config/aliases.sh
 base .config/fastfetch
@@ -12,9 +12,9 @@ gui .config/alacritty
 gui .config/dunst
 gui .config/fcitx5/config
 gui .config/fcitx5/profile
-gui .config/i3
+x11 .config/i3
 gui .config/rofi
-gui .config/sway/config
-gui .config/waybar
+wayland .config/sway/config
+wayland .config/waybar
 gui .local/share/rofi/themes
 gui .local/share/wallpapers

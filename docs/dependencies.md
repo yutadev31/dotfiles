@@ -4,9 +4,8 @@ This page lists the dependencies required to use these dotfiles without `nix/`.
 
 ## Prerequisites
 
-This page does not cover automatic installation with a package manager. It lists the packages required to use the configuration.
-
-If you do not use a GUI, set `gui=no` in `dotconf.sh`. In that case, the GUI dependencies and GUI configuration below are not required.
+This page does not cover automatic installation with a package manager. It lists the packages required to use the configuration. Set `x11=no` or
+`wayland=no` in `dotconf.sh` when the corresponding session is not used.
 
 ## CLI
 

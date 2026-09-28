@@ -12,16 +12,31 @@ load_configuration() {
 
   . "$dotdir/dotconf.sh"
 
-  gui=${gui:-yes}
+  x11=${x11:-yes}
+  wayland=${wayland:-yes}
   vm=${vm:-no}
 
-  case "$gui" in
+  case "$x11" in
   yes | no) ;;
   *)
-    echo "Error: gui must be yes or no in $dotdir/dotconf.sh." >&2
+    echo "Error: x11 must be yes or no in $dotdir/dotconf.sh." >&2
     exit 1
     ;;
   esac
+
+  case "$wayland" in
+  yes | no) ;;
+  *)
+    echo "Error: wayland must be yes or no in $dotdir/dotconf.sh." >&2
+    exit 1
+    ;;
+  esac
+
+  if [ "$x11" = "yes" ] || [ "$wayland" = "yes" ]; then
+    gui=yes
+  else
+    gui=no
+  fi
 
   case "$vm" in
   yes | no) ;;
@@ -50,22 +65,30 @@ install_arch() {
       fcitx5-gtk \
       fcitx5-mozc \
       fcitx5-qt \
-      i3-wm \
-      maim \
       noto-fonts \
       noto-fonts-cjk \
       pavucontrol \
       rofi \
-      ttf-hack-nerd \
+      ttf-hack-nerd
+  fi
+
+  if [ "$x11" = "yes" ]; then
+    pacman -S --noconfirm --needed \
+      i3-wm \
+      maim \
       xclip \
       xorg-server \
-      xorg-xinit \
+      xorg-xinit
+  fi
+
+  if [ "$wayland" = "yes" ]; then
+    pacman -S --noconfirm --needed \
+      dbus \
       grim \
       slurp \
       sway \
       waybar \
-      wl-clipboard \
-      dbus
+      wl-clipboard
 
     if [ "$vm" = "yes" ]; then
       pacman -S --noconfirm --needed wayvnc

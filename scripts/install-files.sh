@@ -112,15 +112,30 @@ load_configuration() {
 
   . "$dotdir/dotconf.sh"
 
-  gui=${gui:-yes}
+  x11=${x11:-yes}
+  wayland=${wayland:-yes}
 
-  case "$gui" in
+  case "$x11" in
   yes | no) ;;
   *)
-    echo "Error: gui must be yes or no in $dotdir/dotconf.sh." >&2
+    echo "Error: x11 must be yes or no in $dotdir/dotconf.sh." >&2
     exit 1
     ;;
   esac
+
+  case "$wayland" in
+  yes | no) ;;
+  *)
+    echo "Error: wayland must be yes or no in $dotdir/dotconf.sh." >&2
+    exit 1
+    ;;
+  esac
+
+  if [ "$x11" = "yes" ] || [ "$wayland" = "yes" ]; then
+    gui=yes
+  else
+    gui=no
+  fi
 
   vm=${vm:-no}
   case "$vm" in
@@ -133,7 +148,7 @@ load_configuration() {
 }
 
 managed_paths() {
-  awk -v gui="$gui" '
+  awk -v gui="$gui" -v x11="$x11" -v wayland="$wayland" '
     /^[[:space:]]*($|#)/ { next }
     NF != 2 {
       printf "Error: invalid dotlist entry on line %d: expected scope and path\n", NR > "/dev/stderr"
@@ -143,6 +158,14 @@ managed_paths() {
     $1 == "base" { print $2; next }
     $1 == "gui" {
       if (gui == "yes") print $2
+      next
+    }
+    $1 == "x11" {
+      if (x11 == "yes") print $2
+      next
+    }
+    $1 == "wayland" {
+      if (wayland == "yes") print $2
       next
     }
     {
@@ -248,7 +271,7 @@ EOF
 }
 
 gen_files() {
-  if [ "$gui" = "no" ]; then return; fi
+  if [ "$wayland" = "no" ]; then return; fi
 
   if [ "$vm" = "yes" ]; then
     source="$dotdir/home/.config/sway/config-vm"

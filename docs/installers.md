@@ -15,8 +15,13 @@ cp dotconf.example.sh dotconf.sh
 
 | Option | Accepted values | Default | Effect |
 | --- | --- | --- | --- |
-| `gui` | `yes`, `no` | `yes` | Includes GUI packages and the `gui` entries in `dotlist.txt`. |
-| `vm` | `yes`, `no` | `no` | Selects the VM-specific Sway configuration when GUI files are installed. |
+| `x11` | `yes`, `no` | `yes` | Includes X11 packages and the `x11` entries in `dotlist.txt`. |
+| `wayland` | `yes`, `no` | `yes` | Includes Wayland packages and the `wayland` entries in `dotlist.txt`. |
+| `vm` | `yes`, `no` | `no` | Selects the VM-specific Sway configuration when Wayland is enabled. |
+
+`gui` is derived internally: it is `yes` when either `x11` or `wayland` is
+`yes`, and cannot be set in `dotconf.sh`. It selects the common GUI entries in
+`dotlist.txt`.
 
 An invalid value, or a missing `dotconf.sh`, stops the relevant installer before
 it changes the system.
@@ -52,11 +57,11 @@ distribution from `/etc/os-release`.
 | FreeBSD, OpenBSD, NetBSD, DragonFly BSD | Stops with a not-implemented error. |
 | Other platforms or Linux distributions | Stops with an unsupported-platform error. |
 
-On Arch Linux, the base package set is `eza`, `fd`, `fastfetch`, `fish`, `git`,
-`git-delta`, `neovim`, and `ripgrep`. With `gui=yes`, it additionally installs
-Alacritty, fcitx5 with Mozc, Grim, Mako, Rofi, Slurp, Sway, Waybar, and WayVNC.
-It runs `pacman` directly, so run it from an account authorized to install
-packages.
+On Arch Linux, it installs the CLI and common desktop dependencies. With
+`x11=yes`, it additionally installs i3 and Xorg dependencies. With
+`wayland=yes`, it additionally installs Sway and Wayland dependencies; WayVNC
+is installed when `vm=yes`. It runs `pacman` directly, so run it from an
+account authorized to install packages.
 
 ```sh
 ./scripts/install-packages.sh
@@ -65,9 +70,9 @@ packages.
 ## `./scripts/install-files.sh`
 
 This script installs the paths listed in `dotlist.txt` into `$HOME`. Each entry
-is a `base` path (always included) or a `gui` path (included only when
-`gui=yes`). It first verifies that every selected source exists and that no
-managed paths overlap.
+is a `base` path (always included), a derived `gui` path, or an `x11`/`wayland`
+path selected by the corresponding option. It first verifies that every
+selected source exists and that no managed paths overlap.
 
 For every selected path, the installer:
 
@@ -77,7 +82,7 @@ For every selected path, the installer:
    under `~/.dotfiles-backup/install.XXXXXXXX`.
 3. Creates a symbolic link from `$HOME` to the matching path under `home/`.
 
-When GUI files are included, it also generates
+When Wayland files are included, it also generates
 `~/.local/share/dotfiles/sway/config-gen` from `config-rm` or `config-vm`,
 depending on `vm`. If the installation fails after making changes, it removes
 links created during that run and restores the paths it moved to the backup.
