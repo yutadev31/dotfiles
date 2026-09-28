@@ -13,11 +13,20 @@ load_configuration() {
   . "$dotdir/dotconf.sh"
 
   gui=${gui:-yes}
+  vm=${vm:-no}
 
   case "$gui" in
   yes | no) ;;
   *)
     echo "Error: gui must be yes or no in $dotdir/dotconf.sh." >&2
+    exit 1
+    ;;
+  esac
+
+  case "$vm" in
+  yes | no) ;;
+  *)
+    echo "Error: vm must be yes or no in $dotdir/dotconf.sh." >&2
     exit 1
     ;;
   esac
@@ -36,15 +45,31 @@ install_arch() {
   if [ "$gui" = "yes" ]; then
     pacman -S --noconfirm --needed \
       alacritty \
+      dunst \
       fcitx5 \
+      fcitx5-gtk \
       fcitx5-mozc \
-      grim \
-      mako \
+      fcitx5-qt \
+      i3-wm \
+      maim \
+      noto-fonts \
+      noto-fonts-cjk \
+      pavucontrol \
       rofi \
+      ttf-hack-nerd \
+      xclip \
+      xorg-server \
+      xorg-xinit \
+      grim \
       slurp \
       sway \
       waybar \
-      wayvnc
+      wl-clipboard \
+      dbus
+
+    if [ "$vm" = "yes" ]; then
+      pacman -S --noconfirm --needed wayvnc
+    fi
   fi
 }
 
