@@ -112,6 +112,7 @@ install_void() {
   }
 
   xbps_install \
+    alacritty-terminfo \
     eza \
     fd \
     fastfetch \
@@ -123,18 +124,18 @@ install_void() {
   if [ "$gui" = "yes" ]; then
     xbps_install \
       alacritty \
-      alacritty-terminfo \
       dunst \
       fcitx5 \
       fcitx5-gtk \
       fcitx5-mozc \
       fcitx5-qt \
-      font-hack-ttf \
       hicolor-icon-theme \
       noto-fonts-cjk \
       noto-fonts-ttf \
       pavucontrol \
       rofi
+
+    # TODO Add Hack Nerd Font
   fi
 
   if [ "$x11" = "yes" ]; then
