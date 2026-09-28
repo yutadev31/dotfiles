@@ -4,7 +4,9 @@
 
   programs.rofi = {
     enable = true;
-    terminal = "${pkgs.alacritty}/bin/alacritty";
     theme = "custom";
+    settings = {
+      terminal = "${pkgs.alacritty}/bin/alacritty";
+    };
   };
 }
