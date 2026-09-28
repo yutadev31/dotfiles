@@ -52,7 +52,7 @@ platforms, options, and side effects of every installer and setup helper.
 
 ## Post-installation
 
-After installing Git and delta, configure them with:
+After installing Git, configure them with:
 
 ```sh
 ./scripts/setup-git.sh
