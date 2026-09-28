@@ -62,7 +62,7 @@ if [ "$os" = "Linux" ] && [ "$distro" = "nixos" ]; then
   case "$HOME" in
   /tmp/*) ;;
   *)
-    echo "Error: install-files.sh can only run on NixOS when \$HOME is under /tmp." >&2
+    echo 'Error: install-files.sh can only run on NixOS when $HOME is under /tmp.' >&2
     exit 1
     ;;
   esac
@@ -225,7 +225,7 @@ install_file() {
   if [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; then
     ensure_backup_dir
     mkdir -p "$(dirname "$backup_dir/$path")"
-    printf '%s\n' "$path" >> "$moved_paths"
+    printf '%s\n' "$path" >>"$moved_paths"
     mv "$HOME/$path" "$backup_dir/$path"
     echo "Move ~/$path to $backup_dir/$path"
   fi
@@ -233,7 +233,7 @@ install_file() {
   # Create a symbolic link
   mkdir -p "$(dirname "$HOME/$path")"
   ln -s "$dotdir/home/$path" "$HOME/$path"
-  printf '%s\n' "$path" >> "$created_paths"
+  printf '%s\n' "$path" >>"$created_paths"
   echo "Create ~/$path"
 }
 
@@ -274,14 +274,14 @@ gen_files() {
   if [ -e "$target" ] || [ -L "$target" ]; then
     ensure_backup_dir
     mkdir -p "$(dirname "$backup_dir/$path")"
-    printf '%s\n' "$path" >> "$moved_paths"
+    printf '%s\n' "$path" >>"$moved_paths"
     mv "$target" "$backup_dir/$path"
     echo "Move ~/$path to $backup_dir/$path"
   fi
 
   mkdir -p "$(dirname "$target")"
   ln -s "$source" "$target"
-  printf '%s\n' "$path" >> "$created_paths"
+  printf '%s\n' "$path" >>"$created_paths"
   echo "Symlink ~/$path -> $source"
 }
 
