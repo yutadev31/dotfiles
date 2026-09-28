@@ -7,11 +7,11 @@ set $right l
 
 set $term alacritty
 set $menu rofi -show drun -show-icons
-
-bindsym $mod+Return exec $term
+set $screenshot maim - | tee ~/Pictures/Screenshots/$(date +'%Y%m%d_%H%M%S').png | xclip -selection clipboard -t image/png
 
 bindsym $mod+q kill
 
+bindsym $mod+Return exec $term
 bindsym $mod+d exec $menu
 
 floating_modifier $mod
@@ -83,7 +83,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Screenshot
-bindsym Print exec maim - | tee ~/Pictures/Screenshots/$(date +'%Y%m%d_%H%M%S').png | xclip -selection clipboard -t image/png
+bindsym Print exec $screenshot
 
 # Resize mode
 mode "resize" {
@@ -120,3 +120,4 @@ font pango:monospace 8
 
 # Programs
 exec dunst
+exec fcitx5 -rd

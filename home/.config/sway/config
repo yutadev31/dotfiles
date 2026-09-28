@@ -7,11 +7,11 @@ set $right l
 
 set $term alacritty
 set $menu rofi -show drun -show-icons
-
-bindsym $mod+Return exec $term
+set $screenshot grim - | tee ~/Pictures/Screenshots/$(date +'%Y%m%d_%H%M%S').png | wl-copy --type image/png
 
 bindsym $mod+q kill
 
+bindsym $mod+Return exec $term
 bindsym $mod+d exec $menu
 
 floating_modifier $mod normal
@@ -83,7 +83,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Screenshot
-bindsym Print exec grim - | tee ~/Pictures/Screenshots/$(date +'%Y%m%d_%H%M%S').png | wl-copy --type image/png
+bindsym Print exec $screenshot
 
 # Resize mode
 mode "resize" {
@@ -122,8 +122,6 @@ default_floating_border pixel 3
 
 gaps inner 8
 gaps outer 8
-
-output * bg ~/.local/share/wallpapers/smile_original.png fill
 
 client.focused          #7aa2f7 #000000 #ffffff #7aa2f7 #7aa2f7
 client.focused_inactive #414868 #000000 #ffffff #414868 #414868
