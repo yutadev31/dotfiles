@@ -53,15 +53,17 @@ distribution from `/etc/os-release`.
 | Platform | Result |
 | --- | --- |
 | Arch Linux | Installs missing packages with `pacman -S --noconfirm --needed`. |
-| Void Linux | Stops with a not-implemented error. |
+| Void Linux | Installs packages with `xbps-install -S -y`. |
 | FreeBSD, OpenBSD, NetBSD, DragonFly BSD | Stops with a not-implemented error. |
 | Other platforms or Linux distributions | Stops with an unsupported-platform error. |
 
 On Arch Linux, it installs the CLI and common desktop dependencies. With
 `x11=yes`, it additionally installs i3 and Xorg dependencies. With
 `wayland=yes`, it additionally installs Sway and Wayland dependencies; WayVNC
-is installed when `vm=yes`. It runs `pacman` directly, so run it from an
-account authorized to install packages.
+is installed when `vm=yes`. Void Linux uses the corresponding Void package
+names, including `fish-shell`, `font-hack-ttf`, and `xinit`. Both package
+managers are run directly, so run the script from an account authorized to
+install packages.
 
 ```sh
 ./scripts/install-packages.sh

@@ -103,7 +103,60 @@ not_implemented() {
 }
 
 install_void() {
-  not_implemented "Void Linux"
+  xbps_install() {
+    xbps-install -S -y "$@"
+  }
+
+  xbps_install \
+    eza \
+    fd \
+    fastfetch \
+    fish-shell \
+    git \
+    neovim \
+    ripgrep
+
+  if [ "$gui" = "yes" ]; then
+    xbps_install \
+      alacritty \
+      alacritty-terminfo \
+      dunst \
+      fcitx5 \
+      fcitx5-gtk \
+      fcitx5-mozc \
+      fcitx5-qt \
+      font-hack-ttf \
+      hicolor-icon-theme \
+      noto-fonts-cjk \
+      noto-fonts-ttf \
+      pavucontrol \
+      rofi
+  fi
+
+  if [ "$x11" = "yes" ]; then
+    xbps_install \
+      i3 \
+      maim \
+      xclip \
+      xorg-server \
+      xinit
+  fi
+
+  if [ "$wayland" = "yes" ]; then
+    xbps_install \
+      dbus \
+      elogind \
+      grim \
+      mesa-dri \
+      slurp \
+      sway \
+      waybar \
+      wl-clipboard
+
+    if [ "$vm" = "yes" ]; then
+      xbps_install wayvnc
+    fi
+  fi
 }
 
 install_freebsd() {
