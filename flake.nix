@@ -86,6 +86,8 @@
       devPackages = with pkgs; [
         bash-language-server
         lua-language-server
+        vscode-langservers-extracted
+        tombi
         nixd
         nixfmt
         typos-lsp
