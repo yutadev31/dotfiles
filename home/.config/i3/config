@@ -119,5 +119,6 @@ client.urgent           #f7768e #000000 #ffffff #f7768e #f7768e
 font pango:monospace 8
 
 # Programs
+exec rubar
 exec dunst
 exec fcitx5 -rd

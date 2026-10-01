@@ -155,7 +155,6 @@ install_void() {
       mesa-dri \
       slurp \
       sway \
-      waybar \
       wl-clipboard
 
     if [ "$vm" = "yes" ]; then
