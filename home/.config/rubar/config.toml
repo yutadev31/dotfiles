@@ -9,4 +9,3 @@ right = ["battery", "volume", "clock"]
 
 [workspace]
 persistent_workspaces = [1, 2, 3, 4, 5]
-active_background_color = "#24283b"
