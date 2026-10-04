@@ -5,6 +5,9 @@ return {
   },
   lazy = false,
   opts = {
+    win_options = {
+      signcolumn = "auto:2",
+    },
     view_options = {
       show_hidden = true,
     },
