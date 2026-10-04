@@ -15,6 +15,7 @@ gui .config/fcitx5/profile
 x11 .config/i3
 gui .config/rofi
 gui .config/rubar
+gui .config/shot
 wayland .config/sway/config
 gui .local/share/rofi/themes
 gui .local/share/wallpapers
