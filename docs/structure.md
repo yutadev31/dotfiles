@@ -3,69 +3,67 @@
 This repository manages a personal development and desktop environment through
 two complementary approaches:
 
-- A portable, shell-based installer that links selected files into `$HOME`.
-- A Nix flake that builds NixOS and Home Manager configurations.
+- A portable shell installer that links selected files into `$HOME` and `/etc`.
+- A Nix flake that builds the `laptop2` NixOS and Home Manager configurations.
 
-The two approaches are maintained side by side. The `home/` tree is used by
-the shell installer, while `nix/` contains declarative Nix configurations.
+The two approaches are maintained side by side. The `home/` and `etc/` trees
+are used by the shell installer, while `nix/` contains declarative Nix
+configurations.
 
-## Top-Level Layout
+## Top-level layout
 
 ```text
 .
-├── home/          Portable dotfiles linked into $HOME
-├── nix/           NixOS and Home Manager flake
-├── scripts/       Installer and setup helpers
-├── docker/        Arch Linux development container
-├── docs/          Repository documentation
-├── LICENSES/      License notices for included third-party files
-├── install.sh     Portable dotfile installer
-├── dotlist.home.txt
-├── dotlist.etc.txt
-├── dotconf.sh     Local, machine-specific installer settings (not tracked)
-├── flake.nix      Development-shell flake for repository tooling
-└── stylua.toml    Lua formatter configuration
+├── home/            Portable dotfiles linked into $HOME
+├── etc/             Portable files linked into /etc
+├── nix/             NixOS and Home Manager configuration
+├── scripts/         Portable installer and Nix helper scripts
+├── docker/          Arch Linux development container
+├── docs/            Repository documentation
+├── LICENSES/        Notices for included third-party files
+├── install.sh       Portable dotfile installer
+├── dotlist.home.txt Paths installed under $HOME
+├── dotlist.etc.txt  Paths installed under /etc
+├── dotconf.example.sh
+│                    Example machine-specific installer settings
+├── flake.nix        NixOS, Home Manager, and development-shell outputs
+└── stylua.toml      Lua formatter configuration
 ```
 
-## Portable Dotfile Installation
+`dotconf.sh` is created locally from `dotconf.example.sh` and is not tracked.
+The repository's `.gitignore` excludes it.
 
-`home/` mirrors the relevant portions of a home directory, while `etc/` mirrors
-the managed portions of `/etc`. Their internal files are intentionally not
-catalogued here; paths are selected through `dotlist.home.txt` and
-`dotlist.etc.txt`.
+## Portable dotfile installation
 
-`install.sh` installs the portable dotfiles. It reads the two dotlists, which
-separate always-installed paths (`base`) from common GUI, WM, X11, and
-Wayland paths (`gui`, `i3`, `sway`, `hyprland`, `x11`, and `wayland`). Local
-options in `dotconf.sh` control the graphical paths; `gui` is derived from the
-window manager options, while `x11` and `wayland` select platform-specific
-paths.
+`home/` mirrors the relevant portions of a home directory, and `etc/` mirrors
+the managed portions of `/etc`. The dotlists select paths with these scopes:
 
-Before replacing a managed path, the installer moves it to a timestamped
-directory under `~/.dotfiles-backup`. It creates symbolic links only after
-preflight checks pass and restores changed paths if installation fails. The
-`--dry-run` option previews this process. On NixOS, execution is restricted
-to temporary homes under `/tmp` for debugging.
+- `base`: always installed
+- `gui`: installed when any window manager is enabled
+- `i3`, `sway`, `hyprland`: selected window-manager paths
+- `x11`, `wayland`: platform-specific paths derived from the window-manager options
 
-## Nix Configuration
+`install.sh` validates selected source paths and target overlap before making
+changes. It backs up conflicting paths, creates symlinks, and restores moved
+paths if the installation fails. `--dry-run` previews the process. On NixOS,
+execution is restricted to temporary homes under `/tmp`.
 
-`nix/` is an independent flake with its own lock file and formatter setup.
-It provides both NixOS system configurations and Home Manager configurations
-for the hosts listed in `nix/flake.nix`.
+## Nix configuration
+
+The root `flake.nix` exposes NixOS and Home Manager configurations for the
+host listed in the flake (`laptop2`), plus a development shell, formatter, and
+formatting check.
 
 ```text
 nix/
 ├── hosts/
-│   └── <host>/    Host-specific hardware, networking, system, and home entry points
+│   └── laptop2/    Host-specific hardware, networking, system, and home entry points
 ├── profiles/
-│   ├── nixos/     Reusable system-level feature bundles
-│   └── home/      Reusable Home Manager feature bundles
-├── modules/
-│   ├── nixos/     Focused NixOS modules grouped by base, desktop, and development
-│   └── home/      Focused Home Manager modules for base tools, apps, desktop, and more
-├── scripts/        Rebuild and garbage-collection helpers
-├── flake.nix       NixOS, Home Manager, formatter, and formatting-check outputs
-└── flake.lock      Pinned Nix inputs
+│   ├── nixos/      Reusable system-level feature bundles
+│   └── home/       Reusable Home Manager feature bundles
+└── modules/
+    ├── nixos/      Focused NixOS modules for base, desktop, and development
+    └── home/       Focused Home Manager modules for tools, apps, and desktop
 ```
 
 Configuration composition follows this direction:
@@ -74,39 +72,26 @@ Configuration composition follows this direction:
 host → profiles → modules
 ```
 
-- A host directory declares machine-specific details and chooses profiles.
-- Profiles collect related capabilities, such as a desktop or development
-  workstation, without containing host-specific details.
-- Modules implement those capabilities in small, focused Nix files.
+The host directory chooses profiles, profiles collect related capabilities,
+and modules implement those capabilities in focused Nix files.
 
-This separation keeps machine details local to `hosts/` and makes shared
-system and user-environment features reusable.
+## Scripts and operational helpers
 
-## Scripts and Operational Helpers
-
-The repository includes a small set of scripts for routine setup and
-maintenance:
-
-- `install.sh` links the selected portable dotfiles into `$HOME`, with backups,
-  rollback, and a dry-run mode.
-- `scripts/install-packages.sh` installs the packages required by the
-  portable setup. It is currently not invoked by `install.sh`.
+- `install.sh` links selected portable dotfiles with backup, rollback, and
+  dry-run support.
+- `scripts/install-packages.sh` installs the portable setup's packages on
+  Arch Linux or Void Linux.
 - `scripts/install-paru.sh` bootstraps the Paru AUR helper on Arch Linux.
 - `scripts/setup-git.sh` applies the repository owner's global Git defaults.
-- `nix/scripts/os-rebuild` switches the NixOS configuration from the
-  `nix/` flake.
-- `nix/scripts/home-rebuild` switches the Home Manager configuration for
-  the current host.
-- `nix/scripts/clean-gc` removes obsolete Nix generations and collects
-  unused store paths.
+- `scripts/os-rebuild` switches the NixOS configuration from the root flake.
+- `scripts/home-rebuild` switches the Home Manager configuration selected by
+  `$HOSTNAME`.
+- `scripts/clean-gc` removes obsolete Nix generations and collects unused
+  store paths.
 
-## Development and Container Support
+## Development and container support
 
-The root `flake.nix` supplies a lightweight development shell with the
-formatters used by this repository. The Nix flake additionally exposes a
-formatter and a formatting check for its own configuration.
-
-`docker/Dockerfile` defines a minimal Arch Linux-based environment with the
-core command-line tools needed to work with the portable setup. It is useful
-for isolated development or installer testing without changing a primary
-machine.
+The root flake provides a development shell with language servers and
+formatters, as well as a formatter and formatting check for the Nix
+configuration. `docker/Dockerfile` defines an Arch Linux environment with the
+core command-line tools used for portable setup and installer testing.

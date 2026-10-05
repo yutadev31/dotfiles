@@ -1,119 +1,98 @@
 # Installer Guide
 
 This repository provides separate scripts for installing packages, linking
-dotfiles, preparing Paru, and applying Git settings. Run them from the
-repository root unless noted otherwise.
+portable dotfiles, bootstrapping Paru, applying Git settings, and rebuilding
+Nix configurations. Run the scripts from the repository root unless noted
+otherwise.
 
-## Before You Start
+## Before you start
 
-The package and dotfile installers read the untracked `dotconf.sh` file. Create
-it from the example and adjust the options for the machine:
+The portable installers read the untracked `dotconf.sh`. Create it from the
+example and adjust the options for the machine:
 
 ```sh
 cp dotconf.example.sh dotconf.sh
 ```
 
-| Option | Accepted values | Default | Effect |
+| Option | Values | Default | Effect |
 | --- | --- | --- | --- |
-| `i3` | `yes`, `no` | `yes` | Includes i3, X11 packages, and the `i3` and `x11` entries in the dotlists. |
-| `sway` | `yes`, `no` | `yes` | Includes Sway, Wayland packages, and the `sway` and `wayland` entries in the dotlists. |
-| `hyprland` | `yes`, `no` | `no` | Includes Hyprland and the `hyprland` entry in the dotlist. |
-| `vm` | `yes`, `no` | `no` | Selects the VM-specific Sway configuration when Sway is enabled. |
+| `i3` | `yes`, `no` | `no` in the example; `yes` if omitted | Enables i3, X11 packages, and i3/X11 dotlist entries |
+| `sway` | `yes`, `no` | `no` in the example; `yes` if omitted | Enables Sway, Wayland packages, and Sway/Wayland dotlist entries |
+| `hyprland` | `yes`, `no` | `no` | Enables Hyprland and its dotlist/package entries |
+| `vm` | `yes`, `no` | `no` | Selects the VM-specific Sway config and installs WayVNC with Sway |
 
-`gui` is derived internally: it is `yes` when `i3`, `sway`, or `hyprland` is
-`yes`, and cannot be set in `dotconf.sh`. It selects the common GUI entries in
-`dotlist.home.txt` and `dotlist.etc.txt`.
+The example explicitly sets all four values to `no`. The scripts apply the
+defaults shown in the table when an option is absent from a custom
+`dotconf.sh`. `gui` is derived internally from the three window-manager
+options and cannot be set in `dotconf.sh`. `x11` follows `i3`; `wayland` is
+enabled by Sway or Hyprland.
 
-An invalid value, or a missing `dotconf.sh`, stops the relevant installer before
-it changes the system.
+Invalid values or a missing `dotconf.sh` stop the relevant script before it
+changes the system.
 
 ## `./install.sh`
 
-This runs the portable dotfile installation.
-
-Preview the operation without changing `$HOME`:
+This installs the selected portable dotfiles. It does not install packages.
 
 ```sh
+./install.sh
 ./install.sh --dry-run
 ```
 
-Package installation remains available as a separate operation below, but is
-not run by `install.sh`.
+The dry run previews the operation without changing `$HOME` or `/etc`.
+`--help` displays usage; any other option is rejected.
+
+The installer reads `dotlist.home.txt` for paths under `$HOME` and
+`dotlist.etc.txt` for paths under `/etc`. It preflights selected source paths
+and overlapping targets before changing anything. For each selected path it:
+
+1. Leaves a symlink alone when it already points to this repository.
+2. Moves a conflicting file, directory, or symlink to a unique directory
+   under `~/.dotfiles-backup/install.XXXXXXXX` or
+   `/etc/.dotfiles-backup/install.XXXXXXXX`.
+3. Creates a symlink to the matching path in `home/` or `etc/`.
+
+Paths under `/etc` use `sudo` when the script is not run as root. When Sway is
+selected, the installer also generates
+`~/.local/share/dotfiles/sway/config-gen` from `config-rm` or `config-vm`,
+depending on `vm`. If installation fails after changes, it removes links
+created during that run and restores moved paths.
+
+On NixOS, `install.sh` only runs when `$HOME` is under `/tmp`; this prevents
+accidental use against a regular NixOS home directory.
 
 ## `./scripts/install-packages.sh`
 
-This script installs packages required by the portable dotfile setup. It uses
-`scripts/platform.sh` to detect the operating system and, on Linux, the
-distribution from `/etc/os-release`.
+This script detects the operating system with `scripts/platform.sh` and, on
+Linux, reads the distribution from `/etc/os-release`.
 
 | Platform | Result |
 | --- | --- |
-| Arch Linux | Installs missing packages with `pacman -S --noconfirm --needed`. |
-| Void Linux | Installs packages with `xbps-install -S -y`. |
-| FreeBSD, OpenBSD, NetBSD, DragonFly BSD | Stops with a not-implemented error. |
-| Other platforms or Linux distributions | Stops with an unsupported-platform error. |
+| Arch Linux | Installs missing packages with `pacman -S --noconfirm --needed` |
+| Void Linux | Installs packages with `xbps-install -S -y` |
+| FreeBSD, OpenBSD, NetBSD, DragonFly BSD | Stops with a not-implemented error |
+| Other platforms or Linux distributions | Stops with an unsupported-platform error |
 
-On Arch Linux, it installs the CLI and common desktop dependencies. With
-`i3=yes`, it additionally installs i3 and Xorg dependencies. With
-`sway=yes`, it additionally installs Sway and Wayland dependencies; WayVNC
-is installed when `vm=yes`. With `hyprland=yes`, it additionally installs
-Hyprland and its Wayland dependencies. Void Linux uses the corresponding Void package
-names, including `fish-shell`, `font-hack-ttf`, and `xinit`. Both package
-managers are run directly, so run the script from an account authorized to
-install packages.
-
-```sh
-./scripts/install-packages.sh
-```
-
-## Dotfile installation details
-
-`install.sh` installs the paths listed in `dotlist.home.txt` into `$HOME` and
-the paths listed in `dotlist.etc.txt` into `/etc`. Each entry is a `base` path
-(always included), a derived `gui` path, an `i3`/`sway`/`hyprland` path selected by the
-corresponding option, or an `x11`/`wayland` path selected by the corresponding
-WM's platform.
-It first verifies that every selected source exists
-and that no managed paths overlap. Paths under `/etc` are installed through
-`sudo` when the script is not run as root.
-
-For every selected path, the installer:
-
-1. Leaves an existing symbolic link alone when it already points at this
-   repository.
-2. Moves a conflicting file, directory, or symbolic link to a new directory
-   under `~/.dotfiles-backup/install.XXXXXXXX` or
-   `/etc/.dotfiles-backup/install.XXXXXXXX`.
-3. Creates a symbolic link from the target root to the matching path under
-   `home/` or `etc/`.
-
-When Sway files are included, it also generates
-`~/.local/share/dotfiles/sway/config-gen` from `config-rm` or `config-vm`,
-depending on `vm`. If the installation fails after making changes, it removes
-links created during that run and restores the paths it moved to the backup.
-
-`--help` displays usage. Any other option exits with an error. On NixOS, the
-script only runs when `$HOME` is located under `/tmp`; this prevents accidental
-use against a regular NixOS home directory.
+The selected package groups follow `dotconf.sh`. Both package managers run
+with the current user's permissions, so use an account authorized to install
+packages. See [dependencies](./dependencies.md) for the package groups.
 
 ## `./scripts/install-paru.sh`
 
-This Arch Linux helper installs `base-devel` using `sudo pacman`, clones the
-Paru AUR repository into `/tmp/paru-aur`, and runs `makepkg -si` from that
-directory.
+This Arch Linux helper installs `base-devel` with `sudo pacman`, clones the
+Paru AUR repository into `/tmp/paru-aur`, and runs `makepkg -si` there:
 
 ```sh
 ./scripts/install-paru.sh
 ```
 
-It does not perform platform detection, validate prerequisites, or clean up
-`/tmp/paru-aur`. Use it only on an Arch-based system with the required build
-tools and permissions.
+It does not perform platform detection, validate prerequisites, or remove an
+existing `/tmp/paru-aur`. Use it only on an Arch-based system and inspect the
+target directory before rerunning it.
 
 ## `./scripts/setup-git.sh`
 
-This helper requires `git` to be available, then writes these global Git
-settings for the repository owner:
+This helper requires Git and writes these global settings for the current user:
 
 - `user.name=Yuta`
 - `user.email=yuta256dev@gmail.com`
@@ -123,5 +102,16 @@ settings for the repository owner:
 ./scripts/setup-git.sh
 ```
 
-It changes the current user's global Git configuration, so inspect or adapt the
-script before running it on another user's machine.
+Review or adapt the script before using it for another user.
+
+## Nix helpers
+
+The root flake defines the `laptop2` NixOS and Home Manager configurations:
+
+```sh
+./scripts/os-rebuild    # sudo nixos-rebuild switch --flake .
+./scripts/home-rebuild  # home-manager switch --flake .#$HOSTNAME
+./scripts/clean-gc      # remove old generations and collect the store
+```
+
+Inspect the scripts and the flake before applying them on a different host.
