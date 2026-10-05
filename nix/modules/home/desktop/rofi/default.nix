@@ -1,10 +1,11 @@
 { pkgs, ... }:
 {
-  xdg.dataFile."rofi/themes/custom.rasi".source = ./theme.rasi;
+  xdg.dataFile."rofi/themes/tokyonight.rasi".source =
+    ../../../../../home/.local/share/rofi/themes/tokyonight.rasi;
 
   programs.rofi = {
     enable = true;
-    theme = "custom";
+    theme = "tokyonight";
     settings = {
       terminal = "${pkgs.alacritty}/bin/alacritty";
     };
