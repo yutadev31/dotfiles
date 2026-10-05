@@ -17,9 +17,10 @@ cp dotconf.example.sh dotconf.sh
 | --- | --- | --- | --- |
 | `i3` | `yes`, `no` | `yes` | Includes i3, X11 packages, and the `i3` and `x11` entries in the dotlists. |
 | `sway` | `yes`, `no` | `yes` | Includes Sway, Wayland packages, and the `sway` and `wayland` entries in the dotlists. |
+| `hyprland` | `yes`, `no` | `no` | Includes Hyprland and the `hyprland` entry in the dotlist. |
 | `vm` | `yes`, `no` | `no` | Selects the VM-specific Sway configuration when Sway is enabled. |
 
-`gui` is derived internally: it is `yes` when either `i3` or `sway` is
+`gui` is derived internally: it is `yes` when `i3`, `sway`, or `hyprland` is
 `yes`, and cannot be set in `dotconf.sh`. It selects the common GUI entries in
 `dotlist.home.txt` and `dotlist.etc.txt`.
 
@@ -55,7 +56,8 @@ distribution from `/etc/os-release`.
 On Arch Linux, it installs the CLI and common desktop dependencies. With
 `i3=yes`, it additionally installs i3 and Xorg dependencies. With
 `sway=yes`, it additionally installs Sway and Wayland dependencies; WayVNC
-is installed when `vm=yes`. Void Linux uses the corresponding Void package
+is installed when `vm=yes`. With `hyprland=yes`, it additionally installs
+Hyprland and its Wayland dependencies. Void Linux uses the corresponding Void package
 names, including `fish-shell`, `font-hack-ttf`, and `xinit`. Both package
 managers are run directly, so run the script from an account authorized to
 install packages.
@@ -68,7 +70,7 @@ install packages.
 
 `install.sh` installs the paths listed in `dotlist.home.txt` into `$HOME` and
 the paths listed in `dotlist.etc.txt` into `/etc`. Each entry is a `base` path
-(always included), a derived `gui` path, an `i3`/`sway` path selected by the
+(always included), a derived `gui` path, an `i3`/`sway`/`hyprland` path selected by the
 corresponding option, or an `x11`/`wayland` path selected by the corresponding
 WM's platform.
 It first verifies that every selected source exists

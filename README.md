@@ -6,7 +6,7 @@ The [`nix/`](./nix/) directory contains NixOS and Home Manager configurations.
 
 ## Managed configurations
 
-- Sway, Waybar, Rofi, and Mako
+- Sway, Hyprland, Waybar, Rofi, and Mako
 - Alacritty and Fish
 - Neovim
 - fcitx5
@@ -22,9 +22,9 @@ cd ~/dotfiles
 cp dotconf.example.sh dotconf.sh
 ```
 
-Edit `dotconf.sh` to suit the machine. Set `i3=no` or `sway=no` to skip
-the corresponding window manager packages and configurations. Set `vm=yes` to
-use the VM-specific Sway configuration.
+Edit `dotconf.sh` to suit the machine. Set `i3=no`, `sway=no`, or
+`hyprland=yes`/`no` to select the corresponding window manager packages and
+configurations. Set `vm=yes` to use the VM-specific Sway configuration.
 
 Then run the installer:
 

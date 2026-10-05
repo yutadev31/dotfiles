@@ -14,6 +14,7 @@ load_configuration() {
 
   i3=${i3:-yes}
   sway=${sway:-yes}
+  hyprland=${hyprland:-no}
   vm=${vm:-no}
 
   case "$i3" in
@@ -32,7 +33,15 @@ load_configuration() {
     ;;
   esac
 
-  if [ "$i3" = "yes" ] || [ "$sway" = "yes" ]; then
+  case "$hyprland" in
+  yes | no) ;;
+  *)
+    echo "Error: hyprland must be yes or no in $dotdir/dotconf.sh." >&2
+    exit 1
+    ;;
+  esac
+
+  if [ "$i3" = "yes" ] || [ "$sway" = "yes" ] || [ "$hyprland" = "yes" ]; then
     gui=yes
   else
     gui=no
@@ -104,6 +113,16 @@ install_arch() {
       pacman_install wayvnc
     fi
   fi
+
+  if [ "$hyprland" = "yes" ]; then
+    pacman_install \
+      dbus \
+      grim \
+      hyprland \
+      slurp \
+      waybar \
+      wl-clipboard
+  fi
 }
 
 install_void() {
@@ -160,6 +179,18 @@ install_void() {
     if [ "$vm" = "yes" ]; then
       xbps_install wayvnc
     fi
+  fi
+
+  if [ "$hyprland" = "yes" ]; then
+    xbps_install \
+      dbus \
+      elogind \
+      grim \
+      hyprland \
+      mesa-dri \
+      slurp \
+      waybar \
+      wl-clipboard
   fi
 }
 

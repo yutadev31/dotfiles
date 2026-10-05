@@ -4,8 +4,9 @@ This page lists the dependencies required to use these dotfiles without `nix/`.
 
 ## Prerequisites
 
-This page does not cover automatic installation with a package manager. It lists the packages required to use the configuration. Set `i3=no` or
-`sway=no` in `dotconf.sh` when the corresponding window manager is not used.
+This page does not cover automatic installation with a package manager. It lists the packages required to use the configuration. Set `i3=no`,
+`sway=no`, or `hyprland=no` in `dotconf.sh` when the corresponding window
+manager is not used.
 
 ## CLI
 
@@ -63,3 +64,16 @@ These dependencies are required when using Sway in a Wayland session. They are n
 | `dbus` | Starts a Sway session via `dbus-run-session` |
 
 `wayvnc` is an optional dependency used only with the Sway configuration for VMs (`vm=yes`).
+
+## Hyprland (Wayland Only)
+
+These dependencies are required when using Hyprland in a Wayland session.
+
+| Package | Purpose |
+| --- | --- |
+| `hyprland` | Wayland compositor |
+| `grim` | Screenshots |
+| `slurp` | Selects a screenshot region |
+| `wl-clipboard` | Wayland clipboard via `wl-copy` |
+| `waybar` | Status bar |
+| `dbus` | Starts a Hyprland session |

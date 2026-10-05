@@ -108,15 +108,20 @@ load_configuration() {
 
   i3=${i3:-yes}
   sway=${sway:-yes}
+  hyprland=${hyprland:-no}
 
   validate_option i3 "$i3"
   validate_option sway "$sway"
+  validate_option hyprland "$hyprland"
 
-  # Keep platform scopes available in dotlists for future window managers.
+  # Keep platform scopes available in dotlists for all supported window managers.
   x11=$i3
   wayland=$sway
+  if [ "$hyprland" = "yes" ]; then
+    wayland=yes
+  fi
 
-  if [ "$i3" = "yes" ] || [ "$sway" = "yes" ]; then
+  if [ "$i3" = "yes" ] || [ "$sway" = "yes" ] || [ "$hyprland" = "yes" ]; then
     gui=yes
   else
     gui=no
@@ -141,7 +146,7 @@ validate_option() {
 
 managed_paths() {
   list=${1:?managed_paths: missing list}
-  awk -v gui="$gui" -v i3="$i3" -v sway="$sway" -v x11="$x11" -v wayland="$wayland" '
+  awk -v gui="$gui" -v i3="$i3" -v sway="$sway" -v hyprland="$hyprland" -v x11="$x11" -v wayland="$wayland" '
     /^[[:space:]]*($|#)/ { next }
     NF != 2 {
       printf "Error: invalid dotlist entry on line %d: expected scope and path\n", NR > "/dev/stderr"
@@ -159,6 +164,10 @@ managed_paths() {
     }
     $1 == "sway" {
       if (sway == "yes") print $2
+      next
+    }
+    $1 == "hyprland" {
+      if (hyprland == "yes") print $2
       next
     }
     $1 == "x11" {
