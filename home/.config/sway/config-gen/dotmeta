@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+if [ "$vm" = "yes" ]; then
+  echo config-vm
+else
+  echo config-rm
+fi

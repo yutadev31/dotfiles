@@ -129,6 +129,8 @@ load_configuration() {
 
   vm=${vm:-no}
   validate_option vm "$vm"
+
+  export gui i3 sway hyprland x11 wayland vm
 }
 
 validate_option() {
@@ -196,8 +198,14 @@ root_cmd() {
 
 is_managed_link() {
   path=${1:?is_managed_link: missing path}
+  source=${2:-}
 
   [ -L "$HOME/$path" ] || return 1
+
+  if [ -z "$source" ]; then
+    resolve_source "$dotdir/home/$path"
+    source=$resolved_source
+  fi
 
   target=$(readlink "$HOME/$path")
   case "$target" in
@@ -206,14 +214,21 @@ is_managed_link() {
   esac
 
   target_dir=$(CDPATH= cd -P "$(dirname "$target")" 2>/dev/null && pwd) || return 1
-  source_dir=$(CDPATH= cd -P "$(dirname "$dotdir/home/$path")" && pwd)
-  [ "$target_dir/$(basename "$target")" = "$source_dir/$(basename "$path")" ]
+  source_dir=$(CDPATH= cd -P "$(dirname "$source")" && pwd)
+  [ "$target_dir/$(basename "$target")" = "$source_dir/$(basename "$source")" ]
 }
 
 is_managed_etc_link() {
   path=${1:?is_managed_etc_link: missing path}
+  source=${2:-}
 
   [ -L "/etc/$path" ] || return 1
+
+  if [ -z "$source" ]; then
+    resolve_source "$dotdir/etc/$path"
+    source=$resolved_source
+  fi
+
   target=$(readlink "/etc/$path")
   case "$target" in
   /*) ;;
@@ -221,8 +236,42 @@ is_managed_etc_link() {
   esac
 
   target_dir=$(CDPATH= cd -P "$(dirname "$target")" 2>/dev/null && pwd) || return 1
-  source_dir=$(CDPATH= cd -P "$(dirname "$dotdir/etc/$path")" && pwd)
-  [ "$target_dir/$(basename "$target")" = "$source_dir/$(basename "$path")" ]
+  source_dir=$(CDPATH= cd -P "$(dirname "$source")" && pwd)
+  [ "$target_dir/$(basename "$target")" = "$source_dir/$(basename "$source")" ]
+}
+
+resolve_source() {
+  source=${1:?resolve_source: missing source}
+  resolved_source=$source
+
+  if [ ! -f "$source/dotmeta" ]; then
+    return
+  fi
+
+  if [ ! -x "$source/dotmeta" ]; then
+    echo "Error: dotmeta is not executable: $source/dotmeta" >&2
+    return 1
+  fi
+
+  selected=$(CDPATH= cd -P "$source" && ./dotmeta) || {
+    echo "Error: failed to execute: $source/dotmeta" >&2
+    return 1
+  }
+
+  newline='
+'
+  case "$selected" in
+  "" | */* | *"$newline"*)
+    echo "Error: dotmeta must print one file name: $source/dotmeta" >&2
+    return 1
+    ;;
+  esac
+
+  resolved_source=$source/$selected
+  if [ ! -f "$resolved_source" ]; then
+    echo "Error: dotmeta selected a missing file: $resolved_source" >&2
+    return 1
+  fi
 }
 
 preflight() {
@@ -240,6 +289,7 @@ preflight() {
       echo "Error: managed source does not exist: $dotdir/home/$path" >&2
       exit 1
     fi
+    resolve_source "$dotdir/home/$path" || exit 1
 
     for other_path in $managed_list; do
       [ "$path" = "$other_path" ] && continue
@@ -276,6 +326,7 @@ EOF
       echo "Error: managed source does not exist: $dotdir/etc/$path" >&2
       exit 1
     fi
+    resolve_source "$dotdir/etc/$path" || exit 1
 
     for other_path in $etc_managed_list; do
       [ "$path" = "$other_path" ] && continue
@@ -322,9 +373,11 @@ create_link() {
 
 install_file() {
   path=${1:?install_file: missing path}
+  resolve_source "$dotdir/home/$path"
+  source=$resolved_source
 
   # Leave links created by this installer untouched.
-  if is_managed_link "$path"; then return; fi
+  if is_managed_link "$path" "$source"; then return; fi
 
   if [ "$dry_run" = "yes" ]; then
     if [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; then
@@ -340,7 +393,7 @@ install_file() {
   fi
 
   # Create a symbolic link
-  create_link "$HOME/$path" "$dotdir/home/$path"
+  create_link "$HOME/$path" "$source"
   echo "Create ~/$path"
 }
 
@@ -353,8 +406,10 @@ ensure_etc_backup_dir() {
 
 install_etc_file() {
   path=${1:?install_etc_file: missing path}
+  resolve_source "$dotdir/etc/$path"
+  source=$resolved_source
 
-  if is_managed_etc_link "$path"; then return; fi
+  if is_managed_etc_link "$path" "$source"; then return; fi
 
   if [ "$dry_run" = "yes" ]; then
     if [ -e "/etc/$path" ] || [ -L "/etc/$path" ]; then
@@ -373,7 +428,7 @@ install_etc_file() {
   fi
 
   root_cmd mkdir -p "$(dirname "/etc/$path")"
-  root_cmd ln -s "$dotdir/etc/$path" "/etc/$path"
+  root_cmd ln -s "$source" "/etc/$path"
   printf '%s\n' "$path" >>"$etc_created_paths"
   echo "Create /etc/$path"
 }
@@ -402,16 +457,13 @@ EOF
 gen_files() {
   if [ "$sway" = "no" ]; then return; fi
 
-  if [ "$vm" = "yes" ]; then
-    source="$dotdir/home/.config/sway/config-vm"
-  else
-    source="$dotdir/home/.config/sway/config-rm"
-  fi
-
   path=.local/share/dotfiles/sway/config-gen
+  source_dir="$dotdir/home/.config/sway/config-gen"
   target="$HOME/$path"
+  resolve_source "$source_dir"
+  source=$resolved_source
 
-  if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
+  if [ -L "$target" ] && is_managed_link "$path" "$source"; then
     return
   fi
 

@@ -48,6 +48,11 @@ changes. It backs up conflicting paths, creates symlinks, and restores moved
 paths if the installation fails. `--dry-run` previews the process. On NixOS,
 execution is restricted to temporary homes under `/tmp`.
 
+An installed source directory can contain an executable `dotmeta`. The
+installer runs it in that directory and links the file whose name it prints;
+without `dotmeta`, directories are linked normally. This supports
+machine-specific variants while keeping the dotlist path stable.
+
 ## Nix configuration
 
 The root `flake.nix` exposes NixOS and Home Manager configurations for the

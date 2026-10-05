@@ -52,11 +52,19 @@ and overlapping targets before changing anything. For each selected path it:
    `/etc/.dotfiles-backup/install.XXXXXXXX`.
 3. Creates a symlink to the matching path in `home/` or `etc/`.
 
+If a selected source path is a directory containing an executable `dotmeta`,
+the installer runs it from that directory and uses the file name printed to
+stdout as the symlink source. The selected name must be a single file name in
+that directory. This also applies to generated files such as the Sway
+configuration: `home/.config/sway/config-gen/dotmeta` selects
+`config-rm` or `config-vm` based on the installer settings. A directory without
+`dotmeta` keeps the normal directory-link behavior.
+
 Paths under `/etc` use `sudo` when the script is not run as root. When Sway is
 selected, the installer also generates
-`~/.local/share/dotfiles/sway/config-gen` from `config-rm` or `config-vm`,
-depending on `vm`. If installation fails after changes, it removes links
-created during that run and restores moved paths.
+`~/.local/share/dotfiles/sway/config-gen` by resolving
+`home/.config/sway/config-gen/dotmeta`. If installation fails after changes,
+it removes links created during that run and restores moved paths.
 
 On NixOS, `install.sh` only runs when `$HOME` is under `/tmp`; this prevents
 accidental use against a regular NixOS home directory.
