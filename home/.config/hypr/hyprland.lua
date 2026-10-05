@@ -1,5 +1,3 @@
-local main_mod = "SUPER"
-
 package.path = package.path .. ";./?.lua;./?/init.lua"
 
 hl.monitor({
@@ -69,8 +67,10 @@ hl.gesture({
 hl.on("hyprland.start", function()
   hl.exec_cmd("systemctl --user start hyprland-session.target")
   hl.exec_cmd("waybar")
-  hl.exec_cmd("fcitx5 -dr")
+  hl.exec_cmd("fcitx5 -rd")
 end)
+
+local main_mod = "SUPER"
 
 hl.bind(main_mod .. " + Return", hl.dsp.exec_cmd("alacritty"))
 hl.bind(main_mod .. " + D", hl.dsp.exec_cmd("rofi -show drun -show-icons"))
@@ -137,6 +137,5 @@ for i = 1, smw.get_amount_of_workspaces() do
   local n = tostring(i)
 
   hl.bind(main_mod .. " +" .. n, smw.workspace(n))
-
   hl.bind(main_mod .. " + SHIFT +" .. n, smw.move_to_workspace_silent(n))
 end
