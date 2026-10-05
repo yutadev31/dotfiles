@@ -46,7 +46,10 @@ the managed portions of `/etc`. The dotlists select paths with these scopes:
 `install.sh` validates selected source paths and target overlap before making
 changes. It backs up conflicting paths, creates symlinks, and restores moved
 paths if the installation fails. `--dry-run` previews the process. On NixOS,
-execution is restricted to temporary homes under `/tmp`.
+execution is restricted to temporary homes under `/tmp`. Successful installs
+record their managed paths in
+`${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/installed`; removed dotlist
+entries are cleaned up when their links still point into this repository.
 
 An installed source directory can contain an executable `dotmeta`. The
 installer runs it in that directory and links the file whose name it prints;

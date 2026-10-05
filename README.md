@@ -59,7 +59,10 @@ install packages on FreeBSD, OpenBSD, NetBSD, or DragonFly BSD:
 The dotfile installer reads `dotlist.home.txt` and `dotlist.etc.txt`, moves
 conflicting managed paths into unique directories under
 `~/.dotfiles-backup` or `/etc/.dotfiles-backup`, and creates symbolic links to
-this repository. It uses `sudo` for `/etc` paths when necessary and rolls back
+this repository. It records installed paths under
+`${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/installed`; paths removed from
+the dotlists are automatically removed when they are still links to this
+repository. It uses `sudo` for `/etc` paths when necessary and rolls back
 changes made during a failed installation. On NixOS, it only runs when
 `$HOME` is under `/tmp`.
 

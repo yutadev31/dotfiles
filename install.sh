@@ -8,7 +8,9 @@ usage() {
 Usage: ./install.sh [--dry-run]
 
 Install the managed dotfiles into $HOME and /etc. Existing paths are moved to
-unique backup directories. Use --dry-run to preview changes.
+unique backup directories. Paths removed from the dotlists are removed when
+they are still symlinks managed by this repository. Use --dry-run to preview
+changes.
 EOF
 }
 
@@ -46,10 +48,15 @@ backup_root="$HOME/.dotfiles-backup"
 backup_dir=
 etc_backup_root=/etc/.dotfiles-backup
 etc_backup_dir=
+state_root=${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles
+state_file=$state_root/installed
 moved_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-moved.XXXXXX")
 created_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-created.XXXXXX")
 etc_moved_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-etc-moved.XXXXXX")
 etc_created_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-etc-created.XXXXXX")
+stale_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-stale.XXXXXX")
+etc_stale_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-etc-stale.XXXXXX")
+new_state=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-state.XXXXXX")
 
 path_exists() {
   _path_exists_target=${1:?path_exists: missing path}
@@ -84,6 +91,22 @@ rollback() {
       root_cmd mv "$etc_backup_dir/$path" "/etc/$path"
     fi
   done
+
+  reverse_records "$stale_paths" | while IFS='	' read -r path source; do
+    [ -n "$path" ] || continue
+    mkdir -p "$(dirname "$HOME/$path")"
+    ln -s "$source" "$HOME/$path"
+  done
+
+  reverse_records "$etc_stale_paths" | while IFS='	' read -r path source; do
+    [ -n "$path" ] || continue
+    root_cmd mkdir -p "$(dirname "/etc/$path")"
+    root_cmd ln -s "$source" "/etc/$path"
+  done
+}
+
+reverse_records() {
+  awk '{ records[NR] = $0 } END { for (i = NR; i > 0; i--) print records[i] }' "$1"
 }
 
 cleanup() {
@@ -92,7 +115,8 @@ cleanup() {
     echo "Installation failed; restoring changed paths..." >&2
     rollback
   fi
-  rm -f "$moved_paths" "$created_paths" "$etc_moved_paths" "$etc_created_paths"
+  rm -f "$moved_paths" "$created_paths" "$etc_moved_paths" "$etc_created_paths" \
+    "$stale_paths" "$etc_stale_paths" "$new_state"
   exit "$status"
 }
 
@@ -187,6 +211,23 @@ managed_paths() {
     }
     END { exit invalid }
   ' "$dotdir/$list"
+}
+
+state_has_path() {
+  state=${1:?state_has_path: missing state}
+  scope=${2:?state_has_path: missing scope}
+  path=${3:?state_has_path: missing path}
+
+  [ -f "$state" ] || return 1
+  awk -F '	' -v expected_scope="$scope" -v expected_path="$path" \
+    '$1 == expected_scope && $2 == expected_path { found = 1 } END { exit !found }' "$state"
+}
+
+record_state_path() {
+  scope=${1:?record_state_path: missing scope}
+  path=${2:?record_state_path: missing path}
+  source=${3:?record_state_path: missing source}
+  printf '%s\t%s\t%s\n' "$scope" "$path" "$source" >>"$new_state"
 }
 
 root_cmd() {
@@ -345,6 +386,65 @@ $etc_managed_list
 EOF
 }
 
+build_state() {
+  : >"$new_state"
+
+  while IFS= read -r path; do
+    [ -n "$path" ] || continue
+    resolve_source "$dotdir/home/$path"
+    record_state_path home "$path" "$resolved_source"
+  done <<EOF
+$(managed_paths dotlist.home.txt)
+EOF
+
+  while IFS= read -r path; do
+    [ -n "$path" ] || continue
+    resolve_source "$dotdir/etc/$path"
+    record_state_path etc "$path" "$resolved_source"
+  done <<EOF
+$(managed_paths dotlist.etc.txt)
+EOF
+
+  if [ "$sway" = "yes" ]; then
+    resolve_source "$dotdir/home/.config/sway/config-gen"
+    record_state_path home .local/share/dotfiles/sway/config-gen "$resolved_source"
+  fi
+}
+
+remove_stale_links() {
+  [ -f "$state_file" ] || return 0
+
+  while IFS='	' read -r scope path source; do
+    [ -n "$scope" ] || continue
+    state_has_path "$new_state" "$scope" "$path" && continue
+
+    case "$scope" in
+    home)
+      if is_managed_link "$path" "$source"; then
+        rm -f "$HOME/$path"
+        printf '%s\t%s\n' "$path" "$source" >>"$stale_paths"
+        echo "Remove ~/$path"
+      fi
+      ;;
+    etc)
+      if is_managed_etc_link "$path" "$source"; then
+        root_cmd rm -f "/etc/$path"
+        printf '%s\t%s\n' "$path" "$source" >>"$etc_stale_paths"
+        echo "Remove /etc/$path"
+      fi
+      ;;
+    *)
+      echo "Warning: ignoring invalid scope in $state_file: $scope" >&2
+      ;;
+    esac
+  done <"$state_file"
+}
+
+save_state() {
+  mkdir -p "$state_root"
+  mv "$new_state" "$state_file"
+}
+
 ensure_backup_dir() {
   if [ -n "$backup_dir" ]; then return; fi
 
@@ -494,9 +594,16 @@ install() {
   echo "Installing dotfiles..."
 
   preflight
+  build_state
+  if [ "$dry_run" = "no" ]; then
+    remove_stale_links
+  fi
   install_files
   install_etc_files
   gen_files
+  if [ "$dry_run" = "no" ]; then
+    save_state
+  fi
   finish
 
   echo "Installed dotfiles successfully."
