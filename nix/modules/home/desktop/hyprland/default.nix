@@ -1,6 +1,9 @@
 { inputs, ... }:
 {
   xdg.configFile."hypr/hyprland.lua".source = ../../../../../home/.config/hypr/hyprland.lua;
+  xdg.configFile."hypr/monitors.lua".source =
+    ../../../../../home/.config/hypr/monitors.lua/laptop2.lua;
+  xdg.configFile."hypr/config".source = ../../../../../home/.config/hypr/config;
   xdg.configFile."hypr/plugins/split-monitor-workspaces".source = inputs.split-monitor-workspaces;
 
   systemd.user.targets.hyprland-session = {

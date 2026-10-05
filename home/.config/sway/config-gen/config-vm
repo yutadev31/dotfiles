@@ -1,3 +1,0 @@
-set $mod Mod1
-
-exec wayvnc 0.0.0.0 5900
