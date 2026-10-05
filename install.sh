@@ -7,8 +7,8 @@ usage() {
   cat <<'EOF'
 Usage: ./install.sh [--dry-run]
 
-Install the managed dotfiles into $HOME. Existing paths are moved to a unique
-backup directory under ~/.dotfiles-backup. Use --dry-run to preview changes.
+Install the managed dotfiles into $HOME and /etc. Existing paths are moved to
+unique backup directories. Use --dry-run to preview changes.
 EOF
 }
 
@@ -44,8 +44,12 @@ fi
 
 backup_root="$HOME/.dotfiles-backup"
 backup_dir=
+etc_backup_root=/etc/.dotfiles-backup
+etc_backup_dir=
 moved_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-moved.XXXXXX")
 created_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-created.XXXXXX")
+etc_moved_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-etc-moved.XXXXXX")
+etc_created_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-etc-created.XXXXXX")
 
 path_exists() {
   _path_exists_target=${1:?path_exists: missing path}
@@ -69,6 +73,17 @@ rollback() {
       mv "$backup_dir/$path" "$HOME/$path"
     fi
   done
+
+  reverse_paths "$etc_created_paths" | while IFS= read -r path; do
+    root_cmd rm -f "/etc/$path"
+  done
+
+  reverse_paths "$etc_moved_paths" | while IFS= read -r path; do
+    if root_cmd test -e "$etc_backup_dir/$path" || root_cmd test -L "$etc_backup_dir/$path"; then
+      root_cmd mkdir -p "$(dirname "/etc/$path")"
+      root_cmd mv "$etc_backup_dir/$path" "/etc/$path"
+    fi
+  done
 }
 
 cleanup() {
@@ -77,7 +92,7 @@ cleanup() {
     echo "Installation failed; restoring changed paths..." >&2
     rollback
   fi
-  rm -f "$moved_paths" "$created_paths"
+  rm -f "$moved_paths" "$created_paths" "$etc_moved_paths" "$etc_created_paths"
   exit "$status"
 }
 
@@ -121,6 +136,7 @@ validate_option() {
 }
 
 managed_paths() {
+  list=${1:?managed_paths: missing list}
   awk -v gui="$gui" -v x11="$x11" -v wayland="$wayland" '
     /^[[:space:]]*($|#)/ { next }
     NF != 2 {
@@ -146,7 +162,15 @@ managed_paths() {
       invalid = 1
     }
     END { exit invalid }
-  ' "$dotdir/dotlist.txt"
+  ' "$dotdir/$list"
+}
+
+root_cmd() {
+  if [ "$(id -u)" -eq 0 ]; then
+    "$@"
+  else
+    sudo "$@"
+  fi
 }
 
 is_managed_link() {
@@ -165,16 +189,32 @@ is_managed_link() {
   [ "$target_dir/$(basename "$target")" = "$source_dir/$(basename "$path")" ]
 }
 
+is_managed_etc_link() {
+  path=${1:?is_managed_etc_link: missing path}
+
+  [ -L "/etc/$path" ] || return 1
+  target=$(readlink "/etc/$path")
+  case "$target" in
+  /*) ;;
+  *) target=$(dirname "/etc/$path")/$target ;;
+  esac
+
+  target_dir=$(CDPATH= cd -P "$(dirname "$target")" 2>/dev/null && pwd) || return 1
+  source_dir=$(CDPATH= cd -P "$(dirname "$dotdir/etc/$path")" && pwd)
+  [ "$target_dir/$(basename "$target")" = "$source_dir/$(basename "$path")" ]
+}
+
 preflight() {
   load_configuration
 
-  if [ ! -f "$dotdir/dotlist.txt" ]; then
-    echo "Error: dotfile list does not exist: $dotdir/dotlist.txt" >&2
+  if [ ! -f "$dotdir/home.dotlist.txt" ]; then
+    echo "Error: dotfile list does not exist: $dotdir/home.dotlist.txt" >&2
     exit 1
   fi
 
-  managed_list=$(managed_paths) || exit 1
+  managed_list=$(managed_paths home.dotlist.txt) || exit 1
   while IFS= read -r path; do
+    [ -n "$path" ] || continue
     if [ ! -e "$dotdir/home/$path" ]; then
       echo "Error: managed source does not exist: $dotdir/home/$path" >&2
       exit 1
@@ -193,6 +233,42 @@ preflight() {
     if is_managed_link "$path"; then continue; fi
   done <<EOF
 $managed_list
+EOF
+
+  if [ ! -f "$dotdir/etc.dotlist.txt" ]; then
+    echo "Error: dotfile list does not exist: $dotdir/etc.dotlist.txt" >&2
+    exit 1
+  fi
+
+  etc_managed_list=$(managed_paths etc.dotlist.txt) || exit 1
+  if [ -n "$etc_managed_list" ] && [ "$dry_run" = no ] && [ "$(id -u)" -ne 0 ]; then
+    command -v sudo >/dev/null 2>&1 || {
+      echo 'Error: sudo is required to install files under /etc.' >&2
+      exit 1
+    }
+    sudo -v
+  fi
+
+  while IFS= read -r path; do
+    [ -n "$path" ] || continue
+    if [ ! -e "$dotdir/etc/$path" ]; then
+      echo "Error: managed source does not exist: $dotdir/etc/$path" >&2
+      exit 1
+    fi
+
+    for other_path in $etc_managed_list; do
+      [ "$path" = "$other_path" ] && continue
+      case "$path" in
+      "$other_path"/*)
+        echo "Error: managed paths must not overlap: $other_path and $path" >&2
+        exit 1
+        ;;
+      esac
+    done
+
+    if is_managed_etc_link "$path"; then continue; fi
+  done <<EOF
+$etc_managed_list
 EOF
 }
 
@@ -247,13 +323,58 @@ install_file() {
   echo "Create ~/$path"
 }
 
+ensure_etc_backup_dir() {
+  if [ -n "$etc_backup_dir" ]; then return; fi
+
+  root_cmd mkdir -p "$etc_backup_root"
+  etc_backup_dir=$(root_cmd mktemp -d "$etc_backup_root/install.XXXXXXXX")
+}
+
+install_etc_file() {
+  path=${1:?install_etc_file: missing path}
+
+  if is_managed_etc_link "$path"; then return; fi
+
+  if [ "$dry_run" = "yes" ]; then
+    if [ -e "/etc/$path" ] || [ -L "/etc/$path" ]; then
+      echo "Would move /etc/$path to a new backup directory"
+    fi
+    echo "Would create /etc/$path"
+    return
+  fi
+
+  if path_exists "/etc/$path"; then
+    ensure_etc_backup_dir
+    root_cmd mkdir -p "$(dirname "$etc_backup_dir/$path")"
+    printf '%s\n' "$path" >>"$etc_moved_paths"
+    root_cmd mv "/etc/$path" "$etc_backup_dir/$path"
+    echo "Move /etc/$path to $etc_backup_dir/$path"
+  fi
+
+  root_cmd mkdir -p "$(dirname "/etc/$path")"
+  root_cmd ln -s "$dotdir/etc/$path" "/etc/$path"
+  printf '%s\n' "$path" >>"$etc_created_paths"
+  echo "Create /etc/$path"
+}
+
 install_files() {
   echo "Installing files..."
 
   while IFS= read -r path; do
     install_file "$path"
   done <<EOF
-$(managed_paths)
+$(managed_paths home.dotlist.txt)
+EOF
+}
+
+install_etc_files() {
+  echo "Installing /etc files..."
+
+  while IFS= read -r path; do
+    [ -n "$path" ] || continue
+    install_etc_file "$path"
+  done <<EOF
+$(managed_paths etc.dotlist.txt)
 EOF
 }
 
@@ -300,6 +421,7 @@ install() {
 
   preflight
   install_files
+  install_etc_files
   gen_files
   finish
 

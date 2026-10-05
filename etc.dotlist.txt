@@ -1,0 +1,3 @@
+# Format: scope path
+# Paths are relative to /etc.
+x11 X11/xorg.conf.d/30-input.conf

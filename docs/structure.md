@@ -20,7 +20,8 @@ the shell installer, while `nix/` contains declarative Nix configurations.
 ├── docs/          Repository documentation
 ├── LICENSES/      License notices for included third-party files
 ├── install.sh     Portable dotfile installer
-├── dotlist.txt    Inventory of paths managed by the portable installer
+├── home.dotlist.txt
+├── etc.dotlist.txt
 ├── dotconf.sh     Local, machine-specific installer settings (not tracked)
 ├── flake.nix      Development-shell flake for repository tooling
 └── stylua.toml    Lua formatter configuration
@@ -28,12 +29,13 @@ the shell installer, while `nix/` contains declarative Nix configurations.
 
 ## Portable Dotfile Installation
 
-`home/` mirrors the relevant portions of a home directory. It contains shell
-helpers and application configuration, but its internal files are intentionally
-not catalogued here; each top-level path is selected through `dotlist.txt`.
+`home/` mirrors the relevant portions of a home directory, while `etc/` mirrors
+the managed portions of `/etc`. Their internal files are intentionally not
+catalogued here; paths are selected through `home.dotlist.txt` and
+`etc.dotlist.txt`.
 
-`install.sh` installs the portable dotfiles. It reads `dotlist.txt`,
-which separates always-installed paths (`base`) from common GUI, X11, and
+`install.sh` installs the portable dotfiles. It reads the two dotlists, which
+separate always-installed paths (`base`) from common GUI, X11, and
 Wayland paths (`gui`, `x11`, and `wayland`). Local options in `dotconf.sh`
 control the graphical paths; `gui` is derived from the X11 and Wayland options.
 

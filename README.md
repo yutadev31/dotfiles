@@ -42,9 +42,11 @@ The package installer is currently separate and installs packages on Arch Linux;
 installation on Void Linux, FreeBSD, OpenBSD, NetBSD, and DragonFly BSD is not
 implemented.
 
-The dotfile installer moves existing managed paths to a unique directory under
-`~/.dotfiles-backup`, then creates symbolic links to this repository. If an
-installation step fails, it restores paths changed during that run.
+The dotfile installer moves existing managed paths to unique directories under
+`~/.dotfiles-backup` and `/etc/.dotfiles-backup`, then creates symbolic links to
+this repository. It uses `home.dotlist.txt` and `etc.dotlist.txt`; `/etc`
+changes use `sudo` when needed. If an installation step fails, it restores paths
+changed during that run.
 
 See the [installer guide](./docs/installers.md) for the behavior, supported
 platforms, options, and side effects of every installer and setup helper.

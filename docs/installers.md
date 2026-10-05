@@ -15,13 +15,13 @@ cp dotconf.example.sh dotconf.sh
 
 | Option | Accepted values | Default | Effect |
 | --- | --- | --- | --- |
-| `x11` | `yes`, `no` | `yes` | Includes X11 packages and the `x11` entries in `dotlist.txt`. |
-| `wayland` | `yes`, `no` | `yes` | Includes Wayland packages and the `wayland` entries in `dotlist.txt`. |
+| `x11` | `yes`, `no` | `yes` | Includes X11 packages and the `x11` entries in the dotlists. |
+| `wayland` | `yes`, `no` | `yes` | Includes Wayland packages and the `wayland` entries in the dotlists. |
 | `vm` | `yes`, `no` | `no` | Selects the VM-specific Sway configuration when Wayland is enabled. |
 
 `gui` is derived internally: it is `yes` when either `x11` or `wayland` is
 `yes`, and cannot be set in `dotconf.sh`. It selects the common GUI entries in
-`dotlist.txt`.
+`home.dotlist.txt` and `etc.dotlist.txt`.
 
 An invalid value, or a missing `dotconf.sh`, stops the relevant installer before
 it changes the system.
@@ -66,18 +66,22 @@ install packages.
 
 ## Dotfile installation details
 
-`install.sh` installs the paths listed in `dotlist.txt` into `$HOME`. Each entry
-is a `base` path (always included), a derived `gui` path, or an `x11`/`wayland`
-path selected by the corresponding option. It first verifies that every
-selected source exists and that no managed paths overlap.
+`install.sh` installs the paths listed in `home.dotlist.txt` into `$HOME` and
+the paths listed in `etc.dotlist.txt` into `/etc`. Each entry is a `base` path
+(always included), a derived `gui` path, or an `x11`/`wayland` path selected by
+the corresponding option. It first verifies that every selected source exists
+and that no managed paths overlap. Paths under `/etc` are installed through
+`sudo` when the script is not run as root.
 
 For every selected path, the installer:
 
 1. Leaves an existing symbolic link alone when it already points at this
    repository.
 2. Moves a conflicting file, directory, or symbolic link to a new directory
-   under `~/.dotfiles-backup/install.XXXXXXXX`.
-3. Creates a symbolic link from `$HOME` to the matching path under `home/`.
+   under `~/.dotfiles-backup/install.XXXXXXXX` or
+   `/etc/.dotfiles-backup/install.XXXXXXXX`.
+3. Creates a symbolic link from the target root to the matching path under
+   `home/` or `etc/`.
 
 When Wayland files are included, it also generates
 `~/.local/share/dotfiles/sway/config-gen` from `config-rm` or `config-vm`,
