@@ -13,11 +13,13 @@ gui .config/alacritty
 gui .config/dunst
 gui .config/fcitx5/config
 gui .config/fcitx5/profile
-i3 .config/i3
+i3 .config/i3/config
+i3 .config/i3/config-gen
 gui .config/rofi
 gui .config/rubar
 gui .config/shot
 sway .config/sway/config
+sway .config/sway/config-gen
 hyprland .config/hypr
 gui .local/share/rofi/themes
 gui .local/share/wallpapers

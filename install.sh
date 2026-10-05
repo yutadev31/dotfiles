@@ -404,11 +404,6 @@ EOF
   done <<EOF
 $(managed_paths dotlist.etc.txt)
 EOF
-
-  if [ "$sway" = "yes" ]; then
-    resolve_source "$dotdir/home/.config/sway/config-gen"
-    record_state_path home .local/share/dotfiles/sway/config-gen "$resolved_source"
-  fi
 }
 
 remove_stale_links() {
@@ -555,35 +550,6 @@ $(managed_paths dotlist.etc.txt)
 EOF
 }
 
-gen_files() {
-  if [ "$sway" = "no" ]; then return; fi
-
-  path=.local/share/dotfiles/sway/config-gen
-  source_dir="$dotdir/home/.config/sway/config-gen"
-  target="$HOME/$path"
-  resolve_source "$source_dir"
-  source=$resolved_source
-
-  if [ -L "$target" ] && is_managed_link "$path" "$source"; then
-    return
-  fi
-
-  if [ "$dry_run" = "yes" ]; then
-    if path_exists "$target"; then
-      echo "Would move ~/$path to a new backup directory"
-    fi
-    echo "Would symlink ~/$path -> $source"
-    return
-  fi
-
-  if path_exists "$target"; then
-    backup_path "$path" "$target"
-  fi
-
-  create_link "$target" "$source"
-  echo "Symlink ~/$path -> $source"
-}
-
 finish() {
   if [ -n "$backup_dir" ]; then
     echo "Backups are available in $backup_dir"
@@ -600,7 +566,6 @@ install() {
   fi
   install_files
   install_etc_files
-  gen_files
   if [ "$dry_run" = "no" ]; then
     save_state
   fi

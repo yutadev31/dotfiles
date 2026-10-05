@@ -1,4 +1,4 @@
-include ~/.local/share/dotfiles/i3/config-gen
+include ~/.config/i3/config-gen
 
 set $left h
 set $down j

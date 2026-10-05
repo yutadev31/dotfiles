@@ -56,23 +56,21 @@ After a successful installation, it records the managed paths and their source
 links in `${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/installed`. On the next
 run, paths present in the previous record but absent from the current dotlists
 are removed only when they are still symlinks to this repository. Regular files
-and links to other locations are left untouched. The generated Sway path is
-tracked as well, so disabling Sway removes its generated link automatically.
+and links to other locations are left untouched.
 
 If a selected source path is a directory containing an executable `dotmeta`,
 the installer runs it from that directory and uses the file name printed to
 stdout as the symlink source. The selected name must be a single file name in
-that directory. This also applies to generated files such as the Sway
-configuration: `home/.config/sway/config-gen/dotmeta` selects
-`config-rm` or `config-vm` based on the installer settings. A directory without
-`dotmeta` keeps the normal directory-link behavior.
+that directory. This also applies to generated i3 and Sway configurations:
+`home/.config/i3/config-gen/dotmeta` and
+`home/.config/sway/config-gen/dotmeta` select `config-rm` or `config-vm` based
+on the installer settings. A directory without `dotmeta` keeps the normal
+directory-link behavior.
 
-Paths under `/etc` use `sudo` when the script is not run as root. When Sway is
-selected, the installer also generates
-`~/.local/share/dotfiles/sway/config-gen` by resolving
-`home/.config/sway/config-gen/dotmeta`. If installation fails after changes,
-it removes links created during that run, restores moved paths, and restores
-links removed from a previous installation record.
+Paths under `/etc` use `sudo` when the script is not run as root. If
+installation fails after changes, it removes links created during that run,
+restores moved paths, and restores links removed from a previous installation
+record.
 
 On NixOS, `install.sh` only runs when `$HOME` is under `/tmp`; this prevents
 accidental use against a regular NixOS home directory.
