@@ -1,5 +1,5 @@
 # Format: scope path
-# scope is "base", "gui", "x11", or "wayland".
+# scope is "base", "gui", "i3", "sway", "x11", or "wayland".
 base .bin
 base .profile
 base .config/aliases.sh
@@ -13,10 +13,10 @@ gui .config/alacritty
 gui .config/dunst
 gui .config/fcitx5/config
 gui .config/fcitx5/profile
-x11 .config/i3
+i3 .config/i3
 gui .config/rofi
 gui .config/rubar
 gui .config/shot
-wayland .config/sway/config
+sway .config/sway/config
 gui .local/share/rofi/themes
 gui .local/share/wallpapers

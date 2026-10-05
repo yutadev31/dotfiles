@@ -106,13 +106,17 @@ load_configuration() {
 
   . "$dotdir/dotconf.sh"
 
-  x11=${x11:-yes}
-  wayland=${wayland:-yes}
+  i3=${i3:-yes}
+  sway=${sway:-yes}
 
-  validate_option x11 "$x11"
-  validate_option wayland "$wayland"
+  validate_option i3 "$i3"
+  validate_option sway "$sway"
 
-  if [ "$x11" = "yes" ] || [ "$wayland" = "yes" ]; then
+  # Keep platform scopes available in dotlists for future window managers.
+  x11=$i3
+  wayland=$sway
+
+  if [ "$i3" = "yes" ] || [ "$sway" = "yes" ]; then
     gui=yes
   else
     gui=no
@@ -137,7 +141,7 @@ validate_option() {
 
 managed_paths() {
   list=${1:?managed_paths: missing list}
-  awk -v gui="$gui" -v x11="$x11" -v wayland="$wayland" '
+  awk -v gui="$gui" -v i3="$i3" -v sway="$sway" -v x11="$x11" -v wayland="$wayland" '
     /^[[:space:]]*($|#)/ { next }
     NF != 2 {
       printf "Error: invalid dotlist entry on line %d: expected scope and path\n", NR > "/dev/stderr"
@@ -147,6 +151,14 @@ managed_paths() {
     $1 == "base" { print $2; next }
     $1 == "gui" {
       if (gui == "yes") print $2
+      next
+    }
+    $1 == "i3" {
+      if (i3 == "yes") print $2
+      next
+    }
+    $1 == "sway" {
+      if (sway == "yes") print $2
       next
     }
     $1 == "x11" {
@@ -379,7 +391,7 @@ EOF
 }
 
 gen_files() {
-  if [ "$wayland" = "no" ]; then return; fi
+  if [ "$sway" = "no" ]; then return; fi
 
   if [ "$vm" = "yes" ]; then
     source="$dotdir/home/.config/sway/config-vm"

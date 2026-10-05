@@ -35,9 +35,11 @@ catalogued here; paths are selected through `dotlist.home.txt` and
 `dotlist.etc.txt`.
 
 `install.sh` installs the portable dotfiles. It reads the two dotlists, which
-separate always-installed paths (`base`) from common GUI, X11, and
-Wayland paths (`gui`, `x11`, and `wayland`). Local options in `dotconf.sh`
-control the graphical paths; `gui` is derived from the X11 and Wayland options.
+separate always-installed paths (`base`) from common GUI, WM, X11, and
+Wayland paths (`gui`, `i3`, `sway`, `x11`, and `wayland`). Local options in
+`dotconf.sh` control the graphical paths; `gui` is derived from the i3 and Sway
+options, while `x11` and `wayland` remain platform scopes for future window
+managers.
 
 Before replacing a managed path, the installer moves it to a timestamped
 directory under `~/.dotfiles-backup`. It creates symbolic links only after

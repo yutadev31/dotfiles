@@ -1,8 +1,8 @@
-# Install X11 packages and configurations.
-x11=yes
+# Install i3, X11 packages, and configurations.
+i3=yes
 
-# Install Wayland packages and configurations.
-wayland=yes
+# Install Sway, Wayland packages, and configurations.
+sway=yes
 
 # Use the virtual-machine Sway configuration.
 vm=no

@@ -4,8 +4,8 @@ This page lists the dependencies required to use these dotfiles without `nix/`.
 
 ## Prerequisites
 
-This page does not cover automatic installation with a package manager. It lists the packages required to use the configuration. Set `x11=no` or
-`wayland=no` in `dotconf.sh` when the corresponding session is not used.
+This page does not cover automatic installation with a package manager. It lists the packages required to use the configuration. Set `i3=no` or
+`sway=no` in `dotconf.sh` when the corresponding window manager is not used.
 
 ## CLI
 

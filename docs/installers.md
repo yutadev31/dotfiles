@@ -15,11 +15,11 @@ cp dotconf.example.sh dotconf.sh
 
 | Option | Accepted values | Default | Effect |
 | --- | --- | --- | --- |
-| `x11` | `yes`, `no` | `yes` | Includes X11 packages and the `x11` entries in the dotlists. |
-| `wayland` | `yes`, `no` | `yes` | Includes Wayland packages and the `wayland` entries in the dotlists. |
-| `vm` | `yes`, `no` | `no` | Selects the VM-specific Sway configuration when Wayland is enabled. |
+| `i3` | `yes`, `no` | `yes` | Includes i3, X11 packages, and the `i3` and `x11` entries in the dotlists. |
+| `sway` | `yes`, `no` | `yes` | Includes Sway, Wayland packages, and the `sway` and `wayland` entries in the dotlists. |
+| `vm` | `yes`, `no` | `no` | Selects the VM-specific Sway configuration when Sway is enabled. |
 
-`gui` is derived internally: it is `yes` when either `x11` or `wayland` is
+`gui` is derived internally: it is `yes` when either `i3` or `sway` is
 `yes`, and cannot be set in `dotconf.sh`. It selects the common GUI entries in
 `dotlist.home.txt` and `dotlist.etc.txt`.
 
@@ -53,8 +53,8 @@ distribution from `/etc/os-release`.
 | Other platforms or Linux distributions | Stops with an unsupported-platform error. |
 
 On Arch Linux, it installs the CLI and common desktop dependencies. With
-`x11=yes`, it additionally installs i3 and Xorg dependencies. With
-`wayland=yes`, it additionally installs Sway and Wayland dependencies; WayVNC
+`i3=yes`, it additionally installs i3 and Xorg dependencies. With
+`sway=yes`, it additionally installs Sway and Wayland dependencies; WayVNC
 is installed when `vm=yes`. Void Linux uses the corresponding Void package
 names, including `fish-shell`, `font-hack-ttf`, and `xinit`. Both package
 managers are run directly, so run the script from an account authorized to
@@ -68,8 +68,10 @@ install packages.
 
 `install.sh` installs the paths listed in `dotlist.home.txt` into `$HOME` and
 the paths listed in `dotlist.etc.txt` into `/etc`. Each entry is a `base` path
-(always included), a derived `gui` path, or an `x11`/`wayland` path selected by
-the corresponding option. It first verifies that every selected source exists
+(always included), a derived `gui` path, an `i3`/`sway` path selected by the
+corresponding option, or an `x11`/`wayland` path selected by the corresponding
+WM's platform.
+It first verifies that every selected source exists
 and that no managed paths overlap. Paths under `/etc` are installed through
 `sudo` when the script is not run as root.
 
@@ -83,7 +85,7 @@ For every selected path, the installer:
 3. Creates a symbolic link from the target root to the matching path under
    `home/` or `etc/`.
 
-When Wayland files are included, it also generates
+When Sway files are included, it also generates
 `~/.local/share/dotfiles/sway/config-gen` from `config-rm` or `config-vm`,
 depending on `vm`. If the installation fails after making changes, it removes
 links created during that run and restores the paths it moved to the backup.

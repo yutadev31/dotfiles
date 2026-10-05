@@ -12,27 +12,27 @@ load_configuration() {
 
   . "$dotdir/dotconf.sh"
 
-  x11=${x11:-yes}
-  wayland=${wayland:-yes}
+  i3=${i3:-yes}
+  sway=${sway:-yes}
   vm=${vm:-no}
 
-  case "$x11" in
+  case "$i3" in
   yes | no) ;;
   *)
-    echo "Error: x11 must be yes or no in $dotdir/dotconf.sh." >&2
+    echo "Error: i3 must be yes or no in $dotdir/dotconf.sh." >&2
     exit 1
     ;;
   esac
 
-  case "$wayland" in
+  case "$sway" in
   yes | no) ;;
   *)
-    echo "Error: wayland must be yes or no in $dotdir/dotconf.sh." >&2
+    echo "Error: sway must be yes or no in $dotdir/dotconf.sh." >&2
     exit 1
     ;;
   esac
 
-  if [ "$x11" = "yes" ] || [ "$wayland" = "yes" ]; then
+  if [ "$i3" = "yes" ] || [ "$sway" = "yes" ]; then
     gui=yes
   else
     gui=no
@@ -82,7 +82,7 @@ install_arch() {
       ttf-hack-nerd
   fi
 
-  if [ "$x11" = "yes" ]; then
+  if [ "$i3" = "yes" ]; then
     pacman_install \
       i3-wm \
       maim \
@@ -91,7 +91,7 @@ install_arch() {
       xorg-xinit
   fi
 
-  if [ "$wayland" = "yes" ]; then
+  if [ "$sway" = "yes" ]; then
     pacman_install \
       dbus \
       grim \
@@ -138,7 +138,7 @@ install_void() {
     # TODO Add Hack Nerd Font
   fi
 
-  if [ "$x11" = "yes" ]; then
+  if [ "$i3" = "yes" ]; then
     xbps_install \
       i3 \
       maim \
@@ -147,7 +147,7 @@ install_void() {
       xinit
   fi
 
-  if [ "$wayland" = "yes" ]; then
+  if [ "$sway" = "yes" ]; then
     xbps_install \
       dbus \
       elogind \

@@ -22,7 +22,7 @@ cd ~/dotfiles
 cp dotconf.example.sh dotconf.sh
 ```
 
-Edit `dotconf.sh` to suit the machine. Set `x11=no` or `wayland=no` to skip
+Edit `dotconf.sh` to suit the machine. Set `i3=no` or `sway=no` to skip
 the corresponding window manager packages and configurations. Set `vm=yes` to
 use the VM-specific Sway configuration.
 
