@@ -10,4 +10,4 @@ git config --global user.name "Yuta"
 git config --global user.email "yuta256dev@gmail.com"
 git config --global init.defaultBranch "main"
 
-echo "Configured Git and delta successfully."
+echo "Configured Git successfully."
