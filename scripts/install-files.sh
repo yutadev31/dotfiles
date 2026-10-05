@@ -73,6 +73,11 @@ backup_dir=
 moved_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-moved.XXXXXX")
 created_paths=$(mktemp "${TMPDIR:-/tmp}/dotfiles-install-created.XXXXXX")
 
+path_exists() {
+  _path_exists_target=${1:?path_exists: missing path}
+  [ -e "$_path_exists_target" ] || [ -L "$_path_exists_target" ]
+}
+
 reverse_paths() {
   awk '{ paths[NR] = $0 } END { for (i = NR; i > 0; i--) print paths[i] }' "$1"
 }
@@ -115,21 +120,8 @@ load_configuration() {
   x11=${x11:-yes}
   wayland=${wayland:-yes}
 
-  case "$x11" in
-  yes | no) ;;
-  *)
-    echo "Error: x11 must be yes or no in $dotdir/dotconf.sh." >&2
-    exit 1
-    ;;
-  esac
-
-  case "$wayland" in
-  yes | no) ;;
-  *)
-    echo "Error: wayland must be yes or no in $dotdir/dotconf.sh." >&2
-    exit 1
-    ;;
-  esac
+  validate_option x11 "$x11"
+  validate_option wayland "$wayland"
 
   if [ "$x11" = "yes" ] || [ "$wayland" = "yes" ]; then
     gui=yes
@@ -138,10 +130,17 @@ load_configuration() {
   fi
 
   vm=${vm:-no}
-  case "$vm" in
+  validate_option vm "$vm"
+}
+
+validate_option() {
+  name=${1:?validate_option: missing name}
+  value=${2:?validate_option: missing value}
+
+  case "$value" in
   yes | no) ;;
   *)
-    echo "Error: vm must be yes or no in $dotdir/dotconf.sh." >&2
+    echo "Error: $name must be yes or no in $dotdir/dotconf.sh." >&2
     exit 1
     ;;
   esac
@@ -230,6 +229,26 @@ ensure_backup_dir() {
   backup_dir=$(mktemp -d "$backup_root/install.XXXXXXXX")
 }
 
+backup_path() {
+  _backup_path_name=${1:?backup_path: missing path}
+  _backup_path_target=${2:?backup_path: missing target}
+
+  ensure_backup_dir
+  mkdir -p "$(dirname "$backup_dir/$_backup_path_name")"
+  printf '%s\n' "$_backup_path_name" >>"$moved_paths"
+  mv "$_backup_path_target" "$backup_dir/$_backup_path_name"
+  echo "Move ~/$_backup_path_name to $backup_dir/$_backup_path_name"
+}
+
+create_link() {
+  _create_link_path=${1:?create_link: missing path}
+  _create_link_target=${2:?create_link: missing target}
+
+  mkdir -p "$(dirname "$_create_link_path")"
+  ln -s "$_create_link_target" "$_create_link_path"
+  printf '%s\n' "${_create_link_path#"$HOME/"}" >>"$created_paths"
+}
+
 install_file() {
   path=${1:?install_file: missing path}
 
@@ -245,18 +264,12 @@ install_file() {
   fi
 
   # Move an existing file, directory, or incorrect symbolic link aside.
-  if [ -e "$HOME/$path" ] || [ -L "$HOME/$path" ]; then
-    ensure_backup_dir
-    mkdir -p "$(dirname "$backup_dir/$path")"
-    printf '%s\n' "$path" >>"$moved_paths"
-    mv "$HOME/$path" "$backup_dir/$path"
-    echo "Move ~/$path to $backup_dir/$path"
+  if path_exists "$HOME/$path"; then
+    backup_path "$path" "$HOME/$path"
   fi
 
   # Create a symbolic link
-  mkdir -p "$(dirname "$HOME/$path")"
-  ln -s "$dotdir/home/$path" "$HOME/$path"
-  printf '%s\n' "$path" >>"$created_paths"
+  create_link "$HOME/$path" "$dotdir/home/$path"
   echo "Create ~/$path"
 }
 
@@ -287,24 +300,18 @@ gen_files() {
   fi
 
   if [ "$dry_run" = "yes" ]; then
-    if [ -e "$target" ] || [ -L "$target" ]; then
+    if path_exists "$target"; then
       echo "Would move ~/$path to a new backup directory"
     fi
     echo "Would symlink ~/$path -> $source"
     return
   fi
 
-  if [ -e "$target" ] || [ -L "$target" ]; then
-    ensure_backup_dir
-    mkdir -p "$(dirname "$backup_dir/$path")"
-    printf '%s\n' "$path" >>"$moved_paths"
-    mv "$target" "$backup_dir/$path"
-    echo "Move ~/$path to $backup_dir/$path"
+  if path_exists "$target"; then
+    backup_path "$path" "$target"
   fi
 
-  mkdir -p "$(dirname "$target")"
-  ln -s "$source" "$target"
-  printf '%s\n' "$path" >>"$created_paths"
+  create_link "$target" "$source"
   echo "Symlink ~/$path -> $source"
 }
 
