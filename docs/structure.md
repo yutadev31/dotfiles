@@ -19,7 +19,7 @@ the shell installer, while `nix/` contains declarative Nix configurations.
 ├── docker/        Arch Linux development container
 ├── docs/          Repository documentation
 ├── LICENSES/      License notices for included third-party files
-├── install.sh     Interactive launcher for package and dotfile installation
+├── install.sh     Portable dotfile installer
 ├── dotlist.txt    Inventory of paths managed by the portable installer
 ├── dotconf.sh     Local, machine-specific installer settings (not tracked)
 ├── flake.nix      Development-shell flake for repository tooling
@@ -32,7 +32,7 @@ the shell installer, while `nix/` contains declarative Nix configurations.
 helpers and application configuration, but its internal files are intentionally
 not catalogued here; each top-level path is selected through `dotlist.txt`.
 
-`scripts/install-files.sh` is the entry point for individual dotfile installation. It reads `dotlist.txt`,
+`install.sh` installs the portable dotfiles. It reads `dotlist.txt`,
 which separates always-installed paths (`base`) from common GUI, X11, and
 Wayland paths (`gui`, `x11`, and `wayland`). Local options in `dotconf.sh`
 control the graphical paths; `gui` is derived from the X11 and Wayland options.
@@ -83,13 +83,10 @@ system and user-environment features reusable.
 The repository includes a small set of scripts for routine setup and
 maintenance:
 
-- `scripts/install-files.sh` links the selected portable dotfiles into `$HOME`, with
-  backups, rollback, and a dry-run mode.
-- `install.sh` always runs the dotfile installer and runs the package installer
-  only when invoked with `-p`.
+- `install.sh` links the selected portable dotfiles into `$HOME`, with backups,
+  rollback, and a dry-run mode.
 - `scripts/install-packages.sh` installs the packages required by the
-  portable setup. It currently implements Arch Linux installation and detects
-  several other operating systems.
+  portable setup. It is currently not invoked by `install.sh`.
 - `scripts/install-paru.sh` bootstraps the Paru AUR helper on Arch Linux.
 - `scripts/setup-git.sh` applies the repository owner's global Git defaults.
 - `nix/scripts/os-rebuild` switches the NixOS configuration from the

@@ -32,13 +32,13 @@ Then run the installer:
 ./install.sh
 ```
 
-This installs dotfiles. Add `-p` to install packages first:
+This installs dotfiles. Use `--dry-run` to preview the changes:
 
 ```sh
-./install.sh -p
+./install.sh --dry-run
 ```
 
-The package installer currently installs packages on Arch Linux; package
+The package installer is currently separate and installs packages on Arch Linux; package
 installation on Void Linux, FreeBSD, OpenBSD, NetBSD, and DragonFly BSD is not
 implemented.
 

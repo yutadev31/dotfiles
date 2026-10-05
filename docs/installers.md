@@ -28,21 +28,16 @@ it changes the system.
 
 ## `./install.sh`
 
-This runs dotfile installation unconditionally. Package installation is
-included only when the `-p` option is specified.
+This runs the portable dotfile installation.
+
+Preview the operation without changing `$HOME`:
 
 ```sh
-./install.sh
+./install.sh --dry-run
 ```
 
-To install packages before the dotfiles, run:
-
-```sh
-./install.sh -p
-```
-
-Use the individual scripts below when only one operation is wanted, or when a
-dry run is needed.
+Package installation remains available as a separate operation below, but is
+not run by `install.sh`.
 
 ## `./scripts/install-packages.sh`
 
@@ -69,9 +64,9 @@ install packages.
 ./scripts/install-packages.sh
 ```
 
-## `./scripts/install-files.sh`
+## Dotfile installation details
 
-This script installs the paths listed in `dotlist.txt` into `$HOME`. Each entry
+`install.sh` installs the paths listed in `dotlist.txt` into `$HOME`. Each entry
 is a `base` path (always included), a derived `gui` path, or an `x11`/`wayland`
 path selected by the corresponding option. It first verifies that every
 selected source exists and that no managed paths overlap.
@@ -88,12 +83,6 @@ When Wayland files are included, it also generates
 `~/.local/share/dotfiles/sway/config-gen` from `config-rm` or `config-vm`,
 depending on `vm`. If the installation fails after making changes, it removes
 links created during that run and restores the paths it moved to the backup.
-
-Preview the operation without changing `$HOME`:
-
-```sh
-./scripts/install-files.sh --dry-run
-```
 
 `--help` displays usage. Any other option exits with an error. On NixOS, the
 script only runs when `$HOME` is located under `/tmp`; this prevents accidental
