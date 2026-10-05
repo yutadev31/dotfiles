@@ -6,7 +6,8 @@ dotdir=$(CDPATH= cd "$(dirname "$0")/.." && pwd)
 
 load_configuration() {
   if [ ! -f "$dotdir/dotconf.sh" ]; then
-    echo "Error: create $dotdir/dotconf.sh before running the package installer." >&2
+    echo "Error: $dotdir/dotconf.sh is missing. Create it before running the package installer:" >&2
+    echo "cp dotconf.example.sh dotconf.sh" >&2
     exit 1
   fi
 

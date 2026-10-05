@@ -100,7 +100,8 @@ trap cleanup EXIT HUP INT TERM
 
 load_configuration() {
   if [ ! -f "$dotdir/dotconf.sh" ]; then
-    echo "Error: create $dotdir/dotconf.sh before running the installer." >&2
+    echo "Error: $dotdir/dotconf.sh is missing. Create it before running the installer:" >&2
+    echo "cp dotconf.example.sh dotconf.sh" >&2
     exit 1
   fi
 
