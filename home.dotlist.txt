@@ -1,6 +1,7 @@
 # Format: scope path
 # scope is "base", "gui", "x11", or "wayland".
 base .bin
+base .profile
 base .config/aliases.sh
 base .config/fastfetch
 base .config/fish/config.fish
