@@ -8,7 +8,15 @@ Nix flake for the `laptop2` NixOS and Home Manager configurations.
 - Keep documentation in English.
 - Keep `README.md`, this file, and the files directly under `docs/` consistent
   with the scripts, dotlists, and Nix flake.
-- Do not modify `docs/notes/**` unless the user explicitly requests it.
+- Do not modify `docs/notes/**`; these files are personal notes written and
+  maintained by the user.
+
+## Runtime and Communication
+
+- This repository may be used from a TTY or while an operating system is being
+  installed, when Japanese fonts may not be available. Keep error messages,
+  command output, and other operational messages in English.
+- Japanese is fine for conversations with the user.
 
 ## Changes
 
