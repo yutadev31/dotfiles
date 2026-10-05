@@ -7,5 +7,5 @@ sway=no
 # Install Hyprland, Wayland packages, and configurations.
 hyprland=no
 
-# Use the virtual-machine Sway configuration.
+# Use the virtual-machine configuration.
 vm=no
