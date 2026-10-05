@@ -207,12 +207,12 @@ is_managed_etc_link() {
 preflight() {
   load_configuration
 
-  if [ ! -f "$dotdir/home.dotlist.txt" ]; then
-    echo "Error: dotfile list does not exist: $dotdir/home.dotlist.txt" >&2
+  if [ ! -f "$dotdir/dotlist.home.txt" ]; then
+    echo "Error: dotfile list does not exist: $dotdir/dotlist.home.txt" >&2
     exit 1
   fi
 
-  managed_list=$(managed_paths home.dotlist.txt) || exit 1
+  managed_list=$(managed_paths dotlist.home.txt) || exit 1
   while IFS= read -r path; do
     [ -n "$path" ] || continue
     if [ ! -e "$dotdir/home/$path" ]; then
@@ -235,12 +235,12 @@ preflight() {
 $managed_list
 EOF
 
-  if [ ! -f "$dotdir/etc.dotlist.txt" ]; then
-    echo "Error: dotfile list does not exist: $dotdir/etc.dotlist.txt" >&2
+  if [ ! -f "$dotdir/dotlist.etc.txt" ]; then
+    echo "Error: dotfile list does not exist: $dotdir/dotlist.etc.txt" >&2
     exit 1
   fi
 
-  etc_managed_list=$(managed_paths etc.dotlist.txt) || exit 1
+  etc_managed_list=$(managed_paths dotlist.etc.txt) || exit 1
   if [ -n "$etc_managed_list" ] && [ "$dry_run" = no ] && [ "$(id -u)" -ne 0 ]; then
     command -v sudo >/dev/null 2>&1 || {
       echo 'Error: sudo is required to install files under /etc.' >&2
@@ -363,7 +363,7 @@ install_files() {
   while IFS= read -r path; do
     install_file "$path"
   done <<EOF
-$(managed_paths home.dotlist.txt)
+$(managed_paths dotlist.home.txt)
 EOF
 }
 
@@ -374,7 +374,7 @@ install_etc_files() {
     [ -n "$path" ] || continue
     install_etc_file "$path"
   done <<EOF
-$(managed_paths etc.dotlist.txt)
+$(managed_paths dotlist.etc.txt)
 EOF
 }
 

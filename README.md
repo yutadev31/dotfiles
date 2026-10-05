@@ -44,7 +44,7 @@ implemented.
 
 The dotfile installer moves existing managed paths to unique directories under
 `~/.dotfiles-backup` and `/etc/.dotfiles-backup`, then creates symbolic links to
-this repository. It uses `home.dotlist.txt` and `etc.dotlist.txt`; `/etc`
+this repository. It uses `dotlist.home.txt` and `dotlist.etc.txt`; `/etc`
 changes use `sudo` when needed. If an installation step fails, it restores paths
 changed during that run.
 

@@ -21,7 +21,7 @@ cp dotconf.example.sh dotconf.sh
 
 `gui` is derived internally: it is `yes` when either `x11` or `wayland` is
 `yes`, and cannot be set in `dotconf.sh`. It selects the common GUI entries in
-`home.dotlist.txt` and `etc.dotlist.txt`.
+`dotlist.home.txt` and `dotlist.etc.txt`.
 
 An invalid value, or a missing `dotconf.sh`, stops the relevant installer before
 it changes the system.
@@ -66,8 +66,8 @@ install packages.
 
 ## Dotfile installation details
 
-`install.sh` installs the paths listed in `home.dotlist.txt` into `$HOME` and
-the paths listed in `etc.dotlist.txt` into `/etc`. Each entry is a `base` path
+`install.sh` installs the paths listed in `dotlist.home.txt` into `$HOME` and
+the paths listed in `dotlist.etc.txt` into `/etc`. Each entry is a `base` path
 (always included), a derived `gui` path, or an `x11`/`wayland` path selected by
 the corresponding option. It first verifies that every selected source exists
 and that no managed paths overlap. Paths under `/etc` are installed through

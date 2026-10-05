@@ -20,8 +20,8 @@ the shell installer, while `nix/` contains declarative Nix configurations.
 ├── docs/          Repository documentation
 ├── LICENSES/      License notices for included third-party files
 ├── install.sh     Portable dotfile installer
-├── home.dotlist.txt
-├── etc.dotlist.txt
+├── dotlist.home.txt
+├── dotlist.etc.txt
 ├── dotconf.sh     Local, machine-specific installer settings (not tracked)
 ├── flake.nix      Development-shell flake for repository tooling
 └── stylua.toml    Lua formatter configuration
@@ -31,8 +31,8 @@ the shell installer, while `nix/` contains declarative Nix configurations.
 
 `home/` mirrors the relevant portions of a home directory, while `etc/` mirrors
 the managed portions of `/etc`. Their internal files are intentionally not
-catalogued here; paths are selected through `home.dotlist.txt` and
-`etc.dotlist.txt`.
+catalogued here; paths are selected through `dotlist.home.txt` and
+`dotlist.etc.txt`.
 
 `install.sh` installs the portable dotfiles. It reads the two dotlists, which
 separate always-installed paths (`base`) from common GUI, X11, and
