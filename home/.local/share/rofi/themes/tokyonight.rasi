@@ -1,10 +1,9 @@
 * {
-  bg: #1a1b26;
-  bg-alt: #16161e;
+  bg: #24283b;
+  bg-alt: #414868;
   fg: #c0caf5;
   fg-alt: #a9b1d6;
   accent: #7aa2f7;
-  border: #3d59a1;
 
   background-color: transparent;
   text-color: @fg;
@@ -16,7 +15,7 @@ window {
   width: 520px;
   background-color: @bg;
   border: 2px;
-  border-color: @border;
+  border-color: @accent;
   padding: 10px;
 }
 
