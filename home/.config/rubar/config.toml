@@ -5,7 +5,7 @@ bold = true
 [modules]
 left = ["workspace"]
 center = []
-right = ["battery", "volume", "clock"]
+right = ["tray", "battery", "volume", "clock"]
 
 [workspace]
 persistent_workspaces = [1, 2, 3, 4, 5]

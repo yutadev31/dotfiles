@@ -28,6 +28,19 @@
     };
     llm-agents.url = "github:numtide/llm-agents.nix";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+
+    cpst = {
+      url = "github:yutadev31/cpst";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    shot = {
+      url = "github:yutadev31/shot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rubar = {
+      url = "github:yutadev31/rubar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     inputs@{

@@ -1,5 +1,5 @@
 hl.on("hyprland.start", function()
   hl.exec_cmd("systemctl --user start hyprland-session.target")
-  hl.exec_cmd("waybar")
+  hl.exec_cmd("rubar")
   hl.exec_cmd("fcitx5 -rd")
 end)
