@@ -18,7 +18,6 @@ configurations.
 ├── etc/             Portable files linked into /etc
 ├── nix/             NixOS and Home Manager configuration
 ├── scripts/         Portable installer and Nix helper scripts
-├── docker/          Arch Linux development container
 ├── docs/            Repository documentation
 ├── LICENSES/        Notices for included third-party files
 ├── install.sh       Portable dotfile installer
@@ -97,9 +96,8 @@ and modules implement those capabilities in focused Nix files.
 - `scripts/clean-gc` removes obsolete Nix generations and collects unused
   store paths.
 
-## Development and container support
+## Development support
 
 The root flake provides a development shell with language servers and
 formatters, as well as a formatter and formatting check for the Nix
-configuration. `docker/Dockerfile` defines an Arch Linux environment with the
-core command-line tools used for portable setup and installer testing.
+configuration.
