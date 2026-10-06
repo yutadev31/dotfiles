@@ -6,7 +6,6 @@
     ./fcitx5
     ./hyprland
     ./rofi
-    ./waybar
     ./keyring.nix
     ./theme.nix
   ];
