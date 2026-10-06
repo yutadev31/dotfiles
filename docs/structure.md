@@ -49,6 +49,7 @@ execution is restricted to temporary homes under `/tmp`. Successful installs
 record their managed paths in
 `${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/installed`; removed dotlist
 entries are cleaned up when their links still point into this repository.
+`--uninstall` removes recorded links that still point into this repository.
 
 An installed source directory can contain an executable `dotmeta`. The
 installer runs it in that directory and links the file whose name it prints;

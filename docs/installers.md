@@ -37,9 +37,13 @@ This installs the selected portable dotfiles. It does not install packages.
 ```sh
 ./install.sh
 ./install.sh --dry-run
+./install.sh --uninstall
 ```
 
 The dry run previews the operation without changing `$HOME` or `/etc`.
+`--uninstall` removes symlinks recorded by a previous installation. It does not
+depend on the current dotlists or `dotconf.sh`, so it can remove links after
+their configuration has changed.
 `--help` displays usage; any other option is rejected.
 
 The installer reads `dotlist.home.txt` for paths under `$HOME` and
@@ -57,6 +61,11 @@ links in `${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/installed`. On the next
 run, paths present in the previous record but absent from the current dotlists
 are removed only when they are still symlinks to this repository. Regular files
 and links to other locations are left untouched.
+
+`--uninstall` uses the same record and removes only links that still point to
+the recorded source in this repository. Regular files and links changed to
+other locations are left untouched. After a successful non-dry-run
+uninstallation, the installed-path record is removed.
 
 If a selected source path is a directory containing an executable `dotmeta`,
 the installer runs it from that directory and uses the file name printed to

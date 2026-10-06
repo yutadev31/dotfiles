@@ -48,6 +48,12 @@ Use `--dry-run` to preview the operation:
 ./install.sh --dry-run
 ```
 
+Use `--uninstall` to remove symlinks recorded by a previous installation:
+
+```sh
+./install.sh --uninstall
+```
+
 `install.sh` does not install packages. The separate package helper supports
 Arch Linux and Void Linux; it reports unsupported platforms and does not yet
 install packages on FreeBSD, OpenBSD, NetBSD, or DragonFly BSD:
@@ -62,8 +68,10 @@ conflicting managed paths into unique directories under
 this repository. It records installed paths under
 `${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/installed`; paths removed from
 the dotlists are automatically removed when they are still links to this
-repository. It uses `sudo` for `/etc` paths when necessary and rolls back
-changes made during a failed installation. On NixOS, it only runs when
+repository. `--uninstall` removes recorded links that still point to this
+repository and leaves changed or unrelated paths untouched. It uses `sudo` for
+`/etc` paths when necessary and rolls back changes made during a failed
+installation. On NixOS, it only runs when
 `$HOME` is under `/tmp`.
 
 See the [installer guide](./docs/installers.md) for options, supported

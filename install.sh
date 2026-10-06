@@ -2,14 +2,17 @@
 set -eu
 
 dry_run=no
+uninstall=no
+operation=installation
 
 usage() {
   cat <<'EOF'
-Usage: ./install.sh [--dry-run]
+Usage: ./install.sh [--dry-run] [--uninstall]
 
 Install the managed dotfiles into $HOME and /etc. Existing paths are moved to
 unique backup directories. Paths removed from the dotlists are removed when
-they are still symlinks managed by this repository. Use --dry-run to preview
+they are still symlinks managed by this repository. Use --uninstall to remove
+all symlinks recorded by a previous installation. Use --dry-run to preview
 changes.
 EOF
 }
@@ -17,6 +20,7 @@ EOF
 while [ "$#" -gt 0 ]; do
   case "$1" in
   --dry-run) dry_run=yes ;;
+  --uninstall) uninstall=yes ;;
   -h | --help)
     usage
     exit 0
@@ -112,7 +116,7 @@ reverse_records() {
 cleanup() {
   status=$?
   if [ "$status" -ne 0 ]; then
-    echo "Installation failed; restoring changed paths..." >&2
+    echo "$operation failed; restoring changed paths..." >&2
     rollback
   fi
   rm -f "$moved_paths" "$created_paths" "$etc_moved_paths" "$etc_created_paths" \
@@ -550,6 +554,73 @@ $(managed_paths dotlist.etc.txt)
 EOF
 }
 
+preflight_uninstall() {
+  [ -f "$state_file" ] || return 0
+  [ "$dry_run" = no ] || return 0
+  [ "$(id -u)" -eq 0 ] && return 0
+
+  if awk -F '	' '$1 == "etc" { found = 1 } END { exit !found }' "$state_file"; then
+    command -v sudo >/dev/null 2>&1 || {
+      echo 'Error: sudo is required to uninstall files under /etc.' >&2
+      exit 1
+    }
+    sudo -v
+  fi
+}
+
+uninstall_links() {
+  if [ ! -f "$state_file" ]; then
+    echo "No installed dotfiles state found: $state_file"
+    return 0
+  fi
+
+  preflight_uninstall
+  echo "Uninstalling dotfiles..."
+
+  while IFS='	' read -r scope path source; do
+    [ -n "$scope" ] || continue
+
+    case "$scope" in
+    home)
+      if is_managed_link "$path" "$source"; then
+        if [ "$dry_run" = yes ]; then
+          echo "Would remove ~/$path"
+        else
+          rm -f "$HOME/$path"
+          printf '%s\t%s\n' "$path" "$source" >>"$stale_paths"
+          echo "Remove ~/$path"
+        fi
+      else
+        echo "Leave ~/$path (not a symlink to this repository)"
+      fi
+      ;;
+    etc)
+      if is_managed_etc_link "$path" "$source"; then
+        if [ "$dry_run" = yes ]; then
+          echo "Would remove /etc/$path"
+        else
+          root_cmd rm -f "/etc/$path"
+          printf '%s\t%s\n' "$path" "$source" >>"$etc_stale_paths"
+          echo "Remove /etc/$path"
+        fi
+      else
+        echo "Leave /etc/$path (not a symlink to this repository)"
+      fi
+      ;;
+    *)
+      echo "Warning: ignoring invalid scope in $state_file: $scope" >&2
+      ;;
+    esac
+  done <"$state_file"
+
+  if [ "$dry_run" = no ]; then
+    rm -f "$state_file"
+    echo "Remove installed dotfiles state: $state_file"
+  fi
+
+  echo "Uninstalled dotfiles successfully."
+}
+
 finish() {
   if [ -n "$backup_dir" ]; then
     echo "Backups are available in $backup_dir"
@@ -574,4 +645,9 @@ install() {
   echo "Installed dotfiles successfully."
 }
 
-install
+if [ "$uninstall" = yes ]; then
+  operation=uninstallation
+  uninstall_links
+else
+  install
+fi
