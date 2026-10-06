@@ -40,14 +40,17 @@ These packages are installed when at least one graphical option is enabled:
 | --- | --- |
 | `alacritty` | Terminal |
 | `dunst` | Notification daemon |
+| `rofi` | Application launcher |
+| [`rubar`](https://github.com/yutadev31/rubar) | Status bar |
 | `fcitx5` | Input method framework |
 | `fcitx5-gtk` | Fcitx5 integration for GTK applications |
 | `fcitx5-mozc` | Japanese input for Fcitx5 (Mozc) |
 | `fcitx5-qt` | Fcitx5 integration for Qt applications |
 | `noto-fonts`, `noto-fonts-cjk` | Standard and CJK fonts |
-| `pavucontrol` | Volume control |
-| `rofi` | Application launcher |
 | `ttf-hack-nerd` | Font and icon glyphs |
+| `pavucontrol` | Volume control |
+| [`shot`](https://github.com/yutadev31/shot) | Screenshots |
+| [`cpst`](https://github.com/yutadev31/cpst) | Clipboard |
 
 The portable configuration also includes the Rubar and Shot configuration
 files; their executables are not installed by the package helper.
@@ -61,8 +64,6 @@ Install these when `i3=yes`:
 | `i3-wm` | Window manager |
 | `xorg-server` | X11 server |
 | `xorg-xinit` | Starts an X11 session |
-| `maim` | Screenshots |
-| `xclip` | X11 clipboard |
 
 ## Sway (Wayland)
 
@@ -71,13 +72,6 @@ Install these when `sway=yes`:
 | Package | Purpose |
 | --- | --- |
 | `sway` | Wayland compositor |
-| `grim` | Screenshots |
-| `slurp` | Selects a screenshot region |
-| `wl-clipboard` | Wayland clipboard via `wl-copy` |
-| `dbus` | Runs a session via `dbus-run-session` |
-| `waybar` | Status bar used by the Sway package set |
-
-`wayvnc` is additionally installed when both `sway=yes` and `vm=yes`.
 
 ## Hyprland (Wayland)
 
@@ -86,13 +80,3 @@ Install these when `hyprland=yes`:
 | Package | Purpose |
 | --- | --- |
 | `hyprland` | Wayland compositor |
-| `grim` | Screenshots |
-| `slurp` | Selects a screenshot region |
-| `wl-clipboard` | Wayland clipboard via `wl-copy` |
-| `waybar` | Status bar |
-| `dbus` | Runs a session via `dbus-run-session` |
-
-Void Linux uses its corresponding package names, including `fish-shell`,
-`noto-fonts-ttf`, `noto-fonts-cjk`, and `xinit`. The Void package helper does
-not currently provide Hack Nerd Font, so install a suitable Nerd Font
-separately when needed.
