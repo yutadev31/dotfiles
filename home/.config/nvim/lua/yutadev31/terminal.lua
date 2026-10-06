@@ -5,14 +5,14 @@ local state = {
   win = nil,
 }
 
-local function create_window(buf)
+local function window_config()
   local width = math.floor(vim.o.columns * 0.8)
   local height = math.floor(vim.o.lines * 0.8)
 
   local row = math.floor((vim.o.lines - height) / 2)
   local col = math.floor((vim.o.columns - width) / 2)
 
-  return vim.api.nvim_open_win(buf, true, {
+  return {
     relative = "editor",
     width = width,
     height = height,
@@ -20,8 +20,20 @@ local function create_window(buf)
     col = col,
     style = "minimal",
     border = "single",
-  })
+  }
 end
+
+local function create_window(buf)
+  return vim.api.nvim_open_win(buf, true, window_config())
+end
+
+vim.api.nvim_create_autocmd("VimResized", {
+  callback = function()
+    if state.win and vim.api.nvim_win_is_valid(state.win) then
+      vim.api.nvim_win_set_config(state.win, window_config())
+    end
+  end,
+})
 
 function M.toggle()
   if state.win and vim.api.nvim_win_is_valid(state.win) then
