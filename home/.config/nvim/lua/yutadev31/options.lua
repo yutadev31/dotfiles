@@ -62,6 +62,11 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldenable = true
 
+-- Title
+vim.opt.title = true
+vim.opt.titlestring = "%t - Neovim"
+
+-- Shell
 vim.opt.shell = "fish"
 
 -- Diagnostic
