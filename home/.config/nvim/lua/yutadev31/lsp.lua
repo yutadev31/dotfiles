@@ -2,6 +2,12 @@ vim.lsp.inlay_hint.enable(true)
 
 vim.lsp.config("*", {
   capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  on_attach = function(client, bufnr)
+    if client.server_capabilities.documentSymbolProvider then
+      require("nvim-navic").attach(client, bufnr)
+      vim.opt_local.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+    end
+  end,
 })
 
 vim.lsp.config("nixd", {
