@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   "refractalize/oil-git-status.nvim",
   dependencies = {

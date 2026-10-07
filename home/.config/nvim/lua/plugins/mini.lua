@@ -2,6 +2,7 @@ local function setup(name, opts)
   require("mini." .. name).setup(opts)
 end
 
+---@type LazySpec
 return {
   "echasnovski/mini.nvim",
   version = "*",
