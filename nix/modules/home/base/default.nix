@@ -1,7 +1,6 @@
 {
   imports = [
     ./cli.nix
-    ./fish.nix
     ./neovim.nix
   ];
 

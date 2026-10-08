@@ -34,3 +34,9 @@ function log_command --on-event fish_preexec
   printf '%s\t%s\n' (date '+%Y-%m-%d %H:%M:%S') "$argv" \
     >> ~/.local/state/fish/commands.log
 end
+
+# List directory contents after changing directories
+function cd
+  builtin cd $argv
+  ls
+end
