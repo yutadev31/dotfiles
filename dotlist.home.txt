@@ -2,6 +2,9 @@
 # scope is "base", "gui", "i3", "sway", "hyprland", "x11", or "wayland".
 base .bin
 base .profile
+base .shrc
+base .bashrc
+base .zshrc
 base .config/aliases.sh
 base .config/fastfetch
 base .config/fish/config.fish

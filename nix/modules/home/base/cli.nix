@@ -6,7 +6,7 @@
   ];
 
   # Shell
-  home.file.".profile".source = ../../../../home/.profile;
+  home.file.".bashrc".source = ../../../../home/.bashrc;
   xdg.configFile."aliases.sh".source = ../../../../home/.config/aliases.sh;
   xdg.configFile."fish/config.fish".source = ../../../../home/.config/fish/config.fish;
 
