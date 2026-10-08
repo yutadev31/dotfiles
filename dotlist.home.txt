@@ -22,6 +22,8 @@ gui .config/shot
 sway .config/sway/config
 sway .config/sway/config.d
 sway .config/sway/config-modkey
-hyprland .config/hypr
+hyprland .config/hypr/hyprland.lua
+hyprland .config/hypr/monitors.lua
+hyprland .config/hypr/config
 gui .local/share/rofi/themes
 gui .local/share/wallpapers
