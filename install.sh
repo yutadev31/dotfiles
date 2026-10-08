@@ -133,83 +133,78 @@ load_configuration() {
     exit 1
   fi
 
+  set -a
   . "$dotdir/dotconf.sh"
-
-  i3=${i3:-yes}
-  sway=${sway:-yes}
-  hyprland=${hyprland:-no}
-
-  validate_option i3 "$i3"
-  validate_option sway "$sway"
-  validate_option hyprland "$hyprland"
-
-  # Keep platform scopes available in dotlists for all supported window managers.
-  x11=$i3
-  wayland=$sway
-  if [ "$hyprland" = "yes" ]; then
-    wayland=yes
-  fi
-
-  if [ "$i3" = "yes" ] || [ "$sway" = "yes" ] || [ "$hyprland" = "yes" ]; then
-    gui=yes
-  else
-    gui=no
-  fi
-
-  vm=${vm:-no}
-  validate_option vm "$vm"
-
-  export gui i3 sway hyprland x11 wayland vm
-}
-
-validate_option() {
-  name=${1:?validate_option: missing name}
-  value=${2:?validate_option: missing value}
-
-  case "$value" in
-  yes | no) ;;
-  *)
-    echo "Error: $name must be yes or no in $dotdir/dotconf.sh." >&2
+  set +a
+  if [ ! -f "$dotdir/dotopts.sh" ]; then
+    echo "Error: $dotdir/dotopts.sh is missing." >&2
     exit 1
-    ;;
-  esac
+  fi
+  if [ ! -x "$dotdir/dotopts.sh" ]; then
+    echo "Error: dotopts.sh is not executable: $dotdir/dotopts.sh" >&2
+    exit 1
+  fi
+
+  options=$(CDPATH= cd -P "$dotdir" && ./dotopts.sh) || {
+    echo "Error: failed to execute: $dotdir/dotopts.sh" >&2
+    exit 1
+  }
+  enabled_scopes=
+  seen_scopes='|'
+  while IFS= read -r option || [ -n "$option" ]; do
+    case "$option" in
+    *=*) scope=${option%%=*}; value=${option#*=} ;;
+    *)
+      echo "Error: invalid dotopts.sh output: $option" >&2
+      exit 1
+      ;;
+    esac
+    case "$scope" in
+    '' | *[!a-zA-Z0-9_-]*)
+      echo "Error: invalid scope in dotopts.sh output: $scope" >&2
+      exit 1
+      ;;
+    esac
+    case "$value" in
+    yes | no) ;;
+    *)
+      echo "Error: scope $scope in dotopts.sh output must be yes or no." >&2
+      exit 1
+      ;;
+    esac
+    case "$seen_scopes" in
+    *"|$scope|"*)
+      echo "Error: duplicate scope in dotopts.sh output: $scope" >&2
+      exit 1
+      ;;
+    esac
+    seen_scopes=$seen_scopes$scope'|'
+    if [ "$value" = yes ]; then
+      if [ -n "$enabled_scopes" ]; then enabled_scopes=$enabled_scopes,; fi
+      enabled_scopes=$enabled_scopes$scope
+    fi
+  done <<EOF
+$options
+EOF
 }
 
 managed_paths() {
   list=${1:?managed_paths: missing list}
-  awk -v gui="$gui" -v i3="$i3" -v sway="$sway" -v hyprland="$hyprland" -v x11="$x11" -v wayland="$wayland" '
+  awk -v enabled_scopes="$enabled_scopes" '
     /^[[:space:]]*($|#)/ { next }
     NF != 2 {
       printf "Error: invalid dotlist entry on line %d: expected scope and path\n", NR > "/dev/stderr"
       invalid = 1
       next
     }
-    $1 == "base" { print $2; next }
-    $1 == "gui" {
-      if (gui == "yes") print $2
-      next
-    }
-    $1 == "i3" {
-      if (i3 == "yes") print $2
-      next
-    }
-    $1 == "sway" {
-      if (sway == "yes") print $2
-      next
-    }
-    $1 == "hyprland" {
-      if (hyprland == "yes") print $2
-      next
-    }
-    $1 == "x11" {
-      if (x11 == "yes") print $2
-      next
-    }
-    $1 == "wayland" {
-      if (wayland == "yes") print $2
-      next
-    }
     {
+      count = split(enabled_scopes, scopes, ",")
+      for (i = 1; i <= count; i++) {
+        if ($1 == scopes[i]) {
+          print $2
+          next
+        }
+      }
       printf "Error: invalid dotlist scope on line %d: %s\n", NR, $1 > "/dev/stderr"
       invalid = 1
     }
