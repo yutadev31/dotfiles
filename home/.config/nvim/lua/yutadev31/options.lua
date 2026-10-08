@@ -69,6 +69,8 @@ vim.opt.titlestring = "%t - Neovim"
 -- Shell
 vim.opt.shell = "fish"
 
+vim.opt.formatoptions:remove({ "r", "o" })
+
 -- Diagnostic
 vim.diagnostic.config({
   virtual_text = true,
@@ -82,6 +84,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Fcitx5
 if vim.fn.executable("fcitx5-remote") == 1 then
   vim.api.nvim_create_autocmd("InsertLeave", {
     callback = function()
