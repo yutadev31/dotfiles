@@ -1,0 +1,26 @@
+# nix
+flakes
+home-manager
+nixos
+
+# home
+alacritty
+dunst
+fastfetch
+fcitx5
+fish
+hyprland
+i3
+neovim
+rofi
+rubar
+shell
+shot
+sway
+
+# etc
+x11
+
+# scripts
+installer
+script
