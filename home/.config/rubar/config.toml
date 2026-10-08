@@ -4,7 +4,7 @@ bold = true
 
 [modules]
 left = ["workspace"]
-center = ["window"]
+center = []
 right = ["tray", "battery", "volume", "clock"]
 
 [workspace]

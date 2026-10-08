@@ -375,11 +375,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1791358256,
-        "narHash": "sha256-kKQ5rTyVLlJMr/wFg4fysu/d2V1l7dLDAWIDuQgEH8c=",
+        "lastModified": 1791472285,
+        "narHash": "sha256-jU/PRdr+xdOmBzGZjMY+IfFYYvPY05NI7+C8De3/EAU=",
         "owner": "yutadev31",
         "repo": "rubar",
-        "rev": "19e6ce0353aadb3b6f983aad6ab10a062215472f",
+        "rev": "81bdb32969fb7221680a47e2cb48a04910434f1f",
         "type": "github"
       },
       "original": {
