@@ -136,17 +136,17 @@ load_configuration() {
   set -a
   . "$dotdir/dotconf.sh"
   set +a
-  if [ ! -f "$dotdir/dotopts.sh" ]; then
-    echo "Error: $dotdir/dotopts.sh is missing." >&2
+  if [ ! -f "$dotdir/dotscopes.sh" ]; then
+    echo "Error: $dotdir/dotscopes.sh is missing." >&2
     exit 1
   fi
-  if [ ! -x "$dotdir/dotopts.sh" ]; then
-    echo "Error: dotopts.sh is not executable: $dotdir/dotopts.sh" >&2
+  if [ ! -x "$dotdir/dotscopes.sh" ]; then
+    echo "Error: dotscopes.sh is not executable: $dotdir/dotscopes.sh" >&2
     exit 1
   fi
 
-  options=$(CDPATH= cd -P "$dotdir" && ./dotopts.sh) || {
-    echo "Error: failed to execute: $dotdir/dotopts.sh" >&2
+  options=$(CDPATH= cd -P "$dotdir" && ./dotscopes.sh) || {
+    echo "Error: failed to execute: $dotdir/dotscopes.sh" >&2
     exit 1
   }
   enabled_scopes=
@@ -155,26 +155,26 @@ load_configuration() {
     case "$option" in
     *=*) scope=${option%%=*}; value=${option#*=} ;;
     *)
-      echo "Error: invalid dotopts.sh output: $option" >&2
+      echo "Error: invalid dotscopes.sh output: $option" >&2
       exit 1
       ;;
     esac
     case "$scope" in
     '' | *[!a-zA-Z0-9_-]*)
-      echo "Error: invalid scope in dotopts.sh output: $scope" >&2
+      echo "Error: invalid scope in dotscopes.sh output: $scope" >&2
       exit 1
       ;;
     esac
     case "$value" in
     yes | no) ;;
     *)
-      echo "Error: scope $scope in dotopts.sh output must be yes or no." >&2
+      echo "Error: scope $scope in dotscopes.sh output must be yes or no." >&2
       exit 1
       ;;
     esac
     case "$seen_scopes" in
     *"|$scope|"*)
-      echo "Error: duplicate scope in dotopts.sh output: $scope" >&2
+      echo "Error: duplicate scope in dotscopes.sh output: $scope" >&2
       exit 1
       ;;
     esac
