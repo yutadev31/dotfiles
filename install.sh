@@ -153,7 +153,10 @@ load_configuration() {
   seen_scopes='|'
   while IFS= read -r option || [ -n "$option" ]; do
     case "$option" in
-    *=*) scope=${option%%=*}; value=${option#*=} ;;
+    *=*)
+      scope=${option%%=*}
+      value=${option#*=}
+      ;;
     *)
       echo "Error: invalid dotscopes.sh output: $option" >&2
       exit 1
