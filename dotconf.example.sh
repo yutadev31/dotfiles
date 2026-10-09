@@ -1,11 +1,11 @@
 # Install i3, X11 packages, and configurations.
-i3=no
+i3=auto
 
 # Install Sway, Wayland packages, and configurations.
-sway=no
+sway=auto
 
 # Install Hyprland, Wayland packages, and configurations.
-hyprland=no
+hyprland=auto
 
 # Use the virtual-machine configuration.
 vm=no
