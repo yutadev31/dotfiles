@@ -150,6 +150,7 @@ load_configuration() {
     exit 1
   }
   enabled_scopes=
+  known_scopes=
   seen_scopes='|'
   while IFS= read -r option || [ -n "$option" ]; do
     case "$option" in
@@ -182,6 +183,8 @@ load_configuration() {
       ;;
     esac
     seen_scopes=$seen_scopes$scope'|'
+    if [ -n "$known_scopes" ]; then known_scopes=$known_scopes,; fi
+    known_scopes=$known_scopes$scope
     if [ "$value" = yes ]; then
       if [ -n "$enabled_scopes" ]; then enabled_scopes=$enabled_scopes,; fi
       enabled_scopes=$enabled_scopes$scope
@@ -193,7 +196,7 @@ EOF
 
 managed_paths() {
   list=${1:?managed_paths: missing list}
-  awk -v enabled_scopes="$enabled_scopes" '
+  awk -v enabled_scopes="$enabled_scopes" -v known_scopes="$known_scopes" '
     /^[[:space:]]*($|#)/ { next }
     NF != 2 {
       printf "Error: invalid dotlist entry on line %d: expected scope and path\n", NR > "/dev/stderr"
@@ -201,10 +204,16 @@ managed_paths() {
       next
     }
     {
-      count = split(enabled_scopes, scopes, ",")
+      count = split(known_scopes, scopes, ",")
       for (i = 1; i <= count; i++) {
         if ($1 == scopes[i]) {
-          print $2
+          enabled_count = split(enabled_scopes, enabled, ",")
+          for (j = 1; j <= enabled_count; j++) {
+            if ($1 == enabled[j]) {
+              print $2
+              break
+            }
+          }
           next
         }
       }
