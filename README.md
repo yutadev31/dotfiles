@@ -7,13 +7,13 @@ This repository supports two installation paths:
 - A portable shell installer that links selected files into `$HOME` and `/etc`.
 - A Nix flake that builds the `laptop2` NixOS and Home Manager configurations.
 
-## Managed configurations
+## Key configurations
 
-- Shell and CLI tools: Fish, Fastfetch, tmux, Git, and Neovim
+- Shell and editor configuration: Fish and Neovim
 - Desktop applications: Alacritty, Dunst, Fcitx5, Rofi, and custom Rubar/Shot configuration
 - Window managers and compositors: i3, Sway, and Hyprland
 - NixOS and Home Manager modules, profiles, and host configuration
-- Tokyo Night themes and wallpapers
+- Tokyo Night themes
 
 ## Portable installation
 
