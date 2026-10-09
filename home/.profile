@@ -1,5 +1,4 @@
 #!/bin/sh
-set -eu
 
 # Load aliases for POSIX-compatible login shells.
 if [ -r "$HOME/.config/aliases.sh" ]; then
