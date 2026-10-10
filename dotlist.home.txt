@@ -12,6 +12,7 @@ base .config/nvim/init.lua
 base .config/nvim/lsp
 base .config/nvim/lua
 gui .config/chrome-flags.conf
+gui .config/user-dirs.dirs
 gui .config/alacritty
 gui .config/dunst
 gui .config/fcitx5/config
