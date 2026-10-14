@@ -35,6 +35,7 @@ vim.lsp.enable({
   "ts_ls",
   "tailwindcss",
   "taplo",
+  "tombi",
   "yamlls",
   "gopls",
   "cmake",
