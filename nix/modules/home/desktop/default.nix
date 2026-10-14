@@ -52,9 +52,9 @@
     enable = true;
     defaultApplications = {
       "inode/directory" = "org.gnome.Nautilus.desktop";
-      "text/html" = "zen.desktop";
-      "x-scheme-handler/http" = "zen.desktop";
-      "x-scheme-handler/https" = "zen.desktop";
+      "text/html" = "firefox.desktop";
+      "x-scheme-handler/http" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
     };
   };
 }
