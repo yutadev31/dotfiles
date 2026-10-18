@@ -28,6 +28,10 @@ layout {
 
 prefer-no-csd
 
+hotkey-overlay {
+    skip-at-startup
+}
+
 spawn-at-startup "rubar"
 spawn-at-startup "dunst"
 spawn-at-startup "fcitx5" "-rd"
