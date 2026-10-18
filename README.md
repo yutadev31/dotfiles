@@ -11,7 +11,7 @@ This repository supports two installation paths:
 
 - Shell and editor configuration: Fish and Neovim
 - Desktop applications: Alacritty, Dunst, Fcitx5, Rofi, and custom Rubar/Shot configuration
-- Window managers and compositors: i3, Sway, and Hyprland
+- Window managers and compositors: i3, Sway, Hyprland, and niri
 - NixOS and Home Manager modules, profiles, and host configuration
 - Tokyo Night themes
 
@@ -25,14 +25,15 @@ cd ~/dotfiles
 cp dotconf.example.sh dotconf.sh
 ```
 
-Edit `dotconf.sh` for the machine. The current example disables i3, Sway,
-Hyprland, and VM-specific Sway configuration by default. Set each option to
-`yes` or `no` as needed:
+Edit `dotconf.sh` for the machine. The example detects installed window
+managers automatically and disables VM-specific Sway configuration. Set a
+window-manager option to `yes` or `no` to override detection:
 
 ```sh
 i3=no
 sway=no
 hyprland=no
+niri=yes
 vm=no
 ```
 

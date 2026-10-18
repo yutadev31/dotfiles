@@ -34,18 +34,28 @@ any_yes() {
   echo no
 }
 
-i3=$(resolve_scope "$i3" i3)
-sway=$(resolve_scope "$sway" sway)
-hyprland=$(resolve_scope "$hyprland" hyprland)
+i3=$(resolve_scope "${i3:-auto}" i3)
+sway=$(resolve_scope "${sway:-auto}" sway)
+hyprland=$(resolve_scope "${hyprland:-auto}" hyprland)
+niri=$(resolve_scope "${niri:-no}" niri)
+vm=${vm:-no}
+case "$vm" in
+yes | no) ;;
+*)
+  printf 'Invalid vm value: %s\n' "$vm" >&2
+  exit 1
+  ;;
+esac
 
 echo "base=yes"
 
-echo "gui=$(any_yes "$i3" "$sway" "$hyprland")"
+echo "gui=$(any_yes "$i3" "$sway" "$hyprland" "$niri")"
 echo "x11=$(any_yes "$i3")"
-echo "wayland=$(any_yes "$sway" "$hyprland")"
+echo "wayland=$(any_yes "$sway" "$hyprland" "$niri")"
 
 echo "i3=$i3"
 echo "sway=$sway"
 echo "hyprland=$hyprland"
+echo "niri=$niri"
 
 echo "vm=$vm"

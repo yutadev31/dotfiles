@@ -16,16 +16,17 @@ cp dotconf.example.sh dotconf.sh
 
 | Option | Values | Default | Effect |
 | --- | --- | --- | --- |
-| `i3` | `yes`, `no` | `no` in the example; `yes` if omitted | Enables i3, X11 packages, and i3/X11 dotlist entries |
-| `sway` | `yes`, `no` | `no` in the example; `yes` if omitted | Enables Sway, Wayland packages, and Sway/Wayland dotlist entries |
-| `hyprland` | `yes`, `no` | `no` | Enables Hyprland and its dotlist/package entries |
+| `i3` | `yes`, `no`, `auto` | `auto` | Enables i3, X11 packages, and i3/X11 dotlist entries |
+| `sway` | `yes`, `no`, `auto` | `auto` | Enables Sway, Wayland packages, and Sway/Wayland dotlist entries |
+| `hyprland` | `yes`, `no`, `auto` | `auto` | Enables Hyprland and its dotlist/package entries |
+| `niri` | `yes`, `no`, `auto` | `auto` in the example; `no` if omitted | Enables niri and its dotlist/package entries |
 | `vm` | `yes`, `no` | `no` | Selects the VM-specific Sway config and installs WayVNC with Sway |
 
-The example explicitly sets all four values to `no`. The scripts apply the
-defaults shown in the table when an option is absent from a custom
-`dotconf.sh`. `gui` is derived internally from the three window-manager
-options and cannot be set in `dotconf.sh`. `x11` follows `i3`; `wayland` is
-enabled by Sway or Hyprland.
+For window managers, `auto` enables a scope when its executable is on `PATH`.
+The scripts apply the defaults shown in the table when an option is absent.
+`gui` is derived internally from the four window-manager options and cannot
+be set in `dotconf.sh`. `x11` follows `i3`; `wayland` is enabled by Sway,
+Hyprland, or niri.
 
 Invalid values or a missing `dotconf.sh` stop the relevant script before it
 changes the system.

@@ -11,7 +11,8 @@ platforms supported by the platform detector.
 ## Configuration
 
 Create `dotconf.sh` from `dotconf.example.sh` before installing packages. The
-current example defaults to `i3=no`, `sway=no`, `hyprland=no`, and `vm=no`.
+current example sets `i3=auto`, `sway=auto`, `hyprland=auto`, `niri=auto`,
+and `vm=no`. `auto` enables a window manager when its executable is on `PATH`.
 Only dependencies for enabled window managers are required. `vm=yes` adds
 `wayvnc` when Sway is enabled.
 
@@ -80,3 +81,14 @@ Install these when `hyprland=yes`:
 | Package | Purpose |
 | --- | --- |
 | `hyprland` | Wayland compositor |
+
+## niri (Wayland)
+
+Install these when `niri=yes`:
+
+| Package | Purpose |
+| --- | --- |
+| `niri` | Wayland compositor |
+
+The niri configuration uses the common Rofi launcher and starts Rubar, Dunst,
+and Fcitx5. Its Print binding uses niri's built-in screenshot action.

@@ -39,7 +39,7 @@ the managed portions of `/etc`. The dotlists select paths with these scopes:
 
 - `base`: always installed
 - `gui`: installed when any window manager is enabled
-- `i3`, `sway`, `hyprland`: selected window-manager paths
+- `i3`, `sway`, `hyprland`, `niri`: selected window-manager paths
 - `x11`, `wayland`: platform-specific paths derived from the window-manager options
 
 `install.sh` validates selected source paths and target overlap before making

@@ -1,5 +1,5 @@
 # Format: scope path
-# scope is "base", "gui", "i3", "sway", "hyprland", "x11", or "wayland".
+# scope is "base", "gui", "i3", "sway", "hyprland", "niri", "x11", or "wayland".
 base .bin
 base .profile
 base .shrc
@@ -31,3 +31,4 @@ sway .config/sway/config-modkey
 hyprland .config/hypr/hyprland.lua
 hyprland .config/hypr/monitors.lua
 hyprland .config/hypr/config
+niri .config/niri/config.kdl

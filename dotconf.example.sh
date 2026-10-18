@@ -7,5 +7,8 @@ sway=auto
 # Install Hyprland, Wayland packages, and configurations.
 hyprland=auto
 
+# Install niri, Wayland packages, and configurations.
+niri=auto
+
 # Use the virtual-machine configuration.
 vm=no

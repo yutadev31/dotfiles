@@ -11,42 +11,15 @@ load_configuration() {
     exit 1
   fi
 
+  set -a
   . "$dotdir/dotconf.sh"
-
-  i3=${i3:-yes}
-  sway=${sway:-yes}
-  hyprland=${hyprland:-no}
+  set +a
+  i3=${i3:-auto}
+  sway=${sway:-auto}
+  hyprland=${hyprland:-auto}
+  niri=${niri:-no}
   vm=${vm:-no}
-
-  case "$i3" in
-  yes | no) ;;
-  *)
-    echo "Error: i3 must be yes or no in $dotdir/dotconf.sh." >&2
-    exit 1
-    ;;
-  esac
-
-  case "$sway" in
-  yes | no) ;;
-  *)
-    echo "Error: sway must be yes or no in $dotdir/dotconf.sh." >&2
-    exit 1
-    ;;
-  esac
-
-  case "$hyprland" in
-  yes | no) ;;
-  *)
-    echo "Error: hyprland must be yes or no in $dotdir/dotconf.sh." >&2
-    exit 1
-    ;;
-  esac
-
-  if [ "$i3" = "yes" ] || [ "$sway" = "yes" ] || [ "$hyprland" = "yes" ]; then
-    gui=yes
-  else
-    gui=no
-  fi
+  export i3 sway hyprland niri vm
 
   case "$vm" in
   yes | no) ;;
@@ -55,6 +28,19 @@ load_configuration() {
     exit 1
     ;;
   esac
+
+  options=$(CDPATH= cd -P "$dotdir" && ./dotscopes.sh) || exit 1
+  while IFS='=' read -r scope value; do
+    case "$scope" in
+    i3) i3=$value ;;
+    sway) sway=$value ;;
+    hyprland) hyprland=$value ;;
+    niri) niri=$value ;;
+    gui) gui=$value ;;
+    esac
+  done <<EOF
+$options
+EOF
 }
 
 not_implemented() {
@@ -124,6 +110,15 @@ install_arch() {
       waybar \
       wl-clipboard
   fi
+
+  if [ "$niri" = "yes" ]; then
+    pacman_install \
+      dbus \
+      grim \
+      niri \
+      slurp \
+      wl-clipboard
+  fi
 }
 
 install_void() {
@@ -191,6 +186,17 @@ install_void() {
       mesa-dri \
       slurp \
       waybar \
+      wl-clipboard
+  fi
+
+  if [ "$niri" = "yes" ]; then
+    xbps_install \
+      dbus \
+      elogind \
+      grim \
+      mesa-dri \
+      niri \
+      slurp \
       wl-clipboard
   fi
 }
