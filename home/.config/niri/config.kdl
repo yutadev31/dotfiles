@@ -26,6 +26,8 @@ layout {
     }
 }
 
+prefer-no-csd
+
 spawn-at-startup "rubar"
 spawn-at-startup "dunst"
 spawn-at-startup "fcitx5" "-rd"
