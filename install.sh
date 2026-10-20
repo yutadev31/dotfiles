@@ -194,8 +194,8 @@ $options
 EOF
 }
 
-managed_paths() {
-  list=${1:?managed_paths: missing list}
+selected_paths() {
+  list=${1:?selected_paths: missing list}
   awk -v enabled_scopes="$enabled_scopes" -v known_scopes="$known_scopes" '
     /^[[:space:]]*($|#)/ { next }
     NF != 2 {
@@ -222,6 +222,55 @@ managed_paths() {
     }
     END { exit invalid }
   ' "$dotdir/$list"
+}
+
+managed_paths() {
+  _managed_list=${1:?managed_paths: missing list}
+  case "$_managed_list" in
+  dotlist.home.txt) _managed_root=home ;;
+  dotlist.etc.txt) _managed_root=etc ;;
+  *) echo "Error: unknown dotlist: $_managed_list" >&2; return 1 ;;
+  esac
+
+  _selected=$(selected_paths "$_managed_list") || return 1
+  while IFS= read -r _pattern; do
+    [ -n "$_pattern" ] || continue
+    case "$_pattern" in
+    *'*'*)
+      (
+        CDPATH= cd -P "$dotdir/$_managed_root" || exit 1
+        # Split the dotlist token and expand its glob against the source tree.
+        set -- $_pattern
+        if [ "$#" -eq 1 ] && [ "$1" = "$_pattern" ] && [ ! -e "$1" ]; then
+          echo "Error: dotlist pattern has no matches: $_managed_list: $_pattern" >&2
+          exit 1
+        fi
+        for _match do
+          printf '%s\n' "$_match"
+        done
+      ) || return 1
+      ;;
+    *) printf '%s\n' "$_pattern" ;;
+    esac
+  done <<EOF
+$_selected
+EOF
+}
+
+validate_managed_paths() {
+  printf '%s\n' "$1" | awk '
+    NF == 0 { next }
+    {
+      for (i = 1; i <= count; i++) {
+        if ($0 == paths[i] || index($0, paths[i] "/") == 1 || index(paths[i], $0 "/") == 1) {
+          printf "Error: managed paths must not overlap: %s and %s\n", paths[i], $0 > "/dev/stderr"
+          invalid = 1
+        }
+      }
+      paths[++count] = $0
+    }
+    END { exit invalid }
+  '
 }
 
 state_has_path() {
@@ -336,6 +385,7 @@ preflight() {
   fi
 
   managed_list=$(managed_paths dotlist.home.txt) || exit 1
+  validate_managed_paths "$managed_list" || exit 1
   while IFS= read -r path; do
     [ -n "$path" ] || continue
     if [ ! -e "$dotdir/home/$path" ]; then
@@ -343,16 +393,6 @@ preflight() {
       exit 1
     fi
     resolve_source "$dotdir/home/$path" || exit 1
-
-    for other_path in $managed_list; do
-      [ "$path" = "$other_path" ] && continue
-      case "$path" in
-      "$other_path"/*)
-        echo "Error: managed paths must not overlap: $other_path and $path" >&2
-        exit 1
-        ;;
-      esac
-    done
 
     if is_managed_link "$path"; then continue; fi
   done <<EOF
@@ -365,6 +405,7 @@ EOF
   fi
 
   etc_managed_list=$(managed_paths dotlist.etc.txt) || exit 1
+  validate_managed_paths "$etc_managed_list" || exit 1
   if [ -n "$etc_managed_list" ] && [ "$dry_run" = no ] && [ "$(id -u)" -ne 0 ]; then
     command -v sudo >/dev/null 2>&1 || {
       echo 'Error: sudo is required to install files under /etc.' >&2
@@ -381,16 +422,6 @@ EOF
     fi
     resolve_source "$dotdir/etc/$path" || exit 1
 
-    for other_path in $etc_managed_list; do
-      [ "$path" = "$other_path" ] && continue
-      case "$path" in
-      "$other_path"/*)
-        echo "Error: managed paths must not overlap: $other_path and $path" >&2
-        exit 1
-        ;;
-      esac
-    done
-
     if is_managed_etc_link "$path"; then continue; fi
   done <<EOF
 $etc_managed_list
@@ -405,7 +436,7 @@ build_state() {
     resolve_source "$dotdir/home/$path"
     record_state_path home "$path" "$resolved_source"
   done <<EOF
-$(managed_paths dotlist.home.txt)
+$managed_list
 EOF
 
   while IFS= read -r path; do
@@ -413,7 +444,7 @@ EOF
     resolve_source "$dotdir/etc/$path"
     record_state_path etc "$path" "$resolved_source"
   done <<EOF
-$(managed_paths dotlist.etc.txt)
+$etc_managed_list
 EOF
 }
 
@@ -546,7 +577,7 @@ install_files() {
   while IFS= read -r path; do
     install_file "$path"
   done <<EOF
-$(managed_paths dotlist.home.txt)
+$managed_list
 EOF
 }
 
@@ -557,7 +588,7 @@ install_etc_files() {
     [ -n "$path" ] || continue
     install_etc_file "$path"
   done <<EOF
-$(managed_paths dotlist.etc.txt)
+$etc_managed_list
 EOF
 }
 

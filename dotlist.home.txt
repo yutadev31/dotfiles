@@ -23,12 +23,9 @@ gui .config/shot
 gui .local/share/rofi/themes
 gui .local/share/wallpapers
 i3 .config/i3/config
-i3 .config/i3/config.d
-i3 .config/i3/config-modkey
+i3 .config/i3/config.d/*.conf
 sway .config/sway/config
-sway .config/sway/config.d
-sway .config/sway/config-modkey
+sway .config/sway/config.d/*.conf
 hyprland .config/hypr/hyprland.lua
-hyprland .config/hypr/monitors.lua
-hyprland .config/hypr/config
+hyprland .config/hypr/config/*.lua
 niri .config/niri/config.kdl

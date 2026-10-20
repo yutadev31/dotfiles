@@ -48,8 +48,12 @@ their configuration has changed.
 `--help` displays usage; any other option is rejected.
 
 The installer reads `dotlist.home.txt` for paths under `$HOME` and
-`dotlist.etc.txt` for paths under `/etc`. It preflights selected source paths
-and overlapping targets before changing anything. For each selected path it:
+`dotlist.etc.txt` for paths under `/etc`. A path can contain `*` to select
+matching paths from the corresponding `home/` or `etc/` source tree, for
+example `.config/i3/config.d/*.conf`. Each match is linked separately. A
+selected pattern with no matches is an error. The installer preflights the
+expanded source paths and overlapping targets before changing anything. For
+each selected path it:
 
 1. Leaves a symlink alone when it already points to this repository.
 2. Moves a conflicting file, directory, or symlink to a unique directory

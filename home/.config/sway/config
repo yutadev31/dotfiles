@@ -1,2 +1,1 @@
-include ~/.config/sway/config-modkey
 include ~/.config/sway/config.d/*.conf

@@ -42,6 +42,9 @@ the managed portions of `/etc`. The dotlists select paths with these scopes:
 - `i3`, `sway`, `hyprland`, `niri`: selected window-manager paths
 - `x11`, `wayland`: platform-specific paths derived from the window-manager options
 
+Dotlist paths may contain `*` to select matching source paths. The installer
+links each match separately and rejects a selected pattern with no matches.
+
 `install.sh` validates selected source paths and target overlap before making
 changes. It backs up conflicting paths, creates symlinks, and restores moved
 paths if the installation fails. `--dry-run` previews the process. On NixOS,

@@ -1,2 +1,1 @@
-include ~/.config/i3/config-modkey
 include ~/.config/i3/config.d/*.conf
