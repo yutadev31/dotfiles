@@ -2,7 +2,7 @@
 font_family = "Hack Nerd Font"
 bold = true
 
-[modules]
+[widgets]
 left = ["workspace"]
 center = []
 right = ["tray", "battery", "volume", "clock"]
