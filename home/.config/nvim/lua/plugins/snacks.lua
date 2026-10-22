@@ -20,10 +20,6 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    require("snacks").setup(opts)
-    vim.notify = Snacks.notify
-  end,
   keys = {
     -- Top Pickers & Explorer
     {

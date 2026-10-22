@@ -83,12 +83,3 @@ vim.api.nvim_create_autocmd("FileType", {
     pcall(vim.treesitter.start, args.buf)
   end,
 })
-
--- Fcitx5
-if vim.fn.executable("fcitx5-remote") == 1 then
-  vim.api.nvim_create_autocmd("InsertLeave", {
-    callback = function()
-      vim.fn.jobstart({ "fcitx5-remote", "-c" }, { detach = true })
-    end,
-  })
-end
