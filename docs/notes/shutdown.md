@@ -10,22 +10,30 @@ BSD系OSやほとんどLinuxディストリビューションで、`poweroff`コ
 poweroff
 ```
 
-## BSD
+## Systemd
 
-BSD系OSの場合、`shutdown now`だけでは、シャットダウン後に電源が自動で切れない。
-
-電源まで切るには`-p`オプションを指定する。
+Systemd環境では、オプションなしの`shutdown`で、電源を切ることができる。
 
 ```sh
-shutdown -p now
+shutdown now
 ```
 
-## Void Linux (runit)
+## Runit
 
-Void Linuxでは、`shutdown now`を実行すると電源を切るのではなく、シングルユーザモードへ移行する。
+Runit環境では、`shutdown now`を実行すると電源を切るのではなく、シングルユーザモードへ移行する。
 
 シャットダウンするには`-h`オプションを指定する。
 
 ```sh
 shutdown -h now
+```
+
+## BSD
+
+BSDの場合、`shutdown now`だけでは、シャットダウン後に電源が自動で切れない。
+
+電源まで切るには`-p`オプションを指定する。
+
+```sh
+shutdown -p now
 ```
