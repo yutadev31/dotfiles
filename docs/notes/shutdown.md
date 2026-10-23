@@ -30,7 +30,7 @@ shutdown -h now
 
 ## BSD
 
-BSDの場合、`shutdown now`だけでは、シャットダウン後に電源が自動で切れない。
+BSD系OSでは、`shutdown now`だけでは、シャットダウン後に電源が自動で切れない。
 
 電源まで切るには`-p`オプションを指定する。
 
