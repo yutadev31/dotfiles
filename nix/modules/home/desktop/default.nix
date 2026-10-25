@@ -28,11 +28,11 @@
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
     ]
-    ++ [
-      inputs.cpst.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.shot.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.rubar.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ];
+    ++ (with inputs.rudesktop.packages.${pkgs.stdenv.hostPlatform.system}; [
+      rubar
+      cpst
+      shot
+    ]);
 
   xdg.configFile."shot/config.toml".source = ../../../../home/.config/shot/config.toml;
   xdg.configFile."rubar/config.toml".source = ../../../../home/.config/rubar/config.toml;
