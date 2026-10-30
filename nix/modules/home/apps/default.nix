@@ -6,6 +6,7 @@
     discord
     slack
     nautilus
+    loupe
     vscode
   ];
 
