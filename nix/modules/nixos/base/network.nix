@@ -1,6 +1,5 @@
 { lib, ... }:
 {
-  # Network
   networking.networkmanager.enable = true;
   networking.defaultGateway = "192.168.11.1";
   networking.interfaces.enp1s0.ipv4.addresses = lib.mkDefault [

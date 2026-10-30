@@ -1,5 +1,4 @@
 {
-  # SSH
   services.openssh = {
     enable = true;
     settings = {

@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  # System Tools
   environment.systemPackages = with pkgs; [
     neovim
     curl
