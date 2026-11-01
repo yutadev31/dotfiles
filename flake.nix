@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-voicevox.url = "github:NixOS/nixpkgs/24e8d730ef4adac7727652e666cbf9dce4d21d03";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,7 +33,6 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-voicevox,
       home-manager,
       rust-overlay,
       nixvim,
@@ -49,10 +47,6 @@
         inherit system;
         overlays = [ rust-overlay.overlays.default ];
       };
-      pkgs-voicevox = import nixpkgs-voicevox {
-        inherit system;
-        config.allowUnfree = true;
-      };
       hostNames = [
         "laptop2"
       ];
@@ -64,7 +58,6 @@
           extraSpecialArgs = {
             inherit inputs;
             inherit hostName;
-            inherit pkgs-voicevox;
           };
           modules = [
             (./. + "/nix/hosts/${hostName}/home.nix")

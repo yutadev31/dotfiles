@@ -173,22 +173,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-voicevox": {
-      "locked": {
-        "lastModified": 1779665139,
-        "narHash": "sha256-TbTEukUhc6DHfglhNqj1Pb3GRP3AA04rP83L3zhAa7E=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "24e8d730ef4adac7727652e666cbf9dce4d21d03",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "24e8d730ef4adac7727652e666cbf9dce4d21d03",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1792773339,
@@ -265,7 +249,6 @@
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-voicevox": "nixpkgs-voicevox",
         "nixvim": "nixvim",
         "rudesktop": "rudesktop",
         "rust-overlay": "rust-overlay_3",
