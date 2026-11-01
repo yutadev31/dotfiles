@@ -7,6 +7,7 @@
     nautilus
     loupe
     vscode
+    obsidian
   ];
 
   services.syncthing.enable = true;
