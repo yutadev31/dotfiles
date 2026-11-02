@@ -1,8 +1,6 @@
 { inputs, ... }:
 {
   xdg.configFile."hypr/hyprland.lua".source = ../../../../../home/.config/hypr/hyprland.lua;
-  xdg.configFile."hypr/config/monitors.lua".source =
-    ../../../../../home/.config/hypr/config/monitors.lua/laptop2.lua;
   xdg.configFile."hypr/config/animations.lua".source =
     ../../../../../home/.config/hypr/config/animations.lua;
   xdg.configFile."hypr/config/appearance.lua".source =

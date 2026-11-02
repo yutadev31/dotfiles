@@ -1,6 +1,17 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./firefox.nix
+    ./games.nix
+  ];
+
   home.packages = with pkgs; [
+    slack
+    nautilus
+    loupe
+    vscode
+    obsidian
+
     kdePackages.kdenlive
     gimp
     inkscape
@@ -24,4 +35,6 @@
       obs-vkcapture
     ];
   };
+
+  services.syncthing.enable = true;
 }

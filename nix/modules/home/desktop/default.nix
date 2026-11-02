@@ -8,6 +8,7 @@
     ./rofi
     ./keyring.nix
     ./theme.nix
+    ./apps
   ];
 
   home.packages =

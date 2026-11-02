@@ -1,9 +1,17 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+  imports = [
+    ./neovim.nix
+  ];
+
   home.packages = with pkgs; [
-    fastfetch
     tlrc
+    fastfetch
     tmux
+    inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
+    codex
+    bubblewrap
   ];
 
   # Shell

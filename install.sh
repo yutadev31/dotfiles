@@ -229,7 +229,10 @@ managed_paths() {
   case "$_managed_list" in
   dotlist.home.txt) _managed_root=home ;;
   dotlist.etc.txt) _managed_root=etc ;;
-  *) echo "Error: unknown dotlist: $_managed_list" >&2; return 1 ;;
+  *)
+    echo "Error: unknown dotlist: $_managed_list" >&2
+    return 1
+    ;;
   esac
 
   _selected=$(selected_paths "$_managed_list") || return 1
@@ -245,7 +248,7 @@ managed_paths() {
           echo "Error: dotlist pattern has no matches: $_managed_list: $_pattern" >&2
           exit 1
         fi
-        for _match do
+        for _match; do
           printf '%s\n' "$_match"
         done
       ) || return 1
