@@ -5,3 +5,4 @@ require("yutadev31.lsp")
 
 require("yutadev31.features.fcitx5").setup()
 require("yutadev31.features.markdown").setup()
+require("yutadev31.features.quickfix").setup()
