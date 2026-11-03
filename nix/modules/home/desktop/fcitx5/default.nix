@@ -6,16 +6,6 @@ let
       layout = "jp";
       im = "mozc";
     }
-    {
-      name = "Korean";
-      layout = "kr";
-      im = "hangul";
-    }
-    {
-      name = "Chinese";
-      layout = "cn";
-      im = "pinyin";
-    }
   ];
 in
 {
@@ -24,9 +14,6 @@ in
     type = "fcitx5";
     fcitx5.addons = with pkgs; [
       fcitx5-mozc
-      fcitx5-hangul
-      qt6Packages.fcitx5-chinese-addons
-      fcitx5-gtk
       fcitx5-tokyonight
     ];
     fcitx5.settings = {

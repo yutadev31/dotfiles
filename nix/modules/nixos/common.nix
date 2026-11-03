@@ -28,6 +28,10 @@
 
   # Nixpkgs
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.problems.handlers = {
+    # fcitx5
+    "gtk+".broken = "warn";
+  };
 
   # Nix ld
   programs.nix-ld.enable = true;

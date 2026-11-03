@@ -11,6 +11,7 @@
       fastfetch
       tmux
       codex
+      bubblewrap
     ]
     ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
       herdr
