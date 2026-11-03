@@ -4,15 +4,18 @@
     ./neovim.nix
   ];
 
-  home.packages = with pkgs; [
-    tlrc
-    fastfetch
-    tmux
-    inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
-    codex
-    bubblewrap
-  ];
+  home.packages =
+    with pkgs;
+    [
+      tlrc
+      fastfetch
+      tmux
+      codex
+    ]
+    ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
+      herdr
+      chatgpt
+    ]);
 
   # Shell
   xdg.configFile."aliases.sh".source = ../../../../home/.config/aliases.sh;
