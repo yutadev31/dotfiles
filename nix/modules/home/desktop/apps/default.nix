@@ -11,6 +11,12 @@
     loupe
     vscode
     obsidian
+    gimp
+    inkscape
+    blockbench
+    blender
+    audacity
+    vlc
   ];
 
   programs.google-chrome.enable = true;
