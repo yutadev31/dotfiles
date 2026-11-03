@@ -4,6 +4,7 @@
     flake.nixosModules.common
     flake.nixosModules.dev
     flake.nixosModules.desktop
+    flake.nixosModules.mcserver
   ];
 
   # Boot Loader

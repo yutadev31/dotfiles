@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   # Home Manager
   home.stateVersion = "25.05";
   programs.home-manager.enable = true;
@@ -17,15 +17,4 @@
     enable = true;
     enableDefaultConfig = false;
   };
-
-  # Tools
-  home.packages = with pkgs; [
-    neovim
-    curl
-    wget
-    psmisc
-    file
-    zip
-    unzip
-  ];
 }

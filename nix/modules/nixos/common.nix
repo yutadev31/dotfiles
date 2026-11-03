@@ -1,4 +1,15 @@
 { pkgs, ... }: {
+  # Tools
+  environment.systemPackages = with pkgs; [
+    neovim
+    curl
+    wget
+    psmisc
+    file
+    zip
+    unzip
+  ];
+
   # System
   system.stateVersion = "25.05";
 
