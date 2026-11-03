@@ -14,6 +14,7 @@ configurations.
 
 ```text
 .
+├── .github/workflows/ GitHub Actions CI running nix flake check
 ├── home/            Portable dotfiles linked into $HOME
 ├── etc/             Portable files linked into /etc
 ├── nix/             NixOS and Home Manager configuration
