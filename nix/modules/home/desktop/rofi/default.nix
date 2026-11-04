@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   xdg.dataFile."rofi/themes/tokyonight.rasi".source =
     ../../../../../home/.local/share/rofi/themes/tokyonight.rasi;
 

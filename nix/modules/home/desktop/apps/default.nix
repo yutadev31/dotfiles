@@ -1,8 +1,6 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   imports = [
     ./firefox.nix
-    ./games.nix
   ];
 
   home.packages = with pkgs; [
@@ -17,6 +15,7 @@
     blender
     audacity
     vlc
+    prismlauncher
   ];
 
   programs.google-chrome.enable = true;

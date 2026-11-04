@@ -1,5 +1,4 @@
-{ inputs, ... }:
-{
+{ inputs, ... }: {
   xdg.configFile."hypr/hyprland.lua".source = ../../../../../home/.config/hypr/hyprland.lua;
   xdg.configFile."hypr/config/animations.lua".source =
     ../../../../../home/.config/hypr/config/animations.lua;
@@ -22,5 +21,4 @@
       After = [ "graphical-session-pre.target" ];
     };
   };
-
 }
