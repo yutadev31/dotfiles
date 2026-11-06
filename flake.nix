@@ -21,6 +21,10 @@
       url = "github:yutadev31/desktop-tools";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    cpst = {
+      url = "github:yutadev31/cpst";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     wt = {
       url = "github:yutadev31/wt";
       inputs.nixpkgs.follows = "nixpkgs";

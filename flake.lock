@@ -24,7 +24,7 @@
     "blueprint_2": {
       "inputs": {
         "nixpkgs": [
-          "desktop-tools",
+          "cpst",
           "nixpkgs"
         ],
         "systems": "systems_2"
@@ -46,10 +46,32 @@
     "blueprint_3": {
       "inputs": {
         "nixpkgs": [
+          "desktop-tools",
+          "nixpkgs"
+        ],
+        "systems": "systems_3"
+      },
+      "locked": {
+        "lastModified": 1791920352,
+        "narHash": "sha256-Zbd0CGR2Dh9USbYglGXQ09FJXxxKkD5w5vi99nlz1yE=",
+        "owner": "numtide",
+        "repo": "blueprint",
+        "rev": "2bf123541bd5024046f32299c9f8a6cc6bdd8a9f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "blueprint",
+        "type": "github"
+      }
+    },
+    "blueprint_4": {
+      "inputs": {
+        "nixpkgs": [
           "wt",
           "nixpkgs"
         ],
-        "systems": "systems_4"
+        "systems": "systems_5"
       },
       "locked": {
         "lastModified": 1791920352,
@@ -99,13 +121,35 @@
         "type": "github"
       }
     },
-    "desktop-tools": {
+    "cpst": {
       "inputs": {
         "blueprint": "blueprint_2",
         "nixpkgs": [
           "nixpkgs"
         ],
         "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1793978884,
+        "narHash": "sha256-MUiGwyACC5JoSC6NnPE3apnRJlc2zxHemq5XcR79pYY=",
+        "owner": "yutadev31",
+        "repo": "cpst",
+        "rev": "7c3ae43e4c9d7e7bc5ccfcd2505ae01d698e684e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yutadev31",
+        "repo": "cpst",
+        "type": "github"
+      }
+    },
+    "desktop-tools": {
+      "inputs": {
+        "blueprint": "blueprint_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay_2"
       },
       "locked": {
         "lastModified": 1793960719,
@@ -166,8 +210,8 @@
       "inputs": {
         "bun2nix": "bun2nix",
         "flake-parts": "flake-parts",
-        "nixpkgs": "nixpkgs_2",
-        "systems": "systems_3",
+        "nixpkgs": "nixpkgs_3",
+        "systems": "systems_4",
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
@@ -202,6 +246,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1744536153,
+        "narHash": "sha256-awS2zRgF4uTwrOKwwiJcByDzDOdo3Q1rPZbiHQg/N38=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "18dd725c29603f582cf1900e0d25f9f1063dbf11",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1793345420,
         "narHash": "sha256-e/yiZ31gXRROBDcnOtT3YwDQ73NVG9Cepccbt86LIn8=",
         "owner": "NixOS",
@@ -216,7 +276,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1793540411,
         "narHash": "sha256-fiPJ88izTVucjeo2EQ3jk4aWmLg03I1D4vxnX2QjEgE=",
@@ -232,7 +292,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1790149054,
         "narHash": "sha256-FfjXg6mAzKQBCY+7V9keGWOXG4DV2Eym/qA987lFl8A=",
@@ -248,7 +308,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_6": {
       "locked": {
         "lastModified": 1744536153,
         "narHash": "sha256-awS2zRgF4uTwrOKwwiJcByDzDOdo3Q1rPZbiHQg/N38=",
@@ -267,10 +327,11 @@
     "root": {
       "inputs": {
         "blueprint": "blueprint",
+        "cpst": "cpst",
         "desktop-tools": "desktop-tools",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "split-monitor-workspaces": "split-monitor-workspaces",
         "treefmt-nix": "treefmt-nix_2",
         "wt": "wt"
@@ -279,6 +340,24 @@
     "rust-overlay": {
       "inputs": {
         "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1793956102,
+        "narHash": "sha256-dASUovwB3DUoTm6daga0hsNZZAFCCGlUS4FPBjK0OwA=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "74cebce67ef6671ea48fda353a5be2d229bd2920",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1793348683,
@@ -294,9 +373,9 @@
         "type": "github"
       }
     },
-    "rust-overlay_2": {
+    "rust-overlay_3": {
       "inputs": {
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "lastModified": 1793956102,
@@ -360,6 +439,21 @@
     },
     "systems_3": {
       "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_4": {
+      "locked": {
         "lastModified": 1791244623,
         "narHash": "sha256-uuanbkFk8a313Zfrxdcz8Us/yQtaxNnKJtX8v0ZPpd8=",
         "owner": "nix-systems",
@@ -373,7 +467,7 @@
         "type": "github"
       }
     },
-    "systems_4": {
+    "systems_5": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
@@ -411,7 +505,7 @@
     },
     "treefmt-nix_2": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1791885023,
@@ -429,11 +523,11 @@
     },
     "wt": {
       "inputs": {
-        "blueprint": "blueprint_3",
+        "blueprint": "blueprint_4",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": "rust-overlay_2"
+        "rust-overlay": "rust-overlay_3"
       },
       "locked": {
         "lastModified": 1793970096,

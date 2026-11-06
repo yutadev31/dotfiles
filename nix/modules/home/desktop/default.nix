@@ -27,14 +27,12 @@
       libnotify # includes notify-send
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
+      inputs.cpst.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]
     ++ (with inputs.desktop-tools.packages.${pkgs.stdenv.hostPlatform.system}; [
       rubar
-      cpst
-      shot
     ]);
 
-  xdg.configFile."shot/config.toml".source = ../../../../home/.config/shot/config.toml;
   xdg.configFile."rubar/config.toml".source = ../../../../home/.config/rubar/config.toml;
 
   services.gammastep = {
