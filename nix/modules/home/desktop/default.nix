@@ -28,7 +28,7 @@
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
     ]
-    ++ (with inputs.rudesktop.packages.${pkgs.stdenv.hostPlatform.system}; [
+    ++ (with inputs.desktop-tools.packages.${pkgs.stdenv.hostPlatform.system}; [
       rubar
       cpst
       shot

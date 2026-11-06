@@ -16,8 +16,13 @@
       url = "github:zjeffer/split-monitor-workspaces";
       flake = false;
     };
-    rudesktop = {
-      url = "github:yutadev31/rudesktop";
+
+    desktop-tools = {
+      url = "github:yutadev31/desktop-tools";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    wt = {
+      url = "github:yutadev31/wt";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

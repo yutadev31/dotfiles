@@ -12,6 +12,8 @@
       tmux
       codex
       bubblewrap
+
+      inputs.wt.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]
     ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
       herdr
