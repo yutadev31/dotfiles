@@ -27,7 +27,9 @@
       libnotify # includes notify-send
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
+
       inputs.cpst.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.shot.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]
     ++ (with inputs.desktop-tools.packages.${pkgs.stdenv.hostPlatform.system}; [
       rubar

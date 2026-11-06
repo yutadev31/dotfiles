@@ -25,6 +25,10 @@
       url = "github:yutadev31/cpst";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    shot = {
+      url = "github:yutadev31/shot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     wt = {
       url = "github:yutadev31/wt";
       inputs.nixpkgs.follows = "nixpkgs";
