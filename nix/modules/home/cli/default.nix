@@ -1,24 +1,15 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [
+    ./agents.nix
     ./neovim.nix
   ];
 
-  home.packages =
-    with pkgs;
-    [
-      tlrc
-      fastfetch
-      tmux
-      codex
-      bubblewrap
-
-      inputs.wt.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ]
-    ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
-      herdr
-      chatgpt
-    ]);
+  home.packages = with pkgs; [
+    tlrc
+    fastfetch
+    tmux
+  ];
 
   # Shell
   xdg.configFile."aliases.sh".source = ../../../../home/.config/aliases.sh;

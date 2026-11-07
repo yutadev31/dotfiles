@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [
     ./firefox.nix
   ];
@@ -16,6 +16,8 @@
     audacity
     vlc
     prismlauncher
+
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
   ];
 
   programs.google-chrome.enable = true;
