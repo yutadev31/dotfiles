@@ -22,7 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     cpst = {
-      url = "github:yutadev31/cpst";
+      url = "github:yutadev31/cpst/v0.1.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     shot = {
