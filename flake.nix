@@ -1,7 +1,10 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,9 +20,9 @@
       flake = false;
     };
 
-    rubar.url = "github:yutadev31/rubar";
+    rubar.url = "github:yutadev31/rubar/v0.1.0";
     cpst.url = "github:yutadev31/cpst/v0.1.1";
-    shot.url = "github:yutadev31/shot";
+    shot.url = "github:yutadev31/shot/v0.1.0";
   };
 
   outputs =
