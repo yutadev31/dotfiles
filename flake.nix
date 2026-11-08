@@ -17,8 +17,8 @@
       flake = false;
     };
 
-    desktop-tools = {
-      url = "github:yutadev31/desktop-tools";
+    rubar = {
+      url = "github:yutadev31/rubar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     cpst = {

@@ -1,4 +1,16 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+let
+  system = pkgs.stdenv.hostPlatform.system;
+
+  withNativeRustFlags =
+    pkg:
+    pkg.overrideAttrs (old: {
+      env = (old.env or { }) // {
+        RUSTFLAGS = "-C target-cpu=native";
+      };
+    });
+in
+{
   imports = [
     ./alacritty
     ./dunst
@@ -10,30 +22,26 @@
     ./apps
   ];
 
-  home.packages =
-    with pkgs;
-    [
-      xdg-user-dirs
-      xdg-utils
-      dconf
-      wl-clipboard # includes wl-copy & wl-paste
-      wlr-utils
-      grim
-      slurp
-      playerctl
-      pavucontrol
-      brightnessctl
-      hyprpicker
-      libnotify # includes notify-send
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-gnome
+  home.packages = with pkgs; [
+    xdg-user-dirs
+    xdg-utils
+    dconf
+    wl-clipboard # includes wl-copy & wl-paste
+    wlr-utils
+    grim
+    slurp
+    playerctl
+    pavucontrol
+    brightnessctl
+    hyprpicker
+    libnotify # includes notify-send
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-gnome
 
-      inputs.cpst.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.shot.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ]
-    ++ (with inputs.desktop-tools.packages.${pkgs.stdenv.hostPlatform.system}; [
-      rubar
-    ]);
+    (withNativeRustFlags inputs.rubar.packages.${system}.default)
+    (withNativeRustFlags inputs.cpst.packages.${system}.default)
+    (withNativeRustFlags inputs.shot.packages.${system}.default)
+  ];
 
   xdg.configFile."rubar/config.toml".source = ../../../../home/.config/rubar/config.toml;
 

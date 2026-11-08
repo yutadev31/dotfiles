@@ -26,7 +26,7 @@ hl.bind(main_mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 hl.bind(main_mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
-hl.bind("Print", hl.dsp.exec_cmd("shot --rofi"))
+hl.bind("Print", hl.dsp.exec_cmd("shot | tee ~/Pictures/Screenshots/$(date +'%Y%m%d_%H%M%S').png | cpy"))
 
 hl.bind(
   "XF86AudioRaiseVolume",
