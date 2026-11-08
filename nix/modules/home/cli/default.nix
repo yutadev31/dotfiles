@@ -3,17 +3,13 @@
   imports = [
     ./agents.nix
     ./neovim.nix
+    ./shell.nix
   ];
 
   home.packages = with pkgs; [
     tlrc
     fastfetch
-    tmux
   ];
-
-  # Shell
-  xdg.configFile."aliases.sh".source = ../../../../home/.config/aliases.sh;
-  xdg.configFile."fish/config.fish".source = ../../../../home/.config/fish/config.fish;
 
   # Btop (top)
   programs.btop = {
@@ -32,10 +28,10 @@
   programs.ripgrep.enable = true;
 
   # Eza (ls)
-  programs.eza = {
-    enable = true;
-    enableFishIntegration = true;
-  };
+  programs.eza.enable = true;
+
+  # Fzf
+  programs.fzf.enable = true;
 
   # Git
   programs.git = {
@@ -51,10 +47,4 @@
 
   # GitHub CLI
   programs.gh.enable = true;
-
-  # Lazygit
-  programs.lazygit.enable = true;
-
-  # Fzf
-  programs.fzf.enable = true;
 }
