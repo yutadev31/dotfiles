@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+  system = pkgs.stdenv.hostPlatform.system;
+in
 {
   imports = [
     ./agents
@@ -9,6 +12,8 @@
   home.packages = with pkgs; [
     tlrc
     fastfetch
+
+    inputs.trash.packages.${system}.default
   ];
 
   # Btop (top)

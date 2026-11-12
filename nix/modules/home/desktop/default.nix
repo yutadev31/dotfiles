@@ -1,14 +1,6 @@
 { pkgs, inputs, ... }:
 let
   system = pkgs.stdenv.hostPlatform.system;
-
-  withNativeRustFlags =
-    pkg:
-    pkg.overrideAttrs (old: {
-      env = (old.env or { }) // {
-        RUSTFLAGS = "-C target-cpu=native";
-      };
-    });
 in
 {
   imports = [
@@ -38,9 +30,9 @@ in
     xdg-desktop-portal-gtk
     xdg-desktop-portal-gnome
 
-    (withNativeRustFlags inputs.rubar.packages.${system}.default)
-    (withNativeRustFlags inputs.cpst.packages.${system}.default)
-    (withNativeRustFlags inputs.shot.packages.${system}.default)
+    inputs.rubar.packages.${system}.default
+    inputs.cpst.packages.${system}.default
+    inputs.shot.packages.${system}.default
   ];
 
   xdg.configFile."rubar/config.toml".source = ../../../../home/.config/rubar/config.toml;
