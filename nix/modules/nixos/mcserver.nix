@@ -23,7 +23,7 @@
           stop
       '';
 
-      Restart = "on-failure";
+      Restart = "no";
       RestartSec = 5;
       TimeoutStopSec = 60;
     };
