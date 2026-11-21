@@ -57,7 +57,6 @@
       ga = "git add";
       gaa = "git add .";
       grs = "git restore --staged";
-      grsa = "git restore --staged";
       gc = "git commit";
       gca = "git commit --amend";
       gci = "git commit -m 'Initial commit'";
@@ -71,9 +70,6 @@
       gco = "git checkout";
       gcb = "git checkout -b";
       gb = "git branch";
-      gbm = "git branch -M";
-      gbd = "git branch -d";
-      gbr = "git branch -r";
       gw = "git switch";
       gwm = "git switch main";
       gm = "git merge";
@@ -82,10 +78,6 @@
       gpop = "git stash pop";
       glg = "git log --oneline --graph --all --decorate";
       gt = "git tag";
-      gwa = "git worktree add";
     };
-  };
-
-  home.shellAliases = {
   };
 }
