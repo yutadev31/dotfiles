@@ -4,11 +4,11 @@ let
 in
 {
   imports = [
-    ./alacritty
-    ./dunst
-    ./fcitx5
-    ./hyprland
-    ./rofi
+    ./alacritty.nix
+    ./dunst.nix
+    ./fcitx5.nix
+    ./hyprland.nix
+    ./rofi.nix
     ./keyring.nix
     ./theme.nix
     ./apps
@@ -59,4 +59,5 @@ in
       "image/*" = "org.gnome.Loupe.desktop";
     };
   };
+
 }
