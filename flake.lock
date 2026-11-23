@@ -60,16 +60,16 @@
         "rustdev-nix": "rustdev-nix"
       },
       "locked": {
-        "lastModified": 1794877836,
-        "narHash": "sha256-8ZFEZbX6EaeYFZxV9dM/LVvRdAqKI7Vto2UF8jo1ayo=",
+        "lastModified": 1795405686,
+        "narHash": "sha256-kVbomCsaTojZfSSMZtsOAErwlTWdfA+nRDFIPa0LBw4=",
         "owner": "yutadev31",
         "repo": "cpst",
-        "rev": "0a1d3735c5c1a36541d5a7eab973b1b493592165",
+        "rev": "5578c2d09561c1c36a2c89d70346119f90b8a9b4",
         "type": "github"
       },
       "original": {
         "owner": "yutadev31",
-        "ref": "v0.3.0",
+        "ref": "v0.4.0",
         "repo": "cpst",
         "type": "github"
       }

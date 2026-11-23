@@ -21,7 +21,7 @@
     };
 
     rubar.url = "github:yutadev31/rubar/v0.1.0";
-    cpst.url = "github:yutadev31/cpst/v0.3.0";
+    cpst.url = "github:yutadev31/cpst/v0.4.0";
     shot.url = "github:yutadev31/shot/v0.3.1";
     trash.url = "github:yutadev31/trash/v0.1.0";
   };
