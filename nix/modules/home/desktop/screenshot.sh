@@ -2,16 +2,16 @@
 set -euo pipefail
 
 if [[ $# != 1 ]]; then
-  printf 'Usage: screenshot --monitor | --output | --region\n' >&2
+  printf 'Usage: screenshot --all | --monitor | --region\n' >&2
   exit 2
 fi
 
 shot_args=()
 case $1 in
-  --monitor) ;;
-  --output | --region)
+  --all) ;;
+  --monitor | --region)
     slurp_args=()
-    if [[ $1 == --output ]]; then
+    if [[ $1 == --monitor ]]; then
       slurp_args=(-o)
     fi
 
@@ -25,7 +25,7 @@ case $1 in
     shot_args=(-r "$position" "$size")
     ;;
   *)
-    printf 'Usage: screenshot --monitor | --output | --region\n' >&2
+    printf 'Usage: screenshot --all | --monitor | --region\n' >&2
     exit 2
     ;;
 esac

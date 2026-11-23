@@ -27,8 +27,8 @@ hl.bind(main_mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(main_mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
-hl.bind("Print", hl.dsp.exec_cmd("screenshot --monitor"))
-hl.bind(main_mod .. " + Print", hl.dsp.exec_cmd("screenshot --output"))
+hl.bind("Print", hl.dsp.exec_cmd("screenshot --all"))
+hl.bind(main_mod .. " + Print", hl.dsp.exec_cmd("screenshot --monitor"))
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd("screenshot --region"))
 
 hl.bind(
