@@ -1,6 +1,18 @@
 { pkgs, inputs, ... }:
 let
   system = pkgs.stdenv.hostPlatform.system;
+
+  screenshot = pkgs.writeShellApplication {
+    name = "screenshot";
+    runtimeInputs = [
+      pkgs.coreutils
+      pkgs.slurp
+      inputs.shot.packages.${system}.default
+      inputs.cpst.packages.${system}.default
+      inputs.notify.packages.${system}.default
+    ];
+    text = builtins.readFile ./screenshot.sh;
+  };
 in
 {
   imports = [
@@ -29,10 +41,12 @@ in
     libnotify # includes notify-send
     xdg-desktop-portal-gtk
     xdg-desktop-portal-gnome
+    screenshot
 
     inputs.rubar.packages.${system}.default
     inputs.cpst.packages.${system}.default
     inputs.shot.packages.${system}.default
+    inputs.notify.packages.${system}.default
   ];
 
   xdg.configFile."rubar/config.toml".source = ../../../../home/.config/rubar/config.toml;
@@ -59,5 +73,4 @@ in
       "image/*" = "org.gnome.Loupe.desktop";
     };
   };
-
 }
