@@ -30,23 +30,19 @@ in
     xdg-user-dirs
     xdg-utils
     dconf
-    wl-clipboard # includes wl-copy & wl-paste
-    wlr-utils
-    grim
     slurp
     playerctl
     pavucontrol
     brightnessctl
     hyprpicker
-    libnotify # includes notify-send
     xdg-desktop-portal-gtk
     xdg-desktop-portal-gnome
-    screenshot
 
     inputs.rubar.packages.${system}.default
     inputs.cpst.packages.${system}.default
     inputs.shot.packages.${system}.default
     inputs.notify.packages.${system}.default
+    screenshot
   ];
 
   xdg.configFile."rubar/config.toml".source = ../../../../home/.config/rubar/config.toml;
