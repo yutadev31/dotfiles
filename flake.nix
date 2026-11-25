@@ -20,11 +20,11 @@
       flake = false;
     };
 
-    rubar.url = "github:yutadev31/rubar/v0.1.0";
-    cpst.url = "github:yutadev31/cpst/v0.4.0";
-    shot.url = "github:yutadev31/shot/v0.3.1";
-    notify.url = "github:yutadev31/notify/v0.1.0";
-    trash.url = "github:yutadev31/trash/v0.1.0";
+    rubar.url = "github:yutadev31/rubar/v0.1.1";
+    cpst.url = "github:yutadev31/cpst/v0.5.0";
+    shot.url = "github:yutadev31/shot/v0.4.0";
+    notify.url = "github:yutadev31/notify/v0.1.1";
+    trash.url = "github:yutadev31/trash/v0.1.1";
   };
 
   outputs =
